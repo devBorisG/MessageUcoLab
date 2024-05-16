@@ -1,4 +1,4 @@
-package co.edu.uco.core.entity.entities;
+package co.edu.uco.core.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.broker;
 
-import co.edu.uco.core.application.dto.MessageDTO;
+import co.edu.uco.core.domain.entities.MessageEntity;
 import co.edu.uco.core.port.out.broker.SendMessage;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
@@ -18,7 +18,7 @@ public class SendBrokerMessage implements SendMessage {
     }
 
     @Override
-    public void execute(MessageDTO entity) {
+    public void execute(MessageEntity entity) {
         try(Producer<String> stringProducer = this.client
                 .newProducer(Schema.STRING)
                 .topic("test-topic")
