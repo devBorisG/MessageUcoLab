@@ -2,7 +2,7 @@ package co.edu.uco.core.domain.entities;
 
 import java.util.UUID;
 
-public class CategoryMessage {
+public class CategoryMessageEntity {
     private UUID id;
     private String name;
 }

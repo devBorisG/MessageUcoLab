@@ -37,6 +37,11 @@
             <artifactId>Core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>co.edu.uco</groupId>
+            <artifactId>Utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!-- in your <dependencies> block -->
         <dependency>
             <groupId>org.apache.pulsar</groupId>
