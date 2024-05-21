@@ -1,8 +1,8 @@
 package co.edu.uco.core.domain.port.out.presenter;
 
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.domain.port.GenericReturnPort;
-import org.springframework.http.ResponseEntity;
+import co.edu.uco.core.domain.port.GenericPort;
+import jakarta.servlet.http.HttpServletResponse;
 
-public interface ListMessagePresenter extends GenericReturnPort<MessageDTO> {
+public interface ListMessagePresenter extends GenericPort<MessageDTO, HttpServletResponse> {
 }

@@ -1,6 +1,6 @@
 package co.edu.uco.core.domain.valueobject;
 
-import co.edu.uco.core.domain.entities.CategoryMessageEntity;
+import co.edu.uco.core.application.dto.CategoryDTO;
 
-public record MessageByCategory(CategoryMessageEntity categoryMessage) {
+public record MessageByCategory(CategoryDTO categoryMessage) {
 }

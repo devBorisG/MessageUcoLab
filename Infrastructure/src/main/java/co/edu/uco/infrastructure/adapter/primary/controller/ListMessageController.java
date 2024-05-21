@@ -1,6 +1,7 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.domain.entities.MessageEntity;
+import co.edu.uco.core.application.dto.MessageDTO;
+import co.edu.uco.core.application.facade.message.ListMessageFacade;
 import co.edu.uco.core.domain.port.in.ListMessageInPort;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
@@ -9,14 +10,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/message")
 public class ListMessageController {
 
-    private final ListMessageInPort useCase;
-    public ListMessageController(ListMessageInPort useCase) {
-        this.useCase = useCase;
+    private final ListMessageFacade facade;
+
+    public ListMessageController(ListMessageFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping()
     public void execute(@RequestParam String codeMessage, HttpServletResponse response) {
-        MessageEntity message = new MessageEntity(codeMessage, "Mensaje de prueba");
-        useCase.execute(message, response);
+        MessageDTO message = MessageDTO.builder().code(codeMessage).build();
+        facade.execute(message, response);
     }
 }

@@ -9,6 +9,8 @@ import java.util.UUID;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MessageDTO {
     private UUID id;
     private String code;

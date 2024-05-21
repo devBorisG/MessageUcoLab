@@ -17,14 +17,8 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class ListMessagePresenterImpl implements ListMessagePresenter{
 
-    private final HttpServletResponse response;
-
-    public ListMessagePresenterImpl(HttpServletResponse response) {
-        this.response = response;
-    }
-
     @GetMapping
-    public void execute(MessageDTO messageDTO) {
+    public void execute(MessageDTO messageDTO, HttpServletResponse response) {
         try {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
