@@ -2,9 +2,10 @@ package co.edu.uco.core.domain.usecase;
 
 import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.entities.MessageEntity;
-import co.edu.uco.core.port.in.ListMessageInPort;
-import co.edu.uco.core.port.out.broker.SendMessage;
-import co.edu.uco.core.port.out.presenter.ListMessagePresenter;
+import co.edu.uco.core.domain.port.in.ListMessageInPort;
+import co.edu.uco.core.domain.port.out.broker.SendMessage;
+import co.edu.uco.core.domain.port.out.presenter.ListMessagePresenter;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class ListMessageUseCase implements ListMessageInPort {
     }
 
     @Override
-    public void execute(MessageEntity messageEntity) {
-        sendMessage.execute(messageEntity);
+    public void execute(MessageEntity messageEntity, HttpServletResponse response) {
+        sendMessage.execute(messageEntity, response);
         MessageDTO messageDTO = new MessageDTO();
         BeanUtils.copyProperties(messageEntity, messageDTO);
         presenter.execute(messageDTO);
