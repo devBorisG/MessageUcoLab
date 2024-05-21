@@ -23,8 +23,8 @@ public class ModelAssemblerService implements ModelAssembler {
     }
 
     @Override
-    public <E, T> T assembleDTO(E entity, Class<T> dtoClass) {
-        return modelMapper.map(entity, dtoClass);
+    public <D, T> T assembleDTO(D domain, Class<T> dtoClass) {
+        return modelMapper.map(domain, dtoClass);
     }
 
     @Override
