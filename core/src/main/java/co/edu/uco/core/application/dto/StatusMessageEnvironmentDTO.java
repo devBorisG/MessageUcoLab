@@ -1,21 +1,29 @@
 package co.edu.uco.core.application.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilText.getUtilText;
+import static co.edu.uco.utils.helper.UtilUUID.getUtilUUID;
+
 @Getter
-@Builder
 public class StatusMessageEnvironmentDTO {
     private UUID id;
     private String name;
 
-    public void setId(UUID id) {
-        this.id = id;
+    public StatusMessageEnvironmentDTO(UUID id, String name) {
+        setId(id);
+        setName(name);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(UUID id) {
+        this.id = getUtilUUID().getDefaultUUID(id);
+    }
+
+    public void setName(String name) { this.name = getUtilText().trim(name); }
+
+    public static StatusMessageEnvironmentDTO create(UUID id, String name) {
+        return new StatusMessageEnvironmentDTO(id, name);
     }
 }

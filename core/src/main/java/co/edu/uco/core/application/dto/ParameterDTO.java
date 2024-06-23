@@ -1,27 +1,39 @@
 package co.edu.uco.core.application.dto;
 
 
-import lombok.Builder;
 import lombok.Getter;
 
 
 import java.util.UUID;
+
+import static co.edu.uco.utils.helper.UtilText.getUtilText;
+import static co.edu.uco.utils.helper.UtilUUID.getUtilUUID;
+
 @Getter
-@Builder
 public class ParameterDTO {
     private UUID id;
     private String name;
     private String description;
 
+    public ParameterDTO(UUID id, String name, String description) {
+        setId(id);
+        setName(name);
+        setDescription(description);
+    }
+
     public void setId(UUID id) {
-        this.id = id;
+        this.id = getUtilUUID().getDefaultUUID(id);
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = getUtilText().trim(name);
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = getUtilText().trim(description);
+    }
+
+    public static ParameterDTO create(UUID id, String name, String description) {
+        return new ParameterDTO(id, name, description);
     }
 }
