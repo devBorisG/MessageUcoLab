@@ -2,6 +2,7 @@ package co.edu.uco.infrastructure.adapter.secondary.broker;
 
 import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.port.out.broker.SendMessage;
+import co.edu.uco.utils.exception.enumeration.infrastructure.SendBrokerMessageCustomException;
 import co.edu.uco.utils.mapper.json.UtilMapperJson;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.pulsar.client.api.Producer;
@@ -29,15 +30,12 @@ public class SendBrokerMessage implements SendMessage {
                 .newProducer(Schema.STRING)
                 .topic("test-topic")
                 .create()) {
-            for (int i = 0; i < 1000; i++){
-                Optional<String> message = utilMapperJson.execute(messageDomain);
-                if(message.isPresent()){
-                    stringProducer.send(message.get());
-                }
-            }
+                    Optional<String> message = utilMapperJson.execute(messageDomain);
+                    if(message.isPresent()){
+                        stringProducer.send(message.get());
+                    }
         } catch (PulsarClientException ex) {
-            throw new RuntimeException(ex);
+            throw SendBrokerMessageCustomException.buildTechnicalException(ex.getMessage(), ex);
         }
     }
-
 }
