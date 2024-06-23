@@ -20,7 +20,7 @@
     <modules>
         <module>core</module>
         <module>infrastructure</module>
-        <module>Utils</module>
+        <module>utils</module>
     </modules>
     <dependencies>
         <dependency>
