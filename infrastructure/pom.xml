@@ -7,7 +7,7 @@
         <artifactId>MessageUcoLab</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>Infrastructure</artifactId>
+    <artifactId>infrastructure</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Infrastructure</name>
     <description>Infrastructure</description>
@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>co.edu.uco</groupId>
-            <artifactId>Core</artifactId>
+            <artifactId>core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

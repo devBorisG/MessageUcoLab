@@ -16,7 +16,7 @@ public class ListMessageUseCase implements ListMessageInPort {
     private final ListMessagePresenter presenter;
     private final DTOAssembler<MessageDTO,MessageDomain> assembler;
 
-    public ListMessageUseCase(SendMessage sendMessage, ListMessagePresenter presenter, ModelAssembler assembler) {
+    public ListMessageUseCase(SendMessage sendMessage, ListMessagePresenter presenter, DTOAssembler<MessageDTO, MessageDomain> assembler) {
         this.sendMessage = sendMessage;
         this.presenter = presenter;
         this.assembler = assembler;
