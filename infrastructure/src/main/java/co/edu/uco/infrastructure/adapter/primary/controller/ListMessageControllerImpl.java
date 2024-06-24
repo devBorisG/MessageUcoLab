@@ -1,5 +1,6 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
+import co.edu.uco.core.application.builder.MessageDTOBuilder;
 import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageInputPort;
 import co.edu.uco.infrastructure.adapter.AbstractRestController;
@@ -20,7 +21,7 @@ public class ListMessageControllerImpl extends AbstractRestController implements
 
     @GetMapping()
     public void execute(@RequestParam String codeMessage, HttpServletResponse response) {
-        MessageDTO message = MessageDTO.builder().code(codeMessage).build();
+        MessageDTO message = MessageDTOBuilder.getInstance().setCode(codeMessage).build();
         handlingListMessageInputPort.listMessage(message, response);
     }
 }
