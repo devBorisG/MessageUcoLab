@@ -1,6 +1,8 @@
 package co.edu.uco.core.domain.aggregate.entities.valueobject;
 
-import co.edu.uco.utils.exception.customexception.*;
+import co.edu.uco.core.domain.customexception.ContentCanNotBeEmptyException;
+import co.edu.uco.core.domain.customexception.SizeContentLessThanTenException;
+import co.edu.uco.core.domain.customexception.SizeContentMoreThanOneHundred;
 import co.edu.uco.utils.helper.UtilNumeric;
 import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;

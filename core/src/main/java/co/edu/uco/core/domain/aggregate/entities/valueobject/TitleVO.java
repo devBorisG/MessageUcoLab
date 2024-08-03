@@ -1,8 +1,8 @@
 package co.edu.uco.core.domain.aggregate.entities.valueobject;
 
-import co.edu.uco.utils.exception.customexception.SizeTitleLessThanTenException;
-import co.edu.uco.utils.exception.customexception.SizeTitleMoreThanFiftyException;
-import co.edu.uco.utils.exception.customexception.TitleCanNotBeEmptyException;
+import co.edu.uco.core.domain.customexception.SizeTitleLessThanTenException;
+import co.edu.uco.core.domain.customexception.SizeTitleMoreThanFiftyException;
+import co.edu.uco.core.domain.customexception.TitleCanNotBeEmptyException;
 import co.edu.uco.utils.helper.UtilNumeric;
 import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;
