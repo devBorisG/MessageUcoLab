@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.broker;
 
-import co.edu.uco.core.domain.domains.MessageDomain;
+import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.out.broker.SendMessage;
 import co.edu.uco.core.properties.PropertiesCatalogMessageProducer;
 import co.edu.uco.utils.exception.enumeration.infrastructure.SendBrokerMessageCustomException;
@@ -31,7 +31,7 @@ public class SendBrokerMessage implements SendMessage {
     }
 
     @Override
-    public void execute(MessageDomain messageDomain, HttpServletResponse response) {
+    public void execute(MessageCodeDomain messageDomain, HttpServletResponse response) {
         try (Producer<String> stringProducer = this.client
                 .newProducer(Schema.STRING)
                 .topic(messageProducer.getTopic())
