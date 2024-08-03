@@ -1,4 +1,4 @@
-package co.edu.uco.core.domain.entities.valueobject;
+package co.edu.uco.core.domain.aggregate.entities.valueobject;
 
 import co.edu.uco.utils.exception.customexception.*;
 import co.edu.uco.utils.helper.UtilNumeric;

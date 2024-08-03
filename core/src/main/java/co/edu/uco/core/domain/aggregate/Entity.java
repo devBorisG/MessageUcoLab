@@ -1,4 +1,4 @@
-package co.edu.uco.core.domain.entities;
+package co.edu.uco.core.domain.aggregate;
 
 public abstract class Entity<ID> {
         private ID id;

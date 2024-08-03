@@ -1,7 +1,8 @@
-package co.edu.uco.core.domain.entities;
+package co.edu.uco.core.domain.aggregate.entities;
 
-import co.edu.uco.core.domain.entities.valueobject.ContentVO;
-import co.edu.uco.core.domain.entities.valueobject.TitleVO;
+import co.edu.uco.core.domain.aggregate.Entity;
+import co.edu.uco.core.domain.aggregate.entities.valueobject.ContentVO;
+import co.edu.uco.core.domain.aggregate.entities.valueobject.TitleVO;
 import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;
 
