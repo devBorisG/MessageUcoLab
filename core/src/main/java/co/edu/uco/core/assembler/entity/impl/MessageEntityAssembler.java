@@ -2,7 +2,7 @@ package co.edu.uco.core.assembler.entity.impl;
 
 import co.edu.uco.core.assembler.entity.EntityAssembler;
 import co.edu.uco.core.domain.domains.MessageDomain;
-import co.edu.uco.core.domain.entities.MessageEntity;
+import co.edu.uco.core.domain.aggregate.entities.MessageEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

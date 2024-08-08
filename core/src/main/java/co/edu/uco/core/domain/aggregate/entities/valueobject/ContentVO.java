@@ -1,6 +1,10 @@
-package co.edu.uco.core.domain.entities.valueobject;
+package co.edu.uco.core.domain.aggregate.entities.valueobject;
 
-import co.edu.uco.utils.exception.customexception.*;
+import co.edu.uco.core.domain.customexception.ContentCanNotBeEmptyException;
+import co.edu.uco.core.domain.customexception.SizeContentLessThanTenException;
+import co.edu.uco.core.domain.customexception.SizeContentMoreThanOneHundred;
+import co.edu.uco.utils.helper.UtilNumeric;
+import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;
 
 @Getter
@@ -20,19 +24,19 @@ public class ContentVO {
     }
 
     private void validateContent(String content) {
-        if (content == null || content.trim().isEmpty()) {
+        if (UtilText.getUtilText().isEmpty(content) || UtilText.getUtilText().isNull(content)) {
             ContentCanNotBeEmptyException.report();
         }
     }
 
     private void validateSizeMoreThanOneHundred(String content) {
-        if (content.length() > 100) {
+        if (UtilNumeric.getUtilNumeric().isGreaterThan(content.length(), 100)) {
             SizeContentMoreThanOneHundred.report();
         }
     }
 
     private void validateSizeLessThanTen(String content) {
-        if (content.length() < 10) {
+        if (UtilNumeric.getUtilNumeric().isLessThan(content.length(), 10)) {
             SizeContentLessThanTenException.report();
         }
     }
