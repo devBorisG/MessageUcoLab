@@ -1,7 +1,7 @@
 package co.edu.uco.utils.helper;
 
 
-import co.edu.uco.utils.exception.GeneralException;
+import co.edu.uco.utils.exception.CrossWordsException;
 
 import java.util.UUID;
 
@@ -39,9 +39,9 @@ public final class UtilUUID {
             try {
                 uuid = UUID.fromString(uuidString);
             } catch (IllegalArgumentException exception) {
-                throw GeneralException.build("The UUID to be converted has no valid format.",exception);
+                throw CrossWordsException.build("The UUID to be converted has no valid format.",exception);
             } catch (Exception exception){
-                throw GeneralException.build("An unexpected error trying converted", exception);
+                throw CrossWordsException.build("An unexpected error trying converted", exception);
             }
         }
         return uuid;

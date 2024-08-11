@@ -3,21 +3,21 @@ package co.edu.uco.utils.exception;
 import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
 import static co.edu.uco.utils.helper.UtilText.getUtilText;
 
-public class GeneralException extends RuntimeException {
+public class CrossWordsException extends RuntimeException {
     private static final long serialVersionUID = -3393801537376736983L;
     private String userMessage;
     private String technicalMessage;
     private Exception rootException;
 
-    public static GeneralException build(String technicalMessage) {
-        return new GeneralException(null, technicalMessage, null);
+    public static CrossWordsException build(String technicalMessage) {
+        return new CrossWordsException(null, technicalMessage, null);
     }
 
-    public static GeneralException build(String technicalMessage, Exception rootException) {
-        return new GeneralException(null, technicalMessage, rootException);
+    public static CrossWordsException build(String technicalMessage, Exception rootException) {
+        return new CrossWordsException(null, technicalMessage, rootException);
     }
 
-    protected GeneralException(String userMessage, String technicalMessage, Exception rootException) {
+    protected CrossWordsException(String userMessage, String technicalMessage, Exception rootException) {
         super();
         setUserMessage(userMessage);
         setTechnicalMessage(technicalMessage);
