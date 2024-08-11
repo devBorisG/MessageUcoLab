@@ -3,7 +3,7 @@ package co.edu.uco.utils.exception;
 import co.edu.uco.utils.exception.enumeration.ExceptionLocation;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
 
-import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 
 public class CrossWordCustomException extends GeneralException{
     private ExceptionType type;
@@ -35,7 +35,7 @@ public class CrossWordCustomException extends GeneralException{
     }
 
     public void setType(ExceptionType type) {
-        this.type = getUtilObject().getDefaultIsNull(type, ExceptionType.GENERAL);
+        this.type = getDefaultIsNullObject(type, ExceptionType.GENERAL);
     }
 
     public ExceptionLocation getLocation() {
@@ -43,6 +43,6 @@ public class CrossWordCustomException extends GeneralException{
     }
 
     public void setLocation(ExceptionLocation location) {
-        this.location = getUtilObject().getDefaultIsNull(location, ExceptionLocation.GENERAL);
+        this.location = getDefaultIsNullObject(location, ExceptionLocation.GENERAL);
     }
 }
