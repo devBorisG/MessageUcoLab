@@ -35,4 +35,8 @@ public final class UtilText {
     public static boolean validMatch(String value, String expression) {
         return value.matches(expression);
     }
+
+    public static boolean isEmptyOrNull(String value) {
+        return isNull(value) || isEmpty(value);
+    }
 }

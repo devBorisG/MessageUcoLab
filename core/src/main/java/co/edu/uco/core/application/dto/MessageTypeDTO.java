@@ -4,8 +4,8 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-import static co.edu.uco.utils.helper.UtilText.getUtilText;
-import static co.edu.uco.utils.helper.UtilUUID.getUtilUUID;
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
 public class MessageTypeDTO {
@@ -18,11 +18,11 @@ public class MessageTypeDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public void setName(String name) {
-        this.name = getUtilText().trim(name);
+        this.name = trim(name);
     }
 
     public static MessageTypeDTO create(UUID id, String name) {
