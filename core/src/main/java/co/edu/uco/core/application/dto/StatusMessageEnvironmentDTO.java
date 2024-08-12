@@ -4,8 +4,8 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-import static co.edu.uco.utils.helper.UtilText.getUtilText;
-import static co.edu.uco.utils.helper.UtilUUID.getUtilUUID;
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
 public class StatusMessageEnvironmentDTO {
@@ -18,10 +18,10 @@ public class StatusMessageEnvironmentDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
-    public void setName(String name) { this.name = getUtilText().trim(name); }
+    public void setName(String name) { this.name = trim(name); }
 
     public static StatusMessageEnvironmentDTO create(UUID id, String name) {
         return new StatusMessageEnvironmentDTO(id, name);

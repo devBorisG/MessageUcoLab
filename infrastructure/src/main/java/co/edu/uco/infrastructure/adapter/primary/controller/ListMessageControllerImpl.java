@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/messageucolab/v1/message")
+@RequestMapping("${crosswords.api.path.message}")
 public class ListMessageControllerImpl extends AbstractRestController implements ListMessageController {
 
     private final HandlingListMessageInputPort handlingListMessageInputPort;

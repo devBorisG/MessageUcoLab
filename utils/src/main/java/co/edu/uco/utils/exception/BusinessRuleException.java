@@ -3,15 +3,25 @@ package co.edu.uco.utils.exception;
 import co.edu.uco.utils.exception.enumeration.ExceptionLocation;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
 
-import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 
-public class BusinessRuleException extends CrossWordsException{
+public class BusinessRuleException extends BusinessException {
     private ExceptionType type;
     private ExceptionLocation location;
     protected BusinessRuleException(String userMessage, String technicalMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {
         super(userMessage, technicalMessage, rootException);
         setLocation(location);
         setType(type);
+    }
+
+    public BusinessRuleException(String userMessage, String technicalMessage) {
+        super(userMessage, technicalMessage, null, ExceptionType.BUSINESS_RULE,ExceptionLocation.APPLICATION);
+    }
+
+    public BusinessRuleException(String userMessage, String technicalMessage, Exception rootException, ExceptionType type, ExceptionLocation location, ExceptionType type1, ExceptionLocation location1) {
+        super(userMessage, technicalMessage, rootException, type, location);
+        this.type = type1;
+        this.location = location1;
     }
 
     public static BusinessRuleException buildUserException(String userMessage) {
@@ -35,7 +45,7 @@ public class BusinessRuleException extends CrossWordsException{
     }
 
     public void setType(ExceptionType type) {
-        this.type = getUtilObject().getDefaultIsNull(type, ExceptionType.GENERAL);
+        this.type = getDefaultIsNullObject(type, ExceptionType.GENERAL);
     }
 
     public ExceptionLocation getLocation() {
@@ -43,6 +53,6 @@ public class BusinessRuleException extends CrossWordsException{
     }
 
     public void setLocation(ExceptionLocation location) {
-        this.location = getUtilObject().getDefaultIsNull(location, ExceptionLocation.GENERAL);
+        this.location = getDefaultIsNullObject(location, ExceptionLocation.GENERAL);
     }
 }
