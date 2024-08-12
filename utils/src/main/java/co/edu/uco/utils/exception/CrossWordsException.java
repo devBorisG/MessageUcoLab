@@ -1,5 +1,6 @@
 package co.edu.uco.utils.exception;
 
+import static co.edu.uco.utils.helper.UtilDate.getDefaultIsNull;
 import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
@@ -37,7 +38,7 @@ public class CrossWordsException extends RuntimeException {
         this.userMessage = trim(userMessage);
     }
     private void setTechnicalMessage(String technicalMessage) {
-        this.technicalMessage = trim(technicalMessage);
+        this.technicalMessage = (technicalMessage);
     }
     private void setRootException(Exception rootException) {
         this.rootException = getDefaultIsNullObject(rootException, new Exception());
