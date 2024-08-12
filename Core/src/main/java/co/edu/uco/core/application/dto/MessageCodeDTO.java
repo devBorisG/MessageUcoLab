@@ -2,7 +2,7 @@ package co.edu.uco.core.application.dto;
 
 import lombok.Getter;
 
-import static co.edu.uco.utils.helper.UtilText.getUtilText;
+import static co.edu.uco.utils.helper.UtilText.getDefault;
 
 @Getter
 public class MessageCodeDTO {
@@ -13,7 +13,7 @@ public class MessageCodeDTO {
     }
 
     public void setCode(String code) {
-        this.code = getUtilText().getDefault(code);
+        this.code = getDefault(code);
     }
 
     public static MessageCodeDTO create(String code) {

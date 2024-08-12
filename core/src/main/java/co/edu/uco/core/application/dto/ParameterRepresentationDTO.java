@@ -4,9 +4,9 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
-import static co.edu.uco.utils.helper.UtilText.getUtilText;
-import static co.edu.uco.utils.helper.UtilUUID.getUtilUUID;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
 public class ParameterRepresentationDTO {
@@ -25,18 +25,18 @@ public class ParameterRepresentationDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public void setStart(String start) {
-        this.start = getUtilText().trim(start);
+        this.start = trim(start);
     }
 
-    public void setEnd(String end) { this.end = getUtilText().trim(end); }
+    public void setEnd(String end) { this.end = trim(end); }
 
-    public void setDefaultVal(boolean defaultVal) { this.defaultVal = getUtilObject().getDefaultIsNull(defaultVal, false); }
+    public void setDefaultVal(boolean defaultVal) { this.defaultVal = getDefaultIsNullObject(defaultVal, false); }
 
-    public void setParameter(boolean parameter) { this.isParameter = getUtilObject().getDefaultIsNull(parameter, false); }
+    public void setParameter(boolean parameter) { this.isParameter = getDefaultIsNullObject(parameter, false); }
 
     public static ParameterRepresentationDTO create(UUID id, String start, String end, boolean defaultVal, boolean isParameter) {
         return new ParameterRepresentationDTO(id, start, end, defaultVal, isParameter);

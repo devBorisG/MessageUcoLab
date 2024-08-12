@@ -6,8 +6,8 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-import static co.edu.uco.utils.helper.UtilText.getUtilText;
-import static co.edu.uco.utils.helper.UtilUUID.getUtilUUID;
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
 public class ParameterDTO {
@@ -22,15 +22,15 @@ public class ParameterDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public void setName(String name) {
-        this.name = getUtilText().trim(name);
+        this.name = trim(name);
     }
 
     public void setDescription(String description) {
-        this.description = getUtilText().trim(description);
+        this.description = trim(description);
     }
 
     public static ParameterDTO create(UUID id, String name, String description) {

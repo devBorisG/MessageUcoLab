@@ -1,7 +1,8 @@
 package co.edu.uco.utils.exception;
 
-import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
-import static co.edu.uco.utils.helper.UtilText.getUtilText;
+import static co.edu.uco.utils.helper.UtilDate.getDefaultIsNull;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+import static co.edu.uco.utils.helper.UtilText.trim;
 
 public class CrossWordsException extends RuntimeException {
     private static final long serialVersionUID = -3393801537376736983L;
@@ -34,13 +35,13 @@ public class CrossWordsException extends RuntimeException {
         return rootException;
     }
     private void setUserMessage(String userMessage) {
-        this.userMessage = getUtilText().trim(userMessage);
+        this.userMessage = trim(userMessage);
     }
     private void setTechnicalMessage(String technicalMessage) {
-        this.technicalMessage = getUtilText().trim(technicalMessage);
+        this.technicalMessage = (technicalMessage);
     }
     private void setRootException(Exception rootException) {
-        this.rootException = getUtilObject().getDefaultIsNull(rootException, new Exception());
+        this.rootException = getDefaultIsNullObject(rootException, new Exception());
     }
 
 }

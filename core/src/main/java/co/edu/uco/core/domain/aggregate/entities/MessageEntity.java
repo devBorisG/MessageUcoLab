@@ -8,6 +8,8 @@ import lombok.Getter;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilText.trim;
+
 @Getter
 public class MessageEntity extends Entity<UUID> {
     private String code;
@@ -20,7 +22,7 @@ public class MessageEntity extends Entity<UUID> {
     private FunctionalityEntity functionality;
 
     public void setCode(String code) {
-        this.code = UtilText.getUtilText().trim(code);
+        this.code = trim(code);
     }
 
     public void setTitle(String title) {
@@ -44,7 +46,7 @@ public class MessageEntity extends Entity<UUID> {
     }
 
     public void setApplication(String application) {
-        this.application = UtilText.getUtilText().trim(application);
+        this.application = trim(application);
     }
 
     public void setFunctionality(FunctionalityEntity functionality) {

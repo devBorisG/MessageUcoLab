@@ -4,8 +4,9 @@ import co.edu.uco.core.domain.customexception.SizeTitleLessThanTenException;
 import co.edu.uco.core.domain.customexception.SizeTitleMoreThanFiftyException;
 import co.edu.uco.core.domain.customexception.TitleCanNotBeEmptyException;
 import co.edu.uco.utils.helper.UtilNumeric;
-import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;
+
+import static co.edu.uco.utils.helper.UtilText.isEmptyOrNull;
 
 @Getter
 public class TitleVO {
@@ -24,19 +25,19 @@ public class TitleVO {
     }
 
     private void validateTitle(String title) {
-        if (UtilText.getUtilText().isEmpty(title) || UtilText.getUtilText().isNull(title)) {
+        if (isEmptyOrNull(title)) {
             TitleCanNotBeEmptyException.report();
         }
     }
 
     private void validateSizeMoreThanFifty(String title) {
-        if (UtilNumeric.getUtilNumeric().isGreaterThan(title.length(), 50)) {
+        if (UtilNumeric.isGreaterThan(title.length(), 50)) {
             SizeTitleMoreThanFiftyException.report();
         }
     }
 
     private void validateSizeLessThanTen(String title) {
-        if (UtilNumeric.getUtilNumeric().isLessThan(title.length(), 10)) {
+        if (UtilNumeric.isLessThan(title.length(), 10)) {
             SizeTitleLessThanTenException.report();
         }
     }
