@@ -4,7 +4,7 @@ import co.edu.uco.core.application.dto.CategoryDTO;
 
 import java.util.UUID;
 
-public class CategoryDTOBuilder {
+public final class CategoryDTOBuilder {
     private UUID id;
     private String name;
 

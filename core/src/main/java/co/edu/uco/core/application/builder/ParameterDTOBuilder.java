@@ -4,7 +4,7 @@ import co.edu.uco.core.application.dto.ParameterDTO;
 
 import java.util.UUID;
 
-public class ParameterDTOBuilder {
+public final class ParameterDTOBuilder {
     private UUID id;
     private String name;
     private String description;

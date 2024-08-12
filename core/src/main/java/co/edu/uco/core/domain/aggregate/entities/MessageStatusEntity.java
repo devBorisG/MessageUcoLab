@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.UUID;
 
 @Getter
-public class MessageStatusEntity extends Entity<UUID> {
+public final class MessageStatusEntity extends Entity<UUID> {
     private UUID id;
     private String name;
 }

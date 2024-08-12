@@ -4,7 +4,7 @@ import co.edu.uco.utils.exception.BusinessRuleException;
 
 import java.io.Serial;
 
-public class SizeTitleMoreThanFiftyException extends BusinessRuleException {
+public final class SizeTitleMoreThanFiftyException extends BusinessRuleException {
 
     @Serial
     private static final long serialVersionUID = -2432315861505641573L;

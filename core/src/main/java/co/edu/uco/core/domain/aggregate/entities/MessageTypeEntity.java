@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class MessageTypeEntity extends Entity<UUID> {
+public final class MessageTypeEntity extends Entity<UUID> {
     private UUID id;
     private String name;
 }

@@ -5,6 +5,4 @@ import co.edu.uco.core.domain.aggregate.entities.MessageTypeEntity;
 
 import java.util.UUID;
 
-public class ListMessageAggregateRoot extends AggregateRoot<MessageTypeEntity, UUID> {
-
-}
+public final class ListMessageAggregateRoot extends AggregateRoot<MessageTypeEntity, UUID> { }

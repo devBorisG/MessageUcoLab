@@ -4,7 +4,7 @@ import co.edu.uco.utils.exception.BusinessRuleException;
 
 import java.io.Serial;
 
-public class SizeContentLessThanTenException extends BusinessRuleException {
+public final class SizeContentLessThanTenException extends BusinessRuleException {
 
     @Serial
     private static final long serialVersionUID = -2529239574681102198L;

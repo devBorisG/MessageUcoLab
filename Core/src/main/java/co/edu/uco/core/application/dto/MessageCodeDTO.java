@@ -5,7 +5,7 @@ import lombok.Getter;
 import static co.edu.uco.utils.helper.UtilText.getDefault;
 
 @Getter
-public class MessageCodeDTO {
+public final class MessageCodeDTO {
     private String code;
 
     public MessageCodeDTO(String code) {

@@ -9,7 +9,7 @@ import lombok.Getter;
 import static co.edu.uco.utils.helper.UtilText.isEmptyOrNull;
 
 @Getter
-public class ContentVO {
+public final class ContentVO {
     private String content;
 
     public ContentVO(String content) {

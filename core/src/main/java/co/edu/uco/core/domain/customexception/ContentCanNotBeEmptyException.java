@@ -4,7 +4,7 @@ import co.edu.uco.utils.exception.BusinessRuleException;
 
 import java.io.Serial;
 
-public class ContentCanNotBeEmptyException extends BusinessRuleException {
+public final class ContentCanNotBeEmptyException extends BusinessRuleException {
 
     @Serial
     private static final long serialVersionUID = -2821910820329341124L;

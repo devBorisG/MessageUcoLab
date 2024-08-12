@@ -11,7 +11,7 @@ import java.util.UUID;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-public class MessageEntity extends Entity<UUID> {
+public final class MessageEntity extends Entity<UUID> {
     private String code;
     private TitleVO title;
     private ContentVO content;

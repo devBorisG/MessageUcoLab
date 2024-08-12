@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class FunctionalityEntity extends Entity<UUID> {
+public final class FunctionalityEntity extends Entity<UUID> {
     private UUID id;
     private String name;
     private LocalDateTime startDate;

@@ -8,7 +8,7 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
-public class MessageEnvironmentDTO {
+public final class MessageEnvironmentDTO {
 
     private UUID id;
     private String message;

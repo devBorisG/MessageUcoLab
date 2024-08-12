@@ -4,7 +4,7 @@ import co.edu.uco.core.application.dto.ParameterRepresentationDTO;
 
 import java.util.UUID;
 
-public class ParameterRepresentationDTOBuilder {
+public final class ParameterRepresentationDTOBuilder {
     private UUID id;
     private String start;
     private String end;

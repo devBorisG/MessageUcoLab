@@ -2,7 +2,7 @@ package co.edu.uco.core.application.builder;
 
 import co.edu.uco.core.application.dto.MessageCodeDTO;
 
-public class MessageCodeDTOBuilder {
+public final class MessageCodeDTOBuilder {
     private String code;
 
     private MessageCodeDTOBuilder() {

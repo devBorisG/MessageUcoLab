@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${crosswords.api.path.message}")
-public class ListMessageControllerImpl extends AbstractRestController implements ListMessageController {
+public  final class ListMessageControllerImpl extends AbstractRestController implements ListMessageController {
 
     private final HandlingListMessageInputPort handlingListMessageInputPort;
 

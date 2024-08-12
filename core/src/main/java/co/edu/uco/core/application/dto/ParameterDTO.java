@@ -10,7 +10,7 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
-public class ParameterDTO {
+public final class ParameterDTO {
     private UUID id;
     private String name;
     private String description;

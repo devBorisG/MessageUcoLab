@@ -4,7 +4,7 @@ import co.edu.uco.core.application.dto.MessageStatusDTO;
 
 import java.util.UUID;
 
-public class MessageStatusDTOBuilder {
+public final class MessageStatusDTOBuilder {
     private UUID id;
     private String name;
     private String description;
