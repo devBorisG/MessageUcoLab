@@ -29,9 +29,9 @@ public class MessageEntity extends Entity<UUID> {
         this.title = new TitleVO(title);
     }
 
-    public void setContent(String content) {
-        this.content = new ContentVO(content);
-    }
+    //public void setContent(String content) {
+    //    this.content = new ContentVO(content);
+    //}
 
     public void setType(MessageTypeEntity type) {
         this.type = type;
