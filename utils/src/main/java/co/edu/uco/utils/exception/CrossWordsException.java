@@ -3,16 +3,28 @@ package co.edu.uco.utils.exception;
 import co.edu.uco.utils.exception.enumeration.ExceptionLocation;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
 
+import java.io.Serial;
+
 import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 public class CrossWordsException extends RuntimeException {
+    @Serial
     private static final long serialVersionUID = -3393801537376736983L;
     private String userMessage;
     private String technicalMessage;
     private Exception rootException;
     private ExceptionType type;
     private ExceptionLocation location;
+
+    public CrossWordsException(String userMessage, String technicalMessage, Exception rootException) {
+        super();
+        setUserMessage(userMessage);
+        setTechnicalMessage(technicalMessage);
+        setRootException(rootException);
+        setType(ExceptionType.GENERAL);
+        setLocation(ExceptionLocation.GENERAL);
+    }
 
     public static CrossWordsException build(String technicalMessage) {
         return new CrossWordsException(null, technicalMessage, null, null, null);

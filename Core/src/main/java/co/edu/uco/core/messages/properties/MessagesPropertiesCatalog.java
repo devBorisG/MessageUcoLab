@@ -1,7 +1,7 @@
 package co.edu.uco.core.messages.properties;
 
-import co.edu.uco.core.messages.CatalogMessageEnum;
-import co.edu.uco.core.messages.CatalogoMensajes;
+import co.edu.uco.core.messages.MessageCatalogEnum;
+import co.edu.uco.core.messages.MessageCatalog;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,18 +13,13 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties(prefix = "ucolab-usr")
 @Slf4j
-public class CatalogMessagesProperties extends CatalogoMensajes {
+public  class MessagesPropertiesCatalog extends MessageCatalog {
 
     private  Map<String, String> messages;
 
     private Map<String, String> messagesCatalog = new HashMap<>();
 
-    public CatalogMessagesProperties() {
-        this.messages = getMessages();
-        this.messagesCatalog = messages;
-    }
-
-    public Map<String, String> getMessages() {
+    public final Map<String, String> getMessages() {
         return messages;
     }
 
@@ -34,39 +29,39 @@ public class CatalogMessagesProperties extends CatalogoMensajes {
 
     @PostConstruct
     public void init() {
-        cargarCatalogo();
+        loadCatalog();
         log.info("Catalogo de mensajes cargado");
     }
 
-    public String getMessage(CatalogMessageEnum key) {
+    public String getMessage(MessageCatalogEnum key) {
         return messagesCatalog.get(key.getKey());
     }
 
     @Override
-    public void cargarCatalogo() {
+    public void loadCatalog() {
         if (messages != null) {
             messagesCatalog.putAll(messages);
         }
     }
 
     @Override
-    public void recargarCatalogo() {
+    public void reloadCatalog() {
         messagesCatalog.clear();
-        cargarCatalogo();
+        loadCatalog();
     }
 
     @Override
-    public String obtenerMensaje(String key) {
+    public String getMessage(String key) {
         return messagesCatalog.get(key);
     }
 
     @Override
-    public void agregarMensaje(String key, String mensaje) {
-        messagesCatalog.put(key, mensaje);
+    public void addMessage(String key, String message) {
+        messagesCatalog.put(key, message);
     }
 
     @Override
-    public boolean contieneMensaje(String key) {
+    public boolean isExist(String key) {
         return messagesCatalog.containsKey(key);
     }
 }

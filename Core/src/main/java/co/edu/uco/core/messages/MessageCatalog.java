@@ -1,18 +1,15 @@
 package co.edu.uco.core.messages;
 
-import co.edu.uco.core.messages.properties.CatalogMessagesProperties;
-import jakarta.annotation.PostConstruct;
+public abstract class MessageCatalog {
+    public abstract void loadCatalog();
 
-public abstract class CatalogoMensajes {
-    public abstract void cargarCatalogo();
+    public abstract void reloadCatalog();
 
-    public abstract void recargarCatalogo();
+    public abstract String getMessage(String key);
 
-    public abstract String obtenerMensaje(String key);
+    public abstract void addMessage(String key, String message);
 
-    public abstract void agregarMensaje(String key, String mensaje);
-
-    public abstract boolean contieneMensaje(String key);
+    public abstract boolean isExist(String key);
 
     /*
     public static String buscarMensaje(CatalogMessageEnum key) {

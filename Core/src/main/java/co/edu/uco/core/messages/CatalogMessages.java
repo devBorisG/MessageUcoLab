@@ -1,5 +1,5 @@
 package co.edu.uco.core.messages;
 
 public interface CatalogMessages {
-    String getMessage(CatalogMessageEnum key);
+    String getMessage(MessageCatalogEnum key);
 }
