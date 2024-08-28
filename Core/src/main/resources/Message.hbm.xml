@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//
+EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="co.edu.uco.core.assembler.pojo.Message" table="MESSAGE">
+        <id name="id"  type="string" column="IDENTIFIER"/>
+
+        <property name = "code" column = "CODE" type = "string"/>
+        <property name = "title" column = "TITLE" type = "string"/>
+        <property name = "content" column = "CONTENT" type = "string"/>
+        <property name = "type" column = "TYPE" type = "string"/>
+        <property name = "category" column = "CATEGORY" type = "string"/>
+        <property name = "status" column = "STATUS" type = "string"/>
+        <property name = "application" column = "APPLICATION" type = "string"/>
+        <property name = "functionality" column = "FUNCTIONALITY" type = "string"/>
+
+    </class>
+</hibernate-mapping>
