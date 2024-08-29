@@ -20,6 +20,6 @@ public class DummyController {
 
     @RequestMapping
     public String dummy() {
-        return catalogMessagesProperties.getMessage(MessageCatalogEnum.USR_001.getKey());
+        return catalogMessagesProperties.getMessage(MessageCatalogEnum.USR_002.getKey());
     }
 }

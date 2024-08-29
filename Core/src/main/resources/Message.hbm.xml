@@ -6,7 +6,7 @@ EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
     <class name="co.edu.uco.core.assembler.pojo.Message" table="MESSAGE">
         <id name="id"  type="string" column="IDENTIFIER"/>
 
-        <property name = "code" column = "CODE" type = "string"/>
+        <property name = "code" column = "CODE" type = "string" />
         <property name = "title" column = "TITLE" type = "string"/>
         <property name = "content" column = "CONTENT" type = "string"/>
         <property name = "type" column = "TYPE" type = "string"/>
