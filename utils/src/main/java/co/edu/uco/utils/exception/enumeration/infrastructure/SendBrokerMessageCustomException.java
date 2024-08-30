@@ -1,12 +1,12 @@
 package co.edu.uco.utils.exception.enumeration.infrastructure;
 
-import co.edu.uco.utils.exception.GeneralException;
+import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.exception.enumeration.ExceptionLocation;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
 
-import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 
-public class SendBrokerMessageCustomException extends GeneralException {
+public class SendBrokerMessageCustomException extends CrossWordsException {
     private ExceptionType type;
     private ExceptionLocation location;
 
@@ -37,7 +37,7 @@ public class SendBrokerMessageCustomException extends GeneralException {
     }
 
     public void setType(ExceptionType type) {
-        this.type = getUtilObject().getDefaultIsNull(type, ExceptionType.GENERAL);
+        this.type = getDefaultIsNullObject(type, ExceptionType.GENERAL);
     }
 
     public ExceptionLocation getLocation() {
@@ -45,6 +45,6 @@ public class SendBrokerMessageCustomException extends GeneralException {
     }
 
     public void setLocation(ExceptionLocation location) {
-        this.location = getUtilObject().getDefaultIsNull(location, ExceptionLocation.GENERAL);
+        this.location = getDefaultIsNullObject(location, ExceptionLocation.GENERAL);
     }
 }

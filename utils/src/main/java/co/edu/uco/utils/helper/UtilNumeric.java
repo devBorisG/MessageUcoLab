@@ -1,50 +1,45 @@
 package co.edu.uco.utils.helper;
 
 
-import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 
 public final class UtilNumeric {
-    private static final UtilNumeric INSTANCE = new UtilNumeric();
     public static final Byte ZERO = 0;
     private UtilNumeric() {}
-    public static UtilNumeric getUtilNumeric() {
-        return INSTANCE;
+
+    public static <T extends Number> T getDefault(T value, T defaultValue) {
+        return getDefaultIsNullObject(value, defaultValue);
     }
 
-    public <T extends Number> T getDefault(T value, T defaultValue) {
-        return getUtilObject().getDefaultIsNull(value, defaultValue);
-
-    }
-
-    public <T extends Number> Number getDefault(T value) {
+    public static <T extends Number> Number getDefault(T value) {
         return getDefault(value, ZERO);
     }
 
-    public <T extends Number> boolean isGreaterThan(T firstValue, T secondValue) {
+    public static <T extends Number> boolean isGreaterThan(T firstValue, T secondValue) {
         return getDefault(firstValue).doubleValue() > getDefault(secondValue).doubleValue();
     }
 
-    public <T extends Number> boolean isLessThan(T firstValue,T secondValue) {
+    public static <T extends Number> boolean isLessThan(T firstValue, T secondValue) {
         return getDefault(firstValue).doubleValue() < getDefault(secondValue).doubleValue();
     }
 
-    public <T extends Number> boolean isEqualThan(T firstValue,T secondValue) {
+    public static <T extends Number> boolean isEqualThan(T firstValue,T secondValue) {
         return getDefault(firstValue).doubleValue() == getDefault(secondValue).doubleValue();
     }
 
-    public <T extends Number> boolean isGreaterOrEqualThan(T firstValue, T secondValue) {
+    public static <T extends Number> boolean isGreaterOrEqualThan(T firstValue, T secondValue) {
         return getDefault(firstValue).doubleValue() >= getDefault(secondValue).doubleValue();
     }
 
-    public <T extends Number> boolean isLessOrEqualThan(T firstValue,T secondValue) {
+    public static <T extends Number> boolean isLessOrEqualThan(T firstValue,T secondValue) {
         return getDefault(firstValue).doubleValue() <= getDefault(secondValue).doubleValue();
     }
 
-    public <T extends Number> boolean isDifferent(T firstValue,T secondValue) {
+    public static <T extends Number> boolean isDifferent(T firstValue,T secondValue) {
         return getDefault(firstValue).doubleValue() != getDefault(secondValue).doubleValue();
     }
 
-    public <T extends Number> boolean isBetween(T value, T initialRange, T finalRange,
+    public static <T extends Number> boolean isBetween(T value, T initialRange, T finalRange,
                                                 boolean includeInitialRange, boolean includeFinalRange) {
         return (includeInitialRange
                 ? isGreaterOrEqualThan(value, initialRange)
@@ -55,11 +50,11 @@ public final class UtilNumeric {
                         : isLessThan(value, finalRange));
     }
 
-    public <T extends Number> boolean isBetweenIncludingRanges(T value, T initialValue, T finalValue) {
+    public static <T extends Number> boolean isBetweenIncludingRanges(T value, T initialValue, T finalValue) {
         return isBetween(value, initialValue, finalValue, true, true);
     }
 
-    public <T extends Number> boolean isPositive(T value) {
+    public static <T extends Number> boolean isPositive(T value) {
         return isGreaterOrEqualThan(value, ZERO);
     }
 }

@@ -1,9 +1,8 @@
 package co.edu.uco.utils.helper;
 
-import static co.edu.uco.utils.helper.UtilObject.getUtilObject;
+import static co.edu.uco.utils.helper.UtilObject.*;
 
 public final class UtilText {
-    private static final UtilText INSTANCE = new UtilText();
     public static final String EMPTY = "";
     public static final String LETTERS_AND_SPACES_ONLY = "^[a-zA-ZñÑ\\s]+$";
     public static final String ANY_CHARACTER_EXCEPT_NUMBER = "[^\\d]";
@@ -12,30 +11,32 @@ public final class UtilText {
     public static final String ONLY_CHARACTERS_AND_NUMBERS = "^[a-zA-Z0-9]*$";
     public static final String SPACE = " ";
     private UtilText() {}
-    public static UtilText getUtilText() {
-        return INSTANCE;
+
+
+    public static boolean isNull(String value) {
+        return isNullObject(value);
+    }
+    public static String getDefault(String value, String defaultValue) {
+        return getDefaultIsNullObject(value, defaultValue);
+    }
+    public static String getDefault(String value) {
+        return getDefaultIsNullObject(value, EMPTY);
     }
 
-    public boolean isNull(String value) {
-        return getUtilObject().isNull(value);
-    }
-    public String getDefault(String value, String defaultValue) {
-        return getUtilObject().getDefaultIsNull(value, defaultValue);
-    }
-    public String getDefault(String value) {
-        return getUtilObject().getDefaultIsNull(value, EMPTY);
-    }
+    public static String trim(String value) {return getDefault(value).trim();}
 
-    public String trim(String value) {return getDefault(value).trim();}
-
-    public boolean isEmpty(String value) {
+    public static boolean isEmpty(String value) {
         return EMPTY.equals(trim(value));
     }
 
-    public boolean isContainsOnlyLetterAndSpace(String value) {
+    public static boolean isContainsOnlyLetterAndSpace(String value) {
         return validMatch(value, LETTERS_AND_SPACES_ONLY);
     }
-    public boolean validMatch(String value, String expression) {
+    public static boolean validMatch(String value, String expression) {
         return value.matches(expression);
+    }
+
+    public static boolean isEmptyOrNull(String value) {
+        return isNull(value) || isEmpty(value);
     }
 }

@@ -4,8 +4,8 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-import static co.edu.uco.utils.helper.UtilText.getUtilText;
-import static co.edu.uco.utils.helper.UtilUUID.getUtilUUID;
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
 public class MessageDTO {
@@ -25,23 +25,23 @@ public class MessageDTO {
     }
 
     public void setId(UUID id) {
-        this.id = getUtilUUID().getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public void setCode(String code) {
-        this.code = getUtilText().trim(code);
+        this.code = trim(code);
     }
 
     public void setTitle(String title) {
-        this.title = getUtilText().trim(title);
+        this.title = trim(title);
     }
 
     public void setContent(String content) {
-        this.content = getUtilText().trim(content);
+        this.content = trim(content);
     }
 
     public void setApplication(String application) {
-        this.application = getUtilText().trim(application);
+        this.application = trim(application);
     }
 
     public static MessageDTO create(UUID id, String code, String title, String content, String application) {

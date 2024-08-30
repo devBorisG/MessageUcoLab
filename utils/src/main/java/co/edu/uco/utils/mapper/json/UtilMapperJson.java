@@ -1,6 +1,6 @@
 package co.edu.uco.utils.mapper.json;
 
-import co.edu.uco.utils.exception.GeneralException;
+import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.mapper.config.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,8 +41,8 @@ public class UtilMapperJson implements MapperJsonObject {
     public <T> List<T> execute(String json, TypeReference<List<T>> typeReference) throws JsonProcessingException {
         try {
             return mapper.readValue(json, typeReference);
-        } catch (JsonProcessingException | GeneralException exception) {
-            throw GeneralException.build(exception.getMessage());
+        } catch (JsonProcessingException | CrossWordsException exception) {
+            throw CrossWordsException.build(exception.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class UtilMapperJson implements MapperJsonObject {
     public <T> Optional<T> execute(String json, Class<T> targetClass) {
         try {
             return Optional.ofNullable(mapper.readValue(json, targetClass));
-        } catch (GeneralException | JsonProcessingException exception) {
+        } catch (CrossWordsException | JsonProcessingException exception) {
             return Optional.empty();
         }
     }
@@ -63,7 +63,7 @@ public class UtilMapperJson implements MapperJsonObject {
                     .create();
             String objectToJson = gson.toJson(object);
             return Optional.ofNullable(objectToJson);
-        } catch (GeneralException exception) {
+        } catch (CrossWordsException exception) {
             return Optional.empty();
         }
     }
