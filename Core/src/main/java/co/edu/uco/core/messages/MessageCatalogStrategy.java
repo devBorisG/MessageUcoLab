@@ -2,52 +2,43 @@ package co.edu.uco.core.messages;
 
 import co.edu.uco.core.messages.impl.CacheMessageCatalog;
 import co.edu.uco.core.messages.impl.DatabaseMessageCatalog;
+import co.edu.uco.core.messages.impl.InMemoryMessageCatalog;
 import co.edu.uco.core.messages.properties.MessagesPropertiesCatalog;
+import co.edu.uco.utils.exception.CrossWordsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static co.edu.uco.utils.helper.UtilObject.isNullObject;
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
 
 @Component
 @Scope("singleton")
-public class MessageCatalogStrategy {
-
-    private final CacheMessageCatalog cacheMessageCatalog;
-    private final DatabaseMessageCatalog databaseMessageCatalog;
-    private MessageCatalog currentCatalog;
+public final class MessageCatalogStrategy {
+    private final List<MessageCatalog> catalogs;
 
     @Autowired
     public MessageCatalogStrategy(MessagesPropertiesCatalog messagesPropertiesCatalog,
                                   DatabaseMessageCatalog databaseMessageCatalog,
-                                  CacheMessageCatalog cacheMessageCatalog) {
-        this.currentCatalog = messagesPropertiesCatalog;
-        this.cacheMessageCatalog = cacheMessageCatalog;
-        this.databaseMessageCatalog = databaseMessageCatalog;
+                                  CacheMessageCatalog cacheMessageCatalog,
+                                 InMemoryMessageCatalog inMemoryMessageCatalog) {
+        this.catalogs = Arrays.asList(inMemoryMessageCatalog, messagesPropertiesCatalog, cacheMessageCatalog, databaseMessageCatalog);
     }
 
-    private void setStrategy(MessageCatalog catalog) {
-        this.currentCatalog = catalog;
-    }
-
-    public String getMessage(String key) {
-        var message = currentCatalog.getMessage(key);
-        if (isNullObject(message)) {
-            setStrategy(cacheMessageCatalog);
-            message = currentCatalog.getMessage(key);
-            if (isNullObject(message)) {
-                setStrategy(databaseMessageCatalog);
-                message = currentCatalog.getMessage(key);
+    public String getMessage(final MessageCatalogEnum key) {
+        if (isNullObject(key)) {
+            throw CrossWordsException.build(getMessage(MessageCatalogEnum.TCH_007));
+        }
+        var message = EMPTY;
+        for (var catalog : catalogs) {
+            message = catalog.getContent(key);
+            if (!isNullObject(message)) {
+                return message;
             }
         }
         return message;
-    }
-
-    public void addMessage(String key, String message) {
-        currentCatalog.addMessage(key, message);
-    }
-
-    public boolean isExist(String key) {
-        return currentCatalog.isExist(key);
     }
 }

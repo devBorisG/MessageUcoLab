@@ -1,13 +1,16 @@
 package co.edu.uco.core.messages.impl;
 
+import co.edu.uco.core.messages.Message;
 import co.edu.uco.core.messages.MessageCatalog;
+import co.edu.uco.core.messages.MessageCatalogEnum;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope()
 public final class DatabaseMessageCatalog extends MessageCatalog {
     @Override
     public void loadCatalog() {
-
     }
 
     @Override
@@ -16,13 +19,23 @@ public final class DatabaseMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public String getMessage(String key) {
+    public Message getMessage(MessageCatalogEnum code) {
+        return null;
+    }
+
+    @Override
+    public String getContent(MessageCatalogEnum code) {
         return "";
     }
 
     @Override
-    public void addMessage(String key, String message) {
+    public void addMessage(MessageCatalogEnum key, Message message) {
 
+    }
+
+    @Override
+    public Message getMessage(String key) {
+        return null;
     }
 
     @Override

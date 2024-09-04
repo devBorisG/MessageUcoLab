@@ -1,9 +1,13 @@
 package co.edu.uco.core.messages.properties;
 
+import co.edu.uco.core.CrosswordConstants;
+import co.edu.uco.core.messages.Message;
 import co.edu.uco.core.messages.MessageCatalogEnum;
 import co.edu.uco.core.messages.MessageCatalog;
+import co.edu.uco.core.messages.MessageEnum;
+import co.edu.uco.utils.exception.CrossWordsException;
+import co.edu.uco.utils.helper.UtilObject;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -13,38 +17,33 @@ import java.util.Map;
 
 @Configuration
 @ConfigurationProperties(prefix = "ucolab-usr")
-@Slf4j
 @Scope("singleton")
-public  class MessagesPropertiesCatalog extends MessageCatalog {
+public class MessagesPropertiesCatalog extends MessageCatalog {
 
-    private  Map<String, String> messages;
-
-    private Map<String, String> messagesCatalog = new HashMap<>();
-
-    public final Map<String, String> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Map<String, String> messages) {
-        this.messages = messages;
-    }
+    private static final Map<MessageCatalogEnum, Message> messagesCatalog = new HashMap<>();
 
     @PostConstruct
-    public void init() {
-        loadCatalog();
-        log.info("Catalogo de mensajes cargado");
-    }
+    public void init() {}
 
-    public String getMessage(MessageCatalogEnum key) {
-        return messagesCatalog.get(key.getKey());
+    public Message getMessage(MessageCatalogEnum key) {
+        if (UtilObject.isNullObject(key)) {
+           throw CrossWordsException.build(getContent(MessageCatalogEnum.TCH_007));
+        }
+        return messagesCatalog.get(key);
     }
 
     @Override
-    public void loadCatalog() {
-        if (messages != null) {
-            messagesCatalog.putAll(messages);
-        }
+    public String getContent(MessageCatalogEnum code) {
+        return messagesCatalog.get(code).content();
     }
+
+    @Override
+    public void addMessage(MessageCatalogEnum key, Message message) {
+        messagesCatalog.put(key, message);
+    }
+
+    @Override
+    public void loadCatalog() {}
 
     @Override
     public void reloadCatalog() {
@@ -53,17 +52,18 @@ public  class MessagesPropertiesCatalog extends MessageCatalog {
     }
 
     @Override
-    public String getMessage(String key) {
+    public Message getMessage(String key) {
         return messagesCatalog.get(key);
     }
 
-    @Override
-    public void addMessage(String key, String message) {
-        messagesCatalog.put(key, message);
-    }
 
     @Override
     public boolean isExist(String key) {
         return messagesCatalog.containsKey(key);
+    }
+
+    public static void main(String[] args) {
+        var message = MessageEnum.TCH_001.getMessage();
+        System.out.println(message.code().getKey()+" "+message.content()+" "+message.title()+" "+message.type()+" "+message.category());
     }
 }
