@@ -25,7 +25,7 @@ public final class MessageCatalogStrategy {
                                   DatabaseMessageCatalog databaseMessageCatalog,
                                   CacheMessageCatalog cacheMessageCatalog,
                                  InMemoryMessageCatalog inMemoryMessageCatalog) {
-        this.catalogs = Arrays.asList(inMemoryMessageCatalog, messagesPropertiesCatalog, cacheMessageCatalog, databaseMessageCatalog);
+        this.catalogs = Arrays.asList(messagesPropertiesCatalog, cacheMessageCatalog, databaseMessageCatalog);
     }
 
     public String getMessage(final MessageCatalogEnum key) {
@@ -35,7 +35,7 @@ public final class MessageCatalogStrategy {
         var message = EMPTY;
         for (var catalog : catalogs) {
             message = catalog.getContent(key);
-            if (!isNullObject(message)) {
+            if (catalog.isExist(key)) {
                 return message;
             }
         }

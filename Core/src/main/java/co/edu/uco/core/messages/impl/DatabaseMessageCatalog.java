@@ -1,5 +1,6 @@
 package co.edu.uco.core.messages.impl;
 
+import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.messages.Message;
 import co.edu.uco.core.messages.MessageCatalog;
 import co.edu.uco.core.messages.MessageCatalogEnum;
@@ -7,7 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope()
+@Scope(CrosswordsConstant.SINGLETON_SCOPE)
 public final class DatabaseMessageCatalog extends MessageCatalog {
     @Override
     public void loadCatalog() {
@@ -34,12 +35,7 @@ public final class DatabaseMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public Message getMessage(String key) {
-        return null;
-    }
-
-    @Override
-    public boolean isExist(String key) {
+    public boolean isExist(MessageCatalogEnum key) {
         return false;
     }
 }

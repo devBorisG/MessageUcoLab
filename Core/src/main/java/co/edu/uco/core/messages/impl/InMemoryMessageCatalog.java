@@ -1,5 +1,6 @@
 package co.edu.uco.core.messages.impl;
 
+import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.messages.Message;
 import co.edu.uco.core.messages.MessageCatalog;
 import co.edu.uco.core.messages.MessageCatalogEnum;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@Scope("singleton")
+@Scope(CrosswordsConstant.SINGLETON_SCOPE)
 public final class InMemoryMessageCatalog extends MessageCatalog {
     private Map<MessageCatalogEnum, Message> messages;
     @Override
@@ -54,13 +55,7 @@ public final class InMemoryMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public Message getMessage(String key) {
-        return null;
-    }
-
-
-    @Override
-    public boolean isExist(String key) {
-        return false;
+    public boolean isExist(MessageCatalogEnum key) {
+        return messages.containsKey(key);
     }
 }
