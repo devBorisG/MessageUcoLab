@@ -11,7 +11,7 @@ public class SendBrokerMessageCustomException extends CrossWordsException {
     private ExceptionLocation location;
 
     protected SendBrokerMessageCustomException(String userMessage, String technicalMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {
-        super(userMessage, technicalMessage, rootException);
+        super(userMessage, technicalMessage, rootException, type, location);
         setLocation(location);
         setType(type);
     }

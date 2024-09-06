@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"co.edu.uco"})
 public class CrossWordApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(CrossWordApplication.class, args);
     }
