@@ -1,7 +1,7 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.messages.MessageCatalogEnum;
-import co.edu.uco.core.messages.MessageCatalogStrategy;
+import co.edu.uco.core.messages.enums.MessageKeyEnum;
+import co.edu.uco.core.messages.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilText;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public class DummyController {
     @RequestMapping
     public String dummy(@RequestParam String codeMessage) {
         try {
-            return messageCatalogStrategy.getMessage(MessageCatalogEnum.of(UtilText.trim(codeMessage)));
+            return messageCatalogStrategy.getMessage(MessageKeyEnum.of(UtilText.trim(codeMessage)));
         } catch (CrossWordsException e) {
             log.error(e.getTechnicalMessage());
             codeMessage = e.getTechnicalMessage();

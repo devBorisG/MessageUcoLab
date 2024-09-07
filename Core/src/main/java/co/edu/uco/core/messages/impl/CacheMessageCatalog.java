@@ -3,7 +3,7 @@ package co.edu.uco.core.messages.impl;
 import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.messages.Message;
 import co.edu.uco.core.messages.MessageCatalog;
-import co.edu.uco.core.messages.MessageCatalogEnum;
+import co.edu.uco.core.messages.enums.MessageKeyEnum;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -22,22 +22,22 @@ public final class CacheMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public Message getMessage(MessageCatalogEnum code) {
+    public Message getMessage(MessageKeyEnum code) {
         return null;
     }
 
     @Override
-    public String getContent(MessageCatalogEnum code) {
+    public String getContent(MessageKeyEnum code) {
         return "";
     }
 
     @Override
-    public void addMessage(MessageCatalogEnum key, Message message) {
+    public void addMessage(MessageKeyEnum key, Message message) {
 
     }
 
     @Override
-    public boolean isExist(MessageCatalogEnum key) {
+    public boolean isExist(MessageKeyEnum key) {
         return false;
     }
 }

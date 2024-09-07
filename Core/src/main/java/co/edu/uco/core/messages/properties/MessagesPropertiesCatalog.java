@@ -2,7 +2,7 @@ package co.edu.uco.core.messages.properties;
 
 import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.messages.Message;
-import co.edu.uco.core.messages.MessageCatalogEnum;
+import co.edu.uco.core.messages.enums.MessageKeyEnum;
 import co.edu.uco.core.messages.MessageCatalog;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilObject;
@@ -19,26 +19,26 @@ import java.util.Map;
 @Scope(CrosswordsConstant.SINGLETON_SCOPE)
 public class MessagesPropertiesCatalog extends MessageCatalog {
 
-    private static final Map<MessageCatalogEnum, Message> messagesCatalog = new HashMap<>();
+    private static final Map<MessageKeyEnum, Message> messagesCatalog = new HashMap<>();
 
     @PostConstruct
     public void init() {}
 
     @Override
-    public Message getMessage(MessageCatalogEnum key) {
+    public Message getMessage(MessageKeyEnum key) {
         if (UtilObject.isNullObject(key)) {
-           throw CrossWordsException.build(getContent(MessageCatalogEnum.TCH_007));
+           throw CrossWordsException.build(getContent(MessageKeyEnum.TCH_007));
         }
         return messagesCatalog.get(key);
     }
 
     @Override
-    public String getContent(MessageCatalogEnum code) {
+    public String getContent(MessageKeyEnum code) {
         return messagesCatalog.get(code).content();
     }
 
     @Override
-    public void addMessage(MessageCatalogEnum key, Message message) {
+    public void addMessage(MessageKeyEnum key, Message message) {
         messagesCatalog.put(key, message);
     }
 
@@ -52,7 +52,7 @@ public class MessagesPropertiesCatalog extends MessageCatalog {
     }
 
     @Override
-    public boolean isExist(MessageCatalogEnum key) {
+    public boolean isExist(MessageKeyEnum key) {
         return messagesCatalog.containsKey(key);
     }
 }

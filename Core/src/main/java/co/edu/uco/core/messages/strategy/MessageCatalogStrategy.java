@@ -1,5 +1,7 @@
-package co.edu.uco.core.messages;
+package co.edu.uco.core.messages.strategy;
 
+import co.edu.uco.core.messages.MessageCatalog;
+import co.edu.uco.core.messages.enums.MessageKeyEnum;
 import co.edu.uco.core.messages.impl.CacheMessageCatalog;
 import co.edu.uco.core.messages.impl.DatabaseMessageCatalog;
 import co.edu.uco.core.messages.impl.InMemoryMessageCatalog;
@@ -28,9 +30,9 @@ public final class MessageCatalogStrategy {
         this.catalogs = Arrays.asList(messagesPropertiesCatalog, cacheMessageCatalog, databaseMessageCatalog);
     }
 
-    public String getMessage(final MessageCatalogEnum key) {
+    public String getMessage(final MessageKeyEnum key) {
         if (isNullObject(key)) {
-            throw CrossWordsException.build(getMessage(MessageCatalogEnum.TCH_007));
+            throw CrossWordsException.build(getMessage(MessageKeyEnum.TCH_007));
         }
         var message = EMPTY;
         for (var catalog : catalogs) {
