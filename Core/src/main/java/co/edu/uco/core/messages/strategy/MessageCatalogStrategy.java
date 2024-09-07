@@ -34,13 +34,11 @@ public final class MessageCatalogStrategy {
         if (isNullObject(key)) {
             throw CrossWordsException.build(getMessage(MessageKeyEnum.TCH_007));
         }
-        var message = EMPTY;
-        for (var catalog : catalogs) {
-            message = catalog.getContent(key);
-            if (catalog.isExist(key)) {
-                return message;
-            }
-        }
-        return message;
+
+        return catalogs.stream()
+                .map(catalog -> catalog.getContent(key))
+                .filter(content -> !content.equals(EMPTY))
+                .findFirst()
+                .orElse(EMPTY);
     }
 }
