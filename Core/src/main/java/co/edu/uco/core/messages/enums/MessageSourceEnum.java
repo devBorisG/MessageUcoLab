@@ -1,9 +1,10 @@
-package co.edu.uco.core.messages;
+package co.edu.uco.core.messages.enums;
 
-public enum MessageCatalogSource {
+public enum MessageSourceEnum {
     //Other values can be added here for other sources of messages
     CRITICAL,
     DATABASE,
+    CACHE,
     FILE,
     NETWORK,
 }
