@@ -19,8 +19,8 @@ public class ListMessageControllerImpl extends AbstractRestController implements
         this.handlingListMessageInputPort = handlingListMessageInputPort;
     }
 
-    @GetMapping()
-    public void execute(@RequestParam String codeMessage, HttpServletResponse response) {
+    @GetMapping("/{codeMessage}")
+    public void execute(@PathVariable String codeMessage, HttpServletResponse response) {
         MessageCodeDTO message = MessageCodeDTOBuilder.getInstance().setCode(codeMessage).build();
         handlingListMessageInputPort.listMessage(message, response);
     }
