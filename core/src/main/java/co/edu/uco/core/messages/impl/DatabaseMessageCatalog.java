@@ -1,6 +1,7 @@
 package co.edu.uco.core.messages.impl;
 
-import co.edu.uco.core.messages.Message;
+import co.edu.uco.core.domain.port.out.db.mongo.IMongoRepository;
+import co.edu.uco.core.messages.MessageModel;
 import co.edu.uco.core.messages.MessageCatalog;
 import co.edu.uco.core.messages.enums.DetailMessageEnum;
 import co.edu.uco.core.messages.enums.MessageKeyEnum;
@@ -19,14 +20,15 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 @Scope(SINGLETON_SCOPE)
 public final class DatabaseMessageCatalog extends MessageCatalog {
 
-    private Map<MessageKeyEnum, Message> messages; // TODO cambair e integrar estrategia de persistencia
+    private final IMongoRepository mongoRepository;
+
+    public DatabaseMessageCatalog(IMongoRepository mongoRepository) {
+        this.mongoRepository = mongoRepository;
+    }
 
     @Override
     @PostConstruct
     public void loadCatalog() {
-        messages = UtilObject.getDefaultIsNullObject(messages, new ConcurrentHashMap<>());
-        Arrays.stream(DetailMessageEnum.values()).forEach(messageEnum ->
-                messages.put(messageEnum.getCode(), messageEnum.getMessage()));
     }
 
     @Override
@@ -35,17 +37,17 @@ public final class DatabaseMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public Message getMessage(MessageKeyEnum code) {
+    public MessageModel getMessage(MessageKeyEnum code) {
         return null;
     }
 
     @Override
     public String getContent(MessageKeyEnum code) {
-        return messages.get(code).content();
+        return mongoRepository.findById(code.getKey()).get().getContent();
     }
 
     @Override
-    public void addMessage(MessageKeyEnum key, Message message) {
+    public void addMessage(MessageKeyEnum key, MessageModel messageModel) {
 
     }
 

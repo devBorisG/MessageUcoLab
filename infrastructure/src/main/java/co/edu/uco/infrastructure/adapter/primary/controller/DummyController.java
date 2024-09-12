@@ -26,7 +26,7 @@ public class DummyController {
     @RequestMapping
     public String dummy(@RequestParam String codeMessage) {
         try {
-            return messageCatalogStrategy.getMessage(MessageKeyEnum.of(UtilText.trim(codeMessage)));
+            return messageCatalogStrategy.getMessage(MessageKeyEnum.valueOf(UtilText.trim(codeMessage)));
         } catch (CrossWordsException e) {
             log.error(e.getTechnicalMessage());
             codeMessage = e.getTechnicalMessage();

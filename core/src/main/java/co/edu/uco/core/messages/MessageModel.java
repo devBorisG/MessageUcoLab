@@ -5,9 +5,9 @@ import co.edu.uco.core.messages.enums.MessageKeyEnum;
 import co.edu.uco.core.messages.enums.MessageTypeEnum;
 import co.edu.uco.utils.helper.UtilObject;
 
-public record Message(MessageKeyEnum code, String content, String title, MessageTypeEnum type, MessageCategoryEnum category) {
+public record MessageModel(MessageKeyEnum code, String content, String title, MessageTypeEnum type, MessageCategoryEnum category) {
 
-    public Message {
+    public MessageModel {
         if (UtilObject.isNullObject(code)) {
             throw new IllegalArgumentException("Code is required");
         }

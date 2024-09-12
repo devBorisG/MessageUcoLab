@@ -1,6 +1,6 @@
 package co.edu.uco.core.messages.enums;
 
-import co.edu.uco.core.messages.Message;
+import co.edu.uco.core.messages.MessageModel;
 
 public enum DetailMessageEnum {
 
@@ -68,7 +68,7 @@ public enum DetailMessageEnum {
         this.category = category;
     }
 
-    public Message getMessage() {
-        return new Message(code, content, title, type, category);
+    public MessageModel getMessage() {
+        return new MessageModel(code, content, title, type, category);
     }
 }
