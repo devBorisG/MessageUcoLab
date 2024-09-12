@@ -1,5 +1,6 @@
-package co.edu.uco.core.assembler.pojo;
+package co.edu.uco.core.messages.strategy;
 
+import co.edu.uco.core.assembler.pojo.Message;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;

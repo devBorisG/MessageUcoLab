@@ -1,7 +1,7 @@
 package co.edu.uco.core.messages.impl;
 
 import co.edu.uco.core.CrosswordsConstant;
-import co.edu.uco.core.messages.Message;
+import co.edu.uco.core.messages.MessageModel;
 import co.edu.uco.core.messages.MessageCatalog;
 import co.edu.uco.core.messages.enums.MessageKeyEnum;
 import co.edu.uco.core.messages.enums.DetailMessageEnum;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Component
 @Scope(CrosswordsConstant.SINGLETON_SCOPE)
 public final class InMemoryMessageCatalog extends MessageCatalog {
-    private Map<MessageKeyEnum, Message> messages;
+    private Map<MessageKeyEnum, MessageModel> messages;
     @Override
     @PostConstruct
     public void loadCatalog() {
@@ -34,7 +34,7 @@ public final class InMemoryMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public Message getMessage(MessageKeyEnum code) {
+    public MessageModel getMessage(MessageKeyEnum code) {
         if (UtilObject.isNullObject(code)) {
             throw CrossWordsException.build(getContent(MessageKeyEnum.TCH_007));
         }
@@ -50,8 +50,8 @@ public final class InMemoryMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public void addMessage(MessageKeyEnum key, Message message) {
-        messages.put(key, message);
+    public void addMessage(MessageKeyEnum key, MessageModel messageModel) {
+        messages.put(key, messageModel);
     }
 
     @Override
