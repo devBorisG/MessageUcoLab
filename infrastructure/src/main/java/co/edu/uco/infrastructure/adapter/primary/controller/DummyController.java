@@ -26,10 +26,10 @@ public class DummyController {
     @RequestMapping
     public String dummy(@RequestParam String codeMessage) {
         try {
-            return messageCatalogStrategy.getMessage(MessageKeyEnum.valueOf(UtilText.trim(codeMessage)));
+            return messageCatalogStrategy.getMessage(UtilText.trim(codeMessage));
         } catch (CrossWordsException e) {
-            log.error(e.getTechnicalMessage());
-            codeMessage = e.getTechnicalMessage();
+            codeMessage = String.format(e.getTechnicalMessage(), codeMessage);
+            log.error(codeMessage);
         }
         return codeMessage;
     }

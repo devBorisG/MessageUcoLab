@@ -44,9 +44,9 @@ public final class CacheMessageCatalog extends MessageCatalog {
     }
 
     @Override
-    public String getContent(MessageKeyEnum code) {
+    public String getContent(String code) {
         try {
-            return Objects.requireNonNull(template.opsForValue().get(code.getKey())).getContent();
+            return Objects.requireNonNull(template.opsForValue().get(code)).getContent();
         } catch (NullPointerException exception) {
             return UtilText.EMPTY;
         }
