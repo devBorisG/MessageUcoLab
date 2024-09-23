@@ -27,10 +27,10 @@ public class ListMessageUseCase implements ListMessageInPort {
 
     @Override
     public void execute(MessageCodeDomain messageDomain, HttpServletResponse response) {
-        mongoRepository.findAllSelf(messageDomain.getCode()).forEach(m -> log.info("Message: {}", m.getContent()));
+        /*mongoRepository.findAllSelf(messageDomain.getCode()).forEach(m -> log.info("Message: {}", m.getContent()));
 
         MessageCodeDTO messageCodeDTO = MessageCodeDTO.create(mongoRepository.findAllSelf(messageDomain.getCode()).get(0).getContent());
 
-        presenter.execute(messageCodeDTO, response);
+        presenter.execute(messageCodeDTO, response);*/
     }
 }
