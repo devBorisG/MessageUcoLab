@@ -21,8 +21,12 @@ public enum MessageKeyEnum {
     TCH_008("TCH_008", MessageSourceEnum.CRITICAL),
     TCH_009("TCH_009", MessageSourceEnum.CRITICAL),
     TCH_010("message:125", MessageSourceEnum.CACHE),
-    TCH_011("1", MessageSourceEnum.DATABASE);
-
+    TCH_011("1", MessageSourceEnum.DATABASE),
+    FUN_001("FUN_001", MessageSourceEnum.CRITICAL),
+    FUN_002("FUN_002", MessageSourceEnum.CRITICAL),
+    FUN_003("FUN_003", MessageSourceEnum.CRITICAL),
+    FUN_004("FUN_004", MessageSourceEnum.CRITICAL),
+    FUN_005("FUN_005", MessageSourceEnum.CRITICAL);
     private final String key;
     private final MessageSourceEnum source;
 

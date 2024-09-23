@@ -12,7 +12,12 @@ public enum DetailMessageEnum {
     TCH_006(MessageKeyEnum.TCH_006, "Security component not connected", "Unable to establish connection to Security component", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_007(MessageKeyEnum.TCH_007, "Key is null", "The message key is null", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_008(MessageKeyEnum.TCH_008, "Key is empty", "Message code does not exist", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
-    TCH_009(MessageKeyEnum.TCH_009, "Message not found", "Message code does not exist with %s key", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR);
+    TCH_009(MessageKeyEnum.TCH_009, "Message not found", "Message code does not exist with %s key", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    FUN_001(MessageKeyEnum.FUN_001, "Invalid message code", "The message code is invalid or not within allowed values", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_002(MessageKeyEnum.FUN_002, "Title is empty or null", "The message must have a valid title", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_003(MessageKeyEnum.FUN_003, "Content is empty or null", "The message must include a valid description", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_004(MessageKeyEnum.FUN_004, "Message type is null", "The message type is not defined", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_005(MessageKeyEnum.FUN_005, "Message category is null", "The message category is not defined", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
 
     private MessageKeyEnum code;
     private String title;

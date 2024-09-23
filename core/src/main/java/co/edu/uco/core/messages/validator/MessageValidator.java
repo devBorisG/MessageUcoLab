@@ -2,38 +2,43 @@ package co.edu.uco.core.messages.validator;
 
 import co.edu.uco.core.messages.enums.DetailMessageEnum;
 import co.edu.uco.core.messages.enums.MessageKeyEnum;
+import co.edu.uco.utils.helper.UtilObject;
+import co.edu.uco.utils.helper.UtilText;
+
 import java.util.Arrays;
+
 
 public class MessageValidator {
 
     public static boolean isValid(DetailMessageEnum detailMessage) {
-        // Validar que el código no sea nulo y pertenezca a los valores permitidos
-        if (detailMessage.getCode() == null || !Arrays.asList(MessageKeyEnum.values()).contains(detailMessage.getCode())) {
-            System.out.println("Error: El código del mensaje no es válido o está fuera de los valores permitidos.");
+        // Validate that the code is not null and belongs to the allowed values
+        if (UtilObject.isNullObject(detailMessage.getCode()) ||
+                !Arrays.asList(MessageKeyEnum.values()).contains(detailMessage.getCode())) {
+            System.out.println(DetailMessageEnum.FUN_001.getContent());  // Invalid code
             return false;
         }
 
-        // Validar que el título no sea nulo ni esté vacío
-        if (detailMessage.getTitle() == null || detailMessage.getTitle().isEmpty()) {
-            System.out.println("Error: El mensaje debe tener un título.");
+        // Validate that the title is not null or empty using UtilText
+        if (UtilText.isEmptyOrNull(detailMessage.getTitle())) {
+            System.out.println(DetailMessageEnum.FUN_002.getContent());  // Title is required
             return false;
         }
 
-        // Validar que el contenido no sea nulo ni esté vacío
-        if (detailMessage.getContent() == null || detailMessage.getContent().isEmpty()) {
-            System.out.println("Error: El mensaje debe incluir una descripción.");
+        // Validate that the content is not null or empty using UtilText
+        if (UtilText.isEmptyOrNull(detailMessage.getContent())) {
+            System.out.println(DetailMessageEnum.FUN_003.getContent());  // Content is required
             return false;
         }
 
-        // Validar que el tipo de mensaje no sea nulo
-        if (detailMessage.getType() == null) {
-            System.out.println("Error: El tipo de mensaje no está definido.");
+        // Validate that the message type is not null using UtilObject
+        if (UtilObject.isNullObject(detailMessage.getType())) {
+            System.out.println(DetailMessageEnum.FUN_004.getContent());  // Type is required
             return false;
         }
 
-        // Validar que la categoría del mensaje no sea nula
-        if (detailMessage.getCategory() == null) {
-            System.out.println("Error: La categoría del mensaje no está definida.");
+        // Validate that the message category is not null using UtilObject
+        if (UtilObject.isNullObject(detailMessage.getCategory())) {
+            System.out.println(DetailMessageEnum.FUN_005.getContent());  // Category is required
             return false;
         }
 
@@ -43,9 +48,9 @@ public class MessageValidator {
     public static void validateAllMessages() {
         for (DetailMessageEnum detailMessage : DetailMessageEnum.values()) {
             if (!isValid(detailMessage)) {
-                System.out.println("Error en el mensaje con el código: " + detailMessage.getCode() + ". Revisa los detalles.");
+                System.out.println("Error in the message with code: " + detailMessage.getCode() + ". Please check the details.");
             } else {
-                System.out.println("El mensaje con el código " + detailMessage.getCode() + " es válido.");
+                System.out.println("The message with code " + detailMessage.getCode() + " is valid.");
             }
         }
     }
