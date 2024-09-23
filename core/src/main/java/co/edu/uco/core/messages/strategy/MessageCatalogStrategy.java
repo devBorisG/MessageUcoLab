@@ -27,12 +27,12 @@ public final class MessageCatalogStrategy {
                                   DatabaseMessageCatalog databaseMessageCatalog,
                                   CacheMessageCatalog cacheMessageCatalog,
                                  InMemoryMessageCatalog inMemoryMessageCatalog) {
-        this.catalogs = Arrays.asList(cacheMessageCatalog, databaseMessageCatalog);
+        this.catalogs = Arrays.asList(cacheMessageCatalog, databaseMessageCatalog,inMemoryMessageCatalog);
     }
 
-    public String getMessage(final MessageKeyEnum key) {
+    public String getMessage(final String key) {
         if (isNullObject(key)) {
-            throw CrossWordsException.build(getMessage(MessageKeyEnum.TCH_007));
+            throw CrossWordsException.build(getMessage(String.valueOf(MessageKeyEnum.TCH_007)));
         }
 
         return catalogs.stream()

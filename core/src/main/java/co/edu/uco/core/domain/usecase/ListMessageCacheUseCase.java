@@ -36,12 +36,6 @@ public class ListMessageCacheUseCase implements ListMessageCacheInPort {
             if (redisTemplate.opsForValue().get(entity.getCode()) != null) {
                 log.info((Objects.requireNonNull(redisTemplate.opsForValue().get(entity.getCode())).getContent()));
                 message = "Por redis " + Objects.requireNonNull(redisTemplate.opsForValue().get(entity.getCode())).getContent();
-            } else {
-                mongoRepository.findAllSelf(entity.getCode()).forEach(message1 -> {
-                    redisTemplate.opsForValue().set("message:126", message1);
-                    log.info(message1.getContent());
-                    message = "Por mongo " + message1.getContent();
-                });
             }
             presenter.execute(MessageCodeDTO.create(message), response);
         } catch (Exception exception) {

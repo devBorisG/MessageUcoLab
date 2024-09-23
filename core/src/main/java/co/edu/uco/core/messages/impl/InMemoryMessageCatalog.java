@@ -36,17 +36,17 @@ public final class InMemoryMessageCatalog extends MessageCatalog {
     @Override
     public MessageModel getMessage(MessageKeyEnum code) {
         if (UtilObject.isNullObject(code)) {
-            throw CrossWordsException.build(getContent(MessageKeyEnum.TCH_007));
+            throw CrossWordsException.build(getContent(String.valueOf(MessageKeyEnum.TCH_007)));
         }
         return messages.get(code);
     }
 
     @Override
-    public String getContent(MessageKeyEnum code) {
+    public String getContent(String code) {
         if (UtilObject.isNullObject(code)) {
-            throw CrossWordsException.build(getContent(MessageKeyEnum.TCH_007));
+            throw CrossWordsException.build(getContent(String.valueOf(MessageKeyEnum.TCH_007)));
         }
-        return messages.get(code).content();
+        return messages.get(MessageKeyEnum.of(code)).content();
     }
 
     @Override
