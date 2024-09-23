@@ -8,9 +8,6 @@ import java.util.Arrays;
 
 @Getter
 public enum MessageKeyEnum {
-    USR_001("USR_001", MessageSourceEnum.CRITICAL),
-    USR_002("USR_002", MessageSourceEnum.CRITICAL),
-    USR_003("USR_003", MessageSourceEnum.CRITICAL),
     TCH_001("TCH_001", MessageSourceEnum.CRITICAL),
     TCH_002("TCH_002", MessageSourceEnum.CRITICAL),
     TCH_003("TCH_003", MessageSourceEnum.CRITICAL),

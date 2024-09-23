@@ -1,4 +1,4 @@
-package co.edu.uco.core.messages.strategy;
+package co.edu.uco.infrastructure.configuration;
 
 import co.edu.uco.core.assembler.pojo.Message;
 import org.springframework.context.annotation.Bean;
