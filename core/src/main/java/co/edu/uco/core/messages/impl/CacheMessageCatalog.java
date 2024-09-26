@@ -44,18 +44,14 @@ public final class CacheMessageCatalog extends MessageCatalog {
     public String getContent(String code) {
         MessageRedis cachedMessage = template.opsForValue().get(code);
         if (Objects.nonNull(cachedMessage)) {
-            System.out.println("Mensaje encontrado en cache: " + cachedMessage);
             return cachedMessage.getContent().concat(" Consult with cache");
         } else {
-            System.out.println("Mensaje no encontrado en cache para la clave: " + code);
             return UtilText.EMPTY;
         }
     }
 
     @Override
-    public void addMessage(MessageKeyEnum key, MessageModel messageModel) {
-
-    }
+    public void addMessage(MessageKeyEnum key, MessageModel messageModel) {}
 
     @Override
     public boolean isExist(MessageKeyEnum key) {

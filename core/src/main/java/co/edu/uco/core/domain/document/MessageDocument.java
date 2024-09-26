@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Setter
 @Getter
 @Document(collection = "airbyte_raw_message")
-public class MessageDocument {
+public final class MessageDocument {
     @Id
     @Field("_airbyte_data.id")
     private String id;
