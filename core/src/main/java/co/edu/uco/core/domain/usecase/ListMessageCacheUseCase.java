@@ -1,7 +1,7 @@
 package co.edu.uco.core.domain.usecase;
 
 import co.edu.uco.core.application.dto.MessageCodeDTO;
-import co.edu.uco.core.assembler.pojo.Message;
+import co.edu.uco.core.domain.MessageRedis;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.in.ListMessageCacheInPort;
 import co.edu.uco.core.domain.port.out.db.mongo.IMongoRepository;
@@ -20,11 +20,11 @@ public class ListMessageCacheUseCase implements ListMessageCacheInPort {
 
     private final ListMessagePresenter presenter;
     private final IMongoRepository mongoRepository;
-    private final RedisTemplate<String, Message> redisTemplate;
+    private final RedisTemplate<String, MessageRedis> redisTemplate;
     private String message;
 
     @Autowired
-    public ListMessageCacheUseCase(ListMessagePresenter presenter, IMongoRepository mongoRepository, RedisTemplate<String, Message> redisTemplate) {
+    public ListMessageCacheUseCase(ListMessagePresenter presenter, IMongoRepository mongoRepository, RedisTemplate<String, MessageRedis> redisTemplate) {
         this.presenter = presenter;
         this.mongoRepository = mongoRepository;
         this.redisTemplate = redisTemplate;
@@ -39,7 +39,7 @@ public class ListMessageCacheUseCase implements ListMessageCacheInPort {
             }
             presenter.execute(MessageCodeDTO.create(message), response);
         } catch (Exception exception) {
-            System.out.println("Error: " + exception.getMessage());
+            log.error("Error: {}", exception.getMessage());
         }
     }
 }

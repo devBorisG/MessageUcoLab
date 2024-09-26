@@ -1,12 +1,10 @@
 package co.edu.uco.core.messages.impl;
 
-import co.edu.uco.core.assembler.pojo.Message;
+import co.edu.uco.core.domain.MessageRedis;
 import co.edu.uco.core.messages.MessageCatalog;
 import co.edu.uco.core.messages.MessageModel;
 import co.edu.uco.core.messages.enums.MessageKeyEnum;
-import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilText;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,15 +18,14 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 @Scope(SINGLETON_SCOPE)
 public final class CacheMessageCatalog extends MessageCatalog {
 
-    private final RedisTemplate<String, Message> template;
+    private final RedisTemplate<String, MessageRedis> template;
 
     @Autowired
-    public CacheMessageCatalog(RedisTemplate<String, Message> template) {
+    public CacheMessageCatalog(RedisTemplate<String, MessageRedis> template) {
         this.template = template;
     }
 
     @Override
-    @PostConstruct
     public void loadCatalog() {
 
     }
@@ -45,9 +42,12 @@ public final class CacheMessageCatalog extends MessageCatalog {
 
     @Override
     public String getContent(String code) {
-        try {
-            return Objects.requireNonNull(template.opsForValue().get(code)).getContent();
-        } catch (NullPointerException exception) {
+        MessageRedis cachedMessage = template.opsForValue().get(code);
+        if (Objects.nonNull(cachedMessage)) {
+            System.out.println("Mensaje encontrado en cache: " + cachedMessage);
+            return cachedMessage.getContent().concat(" Consult with cache");
+        } else {
+            System.out.println("Mensaje no encontrado en cache para la clave: " + code);
             return UtilText.EMPTY;
         }
     }

@@ -1,17 +1,14 @@
-package co.edu.uco.core.assembler.pojo;
+package co.edu.uco.core.domain;
 
-
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.redis.core.RedisHash;
 
-@Setter
 @Getter
-@Document(collection = "message")
+@Setter
 @RedisHash("0")
-public class Message {
+public class MessageRedis {
     @Id
     private String id;
     private String code;
