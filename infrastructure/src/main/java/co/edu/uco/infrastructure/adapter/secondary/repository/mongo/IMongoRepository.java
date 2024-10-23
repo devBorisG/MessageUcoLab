@@ -1,6 +1,6 @@
-package co.edu.uco.core.domain.port.out.db.mongo;
+package co.edu.uco.infrastructure.adapter.secondary.repository.mongo;
 
-import co.edu.uco.core.domain.MessageDocument;
+import co.edu.uco.infrastructure.adapter.secondary.repository.MessageDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

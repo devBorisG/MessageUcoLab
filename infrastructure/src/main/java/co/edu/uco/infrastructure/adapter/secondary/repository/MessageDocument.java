@@ -1,4 +1,4 @@
-package co.edu.uco.core.domain;
+package co.edu.uco.infrastructure.adapter.secondary.repository;
 
 import lombok.Getter;
 import lombok.Setter;

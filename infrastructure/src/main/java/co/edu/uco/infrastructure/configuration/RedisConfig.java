@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.configuration;
 
-import co.edu.uco.core.domain.MessageRedis;
+import co.edu.uco.infrastructure.adapter.secondary.repository.MessageRedis;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

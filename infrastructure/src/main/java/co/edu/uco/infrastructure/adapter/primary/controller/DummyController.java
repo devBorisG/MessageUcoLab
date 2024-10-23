@@ -1,6 +1,5 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.messages.enums.MessageKeyEnum;
 import co.edu.uco.core.messages.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilText;
@@ -32,5 +31,10 @@ public class DummyController {
             log.error(codeMessage);
         }
         return codeMessage;
+    }
+
+    @RequestMapping("/test")
+    public String test() {
+        return "Test";
     }
 }
