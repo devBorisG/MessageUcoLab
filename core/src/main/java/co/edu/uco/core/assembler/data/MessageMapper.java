@@ -1,8 +1,7 @@
 package co.edu.uco.core.assembler.data;
 
-import co.edu.uco.core.CrosswordsConstant;
+import co.edu.uco.core.domain.MessageDocument;
 import co.edu.uco.core.domain.MessageRedis;
-import co.edu.uco.core.domain.document.MessageDocument;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

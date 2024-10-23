@@ -1,4 +1,4 @@
-package co.edu.uco.core.domain.document;
+package co.edu.uco.core.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,27 +6,29 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import static co.edu.uco.core.CrosswordsConstant.*;
+
 @Setter
 @Getter
-@Document(collection = "airbyte_raw_message")
+@Document(collection = COLLECTION_MONGO_ADAPTER)
 public final class MessageDocument {
     @Id
-    @Field("_airbyte_data.id")
+    @Field(FIELD_MONGO_ADAPTER_ID)
     private String id;
-    @Field("_airbyte_data.code")
+    @Field(FIELD_MONGO_ADAPTER_CODE)
     private String code;
-    @Field("_airbyte_data.title")
+    @Field(FIELD_MONGO_ADAPTER_TITLE)
     private String title;
-    @Field("_airbyte_data.content")
+    @Field(FIELD_MONGO_ADAPTER_CONTENT)
     private String content;
-    @Field("_airbyte_data.type")
+    @Field(FIELD_MONGO_ADAPTER_TYPE)
     private String type;
-    @Field("_airbyte_data.category")
+    @Field(FIELD_MONGO_ADAPTER_CATEGORY)
     private String category;
-    @Field("_airbyte_data.status")
+    @Field(FIELD_MONGO_ADAPTER_STATUS)
     private String status;
-    @Field("_airbyte_data.application")
+    @Field(FIELD_MONGO_ADAPTER_APPLICATION)
     private String application;
-    @Field("_airbyte_data.functionality")
+    @Field(FIELD_MONGO_ADAPTER_FUNCTIONALITY)
     private String functionality;
 }
