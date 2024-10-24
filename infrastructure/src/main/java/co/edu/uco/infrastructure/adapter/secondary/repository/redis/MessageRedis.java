@@ -1,4 +1,4 @@
-package co.edu.uco.infrastructure.adapter.secondary.repository;
+package co.edu.uco.infrastructure.adapter.secondary.repository.redis;
 
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 @Getter
 @Setter
-@RedisHash("0")
+@RedisHash("Message")
 public final class MessageRedis {
     @Id
     private String id;

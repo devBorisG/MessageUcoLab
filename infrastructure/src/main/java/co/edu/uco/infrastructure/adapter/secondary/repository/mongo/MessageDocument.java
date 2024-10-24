@@ -1,4 +1,4 @@
-package co.edu.uco.infrastructure.adapter.secondary.repository;
+package co.edu.uco.infrastructure.adapter.secondary.repository.mongo;
 
 import lombok.Getter;
 import lombok.Setter;

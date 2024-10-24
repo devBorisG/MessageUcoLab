@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface MessageRepository {
     void save(MessageData data);
-    Optional<MessageData> findApplicationMessageByCode(String code);
+    Optional<MessageData> findApplicationMessageByCode(String code, String application);
     List<MessageData> finByApplication(String application);
 }

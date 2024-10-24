@@ -1,16 +1,15 @@
 package co.edu.uco.core.messages.impl;
 
-import co.edu.uco.core.domain.MessageRedis;
+import co.edu.uco.core.domain.data.MessageData;
+import co.edu.uco.core.domain.port.out.repository.CacheMessageRepository;
 import co.edu.uco.core.messages.MessageCatalog;
 import co.edu.uco.core.messages.MessageModel;
 import co.edu.uco.core.messages.enums.MessageKeyEnum;
 import co.edu.uco.utils.helper.UtilText;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
+import java.util.Optional;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 
@@ -18,12 +17,12 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 @Scope(SINGLETON_SCOPE)
 public final class CacheMessageCatalog extends MessageCatalog {
 
-    private final RedisTemplate<String, MessageRedis> template;
+    private final CacheMessageRepository repository;
 
-    @Autowired
-    public CacheMessageCatalog(RedisTemplate<String, MessageRedis> template) {
-        this.template = template;
+    public CacheMessageCatalog(CacheMessageRepository repository) {
+        this.repository = repository;
     }
+
 
     @Override
     public void loadCatalog() {
@@ -42,12 +41,8 @@ public final class CacheMessageCatalog extends MessageCatalog {
 
     @Override
     public String getContent(String code) {
-        MessageRedis cachedMessage = template.opsForValue().get(code);
-        if (Objects.nonNull(cachedMessage)) {
-            return cachedMessage.getContent().concat(" Consult with cache");
-        } else {
-            return UtilText.EMPTY;
-        }
+        Optional<MessageData> cachedMessage = repository.findApplicationMessageByCode(code, "application");
+        return cachedMessage.map(messageData -> messageData.getContent().concat(" Consult with cache")).orElse(UtilText.EMPTY);
     }
 
     @Override

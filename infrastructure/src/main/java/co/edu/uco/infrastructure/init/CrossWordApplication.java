@@ -9,13 +9,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 @ComponentScan(basePackages = {"co.edu.uco"})
-@EnableMongoRepositories(basePackages = {"co.edu.uco.core"})
+@EnableMongoRepositories(basePackages = {"co.edu.uco.infrastructure.adapter.secondary.repository"})
 @EnableCaching
 public class CrossWordApplication {
-
-
     public static void main(String[] args) {
         SpringApplication.run(CrossWordApplication.class, args);
     }
-
 }
