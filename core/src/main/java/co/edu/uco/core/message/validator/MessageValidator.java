@@ -1,7 +1,7 @@
-package co.edu.uco.core.messages.validator;
+package co.edu.uco.core.message.validator;
 
-import co.edu.uco.core.messages.enums.DetailMessageEnum;
-import co.edu.uco.core.messages.enums.MessageKeyEnum;
+import co.edu.uco.core.message.enums.DetailMessageEnum;
+import co.edu.uco.core.message.enums.MessageKeyEnum;
 import co.edu.uco.utils.exception.BusinessRuleException;
 import co.edu.uco.utils.helper.UtilObject;
 import co.edu.uco.utils.helper.UtilText;

@@ -1,6 +1,6 @@
-package co.edu.uco.core.messages.enums;
+package co.edu.uco.core.message.enums;
 
-import co.edu.uco.core.messages.MessageModel;
+import co.edu.uco.core.message.MessageModel;
 
 public enum DetailMessageEnum {
 

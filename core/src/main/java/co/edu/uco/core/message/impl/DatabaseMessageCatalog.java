@@ -1,9 +1,9 @@
-package co.edu.uco.core.messages.impl;
+package co.edu.uco.core.message.impl;
 
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
-import co.edu.uco.core.messages.MessageModel;
-import co.edu.uco.core.messages.MessageCatalog;
-import co.edu.uco.core.messages.enums.MessageKeyEnum;
+import co.edu.uco.core.message.MessageModel;
+import co.edu.uco.core.message.MessageCatalog;
+import co.edu.uco.core.message.enums.MessageKeyEnum;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

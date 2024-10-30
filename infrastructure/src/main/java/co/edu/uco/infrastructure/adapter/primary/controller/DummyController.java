@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.messages.strategy.MessageCatalogStrategy;
+import co.edu.uco.core.message.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilText;
 import org.slf4j.Logger;

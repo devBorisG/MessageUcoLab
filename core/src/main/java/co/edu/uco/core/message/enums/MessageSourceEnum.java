@@ -1,4 +1,4 @@
-package co.edu.uco.core.messages.enums;
+package co.edu.uco.core.message.enums;
 
 public enum MessageSourceEnum {
     //Other values can be added here for other sources of messages

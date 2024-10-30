@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class MessageData {
+public final class MessageData {
     private UUID id;
     private String code;
     private String title;
