@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.redis.core.RedisHash;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @RedisHash("Message")
 public final class MessageRedis {
     @Id
-    private String id;
+    private UUID id;
     private String code;
     private String title;
     private String content;

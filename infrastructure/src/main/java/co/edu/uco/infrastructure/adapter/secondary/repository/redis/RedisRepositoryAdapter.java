@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface RedisRepositoryAdapter extends CrudRepository<MessageRedis, String> {
-    Optional<MessageRedis> findByApplicationAndCode(String application, String code);
+    Optional<MessageRedis> findByCodeAndApplication(String code, String application);
     List<MessageRedis> findByApplication(String application);
 }

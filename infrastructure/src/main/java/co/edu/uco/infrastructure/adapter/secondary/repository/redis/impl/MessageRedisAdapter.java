@@ -14,7 +14,6 @@ import java.util.Optional;
 public final class MessageRedisAdapter implements CacheMessageRepository {
     private final RedisRepositoryAdapter repository;
     private final DataMapper<MessageData, MessageRedis> mapper;
-
     public MessageRedisAdapter(RedisRepositoryAdapter repository, DataMapper<MessageData, MessageRedis> mapper) {
         this.repository = repository;
         this.mapper = mapper;
@@ -25,7 +24,7 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
     }
     @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
-        return repository.findByApplicationAndCode(application, code).stream().map(mapper::mapperData).findFirst();
+        return repository.findByCodeAndApplication(code, application).stream().map(mapper::mapperData).findFirst();
     }
     @Override
     public List<MessageData> finByApplication(String application) {

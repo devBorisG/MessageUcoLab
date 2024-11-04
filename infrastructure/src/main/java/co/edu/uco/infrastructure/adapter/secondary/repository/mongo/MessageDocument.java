@@ -2,6 +2,7 @@ package co.edu.uco.infrastructure.adapter.secondary.repository.mongo;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -13,6 +14,7 @@ import static co.edu.uco.core.CrosswordsConstant.*;
 @Document(collection = COLLECTION_MONGO_ADAPTER)
 public final class MessageDocument {
     @Id
+    private ObjectId mongoId;
     @Field(FIELD_MONGO_ADAPTER_ID)
     private String id;
     @Field(FIELD_MONGO_ADAPTER_CODE)
