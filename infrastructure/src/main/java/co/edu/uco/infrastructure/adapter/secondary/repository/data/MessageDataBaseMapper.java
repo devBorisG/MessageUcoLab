@@ -16,11 +16,11 @@ public final class MessageDataBaseMapper implements DataMapper<MessageData, Mess
         this.modelMapper = modelMapper;
     }
     @Override
-    public MessageData assemblerData(MessageDocument model) {
+    public MessageData mapperData(MessageDocument model) {
         return modelMapper.map(model, MessageData.class);
     }
     @Override
-    public MessageDocument assemblerModel(MessageData data) {
+    public MessageDocument mapperModel(MessageData data) {
         return modelMapper.map(data, MessageDocument.class);
     }
 }

@@ -20,14 +20,14 @@ public final class MessageMongoAdapter implements DataBaseMessageRepository {
     }
     @Override
     public void save(MessageData data) {
-        repository.save(mapper.assemblerModel(data));
+        repository.save(mapper.mapperModel(data));
     }
     @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
-        return repository.findByApplicationAndCode(application, code).stream().map(mapper::assemblerData).findFirst();
+        return repository.findByApplicationAndCode(application, code).stream().map(mapper::mapperData).findFirst();
     }
     @Override
     public List<MessageData> finByApplication(String application) {
-        return repository.findByApplication(application).stream().map(mapper::assemblerData).toList();
+        return repository.findByApplication(application).stream().map(mapper::mapperData).toList();
     }
 }

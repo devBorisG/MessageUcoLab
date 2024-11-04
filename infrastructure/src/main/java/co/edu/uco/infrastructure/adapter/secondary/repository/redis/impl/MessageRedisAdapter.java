@@ -2,7 +2,6 @@ package co.edu.uco.infrastructure.adapter.secondary.repository.redis.impl;
 
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.CacheMessageRepository;
-import co.edu.uco.core.domain.port.out.repository.MessageRepository;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.DataMapper;
 import co.edu.uco.infrastructure.adapter.secondary.repository.redis.MessageRedis;
 import co.edu.uco.infrastructure.adapter.secondary.repository.redis.RedisRepositoryAdapter;
@@ -22,14 +21,14 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
     }
     @Override
     public void save(MessageData data) {
-        repository.save(mapper.assemblerModel(data));
+        repository.save(mapper.mapperModel(data));
     }
     @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
-        return repository.findByApplicationAndCode(application, code).stream().map(mapper::assemblerData).findFirst();
+        return repository.findByApplicationAndCode(application, code).stream().map(mapper::mapperData).findFirst();
     }
     @Override
     public List<MessageData> finByApplication(String application) {
-        return repository.findByApplication(application).stream().map(mapper::assemblerData).toList();
+        return repository.findByApplication(application).stream().map(mapper::mapperData).toList();
     }
 }

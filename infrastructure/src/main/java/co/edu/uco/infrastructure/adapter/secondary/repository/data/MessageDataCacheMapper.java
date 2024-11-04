@@ -14,11 +14,11 @@ public final class MessageDataCacheMapper  implements DataMapper<MessageData, Me
     private  final ModelMapper modelMapper;
     public MessageDataCacheMapper(ModelMapper modelMapper) {this.modelMapper = modelMapper;}
     @Override
-    public MessageData assemblerData(MessageRedis model) {
+    public MessageData mapperData(MessageRedis model) {
         return modelMapper.map(model, MessageData.class);
     }
     @Override
-    public MessageRedis assemblerModel(MessageData data) {
+    public MessageRedis mapperModel(MessageData data) {
         return modelMapper.map(data, MessageRedis.class);
     }
 }
