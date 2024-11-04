@@ -1,10 +1,10 @@
-package co.edu.uco.core.message.impl;
+package co.edu.uco.core.message.strategy.cache;
 
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.CacheMessageRepository;
-import co.edu.uco.core.message.MessageCatalog;
+import co.edu.uco.core.message.strategy.MessageCatalog;
 import co.edu.uco.core.message.MessageModel;
-import co.edu.uco.core.message.enums.MessageKeyEnum;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.utils.helper.UtilText;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -16,23 +16,15 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 @Component
 @Scope(SINGLETON_SCOPE)
 public final class CacheMessageCatalog extends MessageCatalog {
-
     private final CacheMessageRepository repository;
-
     public CacheMessageCatalog(CacheMessageRepository repository) {
         this.repository = repository;
     }
-
+    @Override
+    public void loadCatalog() {}
 
     @Override
-    public void loadCatalog() {
-
-    }
-
-    @Override
-    public void reloadCatalog() {
-
-    }
+    public void reloadCatalog() {}
 
     @Override
     public MessageModel getMessage(MessageKeyEnum code) {
@@ -44,10 +36,8 @@ public final class CacheMessageCatalog extends MessageCatalog {
         Optional<MessageData> cachedMessage = repository.findApplicationMessageByCode(code, "application");
         return cachedMessage.map(messageData -> messageData.getContent().concat(" Consult with cache")).orElse(UtilText.EMPTY);
     }
-
     @Override
     public void addMessage(MessageKeyEnum key, MessageModel messageModel) {}
-
     @Override
     public boolean isExist(MessageKeyEnum key) {
         return false;

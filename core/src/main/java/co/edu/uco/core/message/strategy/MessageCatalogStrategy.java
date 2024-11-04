@@ -1,10 +1,9 @@
 package co.edu.uco.core.message.strategy;
 
-import co.edu.uco.core.message.MessageCatalog;
-import co.edu.uco.core.message.enums.MessageKeyEnum;
-import co.edu.uco.core.message.impl.CacheMessageCatalog;
-import co.edu.uco.core.message.impl.DatabaseMessageCatalog;
-import co.edu.uco.core.message.impl.InMemoryMessageCatalog;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
+import co.edu.uco.core.message.strategy.cache.CacheMessageCatalog;
+import co.edu.uco.core.message.strategy.database.DatabaseMessageCatalog;
+import co.edu.uco.core.message.strategy.inmemory.InMemoryMessageCatalog;
 import co.edu.uco.utils.exception.CrossWordsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

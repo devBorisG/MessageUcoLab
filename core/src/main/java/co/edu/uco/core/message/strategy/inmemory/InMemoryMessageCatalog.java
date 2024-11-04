@@ -1,10 +1,10 @@
-package co.edu.uco.core.message.impl;
+package co.edu.uco.core.message.strategy.inmemory;
 
 import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.message.MessageModel;
-import co.edu.uco.core.message.MessageCatalog;
-import co.edu.uco.core.message.enums.MessageKeyEnum;
-import co.edu.uco.core.message.enums.DetailMessageEnum;
+import co.edu.uco.core.message.strategy.MessageCatalog;
+import co.edu.uco.core.message.strategy.inmemory.enums.DetailMessageEnum;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilObject;
 import jakarta.annotation.PostConstruct;

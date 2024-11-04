@@ -1,9 +1,9 @@
-package co.edu.uco.core.message.impl;
+package co.edu.uco.core.message.strategy.database;
 
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.message.MessageModel;
-import co.edu.uco.core.message.MessageCatalog;
-import co.edu.uco.core.message.enums.MessageKeyEnum;
+import co.edu.uco.core.message.strategy.MessageCatalog;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -33,10 +33,9 @@ public final class DatabaseMessageCatalog extends MessageCatalog {
 
     @Override
     public String getContent(String code) {
-        return messageRepository.findApplicationMessageByCode(code,"application")
+        return messageRepository.findApplicationMessageByCode(code,"UCO NOTAS")
                 .map(message -> {
                     // TODO Aqui deberia guardar en cache (tengo pensado hacer algun facade o usecase que haga eso para segregar responsabilidad).
-                    messageRepository.save(message);
                     return message.getContent();
                 })
                 .orElse(EMPTY);

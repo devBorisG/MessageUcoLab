@@ -1,8 +1,8 @@
 package co.edu.uco.core.message;
 
-import co.edu.uco.core.message.enums.MessageCategoryEnum;
-import co.edu.uco.core.message.enums.MessageKeyEnum;
-import co.edu.uco.core.message.enums.MessageTypeEnum;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageCategoryEnum;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageTypeEnum;
 import co.edu.uco.utils.helper.UtilObject;
 
 public record MessageModel(MessageKeyEnum code, String content, String title, MessageTypeEnum type, MessageCategoryEnum category) {

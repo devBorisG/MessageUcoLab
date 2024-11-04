@@ -1,6 +1,7 @@
-package co.edu.uco.core.message;
+package co.edu.uco.core.message.strategy;
 
-import co.edu.uco.core.message.enums.MessageKeyEnum;
+import co.edu.uco.core.message.MessageModel;
+import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
 
 public abstract class MessageCatalog {
     public abstract void loadCatalog();

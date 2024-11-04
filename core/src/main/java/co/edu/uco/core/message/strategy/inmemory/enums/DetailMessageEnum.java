@@ -1,4 +1,4 @@
-package co.edu.uco.core.message.enums;
+package co.edu.uco.core.message.strategy.inmemory.enums;
 
 import co.edu.uco.core.message.MessageModel;
 
