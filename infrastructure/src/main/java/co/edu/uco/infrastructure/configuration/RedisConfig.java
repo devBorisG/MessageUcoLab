@@ -11,20 +11,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
+@EnableRedisRepositories(basePackages = {"co.edu.uco.infrastructure.adapter.secondary.repository"})
 public class RedisConfig {
 
     @Bean
     public RedisTemplate<String, MessageRedis> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, MessageRedis> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
-
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-
         PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
                 .allowIfSubType(MessageRedis.class)
                 .build();
@@ -33,9 +33,8 @@ public class RedisConfig {
                 ObjectMapper.DefaultTyping.NON_FINAL,
                 JsonTypeInfo.As.PROPERTY
         );
-
         Jackson2JsonRedisSerializer<MessageRedis> serializer = new Jackson2JsonRedisSerializer<>(objectMapper, MessageRedis.class);
-        template.setKeySerializer(new StringRedisSerializer());  // Para claves
+        template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(serializer);  // Para valores (MessageRedis)
         template.afterPropertiesSet();
         return template;
