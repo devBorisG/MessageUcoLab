@@ -2,7 +2,6 @@ package co.edu.uco.core.message.strategy.database;
 
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
-import co.edu.uco.core.message.strategy.MessageCatalog;
 import co.edu.uco.utils.exception.CrossWordsException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 
 @Component
 @Scope(SINGLETON_SCOPE)
-public final class DatabaseMessageCatalog extends MessageCatalog<List<String>, MessageData> {
+public final class DatabaseMessageCatalog extends DatabaseCatalog {
     private final DataBaseMessageRepository repository;
     public DatabaseMessageCatalog(DataBaseMessageRepository repository) {
         this.repository = repository;
@@ -34,9 +33,7 @@ public final class DatabaseMessageCatalog extends MessageCatalog<List<String>, M
     }
     @Override
     public String getContent(String code) {
-        return repository.findApplicationMessageByCode(code,"UCO NOTAS")
-                .map(MessageData::getContent)
-                .orElse(EMPTY);
+        return repository.toString();
     }
     @Override
     public void addMessage(List<String> key, MessageData messageModel) {

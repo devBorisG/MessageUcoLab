@@ -20,7 +20,6 @@ import static co.edu.uco.utils.helper.UtilText.EMPTY;
 @Scope(SINGLETON_SCOPE)
 public final class MessageCatalogStrategy {
     private final List<MessageCatalog> catalogs;
-
     @Autowired
     public MessageCatalogStrategy(
                                   DatabaseMessageCatalog databaseMessageCatalog,
@@ -33,7 +32,6 @@ public final class MessageCatalogStrategy {
         if (isNullObject(key)) {
             throw CrossWordsException.build(getMessage(String.valueOf(MessageKeyEnum.TCH_007)));
         }
-
         return catalogs.stream()
                 .map(catalog -> catalog.getContent(key))
                 .filter(content -> !content.equals(EMPTY))

@@ -2,7 +2,6 @@ package co.edu.uco.core.message.strategy.cache;
 
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.CacheMessageRepository;
-import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilText;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +24,6 @@ public final class CacheMessageCatalog extends CacheCatalog {
     public void loadCatalog() {}
     @Override
     public void reloadCatalog() {}
-
     @Override
     public MessageData getMessage(List<String> code) {
         var response = repository.findApplicationMessageByCode(code.get(0), code.get(1));
@@ -34,22 +32,14 @@ public final class CacheMessageCatalog extends CacheCatalog {
         }
         return response.get();
     }
-
-    //    @Override
-//    public MessageData getMessage(String code) {
-//        return repository.findApplicationMessageByCode(code, "application").orElse(null);
-//    }
     @Override
     public String getContent(String code) {
         Optional<MessageData> cachedMessage = repository.findApplicationMessageByCode(code, "application");
         return cachedMessage.map(messageData -> messageData.getContent().concat(" Consult with cache")).orElse(UtilText.EMPTY);
     }
-
     @Override
     public void addMessage(List<String> key, MessageData messageModel) {
-
     }
-
     @Override
     public boolean isExist(List<String> key) {
         return false;

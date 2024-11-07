@@ -33,7 +33,6 @@ public final class InMemoryMessageCatalog extends MessageCatalog<MessageKeyEnum,
         messages.clear();
         loadCatalog();
     }
-
     @Override
     public MessageModel getMessage(MessageKeyEnum code) {
         if (isNullObject(code)) {
