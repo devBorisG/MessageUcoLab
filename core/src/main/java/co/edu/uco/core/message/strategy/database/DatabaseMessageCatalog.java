@@ -1,53 +1,49 @@
 package co.edu.uco.core.message.strategy.database;
 
+import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
-import co.edu.uco.core.message.MessageModel;
 import co.edu.uco.core.message.strategy.MessageCatalog;
-import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
+import co.edu.uco.utils.exception.CrossWordsException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+import static co.edu.uco.core.message.strategy.inmemory.enums.DetailMessageEnum.TCH_009;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 
 @Component
 @Scope(SINGLETON_SCOPE)
-public final class DatabaseMessageCatalog extends MessageCatalog {
-    private final DataBaseMessageRepository messageRepository;
-    public DatabaseMessageCatalog(DataBaseMessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+public final class DatabaseMessageCatalog extends MessageCatalog<List<String>, MessageData> {
+    private final DataBaseMessageRepository repository;
+    public DatabaseMessageCatalog(DataBaseMessageRepository repository) {
+        this.repository = repository;
     }
-
     @Override
-    public void loadCatalog() {
-    }
-
+    public void loadCatalog() {}
     @Override
-    public void reloadCatalog() {
-    }
-
+    public void reloadCatalog() {}
     @Override
-    public MessageModel getMessage(MessageKeyEnum code) {
-        return null;
+    public MessageData getMessage(List<String> code) {
+        var response = repository.findApplicationMessageByCode(code.get(0), code.get(1));
+        if (response.isEmpty()) {
+            throw CrossWordsException.build(TCH_009.getContent());
+        }
+        return response.get();
     }
-
     @Override
     public String getContent(String code) {
-        return messageRepository.findApplicationMessageByCode(code,"UCO NOTAS")
-                .map(message -> {
-                    // TODO Aqui deberia guardar en cache (tengo pensado hacer algun facade o usecase que haga eso para segregar responsabilidad).
-                    return message.getContent();
-                })
+        return repository.findApplicationMessageByCode(code,"UCO NOTAS")
+                .map(MessageData::getContent)
                 .orElse(EMPTY);
     }
-
     @Override
-    public void addMessage(MessageKeyEnum key, MessageModel messageModel) {
-     // TODO: Implementar
+    public void addMessage(List<String> key, MessageData messageModel) {
+        repository.save(messageModel);
     }
-
     @Override
-    public boolean isExist(MessageKeyEnum key) {
+    public boolean isExist(List<String> key) {
         return false;
     }
 }

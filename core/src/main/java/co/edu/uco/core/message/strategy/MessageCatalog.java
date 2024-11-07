@@ -1,13 +1,10 @@
 package co.edu.uco.core.message.strategy;
 
-import co.edu.uco.core.message.MessageModel;
-import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
-
-public abstract class MessageCatalog {
+public abstract class MessageCatalog<K, T> {
     public abstract void loadCatalog();
     public abstract void reloadCatalog();
-    public abstract MessageModel getMessage(MessageKeyEnum code);
+    public abstract T getMessage(K code);
     public abstract String getContent(String code);
-    public abstract void addMessage(MessageKeyEnum key, MessageModel messageModel);
-    public abstract boolean isExist(MessageKeyEnum key);
+    public abstract void addMessage(K key, T messageModel);
+    public abstract boolean isExist(K key);
 }

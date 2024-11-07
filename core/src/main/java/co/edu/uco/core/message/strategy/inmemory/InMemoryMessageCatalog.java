@@ -14,9 +14,11 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+import static co.edu.uco.utils.helper.UtilObject.isNullObject;
+
 @Component
 @Scope(CrosswordsConstant.SINGLETON_SCOPE)
-public final class InMemoryMessageCatalog extends MessageCatalog {
+public final class InMemoryMessageCatalog extends MessageCatalog<MessageKeyEnum, MessageModel> {
     private Map<MessageKeyEnum, MessageModel> messages;
     @Override
     @PostConstruct
@@ -26,7 +28,6 @@ public final class InMemoryMessageCatalog extends MessageCatalog {
             messages.put(messageEnum.getCode(), messageEnum.getMessage());
         }
     }
-
     @Override
     public void reloadCatalog() {
         messages.clear();
@@ -35,25 +36,22 @@ public final class InMemoryMessageCatalog extends MessageCatalog {
 
     @Override
     public MessageModel getMessage(MessageKeyEnum code) {
-        if (UtilObject.isNullObject(code)) {
+        if (isNullObject(code)) {
             throw CrossWordsException.build(getContent(String.valueOf(MessageKeyEnum.TCH_007)));
         }
         return messages.get(code);
     }
-
     @Override
     public String getContent(String code) {
-        if (UtilObject.isNullObject(code)) {
+        if (isNullObject(code)) {
             throw CrossWordsException.build(getContent(String.valueOf(MessageKeyEnum.TCH_007)));
         }
         return messages.get(MessageKeyEnum.of(code)).content();
     }
-
     @Override
     public void addMessage(MessageKeyEnum key, MessageModel messageModel) {
         messages.put(key, messageModel);
     }
-
     @Override
     public boolean isExist(MessageKeyEnum key) {
         return messages.containsKey(key);
