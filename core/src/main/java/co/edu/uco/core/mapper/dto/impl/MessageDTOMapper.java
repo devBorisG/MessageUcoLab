@@ -1,27 +1,23 @@
-package co.edu.uco.core.assembler.dto.impl;
+package co.edu.uco.core.mapper.dto.impl;
 
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.assembler.dto.DTOAssembler;
+import co.edu.uco.core.mapper.dto.DTOMapper;
 import co.edu.uco.core.domain.domains.MessageDomain;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageDTOAssembler implements DTOAssembler<MessageDTO, MessageDomain> {
-
+public class MessageDTOMapper implements DTOMapper<MessageDTO, MessageDomain> {
     private final ModelMapper modelMapper;
-
-    public MessageDTOAssembler(ModelMapper modelMapper) {
+    public MessageDTOMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
-
     @Override
-    public MessageDomain assembleDomain(MessageDTO dto) {
+    public MessageDomain mapperDomain(MessageDTO dto) {
         return modelMapper.map(dto, MessageDomain.class);
     }
-
     @Override
-    public MessageDTO assembleDTO(MessageDomain domain) {
+    public MessageDTO mapperDTO(MessageDomain domain) {
         return modelMapper.map(domain, MessageDTO.class);
     }
 }

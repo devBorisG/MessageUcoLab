@@ -1,27 +1,23 @@
-package co.edu.uco.core.assembler.entity.impl;
+package co.edu.uco.core.mapper.entity.impl;
 
-import co.edu.uco.core.assembler.entity.EntityAssembler;
+import co.edu.uco.core.mapper.entity.EntityMapper;
 import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.aggregate.entities.MessageEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageEntityAssembler implements EntityAssembler<MessageEntity, MessageDomain> {
-
+public class MessageEntityMapper implements EntityMapper<MessageEntity, MessageDomain> {
     private final ModelMapper mapper;
-
-    public MessageEntityAssembler(ModelMapper mapper) {
+    public MessageEntityMapper(ModelMapper mapper) {
         this.mapper = mapper;
     }
-
     @Override
-    public MessageDomain assembleDomain(MessageEntity entity) {
+    public MessageDomain mapperDomain(MessageEntity entity) {
         return mapper.map(entity, MessageDomain.class);
     }
-
     @Override
-    public MessageEntity assembleEntity(MessageDomain domain) {
+    public MessageEntity mapperEntity(MessageDomain domain) {
         return mapper.map(domain, MessageEntity.class);
     }
 }

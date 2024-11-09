@@ -1,7 +1,7 @@
 package co.edu.uco.core.domain.usecase;
 
 import co.edu.uco.core.application.dto.MessageCodeDTO;
-import co.edu.uco.core.assembler.dto.DTOAssembler;
+import co.edu.uco.core.mapper.dto.DTOMapper;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.in.ListMessageInPort;
 import co.edu.uco.core.domain.port.out.presenter.ListMessagePresenter;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 public class ListMessageUseCase implements ListMessageInPort {
 
     private final ListMessagePresenter presenter;
-    private final DTOAssembler<MessageCodeDTO,MessageCodeDomain> assembler;
+    private final DTOMapper<MessageCodeDTO,MessageCodeDomain> assembler;
 //    private final IMongoRepository mongoRepository;
 
-    public ListMessageUseCase(ListMessagePresenter presenter, DTOAssembler<MessageCodeDTO, MessageCodeDomain> assembler) {
+    public ListMessageUseCase(ListMessagePresenter presenter, DTOMapper<MessageCodeDTO, MessageCodeDomain> assembler) {
         this.presenter = presenter;
         this.assembler = assembler;
 //        this.mongoRepository = mongoRepository;

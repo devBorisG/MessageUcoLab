@@ -1,4 +1,4 @@
-package co.edu.uco.core.assembler;
+package co.edu.uco.core.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
