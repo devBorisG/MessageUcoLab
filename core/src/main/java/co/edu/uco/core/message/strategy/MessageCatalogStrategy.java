@@ -1,10 +1,13 @@
 package co.edu.uco.core.message.strategy;
 
 import co.edu.uco.core.domain.data.MessageData;
+import co.edu.uco.core.domain.port.out.repository.SimplePage;
+import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.message.strategy.cache.CacheCatalog;
 import co.edu.uco.core.message.strategy.database.DatabaseCatalog;
 import co.edu.uco.core.message.strategy.inmemory.InMemoryCatalog;
 import co.edu.uco.utils.exception.BusinessException;
+import co.edu.uco.utils.helper.UtilUUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -31,9 +34,27 @@ public final class MessageCatalogStrategy {
     public MessageData getMessage(String code, String application) {
         var response = cacheCatalog.getMessage(code, application);
         if (response.isEmpty()) {
+            log.warn("No se encontro el mensaje en cache, se procede a buscar en base de datos");
             response = databaseCatalog.getMessage(code, application);
             response.ifPresent(messageData -> cacheCatalog.addMessage(getStringFromUUID(messageData.getId()), messageData));
         }
         return response.orElseThrow(() -> BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey())));
+    }
+
+    public SimplePage<MessageData> getMessages(String application, SimplePageRequest request) {
+        SimplePage<MessageData> cachedMessages = cacheCatalog.getMessage(application, request);
+
+        if (!cachedMessages.getData().isEmpty()) {
+            log.warn("Se encontraron mensajes en cache, se procede a retornar");
+            return cachedMessages;
+        }
+        SimplePage<MessageData> dbMessages = databaseCatalog.getMessage(application, request);
+        if (!dbMessages.getData().isEmpty()) {
+            log.warn("Se encontraron mensajes en base de datos, se procede a retornar y guardar en cache");
+            databaseCatalog.getMessages(application)
+                    .forEach(message -> cacheCatalog.addMessage(getStringFromUUID(message.getId()), message));
+            return dbMessages;
+        }
+        throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
     }
 }

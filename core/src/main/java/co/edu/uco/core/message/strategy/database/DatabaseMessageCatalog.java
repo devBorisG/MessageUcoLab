@@ -2,13 +2,16 @@ package co.edu.uco.core.message.strategy.database;
 
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
-import co.edu.uco.utils.exception.CrossWordsException;
+import co.edu.uco.core.domain.port.out.repository.SimplePage;
+import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
-import static co.edu.uco.core.message.strategy.inmemory.enums.DetailMessageEnum.TCH_009;
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 
 @Component
@@ -18,10 +21,12 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
     public DatabaseMessageCatalog(DataBaseMessageRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public MessageData getMessage(String code) {
         return null;
     }
+
     @Override
     public String getContent(String code) {
         return repository.toString();
@@ -36,10 +41,17 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
 
     @Override
     public Optional<MessageData> getMessage(String code, String application) {
-        var response = repository.findApplicationMessageByCode(code, application);
-        if (response.isEmpty()) {
-            throw CrossWordsException.build(TCH_009.getContent());
-        }
-        return response;
+        return repository.findApplicationMessageByCode(code, application);
+    }
+
+    @Override
+    public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
+        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+        return repository.finByApplication(application, result);
+    }
+
+    @Override
+    public List<MessageData> getMessages(String application) {
+        return repository.finByApplication(application);
     }
 }
