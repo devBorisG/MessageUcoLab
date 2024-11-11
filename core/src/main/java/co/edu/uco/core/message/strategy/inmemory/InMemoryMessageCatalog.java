@@ -2,7 +2,6 @@ package co.edu.uco.core.message.strategy.inmemory;
 
 import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.message.MessageModel;
-import co.edu.uco.core.message.strategy.MessageCatalog;
 import co.edu.uco.core.message.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.utils.exception.CrossWordsException;
@@ -18,23 +17,11 @@ import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 
 @Component
 @Scope(CrosswordsConstant.SINGLETON_SCOPE)
-public final class InMemoryMessageCatalog extends MessageCatalog<MessageKeyEnum, MessageModel> {
+public final class InMemoryMessageCatalog extends InMemoryCatalog {
     private Map<MessageKeyEnum, MessageModel> messages;
+
     @Override
-    @PostConstruct
-    public void loadCatalog() {
-        messages = UtilObject.getDefaultIsNullObject(messages, new HashMap<>());
-        for (var messageEnum : DetailMessageEnum.values()) {
-            messages.put(messageEnum.getCode(), messageEnum.getMessage());
-        }
-    }
-    @Override
-    public void reloadCatalog() {
-        messages.clear();
-        loadCatalog();
-    }
-    @Override
-    public MessageModel getMessage(MessageKeyEnum code) {
+    public MessageModel getMessageById(MessageKeyEnum code) {
         if (isNullObject(code)) {
             throw CrossWordsException.build(getContent(String.valueOf(MessageKeyEnum.TCH_007)));
         }
@@ -54,5 +41,19 @@ public final class InMemoryMessageCatalog extends MessageCatalog<MessageKeyEnum,
     @Override
     public boolean isExist(MessageKeyEnum key) {
         return messages.containsKey(key);
+    }
+
+    @Override
+    @PostConstruct
+    public void loadCatalog() {
+        messages = UtilObject.getDefaultIsNullObject(messages, new HashMap<>());
+        for (var messageEnum : DetailMessageEnum.values()) {
+            messages.put(messageEnum.getCode(), messageEnum.getMessage());
+        }
+    }
+    @Override
+    public void reloadCatalog() {
+        messages.clear();
+        loadCatalog();
     }
 }
