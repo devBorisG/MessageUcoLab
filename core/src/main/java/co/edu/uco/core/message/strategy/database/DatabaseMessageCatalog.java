@@ -4,6 +4,8 @@ import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
+import co.edu.uco.utils.helper.UtilText;
+import co.edu.uco.utils.helper.UtilUUID;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
 
 @Component
 @Scope(SINGLETON_SCOPE)
@@ -23,20 +26,18 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
     }
 
     @Override
-    public MessageData getMessage(String code) {
-        return null;
+    public Optional<MessageData> getMessageById(String code) {
+        return repository.findById(UtilUUID.getUUIDFromString(code));
     }
 
     @Override
     public String getContent(String code) {
-        return repository.toString();
+        return repository.findById(UtilUUID.getUUIDFromString(code)).map(MessageData::getContent).orElse(EMPTY);
     }
-    @Override
-    public void addMessage(String key, MessageData messageModel) {
-    }
+
     @Override
     public boolean isExist(String key) {
-        return false;
+        return getMessageById(key).isPresent();
     }
 
     @Override

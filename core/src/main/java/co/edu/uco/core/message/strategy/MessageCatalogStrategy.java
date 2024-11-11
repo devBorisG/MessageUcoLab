@@ -7,7 +7,6 @@ import co.edu.uco.core.message.strategy.cache.CacheCatalog;
 import co.edu.uco.core.message.strategy.database.DatabaseCatalog;
 import co.edu.uco.core.message.strategy.inmemory.InMemoryCatalog;
 import co.edu.uco.utils.exception.BusinessException;
-import co.edu.uco.utils.helper.UtilUUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -36,7 +35,7 @@ public final class MessageCatalogStrategy {
         if (response.isEmpty()) {
             log.warn("No se encontro el mensaje en cache, se procede a buscar en base de datos");
             response = databaseCatalog.getMessage(code, application);
-            response.ifPresent(messageData -> cacheCatalog.addMessage(getStringFromUUID(messageData.getId()), messageData));
+            response.ifPresent(cacheCatalog::addMessage);
         }
         return response.orElseThrow(() -> BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey())));
     }
@@ -52,7 +51,7 @@ public final class MessageCatalogStrategy {
         if (!dbMessages.getData().isEmpty()) {
             log.warn("Se encontraron mensajes en base de datos, se procede a retornar y guardar en cache");
             databaseCatalog.getMessages(application)
-                    .forEach(message -> cacheCatalog.addMessage(getStringFromUUID(message.getId()), message));
+                    .forEach(cacheCatalog::addMessage);
             return dbMessages;
         }
         throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));

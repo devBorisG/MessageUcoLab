@@ -6,11 +6,13 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.DataMapper;
 import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MessageDocument;
 import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoRepositoryAdapter;
+import co.edu.uco.utils.helper.UtilUUID;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component("MessageMongoAdapter")
 public final class MessageMongoAdapter implements DataBaseMessageRepository {
@@ -37,5 +39,10 @@ public final class MessageMongoAdapter implements DataBaseMessageRepository {
     @Override
     public List<MessageData> finByApplication(String application) {
         return repository.findByApplication(application).stream().map(mapper::mapperData).toList();
+    }
+
+    @Override
+    public Optional<MessageData> findById(UUID id) {
+        return repository.findById(UtilUUID.getStringFromUUID(id)).map(mapper::mapperData);
     }
 }

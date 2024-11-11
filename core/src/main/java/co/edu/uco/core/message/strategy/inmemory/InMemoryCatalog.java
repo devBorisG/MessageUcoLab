@@ -7,4 +7,5 @@ import co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum;
 public abstract class InMemoryCatalog extends MessageCatalog<MessageKeyEnum, MessageModel> {
     public abstract void loadCatalog();
     public abstract void reloadCatalog();
+    public abstract void addMessage(MessageKeyEnum key, MessageModel messageModel);
 }

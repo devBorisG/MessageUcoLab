@@ -7,7 +7,8 @@ import co.edu.uco.core.message.strategy.MessageCatalog;
 
 import java.util.Optional;
 
-public abstract class CacheCatalog  extends MessageCatalog<String, MessageData> {
+public abstract class CacheCatalog  extends MessageCatalog<String, Optional<MessageData>> {
     public abstract Optional<MessageData> getMessage(String code, String application);
     public abstract SimplePage<MessageData> getMessage(String application, SimplePageRequest request);
+    public abstract void addMessage(MessageData messageModel);
 }

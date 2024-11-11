@@ -21,7 +21,7 @@ public final class InMemoryMessageCatalog extends InMemoryCatalog {
     private Map<MessageKeyEnum, MessageModel> messages;
 
     @Override
-    public MessageModel getMessage(MessageKeyEnum code) {
+    public MessageModel getMessageById(MessageKeyEnum code) {
         if (isNullObject(code)) {
             throw CrossWordsException.build(getContent(String.valueOf(MessageKeyEnum.TCH_007)));
         }

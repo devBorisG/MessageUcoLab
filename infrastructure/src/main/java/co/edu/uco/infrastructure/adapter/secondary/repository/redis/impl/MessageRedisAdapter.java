@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component("MessageRedisAdapter")
 public final class MessageRedisAdapter implements CacheMessageRepository {
@@ -36,5 +37,10 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
     @Override
     public List<MessageData> finByApplication(String application) {
         return repository.findByApplication(application).stream().map(mapper::mapperData).toList();
+    }
+
+    @Override
+    public Optional<MessageData> findById(UUID id) {
+        return repository.findById(id).map(mapper::mapperData);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
+import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
 
 @Component
 @Scope(SINGLETON_SCOPE)
@@ -23,24 +24,23 @@ public final class CacheMessageCatalog extends CacheCatalog {
     }
 
     @Override
-    public MessageData getMessage(String code) {
-        return null;
+    public Optional<MessageData> getMessageById(String id) {
+        return repository.findById(getUUIDFromString(id));
     }
 
     @Override
     public String getContent(String code) {
-        Optional<MessageData> cachedMessage = repository.findApplicationMessageByCode(code, "application");
-        return cachedMessage.map(messageData -> messageData.getContent().concat(" Consult with cache")).orElse(UtilText.EMPTY);
+        return repository.findById(getUUIDFromString(code)).map(MessageData::getContent).orElse(UtilText.EMPTY);
     }
 
     @Override
-    public void addMessage(String key, MessageData messageModel) {
+    public void addMessage(MessageData messageModel) {
             repository.save(messageModel);
     }
 
     @Override
     public boolean isExist(String key) {
-        return false;
+        return getMessageById(key).isPresent();
     }
 
     @Override
