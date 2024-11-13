@@ -1,23 +1,24 @@
 package co.edu.uco.core.mapper.entity.impl;
 
+import co.edu.uco.core.application.dto.MessageDTO;
+import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.mapper.entity.EntityMapper;
 import co.edu.uco.core.domain.domains.MessageDomain;
-import co.edu.uco.core.domain.aggregate.entities.MessageEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageEntityMapper implements EntityMapper<MessageEntity, MessageDomain> {
+public class MessageEntityMapper implements EntityMapper<MessageData, MessageDomain, MessageDTO> {
     private final ModelMapper mapper;
     public MessageEntityMapper(ModelMapper mapper) {
         this.mapper = mapper;
     }
     @Override
-    public MessageDomain mapperDomain(MessageEntity entity) {
+    public MessageDomain mapperDomain(MessageData entity) {
         return mapper.map(entity, MessageDomain.class);
     }
     @Override
-    public MessageEntity mapperEntity(MessageDomain domain) {
-        return mapper.map(domain, MessageEntity.class);
-    }
+    public MessageData mapperEntity(MessageDomain domain) { return mapper.map(domain, MessageData.class); }
+    @Override
+    public MessageDTO mapperDTO(MessageData entity) { return mapper.map(entity, MessageDTO.class);}
 }
