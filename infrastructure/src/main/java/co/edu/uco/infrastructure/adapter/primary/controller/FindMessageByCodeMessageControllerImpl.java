@@ -22,9 +22,9 @@ public class FindMessageByCodeMessageControllerImpl extends AbstractRestControll
     }
 
     @Override
-    @GetMapping("/{codeMessage}")
-    public void execute(@PathVariable String codeMessage, HttpServletResponse response) {
+    @GetMapping("/{codeMessage}/{application}")
+    public void execute(@PathVariable String codeMessage,@PathVariable String application, HttpServletResponse response) {
         MessageCodeDTO message = MessageCodeDTOBuilder.getInstance().setCode(codeMessage).build();
-        handlingFindMessageByCodeMessagePort.findMessageByCode(message, response);
+        handlingFindMessageByCodeMessagePort.findMessageByCode(message, application,response);
     }
 }

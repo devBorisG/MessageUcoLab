@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.presenter;
 
-import co.edu.uco.core.application.dto.MessageCodeDTO;
+import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.port.out.presenter.FindMessageByCodeMessagePresenter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 public class FindMessageByCodeMessagePresenterImpl implements FindMessageByCodeMessagePresenter {
 
     @GetMapping
-    public void execute(MessageCodeDTO dto, HttpServletResponse response) {
+    public void execute(MessageDTO dto, HttpServletResponse response) {
         try {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
