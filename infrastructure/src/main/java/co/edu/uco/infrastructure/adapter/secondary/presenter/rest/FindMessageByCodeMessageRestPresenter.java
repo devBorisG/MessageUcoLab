@@ -1,23 +1,21 @@
-package co.edu.uco.infrastructure.adapter.secondary.presenter;
+package co.edu.uco.infrastructure.adapter.secondary.presenter.rest;
 
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.domain.port.out.presenter.FindMessageByCodeMessagePresenter;
+import co.edu.uco.core.domain.port.out.presenter.message.FindMessageByCodeMessagePresenter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 @Component
 @Slf4j
-public class FindMessageByCodeMessagePresenterImpl implements FindMessageByCodeMessagePresenter {
+public class FindMessageByCodeMessageRestPresenter implements FindMessageByCodeMessagePresenter {
 
-    @GetMapping
     public void execute(MessageDTO dto, HttpServletResponse response) {
         try {
             response.setContentType("application/json");

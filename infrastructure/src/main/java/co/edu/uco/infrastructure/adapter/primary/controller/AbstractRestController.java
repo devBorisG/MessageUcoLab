@@ -1,4 +1,4 @@
-package co.edu.uco.infrastructure.adapter;
+package co.edu.uco.infrastructure.adapter.primary.controller;
 
 import java.util.Map;
 import java.util.Optional;
@@ -28,7 +28,6 @@ public abstract class AbstractRestController {
                 .body(Map.of("error", message));
     }
 
-    // Manejar cualquier otra excepción no específica
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleGeneralException(Exception ex){
         log.error("Error de validación", ex);
