@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.core.message.strategy.inmemory.enums.MessageKeyEnum.TCH_009;
-import static co.edu.uco.utils.helper.UtilUUID.getStringFromUUID;
 
 @Component
 @Scope(SINGLETON_SCOPE)
@@ -41,19 +40,34 @@ public final class MessageCatalogStrategy {
     }
 
     public SimplePage<MessageData> getMessages(String application, SimplePageRequest request) {
-        SimplePage<MessageData> cachedMessages = cacheCatalog.getMessage(application, request);
+        var cachedMessages = cacheCatalog.getMessage(application, request);
+        if (cachedMessages.getData().isEmpty()) {
+            log.warn("No se encontraron mensajes en cache, se procede a buscar en base de datos");
+            var dbMessages = databaseCatalog.getMessage(application, request);
+            if (!dbMessages.getData().isEmpty()) {
+                log.warn("Se encontraron mensajes en base de datos, se procede a retornar y guardar en cache");
+                fillCacheWithMissingMessages(cachedMessages, dbMessages);
+                return dbMessages;
+            }
+            throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
+        }
 
-        if (!cachedMessages.getData().isEmpty()) {
+        var dbMessages = databaseCatalog.getMessage(application, request);
+        if (!dbMessages.getData().isEmpty()) {
+            if (cachedMessages.getData().size() != dbMessages.getData().size()) {
+                log.warn("La cantidad de mensajes en cache y base de datos no coincide, se procede a llenar la cache con los mensajes faltantes");
+                fillCacheWithMissingMessages(cachedMessages, dbMessages);
+                return dbMessages;
+            }
             log.warn("Se encontraron mensajes en cache, se procede a retornar");
             return cachedMessages;
         }
-        SimplePage<MessageData> dbMessages = databaseCatalog.getMessage(application, request);
-        if (!dbMessages.getData().isEmpty()) {
-            log.warn("Se encontraron mensajes en base de datos, se procede a retornar y guardar en cache");
-            databaseCatalog.getMessages(application)
-                    .forEach(cacheCatalog::addMessage);
-            return dbMessages;
-        }
         throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
+    }
+
+    private void fillCacheWithMissingMessages(SimplePage<MessageData> cachedMessages, SimplePage<MessageData> dbMessages) {
+        dbMessages.getData().stream()
+                .filter(message -> !cachedMessages.getData().contains(message))
+                .forEach(cacheCatalog::addMessage);
     }
 }
