@@ -1,6 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.presenter.rest;
 
 import co.edu.uco.core.application.dto.MessageDTO;
+import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.port.out.presenter.message.ListMessageByApplicationPresenter;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ public final class ListMessageByApplicationRestPresenter extends AbstractRestPre
         this.jacksonConverter = jacksonConverter;
     }
     @Override
-    public void present(SimplePage<MessageDTO> dto) {
+    public void present(Response<SimplePage<MessageDTO>> dto) {
         try {
             response.setStatus(HttpStatus.OK.value());
             jacksonConverter.write(dto, MediaType.APPLICATION_JSON, new ServletServerHttpResponse(response));
