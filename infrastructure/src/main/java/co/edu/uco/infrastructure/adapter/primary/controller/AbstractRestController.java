@@ -2,7 +2,9 @@ package co.edu.uco.infrastructure.adapter.primary.controller;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
+import co.edu.uco.infrastructure.adapter.primary.response.ResponseError;
 import co.edu.uco.utils.exception.CrossWordsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,24 +17,27 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public abstract class AbstractRestController {
 
     @ExceptionHandler(CrossWordsException.class)
-    public ResponseEntity<Map<String, String>> handleCrossWordsException(CrossWordsException ex) {
+    public ResponseEntity<ResponseError> handleCrossWordsException(CrossWordsException ex) {
+        String correlationId = UUID.randomUUID().toString();
         String message = Optional.ofNullable(ex.getUserMessage())
                 .filter(msg -> !msg.isEmpty())
                 .orElseGet(() -> {
-                    log.error("Error de validación: {}", ex.getTechnicalMessage());
+                    log.error("Error de validación, Correlation ID: {}", correlationId, ex);
                     return "Ocurrió un error inesperado.";
                 });
-
+        ResponseError responseError = new ResponseError(message, correlationId);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(Map.of("error", message));
+                .body(responseError);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleGeneralException(Exception ex){
-        log.error("Error de validación", ex);
+    public ResponseEntity<ResponseError> handleGeneralException(Exception ex){
+        String correlationId = UUID.randomUUID().toString();
+        log.error("Error de validación, Correlation ID: {}", correlationId, ex);
+        ResponseError responseError = new ResponseError("Ocurrió un error inesperado.", correlationId);
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("error", "Ocurrió un error inesperado."));
+                .body(responseError);
     }
 }
