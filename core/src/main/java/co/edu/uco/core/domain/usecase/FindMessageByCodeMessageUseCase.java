@@ -1,16 +1,20 @@
 package co.edu.uco.core.domain.usecase;
 
-import co.edu.uco.core.application.dto.MessageCodeDTO;
 import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
+import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.port.out.presenter.message.FindMessageByCodeMessagePresenter;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
 import co.edu.uco.core.mapper.entity.EntityMapper;
 import co.edu.uco.core.message.strategy.MessageCatalogStrategy;
-import jakarta.servlet.http.HttpServletResponse;
+import co.edu.uco.utils.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -27,13 +31,15 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
     }
 
     @Override
-    public void findMessageByCode(MessageCodeDTO message, String application,HttpServletResponse response) {
+    public void findMessageByCode(String codeMessage, String application) {
         try {
-            MessageData messageData = messageCatalogStrategy.getMessage(message.getCode(), application);
+            MessageData messageData = messageCatalogStrategy.getMessage(codeMessage, application);
             MessageDTO messageDTO = entityMapper.mapperDTO(messageData);
-            presenter.execute(messageDTO, response);
+            Response<MessageDTO> response = new Response<>(Collections.singletonList(messageDTO));
+            presenter.present(response);
         } catch (Exception exception) {
             log.error( exception.getMessage());
+            throw BusinessException.buildUserException("No existe un mensaje con el código " + codeMessage + " para la aplicación " + application);
         }
     }
 }
