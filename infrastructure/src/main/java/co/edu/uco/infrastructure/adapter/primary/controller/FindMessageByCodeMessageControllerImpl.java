@@ -3,7 +3,6 @@ package co.edu.uco.infrastructure.adapter.primary.controller;
 import co.edu.uco.core.application.builder.MessageCodeDTOBuilder;
 import co.edu.uco.core.application.dto.MessageCodeDTO;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
-import co.edu.uco.infrastructure.adapter.AbstractRestController;
 import co.edu.uco.infrastructure.adapter.primary.FindMessageByCodeMessage;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.GetMapping;
