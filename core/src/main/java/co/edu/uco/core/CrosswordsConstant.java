@@ -11,5 +11,6 @@ public final class CrosswordsConstant {
     public static final String FIELD_MONGO_ADAPTER_CATEGORY = "_airbyte_data.category";
     public static final String FIELD_MONGO_ADAPTER_STATUS = "_airbyte_data.status";
     public static final String FIELD_MONGO_ADAPTER_APPLICATION = "_airbyte_data.application";
-    public static final String FIELD_MONGO_ADAPTER_FUNCTIONALITY = "_airbyte_data.functionality";;
+    public static final String FIELD_MONGO_ADAPTER_FUNCTIONALITY = "_airbyte_data.functionality";
+    public static final String REQUEST_COLUMN_SORT_DEFAULT = "id";
 }
