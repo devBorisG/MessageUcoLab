@@ -1,7 +1,7 @@
 package co.edu.uco.core.application.facade.message.implementation;
 
 import co.edu.uco.core.application.dto.MessageCodeDTO;
-import co.edu.uco.core.mapper.dto.DTOMapper;
+import co.edu.uco.core.application.mapper.dto.DTOMapper;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.in.ListMessageCacheInPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageCacheInputPort;

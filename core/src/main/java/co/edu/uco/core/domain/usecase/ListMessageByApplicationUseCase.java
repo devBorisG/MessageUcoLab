@@ -8,8 +8,8 @@ import co.edu.uco.core.domain.port.out.presenter.message.ListMessageByApplicatio
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationPort;
-import co.edu.uco.core.mapper.entity.EntityMapper;
-import co.edu.uco.core.message.strategy.MessageCatalogStrategy;
+import co.edu.uco.core.application.mapper.entity.EntityMapper;
+import co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.exception.BusinessException;
 import org.springframework.stereotype.Component;
 

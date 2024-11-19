@@ -1,10 +1,7 @@
 package co.edu.uco.core.domain.usecase;
 
-import co.edu.uco.core.application.dto.MessageCodeDTO;
-import co.edu.uco.core.mapper.dto.DTOMapper;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.in.ListMessageInPort;
-import co.edu.uco.core.domain.port.out.presenter.message.ListMessagePresenter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

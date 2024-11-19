@@ -5,7 +5,7 @@ import co.edu.uco.core.domain.port.out.repository.CacheMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
-import co.edu.uco.core.message.strategy.MessageCatalogStrategy;
+import co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.helper.UtilText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
