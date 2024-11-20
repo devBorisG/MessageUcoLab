@@ -1,10 +1,7 @@
 package co.edu.uco.core.domain.usecase;
 
-import co.edu.uco.core.application.dto.MessageCodeDTO;
-import co.edu.uco.core.mapper.dto.DTOMapper;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.in.ListMessageInPort;
-import co.edu.uco.core.domain.port.out.presenter.ListMessagePresenter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,15 +11,15 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ListMessageUseCase implements ListMessageInPort {
 
-    private final ListMessagePresenter presenter;
-    private final DTOMapper<MessageCodeDTO,MessageCodeDomain> assembler;
-//    private final IMongoRepository mongoRepository;
-
-    public ListMessageUseCase(ListMessagePresenter presenter, DTOMapper<MessageCodeDTO, MessageCodeDomain> assembler) {
-        this.presenter = presenter;
-        this.assembler = assembler;
-//        this.mongoRepository = mongoRepository;
-    }
+//    private final ListMessagePresenter presenter;
+//    private final DTOMapper<MessageCodeDTO,MessageCodeDomain> assembler;
+////    private final IMongoRepository mongoRepository;
+//
+//    public ListMessageUseCase(ListMessagePresenter presenter, DTOMapper<MessageCodeDTO, MessageCodeDomain> assembler) {
+//        this.presenter = presenter;
+//        this.assembler = assembler;
+////        this.mongoRepository = mongoRepository;
+//    }
 
     @Override
     public void execute(MessageCodeDomain messageDomain, HttpServletResponse response) {

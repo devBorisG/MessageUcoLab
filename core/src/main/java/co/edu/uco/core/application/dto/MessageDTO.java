@@ -15,7 +15,8 @@ public class MessageDTO {
     private String title;
     private String content;
     private String application;
-
+    public MessageDTO() {
+    }
     public MessageDTO(UUID id, String code, String title, String content, String application) {
         setId(id);
         setCode(code);
@@ -23,27 +24,21 @@ public class MessageDTO {
         setContent(content);
         setApplication(application);
     }
-
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
     }
-
     public void setCode(String code) {
         this.code = trim(code);
     }
-
     public void setTitle(String title) {
         this.title = trim(title);
     }
-
     public void setContent(String content) {
         this.content = trim(content);
     }
-
     public void setApplication(String application) {
         this.application = trim(application);
     }
-
     public static MessageDTO create(UUID id, String code, String title, String content, String application) {
         return new MessageDTO(id, code, title, content, application);
     }
