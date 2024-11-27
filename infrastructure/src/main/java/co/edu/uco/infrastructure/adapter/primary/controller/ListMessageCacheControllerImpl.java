@@ -1,6 +1,5 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.application.builder.MessageCodeDTOBuilder;
 import co.edu.uco.core.application.dto.MessageCodeDTO;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageCacheInputPort;
 import co.edu.uco.infrastructure.adapter.primary.ListMessageCacheController;
@@ -22,7 +21,7 @@ public class ListMessageCacheControllerImpl extends AbstractRestController imple
 
     @GetMapping("/cache/{codeMessage}")
     public void execute(@PathVariable String codeMessage, HttpServletResponse response) {
-        MessageCodeDTO message = MessageCodeDTOBuilder.getInstance().setCode(codeMessage).build();
+        MessageCodeDTO message = MessageCodeDTO.create(codeMessage);
         handlingListMessageInputPort.listMessage(message, response);
     }
 }
