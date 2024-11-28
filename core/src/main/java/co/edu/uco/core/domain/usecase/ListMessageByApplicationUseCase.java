@@ -1,5 +1,6 @@
 package co.edu.uco.core.domain.usecase;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
@@ -33,7 +34,7 @@ public final class ListMessageByApplicationUseCase implements HandlingListMessag
             Response<SimplePage<MessageDTO>> response = new Response<>(List.of(SimplePage.of(messages, page.getCurrentPage(), page.getPageSize(),page.getTotalItems(), page.getTotalPages())));
             presenter.present(response);
         }catch (Exception exception){
-            throw BusinessException.buildUserException("No se pudo obtener los mensajes de la aplicación " + application + " Verifique que la aplicación exista");
+            throw BusinessException.buildUserException(String.format(MessageKeyEnum.FUN_011.getKey(), application));
         }
 
     }

@@ -9,19 +9,19 @@ public record MessageModel(MessageKeyEnum code, String content, String title, Me
 
     public MessageModel {
         if (UtilObject.isNullObject(code)) {
-            throw new IllegalArgumentException("Code is required");
+            throw new IllegalArgumentException(MessageKeyEnum.TCH_010.getKey());
         }
         if (UtilObject.isNullObject(content)) {
-            throw new IllegalArgumentException("Content is required");
+            throw new IllegalArgumentException(MessageKeyEnum.TCH_011.getKey());
         }
         if (UtilObject.isNullObject(title)) {
-            throw new IllegalArgumentException("Title is required");
+            throw new IllegalArgumentException(MessageKeyEnum.TCH_012.getKey());
         }
         if (UtilObject.isNullObject(type)) {
-            throw new IllegalArgumentException("Type is required");
+            throw new IllegalArgumentException(MessageKeyEnum.TCH_013.getKey());
         }
         if (UtilObject.isNullObject(category)) {
-            throw new IllegalArgumentException("Category is required");
+            throw new IllegalArgumentException(MessageKeyEnum.TCH_014.getKey());
         }
     }
 

@@ -1,5 +1,6 @@
 package co.edu.uco.core.domain.usecase;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
@@ -37,7 +38,7 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
             presenter.present(response);
         } catch (Exception exception) {
             log.error( exception.getMessage());
-            throw BusinessException.buildUserException("No existe un mensaje con el código " + codeMessage + " para la aplicación " + application);
+            throw BusinessException.buildUserException(String.format(MessageKeyEnum.FUN_012.getKey(), codeMessage, application));
         }
     }
 }

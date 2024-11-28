@@ -1,5 +1,6 @@
 package co.edu.uco.core.domain.customexception;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.utils.exception.BusinessRuleException;
 
 import java.io.Serial;
@@ -10,7 +11,7 @@ public class SizeContentLessThanTenException extends BusinessRuleException {
     private static final long serialVersionUID = -2529239574681102198L;
 
     private SizeContentLessThanTenException() {
-        super("El tamaño del contenido no puede ser menor a 10", "SIZE_CONTENT_LESS_THAN_TEN");
+        super(MessageKeyEnum.FUN_018.getKey(), MessageKeyEnum.FUN_018.getKey().toUpperCase());
     }
 
     public static void report() {
