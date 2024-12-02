@@ -1,6 +1,8 @@
 package co.edu.uco.core.application.builder;
 
 import co.edu.uco.core.application.dto.CategoryDTO;
+import co.edu.uco.utils.helper.UtilText;
+import co.edu.uco.utils.helper.UtilUUID;
 
 import java.util.UUID;
 
@@ -21,7 +23,7 @@ public class CategoryDTOBuilder {
     }
 
     public CategoryDTOBuilder setId(final UUID id) {
-        this.id = id;
+        this.id = UtilUUID.getDefaultUUID(id);
         return this;
     }
 
@@ -30,7 +32,7 @@ public class CategoryDTOBuilder {
     }
 
     public final CategoryDTOBuilder setName(String name) {
-        this.name = name;
+        this.name = UtilText.trim(name);
         return this;
     }
 

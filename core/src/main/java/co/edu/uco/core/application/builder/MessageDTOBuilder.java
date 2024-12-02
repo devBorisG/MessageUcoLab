@@ -1,6 +1,8 @@
 package co.edu.uco.core.application.builder;
 
 import co.edu.uco.core.application.dto.MessageDTO;
+import co.edu.uco.utils.helper.UtilText;
+import co.edu.uco.utils.helper.UtilUUID;
 
 import java.util.UUID;
 
@@ -20,27 +22,27 @@ public class MessageDTOBuilder {
     }
 
     public MessageDTOBuilder setId(UUID id) {
-        this.id = id;
+        this.id = UtilUUID.getDefaultUUID(id);
         return this;
     }
 
     public MessageDTOBuilder setCode(String code) {
-        this.code = code;
+        this.code = UtilText.trim(code);
         return this;
     }
 
     public MessageDTOBuilder setTitle(String title) {
-        this.title = title;
+        this.title = UtilText.trim(title);
         return this;
     }
 
     public MessageDTOBuilder setContent(String content) {
-        this.content = content;
+        this.content = UtilText.trim(content);
         return this;
     }
 
     public MessageDTOBuilder setApplication(String application) {
-        this.application = application;
+        this.application = UtilText.trim(application);
         return this;
     }
 
