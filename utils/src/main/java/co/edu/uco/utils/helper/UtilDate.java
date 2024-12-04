@@ -9,14 +9,15 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Date;
 
+import static co.edu.uco.utils.helper.UtilNumeric.ZERO;
 import static co.edu.uco.utils.helper.UtilObject.*;
 
 public final class UtilDate {
 
     private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .appendPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+            .appendPattern(EnumConstants.DATE_FORMAT.getValue())
             .optionalStart()
-            .appendFraction(ChronoField.MICRO_OF_SECOND, 0, 9, true)
+            .appendFraction(ChronoField.MICRO_OF_SECOND, ZERO, 9, true)
             .optionalEnd()
             .toFormatter();
     public static final LocalDateTime TIME = LocalDateTime.now();

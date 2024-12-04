@@ -1,5 +1,6 @@
 package co.edu.uco.infrastructure.configuration;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.infrastructure.adapter.secondary.repository.redis.MessageRedis;
 import co.edu.uco.utils.exception.BusinessException;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -44,14 +45,14 @@ public class RedisConfig {
             template.setValueSerializer(serializer);  // Para valores (MessageRedis)
             template.afterPropertiesSet();
         } catch (RedisConnectionFailureException ex) {
-            log.error("Failed to connect to Redis", ex);
-            throw BusinessException.buildTechnicalException("Failed to connect to Redis");
+            log.error(MessageKeyEnum.FUN_013.getKey(), ex);
+            throw BusinessException.buildTechnicalException(MessageKeyEnum.FUN_013.getKey());
         } catch (DataAccessException ex) {
-            log.error("Data access exception while connecting to Redis", ex);
-            throw BusinessException.buildTechnicalException("Data access exception while connecting to Redis");
+            log.error(MessageKeyEnum.FUN_014.getKey(), ex);
+            throw BusinessException.buildTechnicalException(MessageKeyEnum.FUN_014.getKey());
         } catch (Exception ex) {
-            log.error("Unexpected exception while connecting to Redis", ex);
-            throw BusinessException.buildTechnicalException("Unexpected exception while connecting to Redis");
+            log.error(MessageKeyEnum.FUN_015.getKey(), ex);
+            throw BusinessException.buildTechnicalException(MessageKeyEnum.FUN_015.getKey());
         }
         return template;
     }
