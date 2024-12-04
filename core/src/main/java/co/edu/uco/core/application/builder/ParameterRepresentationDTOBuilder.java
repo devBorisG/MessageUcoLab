@@ -1,6 +1,8 @@
 package co.edu.uco.core.application.builder;
 
 import co.edu.uco.core.application.dto.ParameterRepresentationDTO;
+import co.edu.uco.utils.helper.UtilText;
+import co.edu.uco.utils.helper.UtilUUID;
 
 import java.util.UUID;
 
@@ -20,17 +22,17 @@ public class ParameterRepresentationDTOBuilder {
     }
 
     public ParameterRepresentationDTOBuilder setId(UUID id) {
-        this.id = id;
+        this.id = UtilUUID.getDefaultUUID(id);
         return this;
     }
 
     public ParameterRepresentationDTOBuilder setStart(String start) {
-        this.start = start;
+        this.start = UtilText.trim(start);
         return this;
     }
 
     public ParameterRepresentationDTOBuilder setEnd(String end) {
-        this.end = end;
+        this.end = UtilText.trim(end);
         return this;
     }
 
