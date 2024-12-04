@@ -1,6 +1,6 @@
 package co.edu.uco.core.application.validator.impl;
 
-import co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum;
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.application.validator.Validator;
 import co.edu.uco.utils.exception.BusinessRuleException;
 
@@ -14,7 +14,7 @@ public final class NotNullValidator<T> implements Validator<T> {
     @Override
     public void validate(T data) throws BusinessRuleException {
         if (isNullObject(data)) {
-            throw BusinessRuleException.buildUserException(String.format(MessageKeyEnum.FUN_010.getKey(), value));
+            throw BusinessRuleException.buildUserException(String.format(DetailMessageEnum.FUN_010.getContent(), value));
         }
     }
 }
