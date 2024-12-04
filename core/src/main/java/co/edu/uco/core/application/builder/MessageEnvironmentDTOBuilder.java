@@ -1,6 +1,8 @@
 package co.edu.uco.core.application.builder;
 
 import co.edu.uco.core.application.dto.MessageEnvironmentDTO;
+import co.edu.uco.utils.helper.UtilText;
+import co.edu.uco.utils.helper.UtilUUID;
 
 import java.util.UUID;
 
@@ -17,12 +19,12 @@ public class MessageEnvironmentDTOBuilder {
     }
 
     public MessageEnvironmentDTOBuilder setId(UUID id) {
-        this.id = id;
+        this.id = UtilUUID.getDefaultUUID(id);
         return this;
     }
 
     public MessageEnvironmentDTOBuilder setMessage(String message) {
-        this.message = message;
+        this.message = UtilText.trim(message);
         return this;
     }
 

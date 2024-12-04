@@ -5,12 +5,12 @@ import co.edu.uco.utils.exception.CrossWordsException;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.EnumConstants.DEFAULT_UUID_STRING;
 import static co.edu.uco.utils.helper.UtilObject.*;
 import static co.edu.uco.utils.helper.UtilText.*;
 
 public final class UtilUUID {
-    public static final String DEFAULT_UUID_STRING = "00000000-0000-0000-0000-000000000000";
-    public static final UUID DEFAULT_UUID = getStringToUUID(DEFAULT_UUID_STRING);
+    public static final UUID DEFAULT_UUID = getStringToUUID(DEFAULT_UUID_STRING.getValue());
     private UtilUUID() {}
 
     public static UUID getDefaultUUID(final UUID uuid) {
@@ -44,7 +44,7 @@ public final class UtilUUID {
     }
 
     public static String getStringFromUUID(final UUID uuid) {
-        String uuidString = DEFAULT_UUID_STRING;
+        String uuidString = DEFAULT_UUID_STRING.getValue();
         if(!isNull(uuid)) {
             uuidString = uuid.toString();
         }

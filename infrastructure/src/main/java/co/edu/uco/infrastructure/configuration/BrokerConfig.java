@@ -7,6 +7,8 @@ import org.apache.pulsar.client.api.PulsarClientException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static co.edu.uco.utils.helper.EnumConstants.PULSAR_URL;
+
 @Configuration
 public class BrokerConfig {
     private PulsarClient client;
@@ -14,7 +16,7 @@ public class BrokerConfig {
     @PostConstruct
     public void init() throws PulsarClientException {
         this.client = PulsarClient.builder()
-                .serviceUrl("pulsar://localhost:6650")
+                .serviceUrl(PULSAR_URL.getValue())
                 .build();
     }
 
