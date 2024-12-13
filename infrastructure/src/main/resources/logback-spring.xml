@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %mdc - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <!-- Rolling File Appender -->
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Archivo con la fecha en el nombre -->
+            <fileNamePattern>logs/application-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                {
+                "timestamp": "%date{yyyy-MM-dd'T'HH:mm:ss.SSS}",
+                "level": "%level",
+                "thread": "%thread",
+                "logger": "%logger",
+                "message": "%message",
+                "mdc": "%mdc",
+                "exception": "%ex"
+                }
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger for MongoDB Driver -->
+    <logger name="org.mongodb.driver" level="ERROR" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLING" />
+    </logger>
+
+    <!-- General Logger -->
+    <logger name="me.mourjo" level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ROLLING"/>
+    </logger>
+
+    <!-- Root Logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ROLLING"/>
+    </root>
+</configuration>
