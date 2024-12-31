@@ -12,15 +12,12 @@ import static co.edu.uco.utils.helper.UtilText.*;
 public final class UtilUUID {
     public static final UUID DEFAULT_UUID = getStringToUUID(DEFAULT_UUID_STRING.getValue());
     private UtilUUID() {}
-
     public static UUID getDefaultUUID(final UUID uuid) {
         return getDefaultIsNullObject(uuid, DEFAULT_UUID);
     }
-
     public static boolean isEqual(final UUID uuidOne, final UUID uuidTwo) {
         return getDefaultUUID(uuidOne).equals(getDefaultUUID(uuidTwo));
     }
-
     public static UUID getNewUUID() {
         UUID uuid;
         do {
@@ -28,7 +25,6 @@ public final class UtilUUID {
         } while (isEqual(uuid, DEFAULT_UUID));
         return uuid;
     }
-
     public static UUID getUUIDFromString(final String uuidString) {
         UUID uuid = DEFAULT_UUID;
         if(!isEmpty(trim(uuidString))) {
@@ -42,7 +38,6 @@ public final class UtilUUID {
         }
         return uuid;
     }
-
     public static String getStringFromUUID(final UUID uuid) {
         String uuidString = DEFAULT_UUID_STRING.getValue();
         if(!isNull(uuid)) {
@@ -50,11 +45,9 @@ public final class UtilUUID {
         }
         return uuidString;
     }
-
     public static UUID getStringToUUID(final String uuid){
         return UUID.fromString(uuid);
     }
-
     public static boolean isNull(UUID value) {
         return isNullObject(value);
     }
