@@ -29,23 +29,10 @@ public class DummyController extends AbstractRestController {
         this.repository = repository;
         this.cacheMessageRepository = cacheMessageRepository;
     }
-
-//    @RequestMapping
-//    public String dummy(@RequestParam String codeMessage) {
-//        try {
-//            return messageCatalogStrategy.getMessage(UtilText.trim(codeMessage));
-//        } catch (CrossWordsException e) {
-//            codeMessage = String.format(e.getTechnicalMessage(), codeMessage);
-//            log.error(codeMessage);
-//        }
-//        return codeMessage;
-//    }
-
     @RequestMapping("/cache")
     public String test(@RequestParam String codeMessage, @RequestParam String application) {
         return messageCatalogStrategy.getMessage(UtilText.trim(codeMessage), UtilText.trim(application)).getContent();
     }
-
     @RequestMapping("/list")
     public ResponseEntity<SimplePage<MessageData>> list(@RequestParam String application, @ModelAttribute SimplePageRequest request) {
         return ResponseEntity.ok(messageCatalogStrategy.getMessages(application, request));
