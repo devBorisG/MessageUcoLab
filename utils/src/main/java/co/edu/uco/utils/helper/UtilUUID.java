@@ -5,7 +5,7 @@ import co.edu.uco.utils.exception.CrossWordsException;
 
 import java.util.UUID;
 
-import static co.edu.uco.utils.helper.EnumConstants.DEFAULT_UUID_STRING;
+import static co.edu.uco.utils.helper.EnumConstants.*;
 import static co.edu.uco.utils.helper.UtilObject.*;
 import static co.edu.uco.utils.helper.UtilText.*;
 
@@ -31,9 +31,9 @@ public final class UtilUUID {
             try {
                 uuid = UUID.fromString(uuidString);
             } catch (IllegalArgumentException exception) {
-                throw CrossWordsException.build("The UUID to be converted has no valid format.",exception);
+                throw CrossWordsException.build(ERROR_UUID_INVALID_FORMAT.getValue(),exception);
             } catch (Exception exception){
-                throw CrossWordsException.build("An unexpected error trying converted", exception);
+                throw CrossWordsException.build(UNEXPECTED_ERROR_UUID_FORMAT.getValue(), exception);
             }
         }
         return uuid;
