@@ -27,7 +27,7 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
         this.presenter = presenter;
     }
     @Override
-    public void findMessageByCode(String codeMessage, String application) {
+    public void execute(String codeMessage, String application) {
         try {
             MessageData messageData = messageCatalogStrategy.getMessage(codeMessage, application);
             MessageDTO messageDTO = entityMapper.mapperDTO(messageData);

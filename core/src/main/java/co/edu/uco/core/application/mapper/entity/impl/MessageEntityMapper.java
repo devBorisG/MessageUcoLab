@@ -8,7 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageEntityMapper implements EntityMapper<MessageData, MessageDomain, MessageDTO> {
+public final class MessageEntityMapper implements EntityMapper<MessageData, MessageDomain, MessageDTO> {
     private final ModelMapper mapper;
     public MessageEntityMapper(ModelMapper mapper) {
         this.mapper = mapper;

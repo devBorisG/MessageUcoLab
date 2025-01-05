@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageCodeDTOMapper implements DTOMapper<MessageCodeDTO, MessageCodeDomain> {
+public final class MessageCodeDTOMapper implements DTOMapper<MessageCodeDTO, MessageCodeDomain> {
     private final ModelMapper modelMapper;
     public MessageCodeDTOMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;

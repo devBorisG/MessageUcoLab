@@ -6,17 +6,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${crosswords.api.path.message.findByCode}")
-public class FindMessageByCodeMessageControllerImpl extends AbstractRestController implements FindMessageByCodeMessage {
-
+public final class FindMessageByCodeMessageControllerImpl extends AbstractRestController implements FindMessageByCodeMessage {
     private final HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort;
-
     public FindMessageByCodeMessageControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort) {
         this.handlingFindMessageByCodeMessagePort = handlingFindMessageByCodeMessagePort;
     }
-
     @Override
     @GetMapping()
     public void execute(@RequestParam String codeMessage, @RequestParam String application) {
-        handlingFindMessageByCodeMessagePort.findMessageByCode(codeMessage, application);
+        handlingFindMessageByCodeMessagePort.execute(codeMessage, application);
     }
 }

@@ -4,14 +4,13 @@ import co.edu.uco.core.domain.aggregate.Entity;
 import co.edu.uco.core.domain.aggregate.entities.valueobject.ContentVO;
 import co.edu.uco.core.domain.aggregate.entities.valueobject.TitleVO;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.UUID;
 
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-public class MessageEntity extends Entity<UUID> {
+public final class MessageEntity extends Entity<UUID> {
     private String code;
     private TitleVO title;
     private ContentVO content;
@@ -20,19 +19,15 @@ public class MessageEntity extends Entity<UUID> {
     private MessageStatusEntity status;
     private String application;
     private FunctionalityEntity functionality;
-
     public void setCode(String code) {
         this.code = trim(code);
     }
-
     public void setTitle(String title) {
         this.title = new TitleVO(title);
     }
-
     public void setContent(String content) {
         this.content = new ContentVO(content);
     }
-
     public void setApplication(String application) {
         this.application = trim(application);
     }

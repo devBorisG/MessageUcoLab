@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class FunctionalityDomain {
+public final class FunctionalityDomain {
     private UUID id;
     private String name;
     private LocalDateTime startDate;

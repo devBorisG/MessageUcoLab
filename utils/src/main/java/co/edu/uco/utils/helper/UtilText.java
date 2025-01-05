@@ -11,8 +11,6 @@ public final class UtilText {
     public static final String ONLY_CHARACTERS_AND_NUMBERS = "^[a-zA-Z0-9]*$";
     public static final String SPACE = " ";
     private UtilText() {}
-
-
     public static boolean isNull(String value) {
         return isNullObject(value);
     }
