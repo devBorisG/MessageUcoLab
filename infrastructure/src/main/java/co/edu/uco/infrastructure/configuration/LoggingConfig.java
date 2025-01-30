@@ -17,7 +17,6 @@ public class LoggingConfig implements HandlerInterceptor {
         MDC.put("QUERY_STRING", request.getQueryString());
         MDC.put("codeMessage",request.getParameter("codeMessage"));
         MDC.put("application",request.getParameter("application"));
-
         return true;
     }
 
