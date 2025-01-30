@@ -1,0 +1,57 @@
+services:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - observability-network
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - observability-network
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.40.0
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317"  # gRPC
+      - "4318:4318"  # HTTP
+    networks:
+      - observability-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - observability-network
+
+  redis:
+    image: redis:latest
+    container_name: redis-crosswords-db
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--requirepass", "cr0ssw0rds.", "--appendonly", "yes"]
+
+volumes:
+  grafana-data:
+  redis_data:
+    driver: local
+
+networks:
+  observability-network:
+    driver: bridge
