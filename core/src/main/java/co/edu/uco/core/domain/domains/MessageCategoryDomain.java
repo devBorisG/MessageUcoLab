@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class MessageCategoryDomain {
+public final class MessageCategoryDomain {
     private UUID id;
     private String name;
 }

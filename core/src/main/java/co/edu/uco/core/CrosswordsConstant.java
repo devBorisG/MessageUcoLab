@@ -1,6 +1,7 @@
 package co.edu.uco.core;
 
 public final class CrosswordsConstant {
+    private CrosswordsConstant() {}
     public static final String SINGLETON_SCOPE = "singleton";
     public static final String COLLECTION_MONGO_ADAPTER = "airbyte_raw_message";
     public static final String FIELD_MONGO_ADAPTER_ID = "_airbyte_data.id";

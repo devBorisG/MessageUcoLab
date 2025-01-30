@@ -8,7 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageEntityMapper implements EntityMapper<MessageData, MessageDomain, MessageDTO> {
+public final class MessageEntityMapper implements EntityMapper<MessageData, MessageDomain, MessageDTO> {
     private final ModelMapper mapper;
     public MessageEntityMapper(ModelMapper mapper) {
         this.mapper = mapper;
@@ -20,5 +20,5 @@ public class MessageEntityMapper implements EntityMapper<MessageData, MessageDom
     @Override
     public MessageData mapperEntity(MessageDomain domain) { return mapper.map(domain, MessageData.class); }
     @Override
-    public MessageDTO mapperDTO(MessageData entity) { return mapper.map(entity, MessageDTO.class);}
+    public MessageDTO mapperDTO(MessageData entity) { return MessageDTO.create(entity.getCode(), entity.getTitle(), entity.getContent(), entity.getType(), entity.getCategory(), entity.getApplication(), entity.getFunctionality()); }
 }

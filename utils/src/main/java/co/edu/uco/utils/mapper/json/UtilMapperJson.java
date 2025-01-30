@@ -17,17 +17,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UtilMapperJson implements MapperJsonObject {
+import static co.edu.uco.utils.helper.EnumConstants.DATE_FORMAT;
 
+@Service
+public final class UtilMapperJson implements MapperJsonObject {
     private final ObjectMapper mapper = new ObjectMapper();
     public UtilMapperJson() {
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
+        mapper.setDateFormat(new SimpleDateFormat(DATE_FORMAT.getValue()));
         mapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
         mapper.registerModule(new JavaTimeModule());
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
-
     @Override
     public Optional<String> execute(Object object) {
         try {
@@ -36,7 +36,6 @@ public class UtilMapperJson implements MapperJsonObject {
             return Optional.empty();
         }
     }
-
     @Override
     public <T> List<T> execute(String json, TypeReference<List<T>> typeReference) throws JsonProcessingException {
         try {
@@ -45,7 +44,6 @@ public class UtilMapperJson implements MapperJsonObject {
             throw CrossWordsException.build(exception.getMessage());
         }
     }
-
     @Override
     public <T> Optional<T> execute(String json, Class<T> targetClass) {
         try {
@@ -54,7 +52,6 @@ public class UtilMapperJson implements MapperJsonObject {
             return Optional.empty();
         }
     }
-
     @Override
     public Optional<String> executeGson(Object object) {
         try {
