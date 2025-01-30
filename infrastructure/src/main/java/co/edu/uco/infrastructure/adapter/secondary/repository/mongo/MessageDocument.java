@@ -1,5 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo;
 
+import co.edu.uco.utils.helper.UtilObject;
+import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
@@ -8,8 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+import static co.edu.uco.utils.helper.UtilText.trim;
 
-@Setter
 @Getter
 @Document(collection = COLLECTION_MONGO_ADAPTER)
 public final class MessageDocument {
@@ -33,4 +36,44 @@ public final class MessageDocument {
     private String application;
     @Field(FIELD_MONGO_ADAPTER_FUNCTIONALITY)
     private String functionality;
+
+    public void setMongoId(ObjectId mongoId) {
+        this.mongoId = getDefaultIsNullObject(mongoId, new ObjectId());
+    }
+
+    public void setId(String id) {
+        this.id = trim(id);
+    }
+
+    public void setCode(String code) {
+        this.code = trim(code);
+    }
+
+    public void setTitle(String title) {
+        this.title = trim(title);
+    }
+
+    public void setContent(String content) {
+        this.content = trim(content);
+    }
+
+    public void setType(String type) {
+        this.type = trim(type);
+    }
+
+    public void setCategory(String category) {
+        this.category = trim(category);
+    }
+
+    public void setStatus(String status) {
+        this.status = trim(status);
+    }
+
+    public void setApplication(String application) {
+        this.application = trim(application);
+    }
+
+    public void setFunctionality(String functionality) {
+        this.functionality = trim(functionality);
+    }
 }

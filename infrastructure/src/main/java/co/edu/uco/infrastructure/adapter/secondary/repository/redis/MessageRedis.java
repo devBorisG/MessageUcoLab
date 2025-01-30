@@ -2,14 +2,15 @@ package co.edu.uco.infrastructure.adapter.secondary.repository.redis;
 
 import jakarta.persistence.Id;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
+
 @Getter
-@Setter
 @RedisHash("Message")
 public final class MessageRedis {
     @Id
@@ -24,4 +25,40 @@ public final class MessageRedis {
     @Indexed
     private String application;
     private String functionality;
+
+    public void setId(UUID id) {
+        this.id =  getDefaultUUID(id);
+    }
+
+    public void setCode(String code) {
+        this.code = trim(code);
+    }
+
+    public void setTitle(String title) {
+        this.title = trim(title);
+    }
+
+    public void setContent(String content) {
+        this.content = trim(content);
+    }
+
+    public void setType(String type) {
+        this.type = trim(type);
+    }
+
+    public void setCategory(String category) {
+        this.category = trim(category);
+    }
+
+    public void setStatus(String status) {
+        this.status = trim(status);
+    }
+
+    public void setApplication(String application) {
+        this.application = trim(application);
+    }
+
+    public void setFunctionality(String functionality) {
+        this.functionality = trim(functionality);
+    }
 }
