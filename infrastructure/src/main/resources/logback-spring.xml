@@ -35,6 +35,18 @@
         </encoder>
     </appender>
 
+    <!-- Loki Appender -->
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <url>http://localhost:3100/loki/api/v1/push</url>
+        <batchSize>20</batchSize> <!-- Incrementé para manejar más logs por batch -->
+        <batchTimeoutMs>1000</batchTimeoutMs> <!-- Reduje el timeout para envíos más rápidos -->
+        <format>json</format>
+        <staticLabels>
+            <label name="app" value="spring-boot-app" />
+            <label name="env" value="dev" />
+        </staticLabels>
+    </appender>
+
     <!-- Logger for MongoDB Driver -->
     <logger name="org.mongodb.driver" level="ERROR" additivity="false">
         <appender-ref ref="CONSOLE" />
@@ -51,5 +63,6 @@
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ROLLING"/>
+        <appender-ref ref="LOKI"/>
     </root>
 </configuration>
