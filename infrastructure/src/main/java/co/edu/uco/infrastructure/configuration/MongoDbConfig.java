@@ -3,6 +3,8 @@ package co.edu.uco.infrastructure.configuration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.PACKAGE_REPOSITORY_ADAPTER;
+
 @Configuration
-@EnableMongoRepositories(basePackages = {"co.edu.uco.infrastructure.adapter.secondary.repository"})
+@EnableMongoRepositories(basePackages = {PACKAGE_REPOSITORY_ADAPTER})
 public class MongoDbConfig {}

@@ -6,7 +6,7 @@ import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import static co.edu.uco.core.CrosswordsConstant.*;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
 @Component
 public final class LoggingConfig implements HandlerInterceptor {

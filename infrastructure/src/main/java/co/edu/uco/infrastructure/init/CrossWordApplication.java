@@ -5,8 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.PACKAGE_BASE;
+
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-@ComponentScan(basePackages = {"co.edu.uco"})
+@ComponentScan(basePackages = {PACKAGE_BASE})
 public class CrossWordApplication {
     public static void main(String[] args) {
         SpringApplication.run(CrossWordApplication.class, args);

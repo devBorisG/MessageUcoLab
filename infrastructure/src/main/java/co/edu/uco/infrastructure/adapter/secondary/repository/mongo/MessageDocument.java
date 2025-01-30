@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import static co.edu.uco.core.CrosswordsConstant.*;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
 @Setter
 @Getter
