@@ -12,15 +12,18 @@ import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationP
 import co.edu.uco.core.application.mapper.entity.EntityMapper;
 import co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Slf4j
 public final class ListMessageByApplicationUseCase implements HandlingListMessageByApplicationPort {
     private final MessageCatalogStrategy messageCatalogStrategy;
     private final EntityMapper<MessageData,MessageDomain,MessageDTO> entityMapper;
     private final ListMessageByApplicationPresenter presenter;
+
     public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper, ListMessageByApplicationPresenter presenter) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
@@ -34,7 +37,9 @@ public final class ListMessageByApplicationUseCase implements HandlingListMessag
             Response<SimplePage<MessageDTO>> response = new Response<>(List.of(SimplePage.of(messages, page.getCurrentPage(), page.getPageSize(),page.getTotalItems(), page.getTotalPages())));
             presenter.present(response);
         }catch (Exception exception){
-            throw BusinessException.buildUserException(String.format(DetailMessageEnum.FUN_011.getContent(), application));
+            String errorMessage = String.format(DetailMessageEnum.FUN_011.getContent(), application);
+            log.error(errorMessage);
+            throw BusinessException.buildUserException(errorMessage);
         }
     }
 }

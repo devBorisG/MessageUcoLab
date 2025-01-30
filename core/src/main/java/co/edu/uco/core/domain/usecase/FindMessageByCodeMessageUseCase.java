@@ -21,6 +21,7 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
     private final MessageCatalogStrategy messageCatalogStrategy;
     private final EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper;
     private final FindMessageByCodeMessagePresenter presenter;
+
     public FindMessageByCodeMessageUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper, FindMessageByCodeMessagePresenter presenter) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
@@ -34,8 +35,9 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
             Response<MessageDTO> response = new Response<>(Collections.singletonList(messageDTO));
             presenter.present(response);
         } catch (Exception exception) {
-            log.error( exception.getMessage());
-            throw BusinessException.buildUserException(String.format(DetailMessageEnum.FUN_012.getContent(), codeMessage, application));
+            String errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), codeMessage, application);
+            log.error(errorMessage);
+            throw BusinessException.buildUserException(errorMessage);
         }
     }
 }
