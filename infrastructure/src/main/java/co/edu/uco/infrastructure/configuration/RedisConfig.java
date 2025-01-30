@@ -20,11 +20,12 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.PACKAGE_REPOSITORY_ADAPTER;
+
 @Slf4j
 @Configuration
-@EnableRedisRepositories(basePackages = {"co.edu.uco.infrastructure.adapter.secondary.repository"})
+@EnableRedisRepositories(basePackages = {PACKAGE_REPOSITORY_ADAPTER})
 public class RedisConfig {
-
     @Bean
     public RedisTemplate<String, MessageRedis> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, MessageRedis> template = new RedisTemplate<>();
@@ -42,7 +43,7 @@ public class RedisConfig {
             );
             Jackson2JsonRedisSerializer<MessageRedis> serializer = new Jackson2JsonRedisSerializer<>(objectMapper, MessageRedis.class);
             template.setKeySerializer(new StringRedisSerializer());
-            template.setValueSerializer(serializer);  // Para valores (MessageRedis)
+            template.setValueSerializer(serializer);
             template.afterPropertiesSet();
         } catch (RedisConnectionFailureException ex) {
             log.error(MessageKeyEnum.FUN_013.getKey(), ex);
