@@ -1,13 +1,17 @@
 package co.edu.uco.core.domain.data;
 
+import co.edu.uco.utils.helper.UtilText;
+import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
+
 @Getter
-@Setter
 @ToString
 public final class MessageData {
     private UUID id;
@@ -19,4 +23,40 @@ public final class MessageData {
     private String status;
     private String application;
     private String functionality;
+
+    public void setId(UUID id) {
+        this.id = getDefaultUUID(id);
+    }
+
+    public void setCode(String code) {
+        this.code = trim(code);
+    }
+
+    public void setTitle(String title) {
+        this.title = trim(title);
+    }
+
+    public void setContent(String content) {
+        this.content = trim(content);
+    }
+
+    public void setType(String type) {
+        this.type = trim(type);
+    }
+
+    public void setCategory(String category) {
+        this.category = trim(category);
+    }
+
+    public void setStatus(String status) {
+        this.status = trim(status);
+    }
+
+    public void setApplication(String application) {
+        this.application = trim(application);
+    }
+
+    public void setFunctionality(String functionality) {
+        this.functionality = trim(functionality);
+    }
 }
