@@ -33,7 +33,7 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
             MessageData messageData = messageCatalogStrategy.getMessage(codeMessage, application);
             MessageDTO messageDTO = entityMapper.mapperDTO(messageData);
             Response<MessageDTO> response = new Response<>(Collections.singletonList(messageDTO));
-            log.info("Message with code {} in application {} found {}", codeMessage, application, messageDTO);
+            log.info(DetailMessageEnum.TCH_014.getContent(), codeMessage, application, messageDTO);
             presenter.present(response);
         } catch (Exception exception) {
             String errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), codeMessage, application);

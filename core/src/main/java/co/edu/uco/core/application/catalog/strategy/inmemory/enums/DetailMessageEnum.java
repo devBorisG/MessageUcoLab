@@ -18,6 +18,7 @@ public enum DetailMessageEnum {
     TCH_012(MessageKeyEnum.TCH_012, "Title is required", "Title is required", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_013(MessageKeyEnum.TCH_013, "Type is required", "Type is required", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_014(MessageKeyEnum.TCH_014, "Category is required", "Category is required", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_015(MessageKeyEnum.TCH_015, "Message found in application", "Message with code {} in application {} found {}", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.INFORMATION),
     FUN_001(MessageKeyEnum.FUN_001, "Invalid message code", "The message code is invalid or not within allowed values", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_002(MessageKeyEnum.FUN_002, "Title is empty or null", "The message must have a valid title", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_003(MessageKeyEnum.FUN_003, "Content is empty or null", "The message must include a valid description", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -40,13 +41,11 @@ public enum DetailMessageEnum {
     FUN_020(MessageKeyEnum.FUN_020, "Message validators", "The size of the title cannot be smaller than 10", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_021(MessageKeyEnum.FUN_021, "Message validators", "The size of the title cannot be larger than 50", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_022(MessageKeyEnum.FUN_022, "Message validators", "The title cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
-
     private MessageKeyEnum code;
     private String title;
     private String content;
     private MessageTypeEnum type;
     private MessageCategoryEnum category;
-
     DetailMessageEnum(final MessageKeyEnum code, final String title, final String content, final MessageTypeEnum type, final MessageCategoryEnum category) {
         this.code = code;
         this.title = title;
@@ -54,47 +53,36 @@ public enum DetailMessageEnum {
         this.type = type;
         this.category = category;
     }
-
     public MessageKeyEnum getCode() {
         return code;
     }
-
     public void setCode(final MessageKeyEnum code) {
         this.code = code;
     }
-
     public String getTitle() {
         return title;
     }
-
     private void setTitle(final String title) {
         this.title = title;
     }
-
     public MessageTypeEnum getType() {
         return type;
     }
-
     private void setType(final MessageTypeEnum type) {
         this.type = type;
     }
-
     public String getContent() {
         return content;
     }
-
     private void setContent(final String content) {
         this.content = content;
     }
-
     public MessageCategoryEnum getCategory() {
         return category;
     }
-
     private void setCategory(final MessageCategoryEnum category) {
         this.category = category;
     }
-
     public MessageModel getMessage() {
         return new MessageModel(code, content, title, type, category);
     }
