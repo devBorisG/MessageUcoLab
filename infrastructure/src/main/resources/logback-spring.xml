@@ -46,24 +46,37 @@
 
     <!-- Loki Appender (usando loki4j, en JSON) -->
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
-        <url>http://localhost:3100/loki/api/v1/push</url>
-        <batchSize>20</batchSize>
-        <batchTimeoutMs>1000</batchTimeoutMs>
-        <format>json</format>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>
-                {
-                "timestamp": "%date{yyyy-MM-dd'T'HH:mm:ss.SSS}",
-                "level": "%level",
-                "thread": "%thread",
-                "logger": "%logger",
-                "message": "%message",
-                "mdc": "%mdc",
-                "exception": "%ex"
-                }
-            </pattern>
-        </encoder>
+
+        <!-- Configuración HTTP (URL de Loki) -->
+        <http>
+            <url>http://localhost:3100/loki/api/v1/push</url>
+        </http>
+
+        <!-- Formato (labels y mensaje) -->
+        <format>
+            <label>
+                <!-- Etiquetas "estáticas" o con variables -->
+                <pattern>
+                    app = MessageUcoLab,
+                    environment = dev
+                </pattern>
+                <!-- structuredMetadataPattern (Loki v2.9.0+): convierte campos en "metadata" -->
+                <structuredMetadataPattern>
+                    level = %level,
+                    thread = %thread,
+                    logger = %logger,
+                    mdc = %mdc
+                </structuredMetadataPattern>
+            </label>
+
+            <!-- Mensaje que verás en el panel de logs -->
+            <message>
+                <pattern>%date{HH:mm:ss.SSS} %-5level [%thread] %logger{36} [mdc=%mdc] - %msg %ex</pattern>
+            </message>
+        </format>
+
     </appender>
+
 
     <!-- Logger para MongoDB Driver (solo ERROR en consola y archivo, Loki también si quieres) -->
     <logger name="org.mongodb.driver" level="ERROR" additivity="false">
