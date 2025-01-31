@@ -6,12 +6,13 @@ import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.util.UUID;
-
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.REDIS_HASH;
+
 @Getter
-@RedisHash("Message")
+@RedisHash(REDIS_HASH)
 public final class MessageRedis {
     @Id
     private UUID id;

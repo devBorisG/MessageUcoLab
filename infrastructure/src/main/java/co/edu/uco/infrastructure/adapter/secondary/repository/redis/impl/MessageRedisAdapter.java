@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component("MessageRedisAdapter")
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.CACHE_REDIS_ADAPTER;
+
+@Component(CACHE_REDIS_ADAPTER)
 public final class MessageRedisAdapter implements CacheMessageRepository {
     private final RedisRepositoryAdapter repository;
     private final DataMapper<MessageData, MessageRedis> mapper;

@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component("MessageMongoAdapter")
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.DATABASE_MONGO_ADAPTER;
+
+@Component(DATABASE_MONGO_ADAPTER)
 public final class MessageMongoAdapter implements DataBaseMessageRepository {
     private final MongoRepositoryAdapter repository;
     private final DataMapper<MessageData, MessageDocument> mapper;
