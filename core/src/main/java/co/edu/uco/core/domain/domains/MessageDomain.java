@@ -1,12 +1,16 @@
 package co.edu.uco.core.domain.domains;
 
+import co.edu.uco.utils.helper.UtilObject;
+import co.edu.uco.utils.helper.UtilText;
+import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+import static co.edu.uco.utils.helper.UtilText.trim;
+
 @Getter
-@Setter
 public final class MessageDomain {
     private UUID id;
     private String code;
@@ -17,4 +21,41 @@ public final class MessageDomain {
     private MessageStatusDomain status;
     private String application;
     private FunctionalityDomain functionality;
+
+    public void setId(UUID id) {
+        this.id = UtilUUID.getDefaultUUID(id);
+    }
+
+    public void setCode(String code) {
+        this.code = trim(code);
+    }
+
+    public void setTitle(String title) {
+        this.title = trim(title);
+    }
+
+    public void setContent(String content) {
+        this.content = trim(content);
+    }
+
+    public void setType(MessageTypeDomain type) {
+        this.type = getDefaultIsNullObject(type, MessageTypeDomain.create(type.getId(), type.getName()));
+    }
+
+    public void setCategory(MessageCategoryDomain category) {
+        this.category = getDefaultIsNullObject(category, MessageCategoryDomain.create(category.getId(), category.getName()));
+    }
+
+    public void setStatus(MessageStatusDomain status) {
+        this.status = getDefaultIsNullObject(status, MessageStatusDomain.create(status.getId(), status.getName()));
+    }
+
+    public void setApplication(String application) {
+        this.application = trim(application);
+    }
+
+    public void setFunctionality(FunctionalityDomain functionality) {
+        this.functionality = getDefaultIsNullObject(functionality, FunctionalityDomain.create(functionality.getId(),
+                functionality.getName(), functionality.getStartDate(), functionality.getEndDate()));
+    }
 }
