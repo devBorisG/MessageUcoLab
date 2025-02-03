@@ -6,22 +6,52 @@ import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
+
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
 @Component
 public final class LoggingConfig implements HandlerInterceptor {
+
+    private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter
+            .ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX")
+            .withZone(ZoneOffset.UTC);
+
     @Override
-    public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler ){
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        String correlationId = request.getHeader(CORRELATION_ID);
+        if (correlationId == null || correlationId.isEmpty()) {
+            correlationId = UUID.randomUUID().toString();
+        }
+
+        String timestamp = TIMESTAMP_FORMAT.format(Instant.now());
+        String threadName = Thread.currentThread().getName();
+        String className = handler.getClass().getSimpleName();
+
+        MDC.put(CORRELATION_ID, correlationId);
         MDC.put(LOGGING_REQUEST_URI, request.getRequestURI());
         MDC.put(LOGGING_HTTP_METHOD, request.getMethod());
         MDC.put(LOGGING_SESSION_ID, request.getSession().getId());
         MDC.put(LOGGING_QUERY_STRING, request.getQueryString());
         MDC.put(LOGGING_PARAMETER_CODE_MESSAGE,request.getParameter(LOGGING_PARAMETER_CODE_MESSAGE));
         MDC.put(LOGGING_PARAMETER_APPLICATION,request.getParameter(LOGGING_PARAMETER_APPLICATION));
+
+
+        response.setHeader(CORRELATION_ID, correlationId);
+        response.setHeader(LOGGING_TIMESTAMP, timestamp);
+        response.setHeader(LOGGING_THREAD, threadName);
+        response.setHeader(LOGGING_APP_NAME, LOGGING_PARAMETER_APPLICATION_NAME );
+        response.setHeader(LOGGING_TRACE_ID, correlationId);
+
+
         return true;
     }
+
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response , Object handler , Exception exception){
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) {
         MDC.clear();
     }
 }

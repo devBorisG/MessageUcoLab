@@ -3,6 +3,7 @@ package co.edu.uco.infrastructure.adapter.primary.controller;
 import java.util.Optional;
 import java.util.UUID;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.infrastructure.adapter.primary.response.ResponseError;
 import co.edu.uco.utils.exception.CrossWordsException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +23,11 @@ public abstract class AbstractRestController {
                 .filter(msg -> !msg.isEmpty())
                 .orElseGet(() -> {
                     log.error("Error de validación, Correlation ID: {}", correlationId, ex);
-                    return "Ocurrió un error inesperado.";
+                    return DetailMessageEnum.FUN_012.getContent();
                 });
         ResponseError responseError = new ResponseError(message, correlationId);
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
+                .status(HttpStatus.NOT_FOUND)
                 .body(responseError);
     }
 
@@ -34,9 +35,9 @@ public abstract class AbstractRestController {
     public ResponseEntity<ResponseError> handleGeneralException(Exception ex){
         String correlationId = UUID.randomUUID().toString();
         log.error("Error de validación, Correlation ID: {}", correlationId, ex);
-        ResponseError responseError = new ResponseError("Ocurrió un error inesperado.", correlationId);
+        ResponseError responseError = new ResponseError(DetailMessageEnum.FUN_001.getContent(), correlationId);
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(responseError);
     }
 }
