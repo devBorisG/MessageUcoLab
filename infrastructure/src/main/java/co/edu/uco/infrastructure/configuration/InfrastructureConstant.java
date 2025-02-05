@@ -20,7 +20,6 @@ public final class InfrastructureConstant {
     public static final String LOGGING_SESSION_ID = "SESSION_ID";
     public static final String LOGGING_QUERY_STRING = "QUERY_STRING";
     public static final String LOGGING_PARAMETER_APPLICATION_NAME = "MessageUcoLab";
-
     public static final String LOGGING_PARAMETER_CODE_MESSAGE = "codeMessage";
     public static final String LOGGING_PARAMETER_APPLICATION = "application";
     public static final String PACKAGE_REPOSITORY_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository";
@@ -29,8 +28,5 @@ public final class InfrastructureConstant {
     public static final String LOGGING_THREAD = "THREAD";
     public static final String LOGGING_APP_NAME = "APP";
     public static final String LOGGING_TRACE_ID = "TRACEID";
-    public static final String LOGGING_CLASS_NAME = "CLASS";
-    public static final String LOGGING_HTTP_STATUS = "HTTP_STATUS";
-    public static final String LOGGING_ERROR_MESSAGE = "ERROR_MESSAGE";
-
+    public static final String PATTERN_TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
 }

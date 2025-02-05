@@ -1,9 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo;
 
-import co.edu.uco.utils.helper.UtilObject;
-import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;
-import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
