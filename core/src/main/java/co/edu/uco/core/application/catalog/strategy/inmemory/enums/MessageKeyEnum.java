@@ -23,6 +23,7 @@ public enum MessageKeyEnum {
     TCH_013("TCH_013", MessageSourceEnum.CRITICAL),
     TCH_014("TCH_014", MessageSourceEnum.CRITICAL),
     TCH_015("TCH_015", MessageSourceEnum.CRITICAL),
+    TCH_016("TCH_016", MessageSourceEnum.CRITICAL),
     FUN_001("FUN_001", MessageSourceEnum.CRITICAL),
     FUN_002("FUN_002", MessageSourceEnum.CRITICAL),
     FUN_003("FUN_003", MessageSourceEnum.CRITICAL),

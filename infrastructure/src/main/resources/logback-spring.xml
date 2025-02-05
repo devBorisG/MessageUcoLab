@@ -6,6 +6,7 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
                 {
+                "correlationId": "%X{Correlation-ID}",
                 "timestamp": "%date{yyyy-MM-dd'T'HH:mm:ss.SSS}",
                 "level": "%level",
                 "thread": "%thread",
@@ -20,6 +21,11 @@
             <level>INFO</level>
         </filter>
     </appender>
+<!--    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>TS=%X{TS} [%X{THREAD}] APP=%X{APP} LEVEL=%-5level CLASS=%X{CLASS} TRACEID=%X{TRACEID} | %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
 
     <!-- Rolling File Appender (logs locales en JSON) -->
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -32,6 +38,7 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
                 {
+                "correlationId": "%X{Correlation-ID}",
                 "timestamp": "%date{yyyy-MM-dd'T'HH:mm:ss.SSS}",
                 "level": "%level",
                 "thread": "%thread",
@@ -71,7 +78,7 @@
 
             <!-- Mensaje que verás en el panel de logs -->
             <message>
-                <pattern>%date{HH:mm:ss.SSS} %-5level [%thread] %logger{36} [mdc=%mdc] - %msg %ex</pattern>
+                <pattern>TS=%X{TS} [%X{THREAD}] APP=%X{APP} LEVEL=%-5level CLASS=%X{CLASS} TRACEID=%X{TRACEID} | %msg%n</pattern>
             </message>
         </format>
 
