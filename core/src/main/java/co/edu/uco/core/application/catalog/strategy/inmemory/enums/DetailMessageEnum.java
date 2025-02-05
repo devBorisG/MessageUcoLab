@@ -19,6 +19,7 @@ public enum DetailMessageEnum {
     TCH_013(MessageKeyEnum.TCH_013, "Type is required", "Type is required", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_014(MessageKeyEnum.TCH_014, "Category is required", "Category is required", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_015(MessageKeyEnum.TCH_015, "Message found in application", "Message with code {} in application {} found {}", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.INFORMATION),
+    TCH_016(MessageKeyEnum.TCH_016, "Validation Error", "Validation error with correlation id {}", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     FUN_001(MessageKeyEnum.FUN_001, "Invalid message code", "The message code is invalid or not within allowed values", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_002(MessageKeyEnum.FUN_002, "Title is empty or null", "The message must have a valid title", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_003(MessageKeyEnum.FUN_003, "Content is empty or null", "The message must include a valid description", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -56,9 +57,7 @@ public enum DetailMessageEnum {
     public MessageKeyEnum getCode() {
         return code;
     }
-    public void setCode(final MessageKeyEnum code) {
-        this.code = code;
-    }
+    public void setCode(final MessageKeyEnum code) { this.code = code;}
     public String getTitle() {
         return title;
     }

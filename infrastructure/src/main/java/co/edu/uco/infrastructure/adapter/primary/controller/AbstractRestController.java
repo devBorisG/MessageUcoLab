@@ -18,14 +18,14 @@ public abstract class AbstractRestController {
 
     @ExceptionHandler(CrossWordsException.class)
     public ResponseEntity<ResponseError> handleCrossWordsException(CrossWordsException ex) {
-        String correlationId = UUID.randomUUID().toString();
-        String message = Optional.ofNullable(ex.getUserMessage())
+        var correlationId = UUID.randomUUID().toString();
+        var message = Optional.ofNullable(ex.getUserMessage())
                 .filter(msg -> !msg.isEmpty())
                 .orElseGet(() -> {
-                    log.error("Error de validación, Correlation ID: {}", correlationId, ex);
+                    log.error(DetailMessageEnum.TCH_016.getContent(), correlationId, ex);
                     return DetailMessageEnum.FUN_012.getContent();
                 });
-        ResponseError responseError = new ResponseError(message, correlationId);
+        var responseError = new ResponseError(message, correlationId);
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(responseError);
@@ -33,9 +33,9 @@ public abstract class AbstractRestController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseError> handleGeneralException(Exception ex){
-        String correlationId = UUID.randomUUID().toString();
-        log.error("Error de validación, Correlation ID: {}", correlationId, ex);
-        ResponseError responseError = new ResponseError(DetailMessageEnum.FUN_001.getContent(), correlationId);
+        var correlationId = UUID.randomUUID().toString();
+        log.error(DetailMessageEnum.TCH_016.getContent(), correlationId, ex);
+        var responseError = new ResponseError(DetailMessageEnum.FUN_001.getContent(), correlationId);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(responseError);
