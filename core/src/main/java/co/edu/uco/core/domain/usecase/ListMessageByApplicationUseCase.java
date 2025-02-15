@@ -34,8 +34,7 @@ public final class ListMessageByApplicationUseCase implements HandlingListMessag
         try {
             var page = messageCatalogStrategy.getMessages(application, pageRequest);
             var messages = page.getData().stream().map(entityMapper::mapperDTO).toList();
-            Response<SimplePage<MessageDTO>> response = new Response<>(List.of(SimplePage.of(messages, page.getCurrentPage(), page.getPageSize(),page.getTotalItems(), page.getTotalPages())));
-            presenter.present(response);
+//            presenter.present(response);
         }catch (Exception exception){
             String errorMessage = String.format(DetailMessageEnum.FUN_011.getContent(), application);
             log.error(errorMessage);
