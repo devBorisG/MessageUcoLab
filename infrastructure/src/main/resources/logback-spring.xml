@@ -6,14 +6,12 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
                 {
-                "correlationId": "%X{Correlation-ID}",
+                "correlationId": "%X{X-Correlation-ID}",
                 "timestamp": "%date{yyyy-MM-dd'T'HH:mm:ss.SSS}",
                 "level": "%level",
                 "thread": "%thread",
                 "logger": "%logger",
-                "message": "%message",
-                "mdc": "%mdc",
-                "exception": "%ex"
+                "message": "%message"
                 }
             </pattern>
         </encoder>
@@ -38,14 +36,12 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
                 {
-                "correlationId": "%X{Correlation-ID}",
+                "correlationId": "%X{X-Correlation-ID}",
                 "timestamp": "%date{yyyy-MM-dd'T'HH:mm:ss.SSS}",
                 "level": "%level",
                 "thread": "%thread",
                 "logger": "%logger",
-                "message": "%message",
-                "mdc": "%mdc",
-                "exception": "%ex"
+                "message": "%message"
                 }
             </pattern>
         </encoder>
@@ -54,31 +50,33 @@
     <!-- Loki Appender (usando loki4j, en JSON) -->
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
 
-        <!-- Configuración HTTP (URL de Loki) -->
         <http>
             <url>http://localhost:3100/loki/api/v1/push</url>
         </http>
 
-        <!-- Formato (labels y mensaje) -->
         <format>
             <label>
-                <!-- Etiquetas "estáticas" o con variables -->
                 <pattern>
                     app = MessageUcoLab,
-                    environment = dev
+                    environment = dev,
+                    sessionId = %X{JSESSIONID},
+                    httpMethod    = %X{HTTP_METHOD},
+                    requestUri    = %X{REQUEST_URI},
+                    correlationId = %X{X-Correlation-ID}
                 </pattern>
-                <!-- structuredMetadataPattern (Loki v2.9.0+): convierte campos en "metadata" -->
                 <structuredMetadataPattern>
                     level = %level,
                     thread = %thread,
                     logger = %logger,
-                    mdc = %mdc
+                    queryString   = %X{QUERY_STRING},
+                    codeMessage   = %X{codeMessage},
+                    application   = %X{application},
+                    timestamp     = %date{yyyy-MM-dd'T'HH:mm:ss.SSS}
                 </structuredMetadataPattern>
             </label>
 
-            <!-- Mensaje que verás en el panel de logs -->
             <message>
-                <pattern>TS=%X{TS} [%X{THREAD}] APP=%X{APP} LEVEL=%-5level CLASS=%X{CLASS} TRACEID=%X{TRACEID} | %msg%n</pattern>
+                <pattern>%msg</pattern>
             </message>
         </format>
 

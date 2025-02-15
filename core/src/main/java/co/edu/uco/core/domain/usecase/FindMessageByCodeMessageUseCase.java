@@ -6,8 +6,7 @@ import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.application.mapper.entity.EntityMapper;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
-import co.edu.uco.core.domain.port.out.Response;
-import co.edu.uco.core.domain.port.out.presenter.message.FindMessageByCodeMessagePresenter;
+import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
 import co.edu.uco.utils.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
@@ -20,21 +19,16 @@ import java.util.Collections;
 public final class FindMessageByCodeMessageUseCase implements HandlingFindMessageByCodeMessagePort {
     private final MessageCatalogStrategy messageCatalogStrategy;
     private final EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper;
-    private final FindMessageByCodeMessagePresenter presenter;
-
-    public FindMessageByCodeMessageUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper, FindMessageByCodeMessagePresenter presenter) {
+    public FindMessageByCodeMessageUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
-        this.presenter = presenter;
     }
     @Override
-    public void execute(String codeMessage, String application) {
+    public void execute(String codeMessage, String application, PresenterPort<MessageDTO> presenterPort) {
         try {
             MessageData messageData = messageCatalogStrategy.getMessage(codeMessage, application);
             MessageDTO messageDTO = entityMapper.mapperDTO(messageData);
-            Response<MessageDTO> response = new Response<>(Collections.singletonList(messageDTO));
-            log.info(DetailMessageEnum.TCH_015.getContent(), codeMessage, application, messageDTO);
-            presenter.present(response);
+            presenterPort.presentRestSuccess(Collections.singletonList(messageDTO));
         } catch (Exception exception) {
             String errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), codeMessage, application);
             log.error(errorMessage);

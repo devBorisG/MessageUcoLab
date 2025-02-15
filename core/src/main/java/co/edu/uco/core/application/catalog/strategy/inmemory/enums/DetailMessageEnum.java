@@ -41,7 +41,9 @@ public enum DetailMessageEnum {
     FUN_019(MessageKeyEnum.FUN_019, "Message validators", "The size of the content cannot be larger than 100", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_020(MessageKeyEnum.FUN_020, "Message validators", "The size of the title cannot be smaller than 10", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_021(MessageKeyEnum.FUN_021, "Message validators", "The size of the title cannot be larger than 50", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_022(MessageKeyEnum.FUN_022, "Message validators", "The title cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
+    FUN_022(MessageKeyEnum.FUN_022, "Message validators", "The title cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_023(MessageKeyEnum.FUN_023, "Unexpected Error", "An unexpected error has occurred", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_024(MessageKeyEnum.FUN_024, "information consulted", "%s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.CONFIRMATION);
     private MessageKeyEnum code;
     private String title;
     private String content;
