@@ -5,7 +5,6 @@ import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
-import co.edu.uco.core.domain.port.out.presenter.message.ListMessageByApplicationPresenter;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationPort;
@@ -22,7 +21,7 @@ import java.util.List;
 public final class ListMessageByApplicationUseCase implements HandlingListMessageByApplicationPort {
     private final MessageCatalogStrategy messageCatalogStrategy;
     private final EntityMapper<MessageData,MessageDomain,MessageDTO> entityMapper;
-    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper, ListMessageByApplicationPresenter presenter) {
+    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
     }
