@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${crosswords.api.path.message.findByCode}")
-public final class FindMessageByCodeMessageControllerImpl implements FindMessageByCodeMessage {
+final class FindMessageByCodeMessageControllerImpl implements FindMessageByCodeMessage {
     private final HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort;
-    RestPresenterImpl<MessageDTO> restPresenter = new RestPresenterImpl<>();
-
-    public FindMessageByCodeMessageControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort) {
+    private final RestPresenterImpl<MessageDTO> restPresenter;
+    public FindMessageByCodeMessageControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort, RestPresenterImpl<MessageDTO> restPresenter) {
         this.handlingFindMessageByCodeMessagePort = handlingFindMessageByCodeMessagePort;
+        this.restPresenter = restPresenter;
     }
     @Override
     @GetMapping()

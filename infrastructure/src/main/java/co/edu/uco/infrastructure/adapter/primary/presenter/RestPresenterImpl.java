@@ -2,7 +2,7 @@ package co.edu.uco.infrastructure.adapter.primary.presenter;
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.Response;
-import co.edu.uco.core.domain.port.out.presenter.Presenter2;
+import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.utils.exception.CrossWordsException;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -19,15 +19,13 @@ import java.util.Optional;
 @Slf4j
 @RestControllerAdvice
 @Getter
-public class RestPresenterImpl<T> implements Presenter2<T> {
-
+public final class RestPresenterImpl<T> implements PresenterPort<T> {
     private ResponseEntity<Response<T>> response;
-
     @Override
     public void presentRestSuccess(List<T> dto) {
         response = ResponseEntity.ok()
                 .body(new Response<>(dto, Collections.emptyList()));
-        log.info(response.getBody().data().toString());
+        log.info(Objects.requireNonNull(response.getBody()).data().toString());
     }
     @ExceptionHandler(CrossWordsException.class)
     public ResponseEntity<Response<T>> presentCrossWordsException(CrossWordsException ex) {
@@ -43,7 +41,6 @@ public class RestPresenterImpl<T> implements Presenter2<T> {
                 .status(HttpStatus.NOT_FOUND)
                 .body(responseError);
     }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response<T>> handleGeneralException(Exception ex){
         log.error(DetailMessageEnum.TCH_016.getContent(), ex);
