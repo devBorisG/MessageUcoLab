@@ -1,4 +1,4 @@
-package co.edu.uco.infrastructure.adapter.primary.presenter;
+package co.edu.uco.infrastructure.adapter.secondary.presenter.rest;
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.Response;

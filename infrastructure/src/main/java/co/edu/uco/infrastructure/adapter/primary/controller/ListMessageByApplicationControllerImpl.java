@@ -6,7 +6,7 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationPort;
 import co.edu.uco.infrastructure.adapter.primary.ListMessageByApplicationController;
-import co.edu.uco.infrastructure.adapter.primary.presenter.RestPresenterImpl;
+import co.edu.uco.infrastructure.adapter.secondary.presenter.rest.RestPresenterImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

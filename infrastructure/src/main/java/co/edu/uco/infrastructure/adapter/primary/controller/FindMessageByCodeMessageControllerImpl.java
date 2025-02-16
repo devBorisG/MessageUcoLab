@@ -4,7 +4,7 @@ import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
 import co.edu.uco.infrastructure.adapter.primary.FindMessageByCodeMessage;
-import co.edu.uco.infrastructure.adapter.primary.presenter.RestPresenterImpl;
+import co.edu.uco.infrastructure.adapter.secondary.presenter.rest.RestPresenterImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
