@@ -11,6 +11,7 @@ import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationP
 import co.edu.uco.core.application.mapper.entity.EntityMapper;
 import co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.exception.BusinessException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -26,12 +27,12 @@ public final class ListMessageByApplicationUseCase implements HandlingListMessag
         this.entityMapper = entityMapper;
     }
     @Override
-    public void execute(String application, SimplePageRequest pageRequest, PresenterPort<SimplePage<MessageDTO>> presenter) {
+    public void execute(String application, SimplePageRequest pageRequest, PresenterPort<SimplePage<MessageDTO>> presenter, HttpServletResponse response) {
         try {
             var page = messageCatalogStrategy.getMessages(application, pageRequest);
             var messages = page.getData().stream().map(entityMapper::mapperDTO).toList();
-            SimplePage<MessageDTO> response = SimplePage.of(messages, page.getCurrentPage(), page.getPageSize(),page.getTotalItems(), page.getTotalPages());
-            presenter.presentRestSuccess(List.of(response));
+            SimplePage<MessageDTO> listMessageDTO = SimplePage.of(messages, page.getCurrentPage(), page.getPageSize(),page.getTotalItems(), page.getTotalPages());
+            presenter.presentRestSuccess(List.of(listMessageDTO), response);
         }catch (Exception exception){
             String errorMessage = String.format(DetailMessageEnum.FUN_011.getContent(), application);
             log.error(errorMessage);

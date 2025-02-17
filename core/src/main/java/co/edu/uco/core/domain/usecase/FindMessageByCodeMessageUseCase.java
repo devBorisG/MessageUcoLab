@@ -9,6 +9,7 @@ import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
 import co.edu.uco.utils.exception.BusinessException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,11 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
         this.entityMapper = entityMapper;
     }
     @Override
-    public void execute(String codeMessage, String application, PresenterPort<MessageDTO> presenterPort) {
+    public void execute(String codeMessage, String application, PresenterPort<MessageDTO> presenterPort, HttpServletResponse response) {
         try {
             MessageData messageData = messageCatalogStrategy.getMessage(codeMessage, application);
             MessageDTO messageDTO = entityMapper.mapperDTO(messageData);
-            presenterPort.presentRestSuccess(Collections.singletonList(messageDTO));
+            presenterPort.presentRestSuccess(Collections.singletonList(messageDTO), response);
         } catch (Exception exception) {
             String errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), codeMessage, application);
             log.error(errorMessage);

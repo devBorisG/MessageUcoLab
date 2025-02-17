@@ -1,11 +1,10 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
 import co.edu.uco.infrastructure.adapter.primary.FindMessageByCodeMessage;
 import co.edu.uco.infrastructure.adapter.secondary.presenter.rest.RestPresenterImpl;
-import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,8 +18,7 @@ final class FindMessageByCodeMessageControllerImpl implements FindMessageByCodeM
     }
     @Override
     @GetMapping()
-    public ResponseEntity<Response<MessageDTO>> execute(@RequestParam String codeMessage, @RequestParam String application) {
-        handlingFindMessageByCodeMessagePort.execute(codeMessage, application, restPresenter);
-        return restPresenter.getResponse();
+    public void execute(@RequestParam String codeMessage, @RequestParam String application, HttpServletResponse response) {
+        handlingFindMessageByCodeMessagePort.execute(codeMessage, application, restPresenter, response);
     }
 }
