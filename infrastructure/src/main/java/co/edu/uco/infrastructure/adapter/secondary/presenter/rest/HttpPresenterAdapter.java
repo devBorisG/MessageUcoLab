@@ -6,7 +6,6 @@ import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.utils.exception.CrossWordsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +20,16 @@ import java.util.Optional;
 
 @Slf4j
 @RestControllerAdvice
-@Getter
-public final class RestPresenterImpl<T> implements PresenterPort<T> {
+public class HttpPresenterAdapter<T> implements PresenterPort<T> {
+
+    private final HttpServletResponse response;
+
+    public HttpPresenterAdapter(HttpServletResponse response) {
+        this.response = response;
+    }
+
     @Override
-    public void presentRestSuccess(List<T> dto, HttpServletResponse response) {
+    public void presentRestSuccess(List<T> dto) {
         try {
             response.setStatus(HttpStatus.OK.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
@@ -39,6 +44,7 @@ public final class RestPresenterImpl<T> implements PresenterPort<T> {
             log.error("Error al escribir la respuesta", e);
         }
     }
+
     @ExceptionHandler(CrossWordsException.class)
     public ResponseEntity<Response<T>> presentCrossWordsException(CrossWordsException ex) {
         var message = Optional.ofNullable(ex.getUserMessage())
