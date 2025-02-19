@@ -3,8 +3,10 @@ package co.edu.uco.infrastructure.adapter.secondary.presenter.rest;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
+import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerRegistry;
+import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerType;
 import co.edu.uco.utils.exception.CrossWordsException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,26 +24,35 @@ import java.util.Optional;
 @RestControllerAdvice
 public class HttpPresenterAdapter<T> implements PresenterPort<T> {
 
+    private final SerializerRegistry serializerRegistry;
     private final HttpServletResponse response;
 
-    public HttpPresenterAdapter(HttpServletResponse response) {
+    public HttpPresenterAdapter(SerializerRegistry serializerRegistry, HttpServletResponse response) {
+        this.serializerRegistry = serializerRegistry;
         this.response = response;
     }
 
     @Override
-    public void presentRestSuccess(List<T> dto) {
+    public void presentRestSuccess(
+            List<T> dto,
+            HttpServletRequest  request
+    ) {
         try {
-            response.setStatus(HttpStatus.OK.value());
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            String acceptHeader = Optional.ofNullable(request.getHeader("Accept"))
+                    .orElse(MediaType.APPLICATION_JSON_VALUE);
 
+            SerializerType serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
             Response<T> responseBody = new Response<>(dto, Collections.emptyList());
 
-            String json = new ObjectMapper().writeValueAsString(responseBody);
-            response.getWriter().write(json);
+            String formattedResponse = serializer.serialize(responseBody);
 
-            log.info("Respuesta exitosa: {}", json);
-        } catch (IOException e) {
-            log.error("Error al escribir la respuesta", e);
+            response.setStatus(HttpStatus.OK.value());
+            response.setContentType(serializer.getSupportedContentType());
+            response.getWriter().write(formattedResponse);
+
+            log.info("Respuesta exitosa: {}", formattedResponse);
+        } catch (CrossWordsException | IOException ex) {
+            log.error(DetailMessageEnum.TCH_016.getContent(), ex);
         }
     }
 
