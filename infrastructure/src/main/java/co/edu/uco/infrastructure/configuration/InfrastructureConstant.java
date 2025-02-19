@@ -36,5 +36,6 @@ public final class InfrastructureConstant {
     public static final String YAML_SERIALIZER_CONTENT_TYPE = "application/yaml";
     public static final String HTML_SERIALIZER_CONTENT_TYPE = "text/html";
     public static final String TEXT_SERIALIZER_CONTENT_TYPE = "text/plain";
+    public static final String XML_SERIALIZER_CONTENT_TYPE = "application/xml";
     public static final String PATTERN_TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
 }
