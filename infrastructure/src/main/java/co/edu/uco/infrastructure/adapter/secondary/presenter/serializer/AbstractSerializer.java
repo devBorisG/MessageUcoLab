@@ -23,4 +23,5 @@ public abstract class AbstractSerializer implements SerializerType {
     public boolean isDefault() {
         return false;
     }
+
 }

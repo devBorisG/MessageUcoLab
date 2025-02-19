@@ -4,13 +4,15 @@ import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessage
 import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerRegistry;
+import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerType;
 import co.edu.uco.utils.exception.CrossWordsException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -20,7 +22,7 @@ import java.util.Optional;
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.REQUEST_GET_HEADER_ACCEPT;
 
 @Slf4j
-@Component
+@RestControllerAdvice
 public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
     private final SerializerRegistry serializerRegistry;
     public HttpPresenterAdapter(SerializerRegistry serializerRegistry) {
@@ -36,6 +38,11 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
                     .orElse(MediaType.APPLICATION_JSON_VALUE);
             var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
+
+            if (validateIfNotSupportedMediaType(acceptHeader, serializer, response)) {
+                return;
+            }
+
             var responseBody = new Response<>(dto, Collections.emptyList());
             var formattedResponse = serializer.serialize(responseBody);
             response.setStatus(HttpStatus.OK.value());
@@ -45,5 +52,78 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
         } catch (CrossWordsException | IOException ex) {
             log.error(DetailMessageEnum.TCH_016.getContent(), ex);
         }
+    }
+
+    @ExceptionHandler(CrossWordsException.class)
+    public void presentCrossWordsException(
+            CrossWordsException ex,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        try {
+            var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
+                    .orElse(MediaType.APPLICATION_JSON_VALUE);
+            var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
+
+            if (validateIfNotSupportedMediaType(acceptHeader, serializer, response)) {
+                return;
+            }
+
+            var message = Optional.ofNullable(ex.getUserMessage())
+                    .filter(msg -> !msg.isEmpty())
+                    .orElseGet(() -> {
+                        log.error(DetailMessageEnum.TCH_016.getContent(), ex);
+                        return DetailMessageEnum.FUN_023.getContent();
+                    });
+            var responseError = new Response<>(List.of(), List.of(message));
+            var formattedResponse = serializer.serialize(responseError);
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            response.setContentType(serializer.getSupportedContentType());
+            response.getWriter().write(formattedResponse);
+            log.error(DetailMessageEnum.TCH_020.getContent(), formattedResponse);
+        } catch (IOException | CrossWordsException exception) {
+            log.error(DetailMessageEnum.TCH_019.getContent(), exception);
+            throw exception;
+        }
+    }
+
+    @ExceptionHandler(Exception.class)
+    public void handleGeneralException(
+            Exception ex,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        try {
+            var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
+                    .orElse(MediaType.APPLICATION_JSON_VALUE);
+            var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
+
+            if (validateIfNotSupportedMediaType(acceptHeader, serializer, response)) {
+                return;
+            }
+
+            var responseError = new Response<>(List.of(), List.of(ex.getMessage()));
+            var formattedResponse = serializer.serialize(responseError);
+            response.setStatus(HttpStatus.BAD_REQUEST.value());
+            response.setContentType(serializer.getSupportedContentType());
+            response.getWriter().write(formattedResponse);
+            log.error(DetailMessageEnum.TCH_020.getContent(), formattedResponse);
+        } catch (IOException ioEx) {
+            log.error(DetailMessageEnum.TCH_019.getContent(), ioEx);
+        }
+    }
+
+    private boolean validateIfNotSupportedMediaType(String acceptHeader, SerializerType serializer, HttpServletResponse response) throws IOException {
+        if (!serializer.supports(acceptHeader)) {
+            var errorMessage = "El media type " + acceptHeader + " no es soportado.";
+            var errorResponse = new Response<T>(List.of(), List.of(errorMessage));
+            var formattedError = serializer.serialize(errorResponse);
+            response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
+            response.setContentType(serializer.getSupportedContentType());
+            response.getWriter().write(formattedError);
+            log.error("Media type no soportado: {}", formattedError);
+            return true;
+        }
+        return false;
     }
 }
