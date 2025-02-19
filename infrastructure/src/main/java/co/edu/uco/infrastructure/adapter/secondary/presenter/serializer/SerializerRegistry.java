@@ -1,5 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.presenter.serializer;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public final class SerializerRegistry {
             if (defaultSerializer.isPresent()) {
                 return defaultSerializer.get();
             } else {
-                log.error("No se encontró serializador para el media type '{}'.", mediaType);
+                log.error(DetailMessageEnum.TCH_017.getContent(), mediaType);
                 return null;
             }
         });
