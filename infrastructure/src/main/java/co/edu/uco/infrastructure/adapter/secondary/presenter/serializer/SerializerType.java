@@ -6,4 +6,5 @@ public interface SerializerType {
     <T> String serialize(T data) throws CrossWordsException;
     String getSupportedContentType();
     boolean supports(String mediaType);
+    boolean isDefault();
 }

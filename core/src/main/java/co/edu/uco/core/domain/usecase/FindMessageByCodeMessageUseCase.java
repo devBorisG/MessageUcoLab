@@ -27,7 +27,7 @@ public final class FindMessageByCodeMessageUseCase implements HandlingFindMessag
             MessageData messageData = messageCatalogStrategy.getMessage(codeMessage, application);
             return entityMapper.mapperDTO(messageData);
         } catch (Exception exception) {
-            String errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), codeMessage, application);
+            var errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), codeMessage, application);
             log.error(errorMessage);
             throw BusinessException.buildUserException(errorMessage);
         }

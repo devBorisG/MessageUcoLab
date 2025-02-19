@@ -7,6 +7,7 @@ import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationPort;
 import co.edu.uco.infrastructure.adapter.primary.ListMessageByApplicationController;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,9 @@ final class ListMessageByApplicationControllerImpl implements ListMessageByAppli
     }
     @GetMapping
     @Override
-    public void execute(@RequestParam String application, @ModelAttribute SimplePageRequest request, HttpServletRequest httpServletRequest) {
+    public void execute(@RequestParam String application, @ModelAttribute SimplePageRequest request,
+                        HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         SimplePage<MessageDTO> messageDTOSimplePage = handlingListMessageByApplicationPort.execute(application, request);
-        restPresenter.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest);
+        restPresenter.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest, httpServletResponse);
     }
 }

@@ -13,8 +13,6 @@ import co.edu.uco.utils.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Slf4j
 public final class ListMessageByApplicationUseCase implements HandlingListMessageByApplicationPort {
@@ -31,7 +29,7 @@ public final class ListMessageByApplicationUseCase implements HandlingListMessag
             var messages = page.getData().stream().map(entityMapper::mapperDTO).toList();
             return SimplePage.of(messages, page.getCurrentPage(), page.getPageSize(),page.getTotalItems(), page.getTotalPages());
         }catch (Exception exception){
-            String errorMessage = String.format(DetailMessageEnum.FUN_011.getContent(), application);
+            var errorMessage = String.format(DetailMessageEnum.FUN_011.getContent(), application);
             log.error(errorMessage);
             throw BusinessException.buildUserException(errorMessage);
         }

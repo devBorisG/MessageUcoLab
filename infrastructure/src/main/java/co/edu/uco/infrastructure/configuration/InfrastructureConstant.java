@@ -28,5 +28,9 @@ public final class InfrastructureConstant {
     public static final String LOGGING_THREAD = "THREAD";
     public static final String LOGGING_APP_NAME = "APP";
     public static final String LOGGING_TRACE_ID = "TRACEID";
+    public static final String REQUEST_GET_HEADER_ACCEPT = "Accept";
+    public static final String MEDIA_TYPE_DEFAULT = "*/*";
+    public static final String JSON_SERIALIZER_CONTENT_TYPE = "application/json";
+    public static final String YAML_SERIALIZER_CONTENT_TYPE = "application/yaml";
     public static final String PATTERN_TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
 }

@@ -1,5 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.presenter.serializer;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.MEDIA_TYPE_DEFAULT;
+
 public abstract class AbstractSerializer implements SerializerType {
     private final String contentType;
 
@@ -15,10 +17,10 @@ public abstract class AbstractSerializer implements SerializerType {
     @Override
     public boolean supports(String mediaType) {
         return getSupportedContentType().equalsIgnoreCase(mediaType) ||
-                mediaType.equals("*/*") && isDefault();
+                mediaType.equals(MEDIA_TYPE_DEFAULT) && isDefault();
     }
-
-    protected boolean isDefault() {
+    @Override
+    public boolean isDefault() {
         return false;
     }
 }

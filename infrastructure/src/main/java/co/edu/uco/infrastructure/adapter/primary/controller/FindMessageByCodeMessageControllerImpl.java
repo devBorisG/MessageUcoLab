@@ -5,6 +5,7 @@ import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
 import co.edu.uco.infrastructure.adapter.primary.FindMessageByCodeMessage;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +23,8 @@ final class FindMessageByCodeMessageControllerImpl implements FindMessageByCodeM
     }
     @Override
     @GetMapping()
-    public void execute(@RequestParam String codeMessage, @RequestParam String application, HttpServletRequest request) {
+    public void execute(@RequestParam String codeMessage, @RequestParam String application, HttpServletRequest request, HttpServletResponse response) {
         MessageDTO messageDTO = handlingFindMessageByCodeMessagePort.execute(codeMessage, application);
-        restPresenter.presentRestSuccess(List.of(messageDTO), request);
+        restPresenter.presentRestSuccess(List.of(messageDTO), request, response);
     }
 }
