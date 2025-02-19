@@ -1,6 +1,8 @@
 package co.edu.uco.infrastructure.configuration;
 
 public final class InfrastructureConstant {
+
+    private InfrastructureConstant() {}
     public static final String COLLECTION_MONGO_ADAPTER = "airbyte_raw_message";
     public static final String FIELD_MONGO_ADAPTER_ID = "_airbyte_data.id";
     public static final String FIELD_MONGO_ADAPTER_CODE = "_airbyte_data.code";
@@ -32,5 +34,7 @@ public final class InfrastructureConstant {
     public static final String MEDIA_TYPE_DEFAULT = "*/*";
     public static final String JSON_SERIALIZER_CONTENT_TYPE = "application/json";
     public static final String YAML_SERIALIZER_CONTENT_TYPE = "application/yaml";
+    public static final String HTML_SERIALIZER_CONTENT_TYPE = "text/html";
+    public static final String TEXT_SERIALIZER_CONTENT_TYPE = "text/plain";
     public static final String PATTERN_TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
 }
