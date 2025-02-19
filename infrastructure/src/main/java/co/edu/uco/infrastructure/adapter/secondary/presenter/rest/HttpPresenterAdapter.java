@@ -35,13 +35,9 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             HttpServletResponse response
     ) {
         try {
-            var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
-                    .orElse(MediaType.APPLICATION_JSON_VALUE);
+            var acceptHeader = request.getHeader(REQUEST_GET_HEADER_ACCEPT);
             var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
 
-            if (validateIfNotSupportedMediaType(acceptHeader, serializer, response)) {
-                return;
-            }
             var responseBody = new Response<>(dto, Collections.emptyList());
             var formattedResponse = serializer.serialize(responseBody);
             response.setStatus(HttpStatus.OK.value());
@@ -60,13 +56,8 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             HttpServletResponse response
     ) throws IOException {
         try {
-            var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
-                    .orElse(MediaType.APPLICATION_JSON_VALUE);
+            var acceptHeader = request.getHeader(REQUEST_GET_HEADER_ACCEPT);
             var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
-
-            if (validateIfNotSupportedMediaType(acceptHeader, serializer, response)) {
-                return;
-            }
 
             var message = Optional.ofNullable(ex.getUserMessage())
                     .filter(msg -> !msg.isEmpty())
@@ -93,13 +84,8 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             HttpServletResponse response
     ) {
         try {
-            var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
-                    .orElse(MediaType.APPLICATION_JSON_VALUE);
+            var acceptHeader = request.getHeader(REQUEST_GET_HEADER_ACCEPT);
             var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
-
-            if (validateIfNotSupportedMediaType(acceptHeader, serializer, response)) {
-                return;
-            }
 
             var responseError = new Response<>(List.of(), List.of(ex.getMessage()));
             var formattedResponse = serializer.serialize(responseError);
@@ -112,17 +98,4 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
         }
     }
 
-    private boolean validateIfNotSupportedMediaType(String acceptHeader, SerializerType serializer, HttpServletResponse response) throws IOException {
-        if (!serializer.supports(acceptHeader)) {
-            var errorMessage = String.format(DetailMessageEnum.TCH_022.getContent(), acceptHeader);
-            var errorResponse = new Response<T>(List.of(), List.of(errorMessage));
-            var formattedError = serializer.serialize(errorResponse);
-            response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
-            response.setContentType(serializer.getSupportedContentType());
-            response.getWriter().write(formattedError);
-            log.error(DetailMessageEnum.TCH_023.getContent(), formattedError);
-            return true;
-        }
-        return false;
-    }
 }
