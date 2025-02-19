@@ -42,7 +42,6 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             if (validateIfNotSupportedMediaType(acceptHeader, serializer, response)) {
                 return;
             }
-
             var responseBody = new Response<>(dto, Collections.emptyList());
             var formattedResponse = serializer.serialize(responseBody);
             response.setStatus(HttpStatus.OK.value());
@@ -115,13 +114,13 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
 
     private boolean validateIfNotSupportedMediaType(String acceptHeader, SerializerType serializer, HttpServletResponse response) throws IOException {
         if (!serializer.supports(acceptHeader)) {
-            var errorMessage = "El media type " + acceptHeader + " no es soportado.";
+            var errorMessage = String.format(DetailMessageEnum.TCH_022.getContent(), acceptHeader);
             var errorResponse = new Response<T>(List.of(), List.of(errorMessage));
             var formattedError = serializer.serialize(errorResponse);
             response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
             response.setContentType(serializer.getSupportedContentType());
             response.getWriter().write(formattedError);
-            log.error("Media type no soportado: {}", formattedError);
+            log.error(DetailMessageEnum.TCH_023.getContent(), formattedError);
             return true;
         }
         return false;
