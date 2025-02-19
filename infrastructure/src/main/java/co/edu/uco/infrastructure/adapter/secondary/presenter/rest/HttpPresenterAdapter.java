@@ -4,7 +4,6 @@ import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessage
 import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerRegistry;
-import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerType;
 import co.edu.uco.utils.exception.CrossWordsException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +41,7 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             response.setStatus(HttpStatus.OK.value());
             response.setContentType(serializer.getSupportedContentType());
             response.getWriter().write(formattedResponse);
-            log.info("Respuesta exitosa: {}", formattedResponse);
+            log.info(DetailMessageEnum.TCH_021.getContent(), formattedResponse);
         } catch (CrossWordsException | IOException ex) {
             log.error(DetailMessageEnum.TCH_016.getContent(), ex);
         }

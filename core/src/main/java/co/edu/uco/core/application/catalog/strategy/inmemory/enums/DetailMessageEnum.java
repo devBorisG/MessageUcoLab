@@ -24,6 +24,7 @@ public enum DetailMessageEnum {
     TCH_018(MessageKeyEnum.TCH_018, "Serializer error", "Error when serializing the object", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_019(MessageKeyEnum.TCH_019, "Error when serializing error response", "An error occurred while trying to serialize the error response.", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_020(MessageKeyEnum.TCH_020, "Response Error", "The error response is: {}", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_021(MessageKeyEnum.TCH_021, "Response success", "The successful response is: {}", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.INFORMATION),
     FUN_001(MessageKeyEnum.FUN_001, "Invalid message code", "The message code is invalid or not within allowed values", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_002(MessageKeyEnum.FUN_002, "Title is empty or null", "The message must have a valid title", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_003(MessageKeyEnum.FUN_003, "Content is empty or null", "The message must include a valid description", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
