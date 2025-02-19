@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("${crosswords.api.path.message.findByCode}")
+@RequestMapping("${crosswords.api.path.message.code}")
 final class FindMessageByCodeMessageControllerImpl implements FindMessageByCodeMessage {
     private final HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort;
 

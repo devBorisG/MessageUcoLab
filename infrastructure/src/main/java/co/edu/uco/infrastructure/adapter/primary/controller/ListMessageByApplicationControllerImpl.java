@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("${crosswords.api.path.message}")
+@RequestMapping("${crosswords.api.path.message.application}")
 final class ListMessageByApplicationControllerImpl implements ListMessageByApplicationController {
     private final HandlingListMessageByApplicationPort handlingListMessageByApplicationPort;
     private final PresenterPort<SimplePage<MessageDTO>> restPresenter;
