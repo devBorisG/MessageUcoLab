@@ -54,7 +54,15 @@ public enum MessageKeyEnum {
     FUN_021("FUN_021", MessageSourceEnum.CRITICAL),
     FUN_022("FUN_022", MessageSourceEnum.CRITICAL),
     FUN_023("FUN_023", MessageSourceEnum.CRITICAL),
-    FUN_024("FUN_024", MessageSourceEnum.NETWORK);
+    FUN_024("FUN_024", MessageSourceEnum.NETWORK),
+    FUN_025("FUN_025", MessageSourceEnum.CRITICAL),
+    FUN_026("FUN_026", MessageSourceEnum.CRITICAL),
+    FUN_027("FUN_027", MessageSourceEnum.CRITICAL),
+    FUN_028("FUN_028", MessageSourceEnum.CRITICAL),
+    FUN_029("FUN_029", MessageSourceEnum.CRITICAL),
+    FUN_030("FUN_030", MessageSourceEnum.CRITICAL),
+    FUN_031("FUN_031", MessageSourceEnum.CRITICAL),
+    FUN_032("FUN_032", MessageSourceEnum.CRITICAL);
 
     private final String key;
     private final MessageSourceEnum source;

@@ -50,7 +50,12 @@ public enum DetailMessageEnum {
     FUN_021(MessageKeyEnum.FUN_021, "Message validators", "The size of the title cannot be larger than 50", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_022(MessageKeyEnum.FUN_022, "Message validators", "The title cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_023(MessageKeyEnum.FUN_023, "Unexpected Error", "An unexpected error has occurred", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_024(MessageKeyEnum.FUN_024, "information consulted", "%s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.CONFIRMATION);
+    FUN_024(MessageKeyEnum.FUN_024, "information consulted", "%s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.CONFIRMATION),
+    FUN_025(MessageKeyEnum.FUN_025, "Invalid page number", "The page number must be between 1 and %d.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_026(MessageKeyEnum.FUN_026, "Invalid page size", "The page size must be between 1 and %d.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_027(MessageKeyEnum.FUN_027, "Invalid sort column", "The sort column '%s' is not valid.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_028(MessageKeyEnum.FUN_028, "Invalid sort direction", "The sort direction must be 'ASC' or 'DESC'.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_029(MessageKeyEnum.FUN_029, "Page not found", "The requested page is empty or does not exist.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
     private MessageKeyEnum code;
     private String title;
     private String content;

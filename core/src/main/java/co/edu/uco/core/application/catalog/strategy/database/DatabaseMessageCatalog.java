@@ -2,6 +2,7 @@ package co.edu.uco.core.application.catalog.strategy.database;
 
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
+import co.edu.uco.core.domain.port.out.repository.PageBuilder;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.utils.helper.UtilUUID;
@@ -46,7 +47,7 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
 
     @Override
     public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
-        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+        var  result = PageBuilder.createPageRequest(request);
         return repository.finByApplication(application, result);
     }
 

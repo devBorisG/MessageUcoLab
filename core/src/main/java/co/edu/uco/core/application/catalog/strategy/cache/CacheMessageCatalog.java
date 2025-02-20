@@ -2,12 +2,11 @@ package co.edu.uco.core.application.catalog.strategy.cache;
 
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.CacheMessageRepository;
+import co.edu.uco.core.domain.port.out.repository.PageBuilder;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.utils.helper.UtilText;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -50,7 +49,7 @@ public final class CacheMessageCatalog extends CacheCatalog {
 
     @Override
     public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
-        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+        var  result = PageBuilder.createPageRequest(request);
         return repository.finByApplication(application, result);
     }
 }
