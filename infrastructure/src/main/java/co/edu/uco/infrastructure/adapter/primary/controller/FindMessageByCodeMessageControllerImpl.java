@@ -1,26 +1,30 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.domain.port.out.Response;
+import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
 import co.edu.uco.infrastructure.adapter.primary.FindMessageByCodeMessage;
-import co.edu.uco.infrastructure.adapter.primary.presenter.RestPresenterImpl;
-import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("${crosswords.api.path.message.findByCode}")
+@RequestMapping("${crosswords.api.path.message.code}")
 final class FindMessageByCodeMessageControllerImpl implements FindMessageByCodeMessage {
     private final HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort;
-    private final RestPresenterImpl<MessageDTO> restPresenter;
-    public FindMessageByCodeMessageControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort, RestPresenterImpl<MessageDTO> restPresenter) {
+
+    private final PresenterPort<MessageDTO> restPresenter;
+
+    public FindMessageByCodeMessageControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort, PresenterPort<MessageDTO> restPresenter) {
         this.handlingFindMessageByCodeMessagePort = handlingFindMessageByCodeMessagePort;
         this.restPresenter = restPresenter;
     }
     @Override
     @GetMapping()
-    public ResponseEntity<Response<MessageDTO>> execute(@RequestParam String codeMessage, @RequestParam String application) {
-        handlingFindMessageByCodeMessagePort.execute(codeMessage, application, restPresenter);
-        return restPresenter.getResponse();
+    public void execute(@RequestParam String codeMessage, @RequestParam String application, HttpServletRequest request, HttpServletResponse response) {
+        MessageDTO messageDTO = handlingFindMessageByCodeMessagePort.execute(codeMessage, application);
+        restPresenter.presentRestSuccess(List.of(messageDTO), request, response);
     }
 }

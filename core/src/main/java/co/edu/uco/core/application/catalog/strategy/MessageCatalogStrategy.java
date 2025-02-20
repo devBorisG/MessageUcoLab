@@ -42,10 +42,10 @@ public final class MessageCatalogStrategy {
     public SimplePage<MessageData> getMessages(String application, SimplePageRequest request) {
         var cachedMessages = cacheCatalog.getMessage(application, request);
         if (cachedMessages.getData().isEmpty()) {
-            log.warn(inMemoryCatalog.getContent(FUN_006.getKey()));
+            log.info(inMemoryCatalog.getContent(FUN_006.getKey()));
             var dbMessages = databaseCatalog.getMessage(application, request);
             if (!dbMessages.getData().isEmpty()) {
-                log.warn(inMemoryCatalog.getContent(FUN_007.getKey()));
+                log.info(inMemoryCatalog.getContent(FUN_007.getKey()));
                 fillCacheWithMissingMessages(cachedMessages, dbMessages);
                 return dbMessages;
             }
@@ -55,11 +55,11 @@ public final class MessageCatalogStrategy {
         var dbMessages = databaseCatalog.getMessage(application, request);
         if (!dbMessages.getData().isEmpty()) {
             if (cachedMessages.getData().size() != dbMessages.getData().size()) {
-                log.warn(inMemoryCatalog.getContent(FUN_008.getKey()));
+                log.info(inMemoryCatalog.getContent(FUN_008.getKey()));
                 fillCacheWithMissingMessages(cachedMessages, dbMessages);
                 return dbMessages;
             }
-            log.warn(inMemoryCatalog.getContent(FUN_009.getKey()));
+            log.info(inMemoryCatalog.getContent(FUN_009.getKey()));
             return cachedMessages;
         }
         throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
