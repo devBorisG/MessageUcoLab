@@ -1,7 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.data;
 
 import co.edu.uco.core.domain.data.MessageData;
-import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MessageDocument;
+import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

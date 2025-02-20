@@ -4,7 +4,7 @@ import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.DataMapper;
-import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MessageDocument;
+import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument;
 import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoRepositoryAdapter;
 import co.edu.uco.utils.helper.UtilUUID;
 import org.springframework.data.domain.Pageable;
