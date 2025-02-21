@@ -59,10 +59,7 @@ public enum MessageKeyEnum {
     FUN_026("FUN_026", MessageSourceEnum.CRITICAL),
     FUN_027("FUN_027", MessageSourceEnum.CRITICAL),
     FUN_028("FUN_028", MessageSourceEnum.CRITICAL),
-    FUN_029("FUN_029", MessageSourceEnum.CRITICAL),
-    FUN_030("FUN_030", MessageSourceEnum.CRITICAL),
-    FUN_031("FUN_031", MessageSourceEnum.CRITICAL),
-    FUN_032("FUN_032", MessageSourceEnum.CRITICAL);
+    FUN_029("FUN_029", MessageSourceEnum.CRITICAL);
 
     private final String key;
     private final MessageSourceEnum source;
@@ -78,6 +75,6 @@ public enum MessageKeyEnum {
         }
         return Arrays.stream(MessageKeyEnum.values()).filter(messageCatalogEnum
                         -> messageCatalogEnum.getKey().equals(key)).findFirst()
-                .orElseThrow(() -> CrossWordsException.build(DetailMessageEnum.TCH_009.getContent()));
+                .orElseThrow(() -> CrossWordsException.build(String.format(DetailMessageEnum.TCH_009.getContent(), key)));
     }
 }
