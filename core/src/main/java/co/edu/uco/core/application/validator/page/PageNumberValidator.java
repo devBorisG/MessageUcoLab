@@ -5,14 +5,13 @@ import co.edu.uco.core.application.validator.Validator;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.utils.exception.BusinessRuleException;
 
+import static co.edu.uco.core.CrosswordsConstant.REQUEST_PAGE_DEFAULT;
+import static co.edu.uco.utils.helper.UtilNumeric.isLessThan;
+
 public final class PageNumberValidator implements Validator<SimplePageRequest> {
-    private final int totalPages;
-    public PageNumberValidator(int totalPages) {
-        this.totalPages = totalPages;
-    }
     @Override
     public void validate(SimplePageRequest data) throws BusinessRuleException {
-        if (data.getPage() < 1 || data.getPage() > totalPages) {
+        if (isLessThan(data.getPage(), REQUEST_PAGE_DEFAULT)) {
             throw BusinessRuleException.buildUserException(DetailMessageEnum.FUN_029.getContent());
         }
     }

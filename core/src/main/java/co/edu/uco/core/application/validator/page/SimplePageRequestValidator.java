@@ -12,6 +12,7 @@ public final class SimplePageRequestValidator implements Validator<SimplePageReq
     public SimplePageRequestValidator(Class<?> modelClass) {
         this.validators = Arrays.asList(
                 new PageSizeValidator(),
+                new PageNumberValidator(),
                 new SortDirectionValidator(),
                 new SortColumnValidator(modelClass)
         );

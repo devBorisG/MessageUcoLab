@@ -7,8 +7,6 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.utils.helper.UtilUUID;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

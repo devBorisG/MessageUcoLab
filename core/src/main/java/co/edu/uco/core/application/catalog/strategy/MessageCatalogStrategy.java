@@ -36,7 +36,7 @@ public final class MessageCatalogStrategy {
             response = databaseCatalog.getMessage(code, application);
             response.ifPresent(cacheCatalog::addMessage);
         }
-        return response.orElseThrow(() -> BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey())));
+        return response.orElseThrow(() -> BusinessException.buildUserException(String.format(inMemoryCatalog.getContent(TCH_009.getKey()))));
     }
 
     public SimplePage<MessageData> getMessages(String application, SimplePageRequest request) {
@@ -49,7 +49,7 @@ public final class MessageCatalogStrategy {
                 fillCacheWithMissingMessages(cachedMessages, dbMessages);
                 return dbMessages;
             }
-            throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
+            throw BusinessException.buildUserException(String.format(inMemoryCatalog.getContent(TCH_009.getKey()), application));
         }
 
         var dbMessages = databaseCatalog.getMessage(application, request);
@@ -62,7 +62,7 @@ public final class MessageCatalogStrategy {
             log.info(inMemoryCatalog.getContent(FUN_009.getKey()));
             return cachedMessages;
         }
-        throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
+        throw BusinessException.buildUserException(String.format(inMemoryCatalog.getContent(TCH_009.getKey()), application));
     }
 
     private void fillCacheWithMissingMessages(SimplePage<MessageData> cachedMessages, SimplePage<MessageData> dbMessages) {

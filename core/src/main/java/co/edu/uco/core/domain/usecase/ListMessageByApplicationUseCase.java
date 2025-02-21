@@ -14,8 +14,6 @@ import co.edu.uco.utils.exception.CrossWordsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import static co.edu.uco.utils.exception.enumeration.ExceptionLocation.APPLICATION;
-
 @Component
 @Slf4j
 public final class ListMessageByApplicationUseCase implements HandlingListMessageByApplicationPort {
