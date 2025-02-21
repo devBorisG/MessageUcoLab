@@ -4,17 +4,17 @@ import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessage
 import co.edu.uco.core.application.validator.Validator;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.utils.exception.BusinessRuleException;
+import co.edu.uco.utils.helper.UtilNumeric;
 import org.springframework.stereotype.Component;
 
 import static co.edu.uco.core.CrosswordsConstant.REQUEST_PAGE_DEFAULT;
-import static co.edu.uco.utils.helper.UtilNumeric.isBetweenIncludingRanges;
 
 @Component
 public final class PageSizeValidator implements Validator<SimplePageRequest> {
     private static final int MAX_PAGE_SIZE = 100;
     @Override
     public void validate(SimplePageRequest data) throws BusinessRuleException {
-        if (isBetweenIncludingRanges(data.getSize(), REQUEST_PAGE_DEFAULT, MAX_PAGE_SIZE)) {
+        if (!UtilNumeric.isBetweenIncludingRanges(data.getSize(), REQUEST_PAGE_DEFAULT, MAX_PAGE_SIZE)) {
             throw BusinessRuleException.buildUserException(String.format(DetailMessageEnum.FUN_026.getContent(), MAX_PAGE_SIZE));
         }
     }

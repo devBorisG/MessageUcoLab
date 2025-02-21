@@ -1,7 +1,7 @@
 package co.edu.uco.core.domain.usecase;
 
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.application.validator.page.SimplePageRequestValidator;
+import co.edu.uco.core.application.validator.message.ListMessageValidator;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
@@ -18,17 +18,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public final class ListMessageByApplicationUseCase implements HandlingListMessageByApplicationPort {
     private final MessageCatalogStrategy messageCatalogStrategy;
-    private final SimplePageRequestValidator simplePageRequestValidator;
     private final EntityMapper<MessageData,MessageDomain,MessageDTO> entityMapper;
-    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, SimplePageRequestValidator simplePageRequestValidator, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper){
+    private final ListMessageValidator listMessageValidator;
+    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper, ListMessageValidator listMessageValidator){
         this.messageCatalogStrategy = messageCatalogStrategy;
-        this.simplePageRequestValidator = simplePageRequestValidator;
         this.entityMapper = entityMapper;
+        this.listMessageValidator = listMessageValidator;
     }
     @Override
     public SimplePage<MessageDTO> execute(String application, SimplePageRequest pageRequest) {
         try {
-            simplePageRequestValidator.validate(pageRequest);
+            listMessageValidator.validate(pageRequest);
             var page = messageCatalogStrategy.getMessages(application, pageRequest);
             var messages = page.getData().stream().map(entityMapper::mapperDTO).toList();
             return SimplePage.of(messages, page.getPage(), page.getSize(),page.getTotalItems(), page.getTotalPages());
