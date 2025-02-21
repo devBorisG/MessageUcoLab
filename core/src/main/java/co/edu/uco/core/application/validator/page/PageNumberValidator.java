@@ -4,10 +4,12 @@ import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessage
 import co.edu.uco.core.application.validator.Validator;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.utils.exception.BusinessRuleException;
+import org.springframework.stereotype.Component;
 
 import static co.edu.uco.core.CrosswordsConstant.REQUEST_PAGE_DEFAULT;
 import static co.edu.uco.utils.helper.UtilNumeric.isLessThan;
 
+@Component
 public final class PageNumberValidator implements Validator<SimplePageRequest> {
     @Override
     public void validate(SimplePageRequest data) throws BusinessRuleException {

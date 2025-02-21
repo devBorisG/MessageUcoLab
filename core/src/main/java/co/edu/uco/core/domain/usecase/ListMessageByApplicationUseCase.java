@@ -20,9 +20,9 @@ public final class ListMessageByApplicationUseCase implements HandlingListMessag
     private final MessageCatalogStrategy messageCatalogStrategy;
     private final SimplePageRequestValidator simplePageRequestValidator;
     private final EntityMapper<MessageData,MessageDomain,MessageDTO> entityMapper;
-    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper){
-        simplePageRequestValidator = new SimplePageRequestValidator(MessageDTO.class);
+    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, SimplePageRequestValidator simplePageRequestValidator, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper){
         this.messageCatalogStrategy = messageCatalogStrategy;
+        this.simplePageRequestValidator = simplePageRequestValidator;
         this.entityMapper = entityMapper;
     }
     @Override
