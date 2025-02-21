@@ -10,7 +10,7 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 import static co.edu.uco.utils.helper.UtilUUID.getNewUUID;
 
 @Getter
-public class StatusMessageData {
+public final class StatusMessageData {
     private UUID id;
     private String name;
 

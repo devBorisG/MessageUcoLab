@@ -21,7 +21,7 @@ public final class MessageData {
     private String content;
     private MessageTypeData type;
     private MessageCategoryData category;
-    private String status;
+    private StatusMessageData status;
     private String application;
     private FunctionalityData functionality;
 
@@ -33,16 +33,17 @@ public final class MessageData {
         setApplication(UtilText.EMPTY);
         setType(MessageTypeData.build());
         setCategory(MessageCategoryData.build());
-        setStatus(UtilText.EMPTY);
+        setStatus(StatusMessageData.build());
         setFunctionality(FunctionalityData.build());
     }
     public MessageData(UUID id, String code, String title, String content, MessageTypeData type,
-                       MessageCategoryData category, String status, String application, FunctionalityData functionality) {
+                       MessageCategoryData category,  String application, FunctionalityData functionality) {
         setId(id);
         setCode(code);
         setTitle(title);
         setContent(content);
         setType(type);
+        setStatus(StatusMessageData.build());
         setApplication(application);
         setCategory(category);
         setFunctionality(functionality);
@@ -63,8 +64,8 @@ public final class MessageData {
     public void setCategory(MessageCategoryData category) {
         this.category = getDefaultIsNullObject(category, MessageCategoryData.build());
     }
-    public void setStatus(String status) {
-        this.status = trim(status);
+    public void setStatus(StatusMessageData status) {
+        this.status = getDefaultIsNullObject(status, StatusMessageData.build());
     }
     public void setApplication(String application) {
         this.application = trim(application);

@@ -15,19 +15,19 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 public final class FunctionalityData {
     private UUID id;
     private String name;
-//    private LocalDateTime startDate;
-//    private LocalDateTime endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     public FunctionalityData() {
         setId(UUID.randomUUID());
         setName(UtilText.EMPTY);
-//        setStartDate(UtilDate.TIME);
-//        setEndDate(UtilDate.TIME);
+        setStartDate(UtilDate.TIME);
+        setEndDate(UtilDate.TIME);
     }
     public FunctionalityData(UUID id, String name, LocalDateTime startDate, LocalDateTime endDate) {
         setId(id);
         setName(name);
-//        setStartDate(startDate);
-//        setEndDate(endDate);
+        setStartDate(startDate);
+        setEndDate(endDate);
     }
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
@@ -35,12 +35,12 @@ public final class FunctionalityData {
     public void setName(String name) {
         this.name = trim(name);
     }
-//    public void setStartDate(LocalDateTime startDate) {
-//        this.startDate = UtilDate.getDefaultTimeIfNull(startDate);
-//    }
-//    public void setEndDate(LocalDateTime endDate) {
-//        this.endDate = UtilDate.getDefaultTimeIfNull(endDate);
-//    }
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = UtilDate.getDefaultTimeIfNull(startDate);
+    }
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = UtilDate.getDefaultTimeIfNull(endDate);
+    }
     public static FunctionalityData build() {
         return new FunctionalityData();
     }
