@@ -47,9 +47,24 @@ services:
       - redis_data:/data
     command: ["redis-server", "--requirepass", "cr0ssw0rds.", "--appendonly", "yes"]
 
+  postgres:
+    image: postgres:latest
+    container_name: airbyte-postgres
+    environment:
+      POSTGRES_USER: crosswords
+      POSTGRES_PASSWORD: crosswords.
+      POSTGRES_DB: ucolab
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
 volumes:
   grafana-data:
   redis_data:
+    driver: local
+  postgres_data:
     driver: local
 
 networks:
