@@ -125,8 +125,6 @@ GRANT USAGE ON SCHEMA public TO crosswords;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO crosswords;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO crosswords;
 
-ALTER USER crosswords REPLICATION;
-
 -- Otorgar permisos de replicación a la tabla message
 GRANT SELECT ON application_data TO crosswords;
 GRANT SELECT ON environment_data TO crosswords;
@@ -152,6 +150,7 @@ ALTER SYSTEM SET max_wal_senders = 5;
 SELECT * FROM pg_create_logical_replication_slot('replication_slot', 'pgoutput');
 
 ALTER TABLE message_data REPLICA IDENTITY DEFAULT;
+CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
 
 -- Reiniciar el servidor para aplicar los cambios
 SELECT pg_reload_conf();
