@@ -1,7 +1,6 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
 import co.edu.uco.core.application.dto.CreateTokenDTO;
-import co.edu.uco.core.application.dto.TokenDTO;
 import co.edu.uco.core.application.facade.token.CreateTokenUseCaseFacade;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.infrastructure.adapter.primary.CreateTokenController;
@@ -13,19 +12,19 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("${crosswords.api.path.token.application}")
+@RequestMapping("${crosswords.api.path.message}")
 public class CreateTokenControllerImpl implements CreateTokenController {
 
     private final CreateTokenUseCaseFacade createTokenUseCaseFacade;
-    private final PresenterPort<TokenDTO> restPresenter;
+    private final PresenterPort<String> restPresenter;
 
 
-    public CreateTokenControllerImpl(CreateTokenUseCaseFacade createTokenUseCaseFacade, PresenterPort<TokenDTO> restPresenter) {
+    public CreateTokenControllerImpl(CreateTokenUseCaseFacade createTokenUseCaseFacade, PresenterPort<String> restPresenter) {
         this.createTokenUseCaseFacade = createTokenUseCaseFacade;
         this.restPresenter = restPresenter;
     }
 
-    @PostMapping
+    @PostMapping("${crosswords.api.path.token.application}")
     @Override
     public void createToken(
             @RequestBody CreateTokenDTO tokenDTO,
@@ -33,7 +32,7 @@ public class CreateTokenControllerImpl implements CreateTokenController {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
     ) {
-        TokenDTO result = createTokenUseCaseFacade.createToken(tokenDTO, id);
+        String result = createTokenUseCaseFacade.createToken(tokenDTO, id);
         restPresenter.presentRestSuccess(List.of(result), httpServletRequest, httpServletResponse);
     }
 }

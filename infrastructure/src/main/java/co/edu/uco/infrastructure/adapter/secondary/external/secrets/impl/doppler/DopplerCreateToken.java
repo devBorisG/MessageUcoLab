@@ -17,7 +17,7 @@ public class DopplerCreateToken implements CreateTokenSecretPort {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\"project\":\"ucolab\",\"config\":\"dev\",\"change_requests\":[{\"name\":\"_%s\",\"originalName\":\"_%s\",\"value\":\"%s\"}]}".formatted(tokenID, tokenID, tokenEncrypted));
+        RequestBody body = RequestBody.create(mediaType, "{\"project\":\"ucolab\",\"config\":\"dev\",\"change_requests\":[{\"name\":\"_%s\",\"originalName\":\"_%s\",\"value\":\"%s\"}]}".formatted(tokenEncrypted, tokenEncrypted, tokenID));
         Request request = new Request.Builder()
                 .url("https://api.doppler.com/v3/configs/config/secrets")
                 .post(body)

@@ -5,6 +5,7 @@ import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.Abstract
 import co.edu.uco.utils.exception.CrossWordsException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.XML_SERIALIZER_CONTENT_TYPE;
 
@@ -17,6 +18,7 @@ public class XMLSerializer extends AbstractSerializer {
     public <T> String serialize(T data) {
         try {
             XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.registerModule(new JavaTimeModule());
             return xmlMapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {
             throw CrossWordsException.build(DetailMessageEnum.TCH_018.getContent(), e);

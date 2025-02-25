@@ -3,5 +3,5 @@ package co.edu.uco.core.domain.usecase.handling;
 import co.edu.uco.core.domain.domains.TokenDomain;
 
 public interface HandlingCreateTokenPort {
-    TokenDomain createToken(TokenDomain tokenDomain);
+    void createToken(TokenDomain tokenDomain);
 }

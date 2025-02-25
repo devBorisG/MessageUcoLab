@@ -36,7 +36,7 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
     }
 
     @Override
-    public TokenDTO createToken(
+    public String createToken(
             CreateTokenDTO createTokenDTO,
             UUID application
     ) {
@@ -53,10 +53,9 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
         var tokenEncrypted = encryptionService.encrypt(token);
         tokenDTO.setId(encryptionService.encrypt(tokenDTO.getId()));
         createTokenSecretPort.execute(tokenDTO.getId(), tokenEncrypted);
-        return tokenDTOMapper.mapperDTO(
-                handlingCreateTokenPort.createToken(
-                        tokenDTOMapper.mapperDomain(tokenDTO)
-                )
-        );
+
+        handlingCreateTokenPort.createToken(tokenDTOMapper.mapperDomain(tokenDTO));
+
+        return tokenEncrypted;
     }
 }

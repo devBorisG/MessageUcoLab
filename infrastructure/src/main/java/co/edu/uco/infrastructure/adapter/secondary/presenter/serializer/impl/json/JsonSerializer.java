@@ -5,6 +5,7 @@ import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.Abstract
 import co.edu.uco.utils.exception.CrossWordsException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.JSON_SERIALIZER_CONTENT_TYPE;
 
@@ -15,7 +16,9 @@ public final class JsonSerializer extends AbstractSerializer {
     @Override
     public <T> String serialize(T data) throws CrossWordsException {
         try{
-            return new ObjectMapper().writeValueAsString(data);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            return mapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {
             throw CrossWordsException.build(DetailMessageEnum.TCH_018.getContent(), e);
         }

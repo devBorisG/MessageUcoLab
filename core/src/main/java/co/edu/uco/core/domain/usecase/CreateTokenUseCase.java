@@ -18,7 +18,7 @@ public class CreateTokenUseCase implements HandlingCreateTokenPort {
     }
 
     @Override
-    public TokenDomain createToken(TokenDomain tokenDomain) {
-        return tokenEntityMapper.mapperDomain(tokenRepository.save(tokenEntityMapper.mapperData(tokenDomain)));
+    public void createToken(TokenDomain tokenDomain) {
+        tokenEntityMapper.mapperDomain(tokenRepository.save(tokenEntityMapper.mapperData(tokenDomain)));
     }
 }
