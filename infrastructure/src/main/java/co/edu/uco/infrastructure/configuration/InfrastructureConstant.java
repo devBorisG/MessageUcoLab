@@ -17,6 +17,7 @@ public final class InfrastructureConstant {
     public static final String REDIS_HASH = "Message";
     public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";
     public static final String CACHE_REDIS_ADAPTER = "MessageRedisAdapter";
+    public static final String POSTGRESQL_ADAPTER = "MessagePostgreSQLAdapter";
     public static final String LOGGING_REQUEST_URI = "REQUEST_URI";
     public static final String LOGGING_HTTP_METHOD = "HTTP_METHOD";
     public static final String LOGGING_SESSION_ID = "JSESSIONID";
@@ -25,6 +26,7 @@ public final class InfrastructureConstant {
     public static final String LOGGING_PARAMETER_CODE_MESSAGE = "codeMessage";
     public static final String LOGGING_PARAMETER_APPLICATION = "application";
     public static final String PACKAGE_REPOSITORY_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository";
+    public static final String PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository.postgresql";
     public static final String PACKAGE_BASE = "co.edu.uco";
     public static final String LOGGING_TIMESTAMP = "TS";
     public static final String LOGGING_THREAD = "THREAD";

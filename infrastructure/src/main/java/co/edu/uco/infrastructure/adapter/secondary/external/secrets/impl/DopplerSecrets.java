@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.external.secrets.impl;
 
-import co.edu.uco.infrastructure.adapter.secondary.external.secrets.Secrets;
+import co.edu.uco.core.domain.port.out.secret.FindTokenSecretPort;
 import co.edu.uco.utils.exception.CrossWordsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DopplerSecrets implements Secrets {
+public class DopplerSecrets implements FindTokenSecretPort {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Value("${doppler.token}")
     private String token;
 
     @Override
-    public String getSecret(String secretName) {
+    public String execute(String secretName) {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()

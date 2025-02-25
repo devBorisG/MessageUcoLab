@@ -7,7 +7,7 @@ import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationPort;
-import co.edu.uco.core.application.mapper.entity.EntityMapper;
+import co.edu.uco.core.application.mapper.entity.DataMapper;
 import co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy;
 import co.edu.uco.utils.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public final class ListMessageByApplicationUseCase implements HandlingListMessageByApplicationPort {
     private final MessageCatalogStrategy messageCatalogStrategy;
-    private final EntityMapper<MessageData,MessageDomain,MessageDTO> entityMapper;
-    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper) {
+    private final DataMapper<MessageData,MessageDomain,MessageDTO> entityMapper;
+    public ListMessageByApplicationUseCase(MessageCatalogStrategy messageCatalogStrategy, DataMapper<MessageData, MessageDomain, MessageDTO> entityMapper) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
     }
