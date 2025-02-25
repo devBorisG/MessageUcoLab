@@ -1,6 +1,6 @@
-package co.edu.uco.core.application.validator.page;
+package co.edu.uco.core.domain.validator.page;
 
-import co.edu.uco.core.application.validator.CompositeValidator;
+import co.edu.uco.core.domain.validator.CompositeValidator;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import org.springframework.stereotype.Component;
 

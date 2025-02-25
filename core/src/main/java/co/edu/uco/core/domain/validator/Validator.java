@@ -1,4 +1,4 @@
-package co.edu.uco.core.application.validator;
+package co.edu.uco.core.domain.validator;
 
 import co.edu.uco.utils.exception.BusinessRuleException;
 

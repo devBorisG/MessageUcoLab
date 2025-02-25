@@ -1,4 +1,4 @@
-package co.edu.uco.core.application.validator;
+package co.edu.uco.core.domain.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;

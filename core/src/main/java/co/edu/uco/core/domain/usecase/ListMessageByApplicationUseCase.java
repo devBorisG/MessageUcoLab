@@ -1,7 +1,7 @@
 package co.edu.uco.core.domain.usecase;
 
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.application.validator.message.ListMessageValidator;
+import co.edu.uco.core.domain.validator.message.ListMessageValidator;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
