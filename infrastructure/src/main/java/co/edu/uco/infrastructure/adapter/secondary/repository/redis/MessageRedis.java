@@ -11,10 +11,6 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.REDIS_HASH;
 
-import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.REDIS_HASH;
-import static co.edu.uco.utils.helper.UtilText.trim;
-import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
-
 @Getter
 @RedisHash(REDIS_HASH)
 public final class MessageRedis {
