@@ -1,16 +1,16 @@
 package co.edu.uco.core.domain.data;
 
 import co.edu.uco.utils.helper.UtilObject;
-import co.edu.uco.utils.helper.UtilText;
-import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+import static co.edu.uco.utils.helper.UtilUUID.getNewUUID;
 
 @Getter
 @ToString
@@ -21,19 +21,18 @@ public final class MessageData {
     private String content;
     private MessageTypeData type;
     private MessageCategoryData category;
-    private StatusMessageData status;
+    private MessageStateData status;
     private String application;
     private FunctionalityData functionality;
-
     public MessageData() {
-        setId(UtilUUID.getNewUUID());
-        setCode(UtilText.EMPTY);
-        setTitle(UtilText.EMPTY);
-        setContent(UtilText.EMPTY);
-        setApplication(UtilText.EMPTY);
+        setId(getNewUUID());
+        setCode(EMPTY);
+        setTitle(EMPTY);
+        setContent(EMPTY);
+        setApplication(EMPTY);
         setType(MessageTypeData.build());
         setCategory(MessageCategoryData.build());
-        setStatus(StatusMessageData.build());
+        setStatus(MessageStateData.build());
         setFunctionality(FunctionalityData.build());
     }
     public MessageData(UUID id, String code, String title, String content, MessageTypeData type,
@@ -43,7 +42,7 @@ public final class MessageData {
         setTitle(title);
         setContent(content);
         setType(type);
-        setStatus(StatusMessageData.build());
+        setStatus(MessageStateData.build());
         setApplication(application);
         setCategory(category);
         setFunctionality(functionality);
@@ -60,19 +59,13 @@ public final class MessageData {
     public void setContent(String content) {
         this.content = trim(content);
     }
-    public void setType(MessageTypeData type) {this.type = UtilObject.getDefaultIsNullObject(type,MessageTypeData.build());}
-    public void setCategory(MessageCategoryData category) {
-        this.category = getDefaultIsNullObject(category, MessageCategoryData.build());
-    }
-    public void setStatus(StatusMessageData status) {
-        this.status = getDefaultIsNullObject(status, StatusMessageData.build());
-    }
+    public void setType(MessageTypeData type) {this.type = getDefaultIsNullObject(type,MessageTypeData.build());}
+    public void setCategory(MessageCategoryData category) {this.category = getDefaultIsNullObject(category, MessageCategoryData.build());}
+    public void setStatus(MessageStateData status) {this.status = getDefaultIsNullObject(status, MessageStateData.build());}
     public void setApplication(String application) {
         this.application = trim(application);
     }
-    public void setFunctionality(FunctionalityData functionality) {
-        this.functionality = UtilObject.getDefaultIsNullObject(functionality, FunctionalityData.build());
-    }
+    public void setFunctionality(FunctionalityData functionality) {this.functionality = UtilObject.getDefaultIsNullObject(functionality, FunctionalityData.build());}
     public static MessageData build() {
         return new MessageData();
     }

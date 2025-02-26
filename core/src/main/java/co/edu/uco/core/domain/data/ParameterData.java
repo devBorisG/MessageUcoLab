@@ -1,12 +1,12 @@
 package co.edu.uco.core.domain.data;
 
-import co.edu.uco.utils.helper.UtilObject;
 import co.edu.uco.utils.helper.UtilText;
 import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
@@ -30,7 +30,7 @@ public final class ParameterData {
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
     }
-    public void setMessage(MessageData message) { this.message = UtilObject.getDefaultIsNullObject(message, MessageData.build());}
+    public void setMessage(MessageData message) { this.message = getDefaultIsNullObject(message, MessageData.build());}
     public void setName(String name) {
         this.name = trim(name);
     }

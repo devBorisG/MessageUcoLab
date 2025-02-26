@@ -12,7 +12,6 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 public final class MessageCategoryData {
     private UUID id;
     private String name;
-
     public MessageCategoryData() {
         setId(getNewUUID());
         setName(EMPTY);

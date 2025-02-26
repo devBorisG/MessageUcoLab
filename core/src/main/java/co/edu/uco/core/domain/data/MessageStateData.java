@@ -10,24 +10,24 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 import static co.edu.uco.utils.helper.UtilUUID.getNewUUID;
 
 @Getter
-public final class MessageEnvironmentStateData {
+public final class MessageStateData {
     private UUID id;
     private String name;
-    public MessageEnvironmentStateData(UUID id, String name) {
-        setId(id);
-        setName(name);
-    }
-    public MessageEnvironmentStateData() {
+    public MessageStateData() {
         setId(getNewUUID());
         setName(EMPTY);
+    }
+    public MessageStateData(UUID id, String name) {
+        setId(id);
+        setName(name);
     }
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
     }
-    public void setName(String id) {
-        this.name = trim(id);
+    public void setName(String name) {
+        this.name = trim(name);
     }
-    public static MessageEnvironmentStateData build() {
-        return new MessageEnvironmentStateData();
+    public static MessageStateData build() {
+        return new MessageStateData();
     }
 }

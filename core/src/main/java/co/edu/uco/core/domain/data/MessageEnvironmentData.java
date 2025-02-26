@@ -1,38 +1,35 @@
 package co.edu.uco.core.domain.data;
 
-import co.edu.uco.utils.helper.UtilObject;
-import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 
 import java.util.UUID;
+
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+import static co.edu.uco.utils.helper.UtilUUID.getNewUUID;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
 @Getter
 public final class MessageEnvironmentData {
     private UUID id;
     private MessageData message;
-    private EnvironmentType environmentType;
+    private EnvironmentTypeData environmentTypeData;
     private MessageEnvironmentStateData stateData;
-
-    public MessageEnvironmentData(UUID id, MessageData message, EnvironmentType environmentType) {
+    public MessageEnvironmentData(UUID id, MessageData message, EnvironmentTypeData environmentTypeData, MessageEnvironmentStateData stateData) {
         setId(id);
         setMessage(message);
-        setEnvironmentType(environmentType);
+        setEnvironmentTypeData(environmentTypeData);
+        setStateData(stateData);
     }
     public MessageEnvironmentData() {
-        setId(UtilUUID.getNewUUID());
+        setId(getNewUUID());
         setMessage(MessageData.build());
-        setEnvironmentType(EnvironmentType.build());
+        setEnvironmentTypeData(EnvironmentTypeData.build());
+        setStateData(MessageEnvironmentStateData.build());
     }
     public void setId(UUID id) {
-        this.id = UtilUUID.getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
-    public void setMessage(MessageData message) {
-        this.message = UtilObject.getDefaultIsNullObject(message, MessageData.build());
-    }
-    public void setEnvironmentType(EnvironmentType environmentType) {
-        this.environmentType = UtilObject.getDefaultIsNullObject(environmentType, EnvironmentType.build());
-    }
-    public void setStateData(MessageEnvironmentStateData stateData) {
-        this.stateData = UtilObject.getDefaultIsNullObject(stateData, MessageEnvironmentStateData.build());
-    }
+    public void setMessage(MessageData message) {this.message = getDefaultIsNullObject(message, MessageData.build());}
+    public void setEnvironmentTypeData(EnvironmentTypeData environmentTypeData) {this.environmentTypeData = getDefaultIsNullObject(environmentTypeData, EnvironmentTypeData.build());}
+    public void setStateData(MessageEnvironmentStateData stateData) {this.stateData = getDefaultIsNullObject(stateData, MessageEnvironmentStateData.build());}
 }
