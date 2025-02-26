@@ -12,24 +12,24 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 public final class MessageEnvironmentData {
     private UUID id;
     private MessageData message;
-    private EnvironmentTypeData environmentTypeData;
+    private EnvironmentData environment;
     private MessageEnvironmentStateData stateData;
-    public MessageEnvironmentData(UUID id, MessageData message, EnvironmentTypeData environmentTypeData, MessageEnvironmentStateData stateData) {
+    public MessageEnvironmentData(UUID id, MessageData message, EnvironmentData environment, MessageEnvironmentStateData stateData) {
         setId(id);
         setMessage(message);
-        setEnvironmentTypeData(environmentTypeData);
+        setEnvironmentData(environment);
         setStateData(stateData);
     }
     public MessageEnvironmentData() {
         setId(getNewUUID());
         setMessage(MessageData.build());
-        setEnvironmentTypeData(EnvironmentTypeData.build());
+        setEnvironmentData(EnvironmentData.build());
         setStateData(MessageEnvironmentStateData.build());
     }
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
     }
     public void setMessage(MessageData message) {this.message = getDefaultIsNullObject(message, MessageData.build());}
-    public void setEnvironmentTypeData(EnvironmentTypeData environmentTypeData) {this.environmentTypeData = getDefaultIsNullObject(environmentTypeData, EnvironmentTypeData.build());}
+    public void setEnvironmentData(EnvironmentData environment) {this.environment = getDefaultIsNullObject(environment, EnvironmentData.build());}
     public void setStateData(MessageEnvironmentStateData stateData) {this.stateData = getDefaultIsNullObject(stateData, MessageEnvironmentStateData.build());}
 }
