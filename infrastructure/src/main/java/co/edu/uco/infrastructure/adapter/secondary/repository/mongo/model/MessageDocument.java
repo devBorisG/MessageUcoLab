@@ -16,10 +16,14 @@ public final class MessageDocument {
     private String code;
     private String title;
     private String content;
+    @DBRef
     private MessageTypeDocument type;
+    @DBRef
     private MessageCategoryDocument category;
-    private StatusMessageDocument status;
-    private String application;
+    @DBRef
+    private MessageStateDocument status;
+    @DBRef
+    private ApplicationDocument application;
     @DBRef
     private FunctionalityDocument functionality;
     public void setId(String id) {
@@ -40,11 +44,11 @@ public final class MessageDocument {
     public void setCategory(MessageCategoryDocument category) {
         this.category = UtilObject.getDefaultIsNullObject(MessageCategoryDocument.build(), category);
     }
-    public void setStatus(StatusMessageDocument status) {
-        this.status = UtilObject.getDefaultIsNullObject(status, StatusMessageDocument.build());
+    public void setStatus(MessageStateDocument status) {
+        this.status = UtilObject.getDefaultIsNullObject(status, MessageStateDocument.build());
     }
-    public void setApplication(String application) {
-        this.application = trim(application);
+    public void setApplication(ApplicationDocument application) {
+        this.application = UtilObject.getDefaultIsNullObject(application, ApplicationDocument.build());
     }
     public void setFunctionality(FunctionalityDocument functionality) {
         this.functionality = UtilObject.getDefaultIsNullObject(functionality, FunctionalityDocument.build());

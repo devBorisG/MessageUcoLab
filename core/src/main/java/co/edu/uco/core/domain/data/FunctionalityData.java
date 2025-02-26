@@ -27,8 +27,10 @@ public final class FunctionalityData {
         setStartDate(TIME);
         setEndDate(TIME);
         setState(FunctionalityStateData.build());
+        setApplication(ApplicationData.build());
     }
-    public FunctionalityData(UUID id, String name, ApplicationData application, LocalDateTime startDate, LocalDateTime endDate, FunctionalityStateData state) {
+    public FunctionalityData(UUID id, String name, ApplicationData application, LocalDateTime startDate, LocalDateTime endDate,
+                             FunctionalityStateData state) {
         setId(id);
         setName(name);
         setApplication(application);

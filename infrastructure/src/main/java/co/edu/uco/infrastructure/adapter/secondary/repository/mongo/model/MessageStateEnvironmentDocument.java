@@ -8,18 +8,18 @@ import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "status_token")
-public final class StatusTokenDocument {
+@Document(collection = "status_message_environment")
+public final class MessageStateEnvironmentDocument {
     @Id
     private String id;
     private String name;
-    public StatusTokenDocument() {
-        setId(EMPTY);
-        setName(EMPTY);
-    }
-    public StatusTokenDocument(String id, String name) {
+    public MessageStateEnvironmentDocument(String id, String name) {
         setId(id);
         setName(name);
+    }
+    public MessageStateEnvironmentDocument() {
+        setId(EMPTY);
+        setName(EMPTY);
     }
     public void setId(String id) {
         this.id = trim(id);
@@ -27,7 +27,6 @@ public final class StatusTokenDocument {
     public void setName(String name) {
         this.name = trim(name);
     }
-    public static StatusTokenDocument build() {
-        return new StatusTokenDocument();
-    }
+
+    public static MessageStateEnvironmentDocument build(){return new MessageStateEnvironmentDocument();}
 }

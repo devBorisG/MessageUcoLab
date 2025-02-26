@@ -17,40 +17,21 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 public final class TokenDocument {
     @Id
     private String id;
-    private LocalDateTime creationDate;
-    private LocalDateTime expirationDate;
-    @DBRef
-    private EnvironmentDocument environment;
-    private String code;
-    public TokenDocument(String id, LocalDateTime creationDate, LocalDateTime expirationDate, EnvironmentDocument environment,
-                         String code) {
+    private String name;
+
+    public TokenDocument(String id, String name) {
         setId(id);
-        setCreationDate(creationDate);
-        setExpirationDate(expirationDate);
-        setEnvironment(environment);
-        setCode(code);
+        setName(name);
     }
     public TokenDocument() {
         setId(EMPTY);
-        setCreationDate(UtilDate.TIME);
-        setExpirationDate(UtilDate.TIME);
-        setEnvironment(EnvironmentDocument.build());
-        setCode(EMPTY);
+        setName(EMPTY);
     }
     public void setId(String id) {
         this.id = trim(id);
     }
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = UtilDate.getDefaultTimeIfNull(creationDate);
-    }
-    public void setExpirationDate(LocalDateTime expirationDate) {
-        this.expirationDate = UtilDate.getDefaultTimeIfNull(expirationDate);
-    }
-    public void setEnvironment(EnvironmentDocument environment) {
-        this.environment = UtilObject.getDefaultIsNullObject(environment, EnvironmentDocument.build());
-    }
-    public void setCode(String code) {
-        this.code = trim(code);
+    public void setName(String name) {
+        this.name = trim(name);
     }
     public static TokenDocument build(){return new TokenDocument();}
 }

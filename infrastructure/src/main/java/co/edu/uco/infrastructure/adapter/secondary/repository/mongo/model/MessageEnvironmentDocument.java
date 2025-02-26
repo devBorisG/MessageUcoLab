@@ -16,9 +16,11 @@ public final class MessageEnvironmentDocument {
     private String id;
     @DBRef
     private MessageData message;
-    private EnvironmentTypeDocument environmentTypeDocument;
+    @DBRef
+    private EnvironmentDocument environmentTypeDocument;
+    @DBRef
     private MessageEnvironmentStateDocument stateData;
-    public MessageEnvironmentDocument(String id, MessageData message, EnvironmentTypeDocument environmentTypeDocument) {
+    public MessageEnvironmentDocument(String id, MessageData message, EnvironmentDocument environmentTypeDocument) {
         setId(id);
         setMessage(message);
         setEnvironmentTypeDocument(environmentTypeDocument);
@@ -26,7 +28,7 @@ public final class MessageEnvironmentDocument {
     public MessageEnvironmentDocument() {
         setId(EMPTY);
         setMessage(MessageData.build());
-        setEnvironmentTypeDocument(EnvironmentTypeDocument.build());
+        setEnvironmentTypeDocument(EnvironmentDocument.build());
     }
     public void setId(String id) {
         this.id =UtilText.trim(id);
@@ -34,8 +36,8 @@ public final class MessageEnvironmentDocument {
     public void setMessage(MessageData message) {
         this.message = UtilObject.getDefaultIsNullObject(message, MessageData.build());
     }
-    public void setEnvironmentTypeDocument(EnvironmentTypeDocument environmentTypeDocument) {
-        this.environmentTypeDocument = UtilObject.getDefaultIsNullObject(environmentTypeDocument, EnvironmentTypeDocument.build());
+    public void setEnvironmentTypeDocument(EnvironmentDocument environmentTypeDocument) {
+        this.environmentTypeDocument = UtilObject.getDefaultIsNullObject(environmentTypeDocument, EnvironmentDocument.build());
     }
     public void setStateData(MessageEnvironmentStateDocument stateData) {
         this.stateData = UtilObject.getDefaultIsNullObject(stateData, MessageEnvironmentStateDocument.build());

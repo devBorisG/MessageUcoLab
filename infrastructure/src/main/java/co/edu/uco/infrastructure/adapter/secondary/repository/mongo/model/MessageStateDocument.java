@@ -9,15 +9,15 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
 @Document(collection = "message_status")
-public final class StatusMessageDocument {
+public final class MessageStateDocument {
     @Id
     private String id;
     private String name;
-    public StatusMessageDocument() {
+    public MessageStateDocument() {
         setId(EMPTY);
         setName(EMPTY);
     }
-    public StatusMessageDocument(String id, String name) {
+    public MessageStateDocument(String id, String name) {
         setId(id);
         setName(name);
     }
@@ -27,7 +27,7 @@ public final class StatusMessageDocument {
     public void setName(String name) {
         this.name = trim(name);
     }
-    public static StatusMessageDocument build() {
-        return new StatusMessageDocument();
+    public static MessageStateDocument build() {
+        return new MessageStateDocument();
     }
 }
