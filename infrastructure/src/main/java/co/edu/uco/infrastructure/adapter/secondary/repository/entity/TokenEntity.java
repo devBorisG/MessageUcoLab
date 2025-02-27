@@ -25,9 +25,15 @@ public class TokenEntity {
     @Column(nullable = false, name = "creation_date")
     private LocalDateTime creationDate;
 
+    @Column(nullable = false, name = "secret_name")
+    private String secretName;
+
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
     @Column(nullable = false, name = "environment_id")
     private UUID environmentId;
+
+    @Column(name = "token_state_data_id")
+    private UUID tokenStateDataId = UUID.fromString("1b0f2304-68e3-4e64-ae87-fdb322d4ed3b");
 }

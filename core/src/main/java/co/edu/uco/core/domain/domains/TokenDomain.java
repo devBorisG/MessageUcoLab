@@ -10,19 +10,21 @@ import java.util.UUID;
 @NoArgsConstructor
 public class TokenDomain {
     private String id;
+    private String secretName;
     private LocalDateTime expirationDate;
     private UUID environmentId;
     private LocalDateTime creationDate;
 
-    public TokenDomain(String id,LocalDateTime creationDate ,LocalDateTime expirationDate, UUID environmentId) {
+    public TokenDomain(String id,LocalDateTime creationDate ,LocalDateTime expirationDate, UUID environmentId, String secretName) {
         setId(id);
+        setSecretName(secretName);
         setExpirationDate(expirationDate);
         setEnvironmentId(environmentId);
         setCreationDate(creationDate);
     }
 
-    public TokenDomain create(String id,LocalDateTime creationDate, LocalDateTime expirationDate, UUID environmentId) {
-        return new TokenDomain(id, creationDate,expirationDate, environmentId);
+    public TokenDomain create(String id,LocalDateTime creationDate, LocalDateTime expirationDate, UUID environmentId, String secretName) {
+        return new TokenDomain(id, creationDate,expirationDate, environmentId, secretName);
     }
 
     public void setExpirationDate(LocalDateTime expirationDate) {
@@ -39,5 +41,9 @@ public class TokenDomain {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public void setSecretName(String secretName) {
+        this.secretName = secretName;
     }
 }

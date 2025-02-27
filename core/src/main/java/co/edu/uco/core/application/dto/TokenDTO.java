@@ -16,6 +16,8 @@ public class TokenDTO {
 
     private String id;
 
+    private String secretName;
+
     private LocalDateTime creationDate;
 
     private LocalDateTime expirationDate;

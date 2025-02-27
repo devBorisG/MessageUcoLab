@@ -13,11 +13,11 @@ public class DopplerCreateToken implements CreateTokenSecretPort {
     private String token;
 
     @Override
-    public String execute(String tokenID, String tokenEncrypted) {
+    public String execute(String secretName, String privateKey) {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\"project\":\"ucolab\",\"config\":\"dev\",\"change_requests\":[{\"name\":\"_%s\",\"originalName\":\"_%s\",\"value\":\"%s\"}]}".formatted(tokenEncrypted, tokenEncrypted, tokenID));
+        RequestBody body = RequestBody.create(mediaType, "{\"project\":\"ucolab\",\"config\":\"dev\",\"change_requests\":[{\"name\":\"%s\",\"originalName\":\"%s\",\"value\":\"%s\"}]}".formatted(secretName, secretName, privateKey));
         Request request = new Request.Builder()
                 .url("https://api.doppler.com/v3/configs/config/secrets")
                 .post(body)

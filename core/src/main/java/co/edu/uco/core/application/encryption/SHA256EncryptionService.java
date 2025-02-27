@@ -1,4 +1,4 @@
-package co.edu.uco.infrastructure.adapter.secondary.encryption;
+package co.edu.uco.core.application.encryption;
 
 import co.edu.uco.core.domain.port.out.secret.EncryptionService;
 import org.springframework.stereotype.Component;
