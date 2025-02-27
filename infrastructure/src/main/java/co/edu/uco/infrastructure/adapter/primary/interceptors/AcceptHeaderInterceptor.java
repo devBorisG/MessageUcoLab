@@ -6,6 +6,7 @@ import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.Serializ
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.Optional;
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.REQUEST_GET_HEADER_ACCEPT;
 
 @Component
+@Order(1)
 @Slf4j
 public class AcceptHeaderInterceptor implements HandlerInterceptor {
 

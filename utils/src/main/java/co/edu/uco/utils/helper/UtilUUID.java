@@ -51,4 +51,12 @@ public final class UtilUUID {
     public static boolean isNull(UUID value) {
         return isNullObject(value);
     }
+
+    public static String formatUUID(UUID uuid) {
+        return uuid.toString().replace("-", "_");
+    }
+
+    public static UUID unformatUUID(String uuid) {
+        return UUID.fromString(uuid.replace("_", "-"));
+    }
 }

@@ -10,7 +10,7 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 
 @Component
 @Scope(SINGLETON_SCOPE)
-public class TokenDataMapper implements DataMapper<TokenData, TokenEntity> {
+public final class TokenDataMapper implements DataMapper<TokenData, TokenEntity> {
     private final ModelMapper mapper;
 
     public TokenDataMapper(ModelMapper mapper) {

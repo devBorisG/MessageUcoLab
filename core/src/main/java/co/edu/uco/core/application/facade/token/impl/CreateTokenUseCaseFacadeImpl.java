@@ -2,12 +2,11 @@ package co.edu.uco.core.application.facade.token.impl;
 
 import co.edu.uco.core.application.dto.CreateTokenDTO;
 import co.edu.uco.core.application.dto.TokenDTO;
-import co.edu.uco.core.application.dto.encrypt.KeyPairResponseDTO;
+import co.edu.uco.core.application.dto.encrypt.KeyPairDTO;
 import co.edu.uco.core.application.facade.token.CreateTokenUseCaseFacade;
 import co.edu.uco.core.application.mapper.dto.impl.TokenDTOMapper;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
-import co.edu.uco.core.domain.port.out.secret.EncryptService;
-import co.edu.uco.core.domain.port.out.secret.EncryptionService;
+import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingCreateTokenPort;
 import co.edu.uco.utils.helper.UtilPairKey;
 import jakarta.transaction.Transactional;
@@ -24,21 +23,18 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
     private final HandlingCreateTokenPort handlingCreateTokenPort;
     private final TokenDTOMapper tokenDTOMapper;
     private final CreateTokenSecretPort createTokenSecretPort;
-    private final EncryptService encrypt;
-    private final EncryptionService encryptionService;
+    private final EncryptTokenPort encrypt;
 
     public CreateTokenUseCaseFacadeImpl(
             HandlingCreateTokenPort handlingCreateTokenPort,
             TokenDTOMapper tokenDTOMapper,
-            EncryptService encrypt,
-            CreateTokenSecretPort createTokenSecretPort,
-            EncryptionService encryptionService
+            EncryptTokenPort encrypt,
+            CreateTokenSecretPort createTokenSecretPort
     ) {
         this.handlingCreateTokenPort = handlingCreateTokenPort;
         this.tokenDTOMapper = tokenDTOMapper;
         this.encrypt = encrypt;
         this.createTokenSecretPort = createTokenSecretPort;
-        this.encryptionService = encryptionService;
     }
 
     @Override
@@ -46,32 +42,38 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
             CreateTokenDTO createTokenDTO,
             UUID application
     ) {
-        var token = "UCOLAB_PK"
+        var secretName = "UCOLAB_PK"
                 .concat(
-                        encryptionService.
-                                encrypt(UtilUUID.getStringFromUUID(application))
+                        UtilUUID.formatUUID(application).toUpperCase()
                 )
                 .concat(
-                        encryptionService.
-                                encrypt(UtilUUID.getStringFromUUID(createTokenDTO.getEnvironmentId()))
+                        UtilUUID.formatUUID(createTokenDTO.getEnvironmentId()).toUpperCase()
                 );
 
-        KeyPairResponseDTO keyPairResponseDTO = encrypt.generateKeys();
+        KeyPairDTO keyPairResponseDTO = encrypt.generateKeys();
 
-        String privateKeyPEMFormatted = UtilPairKey.privateKeyFormatted(keyPairResponseDTO.getPrivateKey());
+        if(keyPairResponseDTO == null) {
+            throw new RuntimeException("Error generating keys");
+        }
 
-        TokenDTO tokenDTO = TokenDTO.builder()
-                .id(keyPairResponseDTO.getPublicKey())
-                .secretName(token)
-                .creationDate(LocalDateTime.now())
-                .expirationDate(createTokenDTO.getExpirationDate())
-                .environmentId(createTokenDTO.getEnvironmentId())
-                .build();
+        try{
+            var generateSignature = encrypt.generateSignature(secretName, keyPairResponseDTO.getPublicKey());
 
-        createTokenSecretPort.execute(token, privateKeyPEMFormatted);
+            TokenDTO tokenDTO = TokenDTO.builder()
+                    .id(generateSignature)
+                    .secretName(secretName)
+                    .creationDate(LocalDateTime.now())
+                    .expirationDate(createTokenDTO.getExpirationDate())
+                    .environmentId(createTokenDTO.getEnvironmentId())
+                    .build();
 
-        handlingCreateTokenPort.createToken(tokenDTOMapper.mapperDomain(tokenDTO));
+            createTokenSecretPort.execute(secretName, UtilPairKey.encodePrivateKey(keyPairResponseDTO.getPrivateKey()));
 
-        return keyPairResponseDTO.getPublicKey();
+            handlingCreateTokenPort.createToken(tokenDTOMapper.mapperDomain(tokenDTO));
+
+            return generateSignature;
+        }catch (Exception e){
+            throw new RuntimeException("Error generating signature", e);
+        }
     }
 }
