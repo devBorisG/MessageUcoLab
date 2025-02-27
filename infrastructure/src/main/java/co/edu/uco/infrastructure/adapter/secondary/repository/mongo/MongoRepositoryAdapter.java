@@ -1,5 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo;
 
+import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
