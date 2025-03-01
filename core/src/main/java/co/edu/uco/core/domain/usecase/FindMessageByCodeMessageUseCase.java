@@ -3,7 +3,7 @@ package co.edu.uco.core.domain.usecase;
 import co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.application.mapper.entity.EntityMapper;
+import co.edu.uco.core.application.mapper.entity.DataMapper;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public final class FindMessageByCodeMessageUseCase implements HandlingFindMessageByCodeMessagePort {
     private final MessageCatalogStrategy messageCatalogStrategy;
-    private final EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper;
-    public FindMessageByCodeMessageUseCase(MessageCatalogStrategy messageCatalogStrategy, EntityMapper<MessageData, MessageDomain, MessageDTO> entityMapper) {
+    private final DataMapper<MessageData, MessageDomain, MessageDTO> entityMapper;
+    public FindMessageByCodeMessageUseCase(MessageCatalogStrategy messageCatalogStrategy, DataMapper<MessageData, MessageDomain, MessageDTO> entityMapper) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
     }

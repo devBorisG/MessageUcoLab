@@ -12,17 +12,20 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 @Getter
 public final class TokenData {
     private String id;
+    private String secretName;
     private LocalDateTime creationDate;
     private LocalDateTime expirationDate;
     private EnvironmentData environment;
-    public TokenData(String id, LocalDateTime creationDate, LocalDateTime expirationDate, EnvironmentData environment) {
+    public TokenData(String id, LocalDateTime creationDate, LocalDateTime expirationDate, EnvironmentData environment, String secretName) {
         setId(id);
+        setSecretName(secretName);
         setCreationDate(creationDate);
         setExpirationDate(expirationDate);
         setEnvironment(environment);
     }
     public TokenData() {
         setId(UtilText.EMPTY);
+        setSecretName(UtilText.EMPTY);
         setCreationDate(UtilDate.TIME);
         setExpirationDate(UtilDate.TIME);
         setEnvironment(EnvironmentData.build());
@@ -38,5 +41,9 @@ public final class TokenData {
     }
     public void setEnvironment(EnvironmentData environment) {
         this.environment = UtilObject.getDefaultIsNullObject(environment, EnvironmentData.build());
+    }
+
+    public void setSecretName(String secretName) {
+        this.secretName = trim(secretName);
     }
 }

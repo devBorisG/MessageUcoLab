@@ -17,6 +17,7 @@ public final class InfrastructureConstant {
     public static final String REDIS_HASH = "Message";
     public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";
     public static final String CACHE_REDIS_ADAPTER = "MessageRedisAdapter";
+    public static final String POSTGRESQL_ADAPTER = "MessagePostgreSQLAdapter";
     public static final String LOGGING_REQUEST_URI = "REQUEST_URI";
     public static final String LOGGING_HTTP_METHOD = "HTTP_METHOD";
     public static final String LOGGING_SESSION_ID = "JSESSIONID";
@@ -25,17 +26,28 @@ public final class InfrastructureConstant {
     public static final String LOGGING_PARAMETER_CODE_MESSAGE = "codeMessage";
     public static final String LOGGING_PARAMETER_APPLICATION = "application";
     public static final String PACKAGE_REPOSITORY_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository";
+    public static final String PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository.postgresql";
     public static final String PACKAGE_BASE = "co.edu.uco";
     public static final String LOGGING_TIMESTAMP = "TS";
     public static final String LOGGING_THREAD = "THREAD";
     public static final String LOGGING_APP_NAME = "APP";
     public static final String LOGGING_TRACE_ID = "TRACEID";
     public static final String REQUEST_GET_HEADER_ACCEPT = "Accept";
+    public static final String REQUEST_GET_HEADER_TOKEN = "Token";
+    public static final String REQUEST_GET_HEADER_CONTENT_TYPE = "Content-Type";
+    public static final String REQUEST_GET_HEADER_AUTHORIZATION = "Authorization";
     public static final String MEDIA_TYPE_DEFAULT = "*/*";
     public static final String JSON_SERIALIZER_CONTENT_TYPE = "application/json";
+    public static final String BEARER_TOKEN = "Bearer %s";
     public static final String YAML_SERIALIZER_CONTENT_TYPE = "application/yaml";
     public static final String HTML_SERIALIZER_CONTENT_TYPE = "text/html";
     public static final String TEXT_SERIALIZER_CONTENT_TYPE = "text/plain";
     public static final String XML_SERIALIZER_CONTENT_TYPE = "application/xml";
     public static final String PATTERN_TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
+    public static final String BODY_DOPPLER_CREATE_TOKEN_REQUEST = "{\"project\":\"ucolab\",\"config\":\"dev\",\"change_requests\":[{\"name\":\"%s\",\"originalName\":\"%s\",\"value\":\"%s\"}]}";
+    public static final String URL_DOPPLER_CONFIG_SECRETS_POST = "https://api.doppler.com/v3/configs/config/secrets";
+    public static final String URL_DOPPLER_CONFIG_SECRETS_GET = "https://api.doppler.com/v3/configs/config/secret?project=ucolab&config=dev&name=%s";
+    public static final int PAIR_KEY_SIZE = 2048;
+    public static final String ALGORITHM_GENERATE_PAIR_KEY = "RSA";
+    public static final String ALGORITHM_PAIR_KEY = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding";
 }

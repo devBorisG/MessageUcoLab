@@ -34,6 +34,10 @@ public class CrossWordsException extends RuntimeException {
         return new CrossWordsException(null, technicalMessage, rootException,null,null);
     }
 
+    public static CrossWordsException build(String technicalMessage, String userMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {
+        return new CrossWordsException(userMessage, technicalMessage, rootException, type, location);
+    }
+
     protected CrossWordsException(String userMessage, String technicalMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {
         super();
         setUserMessage(userMessage);

@@ -36,6 +36,7 @@ public class AcceptHeaderInterceptor implements HandlerInterceptor {
         if (serializer == null || !serializer.supports(acceptHeader)) {
             var errorMessage = String.format(DetailMessageEnum.TCH_022.getContent(), acceptHeader);
             var errorResponse = new Response<String>(List.of(), List.of(errorMessage));
+            assert serializer != null;
             var formattedError = serializer.serialize(errorResponse);
             response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
             response.setContentType(serializer.getSupportedContentType());

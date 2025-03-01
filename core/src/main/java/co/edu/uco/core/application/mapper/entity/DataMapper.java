@@ -1,7 +1,7 @@
 package co.edu.uco.core.application.mapper.entity;
 
-public interface EntityMapper<E,D,T> {
+public interface DataMapper<E,D,T> {
     D mapperDomain(E entity);
-    E mapperEntity(D domain);
+    E mapperData(D data);
     T mapperDTO(E entity);
 }

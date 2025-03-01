@@ -36,7 +36,7 @@ public class FindMessagesControllerImpl implements FindMessagesController {
     }
 
     @Override
-    @GetMapping("${crosswords.api.apth.message.application.code}")
+    @GetMapping("${crosswords.api.path.message.application.code}")
     @Operation(
             summary = "Buscar mensaje por código de mensaje y id de aplicación",
             description = "Permite obtener el mensaje correspondiente a un código específico y una aplicación determinada. "
@@ -100,13 +100,18 @@ public class FindMessagesControllerImpl implements FindMessagesController {
                     )
             }
     )
-    public void findByCodeMessageAndApplication(@PathVariable String messageCode,@PathVariable String id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public void findByCodeMessageAndApplication(
+            @PathVariable String messageCode,
+            @PathVariable String id,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse
+    ) {
         MessageDTO messageDTO = handlingFindMessageByCodeMessagePort.execute(messageCode, id);
         restPresenter.presentRestSuccess(List.of(messageDTO), httpServletRequest, httpServletResponse);
     }
 
     @Override
-    @GetMapping("${crosswords.api.apth.message.application}")
+    @GetMapping("${crosswords.api.path.message.application}")
     @Operation(
             summary = "Listar mensajes por aplicación",
             description = "Retorna una lista paginada de mensajes asociados a una aplicación. " +
@@ -165,7 +170,12 @@ public class FindMessagesControllerImpl implements FindMessagesController {
                     )
             }
     )
-    public void findByApplication(@PathVariable String id, @ModelAttribute SimplePageRequest simplePageRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public void findByApplication(
+            @PathVariable String id,
+            @ModelAttribute SimplePageRequest simplePageRequest,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse
+    ) {
         SimplePage<MessageDTO> messageDTOSimplePage = handlingListMessageByApplicationPort.execute(id, simplePageRequest);
         restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest, httpServletResponse);
     }
