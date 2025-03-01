@@ -37,4 +37,16 @@ public final class UtilText {
     public static boolean isEmptyOrNull(String value) {
         return isNull(value) || isEmpty(value);
     }
+
+    public static String concatenateWithoutSeparator(String... values) {
+        return String.join(EMPTY, values);
+    }
+
+    public static String concatenateWithSeparator(String separator, String... values) {
+        return String.join(separator, values);
+    }
+
+    public static String stringToUpperCase(String value) {
+        return getDefault(value).toUpperCase();
+    }
 }

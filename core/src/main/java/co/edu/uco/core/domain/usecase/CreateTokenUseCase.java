@@ -7,7 +7,7 @@ import co.edu.uco.core.domain.usecase.handling.HandlingCreateTokenPort;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreateTokenUseCase implements HandlingCreateTokenPort {
+public final class CreateTokenUseCase implements HandlingCreateTokenPort {
 
     private final TokenRepository tokenRepository;
     private final TokenEntityMapper tokenEntityMapper;

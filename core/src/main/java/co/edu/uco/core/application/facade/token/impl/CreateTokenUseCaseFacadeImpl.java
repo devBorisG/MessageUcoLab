@@ -8,14 +8,21 @@ import co.edu.uco.core.application.mapper.dto.impl.TokenDTOMapper;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
 import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingCreateTokenPort;
+import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilPairKey;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import co.edu.uco.utils.helper.UtilUUID;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static co.edu.uco.core.CrosswordsConstant.TOKEN_SECRET_IDENTIFIER;
+
+import static co.edu.uco.utils.helper.UtilText.concatenateWithoutSeparator;
+import static co.edu.uco.utils.helper.UtilText.stringToUpperCase;
+
+@Slf4j
 @Component
 @Transactional
 public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
@@ -37,23 +44,23 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
         this.createTokenSecretPort = createTokenSecretPort;
     }
 
+    //TODO: Eliminar codigo hardcodeado
     @Override
     public String createToken(
             CreateTokenDTO createTokenDTO,
             UUID application
     ) {
-        var secretName = "UCOLAB_PK"
-                .concat(
-                        UtilUUID.formatUUID(application).toUpperCase()
-                )
-                .concat(
-                        UtilUUID.formatUUID(createTokenDTO.getEnvironmentId()).toUpperCase()
-                );
+        String secretName = concatenateWithoutSeparator(
+                TOKEN_SECRET_IDENTIFIER,
+                stringToUpperCase(UtilUUID.formatUUID(application)),
+                stringToUpperCase(UtilUUID.formatUUID(createTokenDTO.getEnvironmentId()))
+        );
 
         KeyPairDTO keyPairResponseDTO = encrypt.generateKeys();
 
         if(keyPairResponseDTO == null) {
-            throw new RuntimeException("Error generating keys");
+            log.error("KeyPair generation failed");
+            throw CrossWordsException.build("Error generating keys");
         }
 
         try{
@@ -70,10 +77,10 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
             createTokenSecretPort.execute(secretName, UtilPairKey.encodePrivateKey(keyPairResponseDTO.getPrivateKey()));
 
             handlingCreateTokenPort.createToken(tokenDTOMapper.mapperDomain(tokenDTO));
-
             return generateSignature;
         }catch (Exception e){
-            throw new RuntimeException("Error generating signature", e);
+            log.error("Error generating token", e);
+            throw CrossWordsException.build("Error generating token");
         }
     }
 }
