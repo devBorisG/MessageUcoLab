@@ -50,4 +50,9 @@ public final class InfrastructureConstant {
     public static final int PAIR_KEY_SIZE = 2048;
     public static final String ALGORITHM_GENERATE_PAIR_KEY = "RSA";
     public static final String ALGORITHM_PAIR_KEY = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding";
+    public static final String DOPPLER_DTO_SECRET_NAME = "secretName";
+    public static final String DOPPLER_DTO_PRIVATE_KEY = "privateKey";
+    public static final String DOPPLER_DTO_NAME = "name";
+    public static final String DOPPLER_DTO_VALUE = "value";
+    public static final String DOPPLER_DTO_RAW = "raw";
 }

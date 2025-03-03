@@ -7,17 +7,18 @@ import lombok.Getter;
 
 import java.util.Map;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
+
 @AllArgsConstructor
 @Getter
-public class DopplerFindTokenDTO {
+public final class DopplerFindTokenDTO {
     private final String name;
     private final String raw;
-
     @JsonCreator
     public DopplerFindTokenDTO(
-            @JsonProperty("name") String name,
-            @JsonProperty("value") Map<String, Object> value) {
+            @JsonProperty(DOPPLER_DTO_NAME) String name,
+            @JsonProperty(DOPPLER_DTO_VALUE) Map<String, Object> value) {
         this.name = name;
-        this.raw = value != null ? (String) value.get("raw") : null;
+        this.raw = value != null ? (String) value.get(DOPPLER_DTO_RAW) : null;
     }
 }

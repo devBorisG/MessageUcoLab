@@ -12,15 +12,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TokenDTO {
-
+public final class TokenDTO {
     private String id;
-
     private String secretName;
-
     private LocalDateTime creationDate;
-
     private LocalDateTime expirationDate;
-
     private UUID environmentId;
 }
