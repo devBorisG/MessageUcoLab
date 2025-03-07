@@ -143,7 +143,8 @@ CREATE TABLE token_state_data (
 
 -- Table: token_data
 CREATE TABLE token_data (
-    id UUID PRIMARY KEY,
+    id VARCHAR PRIMARY KEY,
+    secret_name VARCHAR(255) NOT NULL,
     creation_date TIMESTAMP NOT NULL,
     expiration_date TIMESTAMP NOT NULL,
     environment_id UUID NOT NULL,
@@ -151,38 +152,3 @@ CREATE TABLE token_data (
     FOREIGN KEY (environment_id) REFERENCES environment_data(id),
     FOREIGN KEY (state_id) REFERENCES token_state_data(id)
 );
-
--- Asignar al usuario de la db el permiso replicación
-ALTER ROLE crosswords WITH REPLICATION;
--- Agregar permisos a los schemas
-GRANT USAGE ON SCHEMA public TO crosswords;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO crosswords;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO crosswords;
--- Otorgar permisos de replicación
-GRANT SELECT ON application_data TO crosswords;
-GRANT SELECT ON language_base_data TO crosswords;
-GRANT SELECT ON application_state_data TO crosswords;
-GRANT SELECT ON environment_data TO crosswords;
-GRANT SELECT ON environment_type_data TO crosswords;
-GRANT SELECT ON environment_state_data TO crosswords;
-GRANT SELECT ON functionality_data TO crosswords;
-GRANT SELECT ON functionality_state_data TO crosswords;
-GRANT SELECT ON message_category_data TO crosswords;
-GRANT SELECT ON message_type_data TO crosswords;
-GRANT SELECT ON message_state_data TO crosswords;
-GRANT SELECT ON message_data TO crosswords;
-GRANT SELECT ON message_environment_state_data TO crosswords;
-GRANT SELECT ON message_environment_data TO crosswords;
-GRANT SELECT ON parameter_data TO crosswords;
-GRANT SELECT ON represent_parameter_data TO crosswords;
-GRANT SELECT ON token_state_data TO crosswords;
-GRANT SELECT ON token_data TO crosswords;
-
--- Crear una ranura de replicación
-SELECT * FROM pg_create_logical_replication_slot('replication_slot', 'pgoutput');
-
-ALTER TABLE message_data REPLICA IDENTITY DEFAULT;
-CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
-
--- Reiniciar el servidor para aplicar los cambios
-SELECT pg_reload_conf();
