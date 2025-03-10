@@ -16,6 +16,8 @@ CREATE TABLE application_data (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     language_id UUID NOT NULL,
+    start_date TIMESTAMP NOT NULL,
+    end_date TIMESTAMP NOT NULL,
     state_id UUID NOT NULL,
     FOREIGN KEY (language_id) REFERENCES language_base_data(id),
     FOREIGN KEY (state_id) REFERENCES application_state_data(id)
