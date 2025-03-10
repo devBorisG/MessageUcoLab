@@ -42,7 +42,7 @@ services:
 
   redis:
     image: redis:latest
-    container_name: redis-crosswords-db
+    container_name: redis
     ports:
       - "6379:6379"
     volumes:
@@ -51,10 +51,11 @@ services:
 
   debezium-postgres:
     image: debezium/postgres:13
+    container_name: crs-crossword-db
     ports:
       - "5435:5432"
     environment:
-      POSTGRES_DB: inventory
+      POSTGRES_DB: crs-crossword-db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
@@ -89,7 +90,7 @@ services:
   ksqldb-server:
     image: confluentinc/ksqldb-server:0.20.0
     hostname: ksqldb-server
-    container_name: ksqldb-server
+    container_name: cdc-ksqldb-server
     ports:
       - "8088:8088"
     environment:
@@ -118,6 +119,7 @@ services:
 
   mongodb:
     image: mongo:5.0
+    container_name: mongodb-crosswords-db
     ports:
       - "27017:27017"
     volumes:
