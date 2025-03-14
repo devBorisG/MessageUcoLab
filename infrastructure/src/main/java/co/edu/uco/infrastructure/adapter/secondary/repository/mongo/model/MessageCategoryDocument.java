@@ -2,15 +2,16 @@ package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
 public final class MessageCategoryDocument {
-    @JsonProperty("ID")
+    @Field("ID")
     private String id;
-    @JsonProperty("NAME")
+    @Field("NAME")
     private String name;
     public MessageCategoryDocument(String id, String name) {
         setId(id);

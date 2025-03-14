@@ -22,7 +22,7 @@ public final class MessageEnvironmentDocument {
     @Field("ENVIRONMENT_ID")
     private String environmentId;
     @Field("STATUS")
-    private MessageEnvironmentStateDocument stateData;
+    private MessageEnvironmentStateDocument state;
     public MessageEnvironmentDocument(String id, MessageJsonDocument message, String environmentId) {
         setId(id);
         setMessage(message);
@@ -42,8 +42,8 @@ public final class MessageEnvironmentDocument {
     public void setEnvironmentId(String environmentId) {
         this.environmentId = trim(environmentId);
     }
-    public void setStateData(MessageEnvironmentStateDocument stateData) {
-        this.stateData = UtilObject.getDefaultIsNullObject(stateData, MessageEnvironmentStateDocument.build());
+    public void setState(MessageEnvironmentStateDocument state) {
+        this.state = UtilObject.getDefaultIsNullObject(state, MessageEnvironmentStateDocument.build());
     }
     public static MessageEnvironmentDocument build(){return new MessageEnvironmentDocument();}
 }

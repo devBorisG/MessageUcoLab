@@ -10,24 +10,23 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
 public final class MessageJsonDocument {
-    @Id
-    @JsonProperty("ID")
+    @Field("ID")
     private String id;
-    @JsonProperty("CODE")
+    @Field("CODE")
     private String code;
-    @JsonProperty("TITLE")
+    @Field("TITLE")
     private String title;
-    @JsonProperty("CONTENT")
+    @Field("CONTENT")
     private String content;
-    @JsonProperty("TYPE_ID")
+    @Field("TYPE_ID")
     private MessageTypeDocument type;
-    @JsonProperty("CATEGORY_ID")
+    @Field("CATEGORY_ID")
     private MessageCategoryDocument category;
-    @Field(name = "STATUS")
+    @Field("STATUS")
     private StatusMessageDocument status;
-    @Field(name = "APPLICATION")
+    @Field("APPLICATION")
     private String application;
-    @Field(name = "FUNCTIONALITY_ID")
+    @Field("FUNCTIONALITY_ID")
     private String functionality;
     public void setId(String id) {
         this.id = trim(id);

@@ -194,6 +194,6 @@ public class FindMessagesControllerImpl implements FindMessagesController {
     public void findByEnvironmentAndMessage(@PathVariable String environment, SimplePageRequest simplePageRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         //SimplePage<MessageDTO> messageEnvironmentDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environment, simplePageRequest);
         //restPresenterPage.presentRestSuccess(List.of(messageEnvironmentDTOSimplePage), httpServletRequest, httpServletResponse);
-        log.info(repositoryAdapter.findMessagesByEnvironmentId(environment).toString());
+        log.info(repositoryAdapter.findMessageEnvironmentDocumentByEnvironmentId(environment).toString());
     }
 }
