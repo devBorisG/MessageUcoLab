@@ -1,8 +1,10 @@
 package co.edu.uco.infrastructure.adapter.secondary.encryption.impl;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.application.dto.encrypt.KeyPairDTO;
 import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.utils.exception.CrossWordsException;
+import co.edu.uco.utils.exception.enumeration.ExceptionType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,25 +22,24 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
 @Slf4j
 @Service
-public class JavaSecurityEncryptTokenAdapter implements EncryptTokenPort {
-
+public final class JavaSecurityEncryptTokenAdapter implements EncryptTokenPort {
     @Override
     public KeyPairDTO generateKeys() {
         try {
-            KeyPairGenerator generator = KeyPairGenerator.getInstance(ALGORITHM_GENERATE_PAIR_KEY);
+            var generator = KeyPairGenerator.getInstance(ALGORITHM_GENERATE_PAIR_KEY);
             generator.initialize(PAIR_KEY_SIZE);
-            KeyPair keyPair = generator.generateKeyPair();
+            var keyPair = generator.generateKeyPair();
             return new KeyPairDTO(keyPair.getPublic(), keyPair.getPrivate());
         } catch (Exception e) {
-            log.error("Error generating keys", e);
-            throw CrossWordsException.build("Error generating keys", e);
+            var message = DetailMessageEnum.TCH_026.getContent();
+            log.error(message, e);
+            throw CrossWordsException.buildInfrastructure(message, DetailMessageEnum.FUN_025.getContent(), e, ExceptionType.TECHNICAL);
         }
     }
-
     @Override
     public String generateSignature(String data, PublicKey publicKey) {
         try{
-            Cipher encryptCipher = Cipher.getInstance(ALGORITHM_PAIR_KEY);
+            var encryptCipher = Cipher.getInstance(ALGORITHM_PAIR_KEY);
             encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
             byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
@@ -46,11 +47,11 @@ public class JavaSecurityEncryptTokenAdapter implements EncryptTokenPort {
 
             return Base64.getEncoder().encodeToString(encryptedData);
         }catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
-            log.error("Error generating signature", e);
-            throw CrossWordsException.build("Error generating signature", e);
+            var message = DetailMessageEnum.TCH_027.getContent();
+            log.error(message, e);
+            throw CrossWordsException.buildInfrastructure(message, DetailMessageEnum.FUN_025.getContent(), e, ExceptionType.TECHNICAL);
         }
     }
-
     @Override
     public Boolean access(String privateKey, String signature, String secretName) {
         byte[] signatureBytes = Base64.getDecoder().decode(signature);
@@ -58,16 +59,16 @@ public class JavaSecurityEncryptTokenAdapter implements EncryptTokenPort {
 
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
         try{
-            Cipher decryptCipher = Cipher.getInstance(ALGORITHM_PAIR_KEY);
-            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_GENERATE_PAIR_KEY);
+            var decryptCipher = Cipher.getInstance(ALGORITHM_PAIR_KEY);
+            var keyFactory = KeyFactory.getInstance(ALGORITHM_GENERATE_PAIR_KEY);
             decryptCipher.init(Cipher.DECRYPT_MODE, keyFactory.generatePrivate(keySpec));
 
             byte[] decryptedData = decryptCipher.doFinal(signatureBytes);
-            String data = new String(decryptedData, StandardCharsets.UTF_8);
+            var data = new String(decryptedData, StandardCharsets.UTF_8);
 
             return data.equals(secretName);
         }catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | InvalidKeySpecException e){
-            log.error("Error verifying access", e);
+            log.error(DetailMessageEnum.TCH_028.getContent(),privateKey,signature,secretName, e);
             return false;
         }
     }

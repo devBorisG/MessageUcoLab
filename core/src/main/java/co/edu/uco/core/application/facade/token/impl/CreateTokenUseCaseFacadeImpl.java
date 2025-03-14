@@ -1,8 +1,8 @@
 package co.edu.uco.core.application.facade.token.impl;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.application.dto.CreateTokenDTO;
 import co.edu.uco.core.application.dto.TokenDTO;
-import co.edu.uco.core.application.dto.encrypt.KeyPairDTO;
 import co.edu.uco.core.application.facade.token.CreateTokenUseCaseFacade;
 import co.edu.uco.core.application.mapper.dto.impl.TokenDTOMapper;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
@@ -19,6 +19,7 @@ import java.util.UUID;
 
 import static co.edu.uco.core.CrosswordsConstant.TOKEN_SECRET_IDENTIFIER;
 
+import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 import static co.edu.uco.utils.helper.UtilText.concatenateWithoutSeparator;
 import static co.edu.uco.utils.helper.UtilText.stringToUpperCase;
 
@@ -44,29 +45,29 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
         this.createTokenSecretPort = createTokenSecretPort;
     }
 
-    //TODO: Eliminar codigo hardcodeado
     @Override
     public String createToken(
             CreateTokenDTO createTokenDTO,
             UUID application
     ) {
-        String secretName = concatenateWithoutSeparator(
+        var secretName = concatenateWithoutSeparator(
                 TOKEN_SECRET_IDENTIFIER,
                 stringToUpperCase(UtilUUID.formatUUID(application)),
                 stringToUpperCase(UtilUUID.formatUUID(createTokenDTO.getEnvironmentId()))
         );
 
-        KeyPairDTO keyPairResponseDTO = encrypt.generateKeys();
+        var keyPairResponseDTO = encrypt.generateKeys();
 
-        if(keyPairResponseDTO == null) {
-            log.error("KeyPair generation failed");
-            throw CrossWordsException.build("Error generating keys");
+        if(isNullObject(keyPairResponseDTO)){
+            var message = DetailMessageEnum.TCH_024.getMessage();
+            log.error(message.content());
+            throw CrossWordsException.build(message.content());
         }
 
         try{
             var generateSignature = encrypt.generateSignature(secretName, keyPairResponseDTO.getPublicKey());
 
-            TokenDTO tokenDTO = TokenDTO.builder()
+            var tokenDTO = TokenDTO.builder()
                     .id(generateSignature)
                     .secretName(secretName)
                     .creationDate(LocalDateTime.now())
@@ -79,8 +80,9 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
             handlingCreateTokenPort.createToken(tokenDTOMapper.mapperDomain(tokenDTO));
             return generateSignature;
         }catch (Exception e){
-            log.error("Error generating token", e);
-            throw CrossWordsException.build("Error generating token");
+            var message = DetailMessageEnum.TCH_025.getContent();
+            log.error(message, e);
+            throw CrossWordsException.build(message, e);
         }
     }
 }

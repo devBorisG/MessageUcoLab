@@ -13,15 +13,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("${crosswords.api.path.message}")
-public class CreateTokenControllerImpl implements CreateTokenController {
+public final class CreateTokenControllerImpl implements CreateTokenController {
     private final CreateTokenUseCaseFacade createTokenUseCaseFacade;
     private final PresenterPort<String> restPresenter;
-
     public CreateTokenControllerImpl(CreateTokenUseCaseFacade createTokenUseCaseFacade, PresenterPort<String> restPresenter) {
         this.createTokenUseCaseFacade = createTokenUseCaseFacade;
         this.restPresenter = restPresenter;
     }
-
     @PostMapping("${crosswords.api.path.token.application}")
     @Override
     public void createToken(

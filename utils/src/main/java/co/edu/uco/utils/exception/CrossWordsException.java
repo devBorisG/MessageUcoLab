@@ -27,15 +27,19 @@ public class CrossWordsException extends RuntimeException {
     }
 
     public static CrossWordsException build(String technicalMessage) {
-        return new CrossWordsException(null, technicalMessage, null, null, null);
+        return new CrossWordsException(null, technicalMessage, null, ExceptionType.TECHNICAL, null);
     }
 
     public static CrossWordsException build(String technicalMessage, Exception rootException) {
-        return new CrossWordsException(null, technicalMessage, rootException,null,null);
+        return new CrossWordsException(null, technicalMessage, rootException, ExceptionType.TECHNICAL,null);
     }
 
     public static CrossWordsException build(String technicalMessage, String userMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {
         return new CrossWordsException(userMessage, technicalMessage, rootException, type, location);
+    }
+
+    public static CrossWordsException buildInfrastructure(String technicalMessage, String userMessage, Exception rootException, ExceptionType type) {
+        return new CrossWordsException(userMessage, technicalMessage, rootException, type, ExceptionLocation.INFRASTRUCTURE);
     }
 
     protected CrossWordsException(String userMessage, String technicalMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {

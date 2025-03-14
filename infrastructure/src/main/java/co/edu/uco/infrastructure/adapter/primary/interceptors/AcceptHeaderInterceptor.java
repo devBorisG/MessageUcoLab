@@ -3,6 +3,7 @@ package co.edu.uco.infrastructure.adapter.primary.interceptors;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerRegistry;
+import co.edu.uco.utils.helper.UtilObject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -15,17 +16,15 @@ import java.util.List;
 import java.util.Optional;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.REQUEST_GET_HEADER_ACCEPT;
+import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 
 @Component
 @Slf4j
-public class AcceptHeaderInterceptor implements HandlerInterceptor {
-
+public final class AcceptHeaderInterceptor implements HandlerInterceptor {
     private final SerializerRegistry serializerRegistry;
-
     public AcceptHeaderInterceptor(SerializerRegistry serializerRegistry) {
         this.serializerRegistry = serializerRegistry;
     }
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
@@ -33,10 +32,10 @@ public class AcceptHeaderInterceptor implements HandlerInterceptor {
 
         var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
 
-        if (serializer == null || !serializer.supports(acceptHeader)) {
+        if (isNullObject(serializer) || !serializer.supports(acceptHeader)) {
             var errorMessage = String.format(DetailMessageEnum.TCH_022.getContent(), acceptHeader);
             var errorResponse = new Response<String>(List.of(), List.of(errorMessage));
-            assert serializer != null;
+            assert !isNullObject(serializer);
             var formattedError = serializer.serialize(errorResponse);
             response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
             response.setContentType(serializer.getSupportedContentType());

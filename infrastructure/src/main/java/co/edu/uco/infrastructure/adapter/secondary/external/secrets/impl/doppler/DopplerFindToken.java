@@ -1,8 +1,8 @@
 package co.edu.uco.infrastructure.adapter.secondary.external.secrets.impl.doppler;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.secret.FindSecretTokenPort;
 import co.edu.uco.utils.exception.CrossWordsException;
-import co.edu.uco.utils.exception.enumeration.ExceptionLocation;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -16,22 +16,18 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
 @Slf4j
 @Component
-public class DopplerFindToken implements FindSecretTokenPort {
+public final class DopplerFindToken implements FindSecretTokenPort {
     @Value("${doppler.token}")
     private String token;
-
     private final ObjectMapper mapper;
-
     public DopplerFindToken(ObjectMapper mapper) {
         this.mapper = mapper;
     }
-
-    //TODO: Eliminar codigo hardcodeado
     @Override
     public Map<String, String> findSecretToken(String secretName) {
-        OkHttpClient client = new OkHttpClient();
+        var client = new OkHttpClient();
 
-        Request request = new Request.Builder()
+        var request = new Request.Builder()
                 .url(URL_DOPPLER_CONFIG_SECRETS_GET.formatted(secretName))
                 .get()
                 .addHeader(REQUEST_GET_HEADER_ACCEPT.toLowerCase(), JSON_SERIALIZER_CONTENT_TYPE)
@@ -40,29 +36,29 @@ public class DopplerFindToken implements FindSecretTokenPort {
 
         try(Response response = client.newCall(request).execute()){
             if(!response.isSuccessful()){
-                log.error("Error code from response {} : ", response.code());
-                throw CrossWordsException.build(
-                        "Error code from response %s : ".formatted(response.code()),
-                        "An error occurred while verify the token, please try again later",
+                var message = DetailMessageEnum.TCH_030.getContent().formatted(response.code());
+                log.error(message);
+                throw CrossWordsException.buildInfrastructure(
+                        message,
+                        DetailMessageEnum.FUN_025.getContent(),
                         null,
-                        ExceptionType.TECHNICAL,
-                        ExceptionLocation.INFRASTRUCTURE
+                        ExceptionType.TECHNICAL
                 );
             }else {
-                DopplerFindTokenDTO dopplerFindTokenDTO = mapper.readValue(response.body().byteStream(), DopplerFindTokenDTO.class);
+                var dopplerFindTokenDTO = mapper.readValue(response.body().byteStream(), DopplerFindTokenDTO.class);
                 return Map.of(
-                        "secretName", dopplerFindTokenDTO.getName(),
-                        "privateKey", dopplerFindTokenDTO.getRaw()
+                        DOPPLER_DTO_SECRET_NAME, dopplerFindTokenDTO.getName(),
+                        DOPPLER_DTO_PRIVATE_KEY, dopplerFindTokenDTO.getRaw()
                 );
             }
         }catch (Exception e){
-            log.error("Error occurred sending request to Doppler", e);
-            throw CrossWordsException.build(
-                    "Error occurred sending request to Doppler",
-                    "An error occurred while verify the token, please try again later",
+            var message = DetailMessageEnum.TCH_029.getContent();
+            log.error(message, e);
+            throw CrossWordsException.buildInfrastructure(
+                    message,
+                    DetailMessageEnum.FUN_025.getContent(),
                     e,
-                    ExceptionType.TECHNICAL,
-                    ExceptionLocation.INFRASTRUCTURE
+                    ExceptionType.TECHNICAL
             );
         }
     }
