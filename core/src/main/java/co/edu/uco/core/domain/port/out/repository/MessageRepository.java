@@ -1,6 +1,7 @@
 package co.edu.uco.core.domain.port.out.repository;
 
 import co.edu.uco.core.domain.data.MessageData;
+import co.edu.uco.core.domain.data.MessageEnvironmentData;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface MessageRepository {
     SimplePage<MessageData> finByApplication(String application, Pageable pageable);
     List<MessageData> finByApplication(String application);
     Optional<MessageData> findById(UUID id);
+    SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable);
 }

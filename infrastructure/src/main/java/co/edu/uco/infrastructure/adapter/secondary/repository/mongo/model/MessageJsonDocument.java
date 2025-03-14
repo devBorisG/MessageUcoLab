@@ -1,28 +1,27 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
 import co.edu.uco.utils.helper.UtilObject;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "message")
-public final class MessageDocument {
+public final class MessageJsonDocument {
     @Id
-    @Field(name = "MESSAGE_ID")
+    @JsonProperty("ID")
     private String id;
-    @Field(name = "CODE")
+    @JsonProperty("CODE")
     private String code;
-    @Field(name = "TITLE")
+    @JsonProperty("TITLE")
     private String title;
-    @Field(name = "CONTENT")
+    @JsonProperty("CONTENT")
     private String content;
-    @Field(name = "TYPE_ID")
+    @JsonProperty("TYPE_ID")
     private MessageTypeDocument type;
-    @Field(name = "CATEGORY_ID")
+    @JsonProperty("CATEGORY_ID")
     private MessageCategoryDocument category;
     @Field(name = "STATUS")
     private StatusMessageDocument status;
@@ -57,4 +56,5 @@ public final class MessageDocument {
     public void setFunctionality(String functionality) {
         this.functionality = trim(functionality);
     }
+    public static MessageJsonDocument build() {return new MessageJsonDocument();}
 }

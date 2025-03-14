@@ -12,4 +12,5 @@ public abstract class DatabaseCatalog extends MessageCatalog<String, Optional<Me
     public abstract Optional<MessageData> getMessage(String code, String application);
     public abstract SimplePage<MessageData> getMessage(String application, SimplePageRequest request);
     public abstract List<MessageData> getMessages(String application);
+    public abstract SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request);
 }

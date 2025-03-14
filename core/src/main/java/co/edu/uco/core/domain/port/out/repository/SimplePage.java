@@ -23,7 +23,7 @@ public final class SimplePage<T> {
         this.totalItems = totalItems;
         this.totalPages = totalPages;
     }
-    public static SimplePage<MessageData> of(Page<MessageData> map) {
+    public static <T> SimplePage<T> of(Page<T> map) {
         return new SimplePage<>(map.getContent(), map.getNumber(), map.getSize(), map.getTotalElements(), map.getTotalPages());
     }
     public static <T> SimplePage<T> of(List<T> data, int currentPage, int pageSize, long totalItems, int totalPage) {

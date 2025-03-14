@@ -110,10 +110,10 @@ CREATE TABLE message_environment_state_data (
 CREATE TABLE message_environment_data (
     id UUID PRIMARY KEY,
     message_id UUID NOT NULL,
-    environment_type_id UUID NOT NULL,
+    environment_id UUID NOT NULL,
     state_data_id UUID NOT NULL,
     FOREIGN KEY (message_id) REFERENCES message_data(id),
-    FOREIGN KEY (environment_type_id) REFERENCES environment_type_data(id),
+    FOREIGN KEY (environment_id) REFERENCES environment_data(id),
     FOREIGN KEY (state_data_id) REFERENCES message_environment_state_data(id)
 );
 

@@ -5,8 +5,10 @@ import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageByCodeMessagePort;
+import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageEnvironmentPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingListMessageByApplicationPort;
 import co.edu.uco.infrastructure.adapter.primary.FindMessagesController;
+import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoEnvironmentRepositoryAdapter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,6 +17,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,16 +27,21 @@ import java.util.List;
 @RequestMapping("${crosswords.api.path.message}")
 @Tag(name = "Consulta de Mensajes", description = "Endpoints para obtener información de mensajes")
 public class FindMessagesControllerImpl implements FindMessagesController {
+    private static final Logger log = LoggerFactory.getLogger(FindMessagesControllerImpl.class);
     private final HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort;
     private final HandlingListMessageByApplicationPort handlingListMessageByApplicationPort;
+    private final HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort;
     private final PresenterPort<MessageDTO> restPresenter;
     private final PresenterPort<SimplePage<MessageDTO>> restPresenterPage;
+    private final MongoEnvironmentRepositoryAdapter repositoryAdapter;
 
-    public FindMessagesControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort, HandlingListMessageByApplicationPort handlingListMessageByApplicationPort, PresenterPort<MessageDTO> restPresenter, PresenterPort<SimplePage<MessageDTO>> restPresenterPage) {
+    public FindMessagesControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort, HandlingListMessageByApplicationPort handlingListMessageByApplicationPort, HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort, PresenterPort<MessageDTO> restPresenter, PresenterPort<SimplePage<MessageDTO>> restPresenterPage, MongoEnvironmentRepositoryAdapter repositoryAdapter) {
         this.handlingFindMessageByCodeMessagePort = handlingFindMessageByCodeMessagePort;
         this.handlingListMessageByApplicationPort = handlingListMessageByApplicationPort;
+        this.handlingFindMessageEnvironmentPort = handlingFindMessageEnvironmentPort;
         this.restPresenter = restPresenter;
         this.restPresenterPage = restPresenterPage;
+        this.repositoryAdapter = repositoryAdapter;
     }
 
     @Override
@@ -178,5 +187,13 @@ public class FindMessagesControllerImpl implements FindMessagesController {
     ) {
         SimplePage<MessageDTO> messageDTOSimplePage = handlingListMessageByApplicationPort.execute(id, simplePageRequest);
         restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest, httpServletResponse);
+    }
+
+    @Override
+    @GetMapping("${crosswords.api.path.message.environment}")
+    public void findByEnvironmentAndMessage(@PathVariable String environment, SimplePageRequest simplePageRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        //SimplePage<MessageDTO> messageEnvironmentDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environment, simplePageRequest);
+        //restPresenterPage.presentRestSuccess(List.of(messageEnvironmentDTOSimplePage), httpServletRequest, httpServletResponse);
+        log.info(repositoryAdapter.findMessagesByEnvironmentId(environment).toString());
     }
 }

@@ -4,7 +4,6 @@ import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
-import co.edu.uco.utils.helper.UtilUUID;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,6 +14,7 @@ import java.util.Optional;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
+import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
 
 @Component
 @Scope(SINGLETON_SCOPE)
@@ -26,12 +26,12 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
 
     @Override
     public Optional<MessageData> getMessageById(String code) {
-        return repository.findById(UtilUUID.getUUIDFromString(code));
+        return repository.findById(getUUIDFromString(code));
     }
 
     @Override
     public String getContent(String code) {
-        return repository.findById(UtilUUID.getUUIDFromString(code)).map(MessageData::getContent).orElse(EMPTY);
+        return repository.findById(getUUIDFromString(code)).map(MessageData::getContent).orElse(EMPTY);
     }
 
     @Override
@@ -53,5 +53,12 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
     @Override
     public List<MessageData> getMessages(String application) {
         return repository.finByApplication(application);
+    }
+
+    @Override
+    public SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request) {
+        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+
+        return repository.findByIdEnvironment(getUUIDFromString(environment), result);
     }
 }

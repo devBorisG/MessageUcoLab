@@ -1,17 +1,16 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import jakarta.persistence.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 
 @Getter
-@Document(collection = "message_type")
 public final class MessageTypeDocument {
-    @Id
+    @JsonProperty("ID")
     private String id;
+    @JsonProperty("NAME")
     private String name;
     public MessageTypeDocument(String id, String name) {
         setId(id);

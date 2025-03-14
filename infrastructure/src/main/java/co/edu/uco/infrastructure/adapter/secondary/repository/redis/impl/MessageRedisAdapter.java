@@ -6,6 +6,7 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.DataMapper;
 import co.edu.uco.infrastructure.adapter.secondary.repository.redis.MessageRedis;
 import co.edu.uco.infrastructure.adapter.secondary.repository.redis.RedisRepositoryAdapter;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -44,5 +45,10 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
     @Override
     public Optional<MessageData> findById(UUID id) {
         return repository.findById(id).map(mapper::mapperData);
+    }
+
+    @Override
+    public SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable) {
+        return SimplePage.of(Page.empty());
     }
 }
