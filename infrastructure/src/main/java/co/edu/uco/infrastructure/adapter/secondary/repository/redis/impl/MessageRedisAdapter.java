@@ -51,4 +51,9 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
     public SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable) {
         return SimplePage.of(Page.empty());
     }
+
+    @Override
+    public SimplePage<MessageData> findMessagesByEnvironment(String environment, Pageable pageable) {
+        return SimplePage.of(Page.empty());
+    }
 }

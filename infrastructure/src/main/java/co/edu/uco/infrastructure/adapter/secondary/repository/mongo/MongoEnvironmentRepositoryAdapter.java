@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MongoEnvironmentRepositoryAdapter  extends MongoRepository<MessageEnvironmentDocument, String> {
-    @Query(value = "{ 'ENVIRONMENT_ID': ?0 }", fields = "{ 'MESSAGE': 1, '_id': 0 }")
-    List<MessageJsonDocument> findMessagesByEnvironmentId(String environmentId);
+    List<MessageEnvironmentDocument> findMessageEnvironmentDocumentByEnvironmentId(String environmentId);
 }

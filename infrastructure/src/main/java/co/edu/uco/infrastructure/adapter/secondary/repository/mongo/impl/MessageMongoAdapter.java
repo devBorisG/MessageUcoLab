@@ -60,4 +60,10 @@ public final class MessageMongoAdapter implements DataBaseMessageRepository {
     public SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable) {
         return null/*SimplePage.of(environmentRepository.findMessageEnvironmentDocumentByEnvironmentId(getStringFromUUID(id), pageable))*/;
     }
+
+    @Override
+    public SimplePage<MessageData> findMessagesByEnvironment(String id, Pageable pageable) {
+        var query = environmentRepository.findMessageEnvironmentDocumentByEnvironmentId(id);
+        return null;
+    }
 }

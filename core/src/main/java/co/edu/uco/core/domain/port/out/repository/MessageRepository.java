@@ -15,4 +15,5 @@ public interface MessageRepository {
     List<MessageData> finByApplication(String application);
     Optional<MessageData> findById(UUID id);
     SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable);
+    SimplePage<MessageData> findMessagesByEnvironment(String id, Pageable pageable);
 }
