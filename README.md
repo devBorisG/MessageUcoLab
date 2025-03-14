@@ -1,89 +1,88 @@
 # MessageUcoLab
 
-Una aplicación Spring Boot para el manejo y procesamiento de mensajes.
+A Spring Boot application for message handling and processing.
 
-## Requisitos Previos
+## Prerequisites
 
-- Java 17 o superior
-- Maven 3.6.x o superior
-- IDE (IntelliJ IDEA, Eclipse, Visual Studio Code, etc.)
-- Infraestructura necesaria:
-  - MongoDB (versión 4.4 o superior)
-  - Redis (versión 6.0 o superior)
-  - PostgreSQL (versión 12 o superior)
-  - Apache Pulsar (versión 3.2.2)
-  - Observabilidad (opcional pero recomendado):
-    - Grafana (para visualización de métricas y logs)
-    - Loki (para almacenamiento y consulta de logs)
-    - OpenTelemetry Collector (para recopilación de telemetría)
-    - Prometheus (para almacenamiento y consulta de métricas)
+- Java 17 or higher
+- Maven 3.6.x or higher
+- Required infrastructure:
+  - MongoDB (version 4.4 or higher)
+  - Redis (version 6.0 or higher)
+  - PostgreSQL (version 12 or higher)
+  - Apache Pulsar (version 3.2.2)
+  - Observability (optional but recommended):
+    - Grafana (for metrics and logs visualization)
+    - Loki (for log storage and querying)
+    - OpenTelemetry Collector (for telemetry collection)
+    - Prometheus (for metrics storage and querying)
 
-## Estructura del Proyecto
+## Project Structure
 
-El proyecto está organizado en múltiples módulos:
+The project is organized into multiple modules:
 
-- `Core`: Lógica de negocio principal y modelos de dominio
-- `Infrastructure`: Componentes de la capa de infraestructura (contiene la clase principal para ejecutar la aplicación)
-- `Utils`: Clases de utilidad y funciones auxiliares
+- `Core`: Main business logic and domain models
+- `Infrastructure`: Infrastructure layer components (contains the main application class)
+- `Utils`: Utility classes and helper functions
 
-## Configuración de Infraestructura
+## Infrastructure Configuration
 
 ### MongoDB
 
-1. Instalar MongoDB (versión 4.4 o superior)
-2. Crear una base de datos llamada `messageuco`
-3. Configurar las credenciales en las variables de entorno o en `application.properties`
+1. Install MongoDB (version 4.4 or higher)
+2. Create a database named `messageuco`
+3. Configure credentials in environment variables or in `application.properties`
 
 ### Redis
 
-1. Instalar Redis (versión 6.0 o superior)
-2. Configurar las credenciales en las variables de entorno o en `application.properties`
+1. Install Redis (version 6.0 or higher)
+2. Configure credentials in environment variables or in `application.properties`
 
 ### PostgreSQL
 
-1. Instalar PostgreSQL (versión 12 o superior)
-2. Crear una base de datos llamada `ucolab`
-3. Crear un usuario `crosswords` con contraseña `crosswords` (o configurar según tus necesidades)
-4. Asignar permisos al usuario para la base de datos
-5. Si estás configurando PostgreSQL manualmente (sin Docker), ejecutar el script SQL ubicado en `deployment/docker/init.sql` para crear las tablas necesarias
-   > Nota: Si utilizas el docker-compose proporcionado, este script se ejecutará automáticamente al iniciar el contenedor de PostgreSQL
+1. Install PostgreSQL (version 12 or higher)
+2. Create a database named `ucolab`
+3. Create a user `crosswords` with password `crosswords` (or configure according to your needs)
+4. Assign permissions to the user for the database
+5. If you're configuring PostgreSQL manually (without Docker), run the SQL script located at `deployment/docker/init.sql` to create the necessary tables
+   > Note: If you use the provided docker-compose, this script will be executed automatically when the PostgreSQL container starts
 
 ### Apache Pulsar
 
-1. Instalar Apache Pulsar (versión 3.2.2)
-2. Configurar el servicio según la documentación oficial
-3. Crear el topic `list-messageModel-topic`
+1. Install Apache Pulsar (version 3.2.2)
+2. Configure the service according to the official documentation
+3. Create the topic `list-messageModel-topic`
 
-### Infraestructura de Observabilidad
+### Observability Infrastructure
 
 #### Grafana
 
-1. Instalar Grafana (o usar Docker)
-2. Configurar para conectarse a Prometheus y Loki
-3. Importar dashboards predefinidos para monitoreo de aplicaciones Spring Boot
+1. Install Grafana (or use Docker)
+2. Configure to connect to Prometheus and Loki
+3. Import predefined dashboards for Spring Boot application monitoring
 
 #### Loki
 
-1. Instalar Loki (o usar Docker)
-2. Configurar para recibir logs de la aplicación
-3. La aplicación está configurada para enviar logs a Loki en `http://localhost:3100/loki/api/v1/push`
+1. Install Loki (or use Docker)
+2. Configure to receive logs from the application
+3. The application is configured to send logs to Loki at `http://localhost:3100/loki/api/v1/push`
 
 #### OpenTelemetry Collector
 
-1. Instalar OpenTelemetry Collector (o usar Docker)
-2. Usar la configuración en `deployment/docker/otel-collector-config.yaml`
-3. El collector escucha en los puertos 4317 (gRPC) y 4318 (HTTP)
+1. Install OpenTelemetry Collector (or use Docker)
+2. Use the configuration in `deployment/docker/otel-collector-config.yaml`
+3. The collector listens on ports 4317 (gRPC) and 4318 (HTTP)
 
 #### Prometheus
 
-1. Instalar Prometheus (o usar Docker)
-2. Usar la configuración en `deployment/docker/prometheus.yml`
-3. Prometheus escucha en el puerto 9090
-4. La aplicación expone métricas en el endpoint `/actuator/prometheus`
+1. Install Prometheus (or use Docker)
+2. Use the configuration in `deployment/docker/prometheus.yml`
+3. Prometheus listens on port 9090
+4. The application exposes metrics at the `/actuator/prometheus` endpoint
 
-## Variables de Entorno
+## Environment Variables
 
-Configura las siguientes variables de entorno antes de ejecutar la aplicación:
+Configure the following environment variables before running the application:
 
 ```text
 # MongoDB
@@ -100,199 +99,127 @@ REDISPORT=6379
 REDISPASSWORD=your_redis_password
 REDISDATABASE=0
 
-# Azure Key Vault (solo para producción)
+# Azure Key Vault (for production only)
 AZURE_KEYVAULT_UCOLAB_ENDPOINT=your_azure_keyvault_endpoint
 
-# Doppler (opcional)
+# Doppler (optional)
 DOPPLERTOKEN=your_doppler_token
 ```
 
-## Compilación del Proyecto
+## Building the Project
 
-### Compilación Local
+### Local Build
 
-1. Clonar el repositorio:
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/devBorisG/MessageUcoLab.git
 cd MessageUcoLab
 ```
 
-2. Compilar el proyecto usando Maven:
+2. Build the project using Maven:
 
 ```bash
 mvn clean install
 ```
 
-## Ejecución de la Aplicación
+## Running the Application
 
-### Ejecución desde IDE
-
-Para ejecutar la aplicación desde tu IDE (IntelliJ IDEA, Eclipse o Visual Studio Code):
-
-1. Asegúrate de tener todas las dependencias de infraestructura en ejecución (MongoDB, Redis, PostgreSQL, Pulsar)
-2. Configura las variables de entorno necesarias en la configuración de ejecución de tu IDE
-3. Abre el proyecto como un proyecto Maven
-4. Localiza la clase principal: `co.edu.uco.infrastructure.init.CrossWordApplication`
-5. Ejecuta esta clase como una aplicación Spring Boot
-
-#### Configuración en IntelliJ IDEA
-
-1. Abre el proyecto en IntelliJ IDEA
-2. Ve a Run > Edit Configurations
-3. Haz clic en el botón "+" y selecciona "Spring Boot"
-4. Configura lo siguiente:
-   - Name: MessageUcoLab
-   - Main class: co.edu.uco.infrastructure.init.CrossWordApplication
-   - Working directory: $MODULE_WORKING_DIR$
-   - Environment variables: Configura las variables mencionadas anteriormente
-5. Haz clic en "Apply" y luego en "OK"
-6. Ejecuta la configuración creada
-
-#### Configuración en Eclipse
-
-1. Abre el proyecto en Eclipse
-2. Haz clic derecho en el proyecto > Run As > Run Configurations
-3. Crea una nueva configuración de "Spring Boot App"
-4. Configura lo siguiente:
-   - Name: MessageUcoLab
-   - Project: MessageUcoLab
-   - Main class: co.edu.uco.infrastructure.init.CrossWordApplication
-   - En la pestaña "Environment", agrega las variables de entorno necesarias
-5. Haz clic en "Apply" y luego en "Run"
-
-#### Configuración en Visual Studio Code
-
-1. Abre el proyecto en VS Code
-2. Instala la extensión "Spring Boot Tools" si aún no la tienes
-3. Crea un archivo `.vscode/launch.json` con la siguiente configuración:
-
-```json
-{
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "java",
-      "name": "MessageUcoLab",
-      "request": "launch",
-      "mainClass": "co.edu.uco.infrastructure.init.CrossWordApplication",
-      "projectName": "Infrastructure",
-      "env": {
-        "MONGOURI": "mongodb://localhost:27017/messageuco",
-        "MONGODBHOST": "localhost",
-        "MONGODBPORT": "27017",
-        "MONGODBUSER": "your_mongodb_user",
-        "MONGOPASSWORD": "your_mongodb_password",
-        "MONGODBDATABASE": "messageuco",
-        "REDISHOST": "localhost",
-        "REDISPORT": "6379",
-        "REDISPASSWORD": "your_redis_password",
-        "REDISDATABASE": "0"
-      }
-    }
-  ]
-}
-```
-
-4. Ejecuta la configuración desde la pestaña "Run and Debug"
-
-### Ejecución con Maven
-
-También puedes ejecutar la aplicación usando Maven:
+To run the application, make sure all infrastructure dependencies are running (MongoDB, Redis, PostgreSQL, Pulsar), then use Maven:
 
 ```bash
 mvn spring-boot:run -pl Infrastructure
 ```
 
-La aplicación se iniciará en el puerto 8085 por defecto.
+The application will start on port 8085 by default.
 
-## Documentación de la API
+## API Documentation
 
-La documentación de la API está disponible en:
+API documentation is available at:
 
 - Swagger UI: `http://localhost:8085/swagger-ui.html`
 - OpenAPI JSON: `http://localhost:8085/v3/api-docs`
 
-## Endpoints de la API
+## API Endpoints
 
-### Ejemplos de Endpoints
+### Example Endpoints
 
-1. Verificación de salud:
+1. Health check:
 
 ```bash
 curl http://localhost:8085/actuator/health
 ```
 
-2. Endpoints de mensajes:
+2. Message endpoints:
 
 ```bash
-# Obtener mensajes para una aplicación
+# Get messages for an application
 curl http://localhost:8085/messageucolab/v1/application/{id}/messages
 
-# Obtener un mensaje específico por código
+# Get a specific message by code
 curl http://localhost:8085/messageucolab/v1/application/{id}/message/{messageCode}
 
-# Obtener token para una aplicación
+# Get token for an application
 curl http://localhost:8085/messageucolab/v1/application/{id}/token
 ```
 
-## Monitoreo y Logging
+## Monitoring and Logging
 
-- Los logs de la aplicación están disponibles en el directorio `logs/`
-- La aplicación expone métricas de Prometheus en `http://localhost:8085/actuator/prometheus`
-- Acceso a interfaces de monitoreo:
-  - Grafana: `http://localhost:3000` (usuario: admin, contraseña: admin)
+- Application logs are available in the `logs/` directory
+- The application exposes Prometheus metrics at `http://localhost:8085/actuator/prometheus`
+- Access to monitoring interfaces:
+  - Grafana: `http://localhost:3000` (user: admin, password: admin)
   - Prometheus: `http://localhost:9090`
   - Loki: `http://localhost:3100`
 
-## Solución de Problemas
+## Troubleshooting
 
-Problemas comunes y soluciones:
+Common problems and solutions:
 
-1. Puerto ya en uso:
-   - Cambiar el puerto usando la variable de entorno `SERVER_PORT`
-   - O detener el proceso que está usando el puerto en conflicto
+1. Port already in use:
+   - Change the port using the `SERVER_PORT` environment variable
+   - Or stop the process that is using the conflicting port
 
-2. Problemas de conexión con MongoDB/Redis/PostgreSQL:
-   - Verificar que los servicios estén en ejecución
-   - Comprobar las credenciales y configuraciones en `application.properties`
-   - Verificar la conectividad de red
+2. Connection problems with MongoDB/Redis/PostgreSQL:
+   - Verify that the services are running
+   - Check credentials and configurations in `application.properties`
+   - Verify network connectivity
 
-3. Errores de compilación:
-   - Asegurarse de usar Java 17
-   - Limpiar y reconstruir el proyecto: `mvn clean install`
+3. Compilation errors:
+   - Make sure you're using Java 17
+   - Clean and rebuild the project: `mvn clean install`
 
-## Uso de Docker para Infraestructura (Opcional)
+## Using Docker for Infrastructure (Optional)
 
-Si prefieres no instalar todos los componentes de infraestructura localmente, puedes usar Docker para ejecutarlos. En la carpeta `deployment/docker` encontrarás un archivo `docker-compose.yml` que puedes usar para levantar todos los servicios necesarios:
+If you prefer not to install all infrastructure components locally, you can use Docker to run them. In the `deployment/docker` folder, you'll find a `docker-compose.yml` file that you can use to start all the necessary services:
 
 ```bash
 cd deployment/docker
 docker-compose up -d
 ```
 
-Esto iniciará:
+This will start:
 
 - MongoDB
 - Redis
-- PostgreSQL (con las tablas ya creadas automáticamente mediante el script init.sql)
+- PostgreSQL (with tables automatically created using the init.sql script)
 - Apache Pulsar
-- Servicios de observabilidad:
-  - Grafana (puerto 3000)
-  - Loki (puerto 3100)
-  - OpenTelemetry Collector (puertos 4317, 4318)
-  - Prometheus (puerto 9090)
+- Observability services:
+  - Grafana (port 3000)
+  - Loki (port 3100)
+  - OpenTelemetry Collector (ports 4317, 4318)
+  - Prometheus (port 9090)
 
-Luego puedes ejecutar la aplicación desde tu IDE conectándose a estos servicios.
+Then you can run the application connecting to these services.
 
-### Configuración de Grafana
+### Grafana Configuration
 
-Después de iniciar los servicios con Docker Compose, puedes acceder a Grafana en `http://localhost:3000` con las siguientes credenciales:
+After starting the services with Docker Compose, you can access Grafana at `http://localhost:3000` with the following credentials:
 
-- Usuario: admin
-- Contraseña: admin
+- Username: admin
+- Password: admin
 
-Se recomienda configurar las siguientes fuentes de datos:
+It is recommended to configure the following data sources:
 
 1. Prometheus: `http://prometheus:9090`
 2. Loki: `http://loki:3100`
