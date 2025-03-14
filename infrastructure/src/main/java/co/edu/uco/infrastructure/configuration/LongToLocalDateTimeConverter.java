@@ -12,8 +12,7 @@ import java.time.ZoneOffset;
 public final class LongToLocalDateTimeConverter implements Converter<Long, LocalDateTime> {
     @Override
     public LocalDateTime convert(Long source) {
-        // Convertir nanosegundos a microsegundos antes de convertir a LocalDateTime
-        long millis = source / 1_000; // Convertimos de microsegundos a milisegundos
+        long millis = source / 1_000;
         return LocalDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneOffset.UTC);
     }
 }

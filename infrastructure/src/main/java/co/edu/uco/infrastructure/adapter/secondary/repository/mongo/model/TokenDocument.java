@@ -8,27 +8,28 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.time.LocalDateTime;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 import static co.edu.uco.utils.helper.UtilDate.TIME;
 import static co.edu.uco.utils.helper.UtilDate.getDefaultTimeIfNull;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "token")
+@Document(collection = COLLECTION_TOKEN)
 public final class TokenDocument {
     private String _id;
     @Id
-    @Field("id")
+    @Field(FIELD_ID)
     private String id;
-    @Field(value = "creation_date", targetType = FieldType.INT64)
+    @Field(value = FIELD_CREATION_DATE, targetType = FieldType.INT64)
     private LocalDateTime creationDate;
-    @Field(value = "expiration_date", targetType = FieldType.INT64)
+    @Field(value = FIELD_EXPIRATION_DATE, targetType = FieldType.INT64)
     private LocalDateTime expirationDate;
-    @Field("environment_id")
+    @Field(FIELD_ENVIRONMENT_ID)
     private String environmentId;
-    @Field("secret_name")
+    @Field(FIELD_SECRET_NAME)
     private String secretName;
-    @Field("state_id")
+    @Field(FIELD_STATE_ID)
     private String stateId;
     public TokenDocument(String id, LocalDateTime creationDate, LocalDateTime expirationDate,
                          String environmentId, String secretName, String stateId) {
