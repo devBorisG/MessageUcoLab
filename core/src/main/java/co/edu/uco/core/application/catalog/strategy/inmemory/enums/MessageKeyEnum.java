@@ -39,6 +39,8 @@ public enum MessageKeyEnum {
     TCH_029("TCH_029", MessageSourceEnum.NETWORK),
     TCH_030("TCH_030", MessageSourceEnum.NETWORK),
     TCH_031("TCH_031", MessageSourceEnum.NETWORK),
+    TCH_032("TCH_032", MessageSourceEnum.NETWORK),
+    TCH_033("TCH_033", MessageSourceEnum.NETWORK),
     FUN_001("FUN_001", MessageSourceEnum.CRITICAL),
     FUN_002("FUN_002", MessageSourceEnum.CRITICAL),
     FUN_003("FUN_003", MessageSourceEnum.CRITICAL),
@@ -63,7 +65,8 @@ public enum MessageKeyEnum {
     FUN_022("FUN_022", MessageSourceEnum.CRITICAL),
     FUN_023("FUN_023", MessageSourceEnum.CRITICAL),
     FUN_024("FUN_024", MessageSourceEnum.NETWORK),
-    FUN_025("FUN_025", MessageSourceEnum.NETWORK);
+    FUN_025("FUN_025", MessageSourceEnum.NETWORK),
+    FUN_026("FUN_026", MessageSourceEnum.NETWORK);
 
     private final String key;
     private final MessageSourceEnum source;

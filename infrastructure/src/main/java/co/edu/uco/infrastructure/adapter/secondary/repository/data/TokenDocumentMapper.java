@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TokenDocumentMapper implements DataMapper<TokenData, TokenDocument> {
+public final class TokenDocumentMapper implements DataMapper<TokenData, TokenDocument> {
     private final ModelMapper modelMapper;
     public TokenDocumentMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;

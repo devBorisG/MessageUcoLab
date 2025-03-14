@@ -1,40 +1,50 @@
 package co.edu.uco.core.domain.usecase;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
+import co.edu.uco.core.domain.data.TokenData;
 import co.edu.uco.core.domain.port.out.repository.token.FindTokenRepository;
+import co.edu.uco.core.domain.port.out.repository.token.TokenStateRepository;
 import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.core.domain.port.out.secret.FindSecretTokenPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingVerifyAccessPort;
+import co.edu.uco.utils.exception.BusinessRuleException;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+import static co.edu.uco.core.CrosswordsConstant.*;
+
 @Service
-public class VerifyAccessUseCase implements HandlingVerifyAccessPort {
+public final class VerifyAccessUseCase implements HandlingVerifyAccessPort {
     private final EncryptTokenPort encryptTokenPort;
     private final FindSecretTokenPort findSecretTokenPort;
     private final FindTokenRepository findTokenRepository;
-
-    public VerifyAccessUseCase(EncryptTokenPort encryptTokenPort, FindSecretTokenPort findSecretTokenPort, FindTokenRepository findTokenRepository) {
+    private final TokenStateRepository tokenStateRepository;
+    public VerifyAccessUseCase(EncryptTokenPort encryptTokenPort, FindSecretTokenPort findSecretTokenPort, FindTokenRepository findTokenRepository, TokenStateRepository tokenStateRepository) {
         this.encryptTokenPort = encryptTokenPort;
         this.findSecretTokenPort = findSecretTokenPort;
         this.findTokenRepository = findTokenRepository;
+        this.tokenStateRepository = tokenStateRepository;
     }
-
     @Override
     public boolean verifyAccess(String token) {
-        //TODO: Se agrega esto de prueba pero hay que esperar a FEDERICO haga su parte :)
-        String secretName = "UCOLAB_TOKEN_PRIVATE_KEY_00000000_0000_0000_0000_000000000001DDDDDDDD_DDDD_DDDD_DDDD_DDDDDDDDDDDD";
-        findTokenRepository.findId(token);
-       // findTokenRepository.findAll();
-        Map<String, String> secret = findSecretTokenPort.findSecretToken(secretName);
+        var secretName = findTokenRepository.findById(token);
+        stateValid(secretName.getStateId());
+        Map<String, String> secret = findSecretTokenPort.findSecretToken(secretName.getSecretName());
         try{
             return encryptTokenPort.access(
-                    secret.get("privateKey"),
+                    secret.get(SECRET_PORT_PRIVATE_KEY),
                     token,
-                    secret.get("secretName")
+                    secret.get(SECRET_PORT_SECRET_NAME)
             );
         } catch (Exception e){
             return false;
+        }
+    }
+    private void stateValid(String statusId) {
+        var status = tokenStateRepository.findByStatus(statusId);
+        if (!status.getName().equals(STATE_ACTIVE)) {
+            throw BusinessRuleException.buildUserException(DetailMessageEnum.TCH_033.getContent());
         }
     }
 }

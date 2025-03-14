@@ -1,13 +1,12 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.impl;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.data.TokenData;
 import co.edu.uco.core.domain.port.out.repository.token.FindTokenRepository;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.TokenDocumentMapper;
 import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenMongoRepositoryAdapter;
+import co.edu.uco.utils.exception.BusinessException;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Optional;
 
 @Component
 public final class TokenMongoAdapter implements FindTokenRepository {
@@ -18,15 +17,8 @@ public final class TokenMongoAdapter implements FindTokenRepository {
         this.mapper = mapper;
     }
     @Override
-    public Optional<TokenData> findById(String id) {
-        return tokenMongoRepositoryAdapter.findById(id).map(mapper::mapperData);
-    }
-    @Override
-    public String findId(String token) {
-        return tokenMongoRepositoryAdapter.findById(token).get().getSecretName();
-    }
-    @Override
-    public List<TokenData> findAll() {
-        return tokenMongoRepositoryAdapter.findAll().stream().map(mapper::mapperData).toList();
+    public TokenData findById(String id) {
+        return tokenMongoRepositoryAdapter.findTokenDocumentById(id).map(mapper::mapperData)
+                .orElseThrow(() -> BusinessException.buildUserException(DetailMessageEnum.FUN_026.getContent()));
     }
 }
