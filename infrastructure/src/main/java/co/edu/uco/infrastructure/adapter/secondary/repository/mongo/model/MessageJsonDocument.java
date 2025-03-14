@@ -1,9 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
 import co.edu.uco.utils.helper.UtilObject;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import static co.edu.uco.utils.helper.UtilText.trim;

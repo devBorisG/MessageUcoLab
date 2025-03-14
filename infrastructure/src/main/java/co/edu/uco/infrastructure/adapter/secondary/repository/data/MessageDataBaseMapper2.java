@@ -1,7 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.data;
 
 import co.edu.uco.core.domain.data.MessageData;
-import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageJsonDocument;
+import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -10,17 +10,17 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 
 @Component
 @Scope(SINGLETON_SCOPE)
-public final class MessageDataBaseMapper implements DataMapper<MessageData, MessageJsonDocument> {
+public final class MessageDataBaseMapper2 implements DataMapper<MessageData, MessageDocument> {
     private  final ModelMapper modelMapper;
-    public MessageDataBaseMapper(ModelMapper modelMapper) {
+    public MessageDataBaseMapper2(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
     @Override
-    public MessageData mapperData(MessageJsonDocument model) {
+    public MessageData mapperData(MessageDocument model) {
         return modelMapper.map(model, MessageData.class);
     }
     @Override
-    public MessageJsonDocument mapperModel(MessageData data) {
-        return modelMapper.map(data, MessageJsonDocument.class);
+    public MessageDocument mapperModel(MessageData data) {
+        return modelMapper.map(data, MessageDocument.class);
     }
 }

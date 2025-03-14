@@ -7,11 +7,13 @@ import lombok.Getter;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
+import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Document(collection = "message_environment")
+@ToString
 public final class MessageEnvironmentDocument {
     private String _id;
     @Id

@@ -33,7 +33,6 @@ public class FindMessagesControllerImpl implements FindMessagesController {
     private final HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort;
     private final PresenterPort<MessageDTO> restPresenter;
     private final PresenterPort<SimplePage<MessageDTO>> restPresenterPage;
-    private final MongoEnvironmentRepositoryAdapter repositoryAdapter;
 
     public FindMessagesControllerImpl(HandlingFindMessageByCodeMessagePort handlingFindMessageByCodeMessagePort, HandlingListMessageByApplicationPort handlingListMessageByApplicationPort, HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort, PresenterPort<MessageDTO> restPresenter, PresenterPort<SimplePage<MessageDTO>> restPresenterPage, MongoEnvironmentRepositoryAdapter repositoryAdapter) {
         this.handlingFindMessageByCodeMessagePort = handlingFindMessageByCodeMessagePort;
@@ -41,7 +40,6 @@ public class FindMessagesControllerImpl implements FindMessagesController {
         this.handlingFindMessageEnvironmentPort = handlingFindMessageEnvironmentPort;
         this.restPresenter = restPresenter;
         this.restPresenterPage = restPresenterPage;
-        this.repositoryAdapter = repositoryAdapter;
     }
 
     @Override
@@ -191,9 +189,12 @@ public class FindMessagesControllerImpl implements FindMessagesController {
 
     @Override
     @GetMapping("${crosswords.api.path.message.environment}")
-    public void findByEnvironmentAndMessage(@PathVariable String environment, SimplePageRequest simplePageRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        //SimplePage<MessageDTO> messageEnvironmentDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environment, simplePageRequest);
-        //restPresenterPage.presentRestSuccess(List.of(messageEnvironmentDTOSimplePage), httpServletRequest, httpServletResponse);
-        log.info(repositoryAdapter.findMessageEnvironmentDocumentByEnvironmentId(environment).toString());
+    public void findByEnvironmentAndMessage(@PathVariable String environment,
+                                            SimplePageRequest simplePageRequest,
+                                            HttpServletRequest httpServletRequest,
+                                            HttpServletResponse httpServletResponse
+    ) {
+        SimplePage<MessageDTO> messageDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environment, simplePageRequest);
+        restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest, httpServletResponse);
     }
 }

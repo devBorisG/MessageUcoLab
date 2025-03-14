@@ -59,6 +59,6 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
     public SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request) {
         var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
 
-        return repository.findByIdEnvironment(getUUIDFromString(environment), result);
+        return repository.findMessagesByEnvironment(environment, result);
     }
 }

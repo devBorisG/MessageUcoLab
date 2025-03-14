@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.util.UUID;
 
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
@@ -23,7 +24,7 @@ public final class MessageData {
     private MessageCategoryData category;
     private StatusMessageData status;
     private String application;
-    private FunctionalityData functionality;
+    private String functionality;
 
     public MessageData() {
         setId(UtilUUID.getNewUUID());
@@ -34,10 +35,10 @@ public final class MessageData {
         setType(MessageTypeData.build());
         setCategory(MessageCategoryData.build());
         setStatus(StatusMessageData.build());
-        setFunctionality(FunctionalityData.build());
+        setFunctionality(EMPTY);
     }
     public MessageData(UUID id, String code, String title, String content, MessageTypeData type,
-                       MessageCategoryData category,  String application, FunctionalityData functionality) {
+                       MessageCategoryData category,  String application, String functionality) {
         setId(id);
         setCode(code);
         setTitle(title);
@@ -70,8 +71,8 @@ public final class MessageData {
     public void setApplication(String application) {
         this.application = trim(application);
     }
-    public void setFunctionality(FunctionalityData functionality) {
-        this.functionality = UtilObject.getDefaultIsNullObject(functionality, FunctionalityData.build());
+    public void setFunctionality(String functionality) {
+        this.functionality = trim(functionality);
     }
     public static MessageData build() {
         return new MessageData();
