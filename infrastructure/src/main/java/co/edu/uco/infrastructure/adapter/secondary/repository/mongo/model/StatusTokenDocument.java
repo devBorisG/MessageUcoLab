@@ -3,15 +3,20 @@ package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "status_token")
+@Document(collection = COLLECTION_TOKEN_STATE)
 public final class StatusTokenDocument {
+    private String _id;
     @Id
+    @Field(FIELD_ID)
     private String id;
+    @Field(FIELD_NAME)
     private String name;
     public StatusTokenDocument() {
         setId(EMPTY);

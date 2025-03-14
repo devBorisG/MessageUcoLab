@@ -16,12 +16,14 @@ public final class TokenData {
     private LocalDateTime creationDate;
     private LocalDateTime expirationDate;
     private String environmentId;
-    public TokenData(String id, LocalDateTime creationDate, LocalDateTime expirationDate, String environmentId, String secretName) {
+    private String stateId;
+    public TokenData(String id, LocalDateTime creationDate, LocalDateTime expirationDate, String environmentId, String secretName, String stateId) {
         setId(id);
         setSecretName(secretName);
         setCreationDate(creationDate);
         setExpirationDate(expirationDate);
         setEnvironmentId(environmentId);
+        setStateId(stateId);
     }
     public TokenData() {
         setId(UtilText.EMPTY);
@@ -29,6 +31,7 @@ public final class TokenData {
         setCreationDate(UtilDate.TIME);
         setExpirationDate(UtilDate.TIME);
         setEnvironmentId(UtilText.EMPTY);
+        setStateId(UtilText.EMPTY);
     }
     public void setId(String id) {
         this.id = trim(id);
@@ -42,7 +45,12 @@ public final class TokenData {
     public void setEnvironmentId(String environmentId) {
         this.environmentId = trim(environmentId);
     }
+
+    public void setStateId(String stateId) {
+        this.stateId = UtilText.trim(stateId);
+    }
     public void setSecretName(String secretName) {
         this.secretName = trim(secretName);
     }
+
 }

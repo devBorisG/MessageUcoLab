@@ -1,7 +1,6 @@
 package co.edu.uco.infrastructure.configuration;
 
 public final class InfrastructureConstant {
-
     private InfrastructureConstant() {}
     public static final String COLLECTION_MONGO_ADAPTER = "airbyte_raw_message";
     public static final String FIELD_MONGO_ADAPTER_ID = "_airbyte_data.id";
@@ -13,6 +12,18 @@ public final class InfrastructureConstant {
     public static final String FIELD_MONGO_ADAPTER_STATUS = "_airbyte_data.status";
     public static final String FIELD_MONGO_ADAPTER_APPLICATION = "_airbyte_data.application";
     public static final String FIELD_MONGO_ADAPTER_FUNCTIONALITY = "_airbyte_data.functionality";
+
+    public static final String COLLECTION_TOKEN = "token";
+    public static final String COLLECTION_TOKEN_STATE = "token_state";
+
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_CREATION_DATE = "creation_date";
+    public static final String FIELD_EXPIRATION_DATE = "expiration_date";
+    public static final String FIELD_ENVIRONMENT_ID = "environment_id";
+    public static final String FIELD_SECRET_NAME = "secret_name";
+    public static final String FIELD_STATE_ID = "state_id";
+
     public static final String CORRELATION_ID = "X-Correlation-ID";
     public static final String REDIS_HASH = "Message";
     public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";
