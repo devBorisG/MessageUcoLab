@@ -12,7 +12,7 @@ import java.security.PublicKey;
 @Setter
 @AllArgsConstructor
 @Builder
-public class KeyPairDTO {
+public final class KeyPairDTO {
     private PublicKey publicKey;
     private PrivateKey privateKey;
 }

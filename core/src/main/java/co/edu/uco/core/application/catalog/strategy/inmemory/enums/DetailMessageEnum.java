@@ -27,6 +27,16 @@ public enum DetailMessageEnum {
     TCH_021(MessageKeyEnum.TCH_021, "Response success", "The successful response is: {}", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.INFORMATION),
     TCH_022(MessageKeyEnum.TCH_022, "Media type not supported", "The media type %s is not supported by the system", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_023(MessageKeyEnum.TCH_023, "Incorrect Media type", "Media type is not supported {}", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_024(MessageKeyEnum.TCH_024, "KeyPair generation failed", "An error occurred while generating the key pair", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_025(MessageKeyEnum.TCH_025, "Error generating token", "An error occurred while trying to create the token", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_026(MessageKeyEnum.TCH_026, "Error generating keys", "An error occurred while trying to create the token", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_027(MessageKeyEnum.TCH_027, "Error generating signature", "An error occurred while trying to generating the signature", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_028(MessageKeyEnum.TCH_028, "Error verifying access", "An error occurred while trying to verify access with the private key {} , the signature {} and the secret {} provided", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_029(MessageKeyEnum.TCH_029, "Error request to Doppler", "An error occurred sending request to Doppler", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_030(MessageKeyEnum.TCH_030, "Error response code", "The error code of the response is %s: ", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_031(MessageKeyEnum.TCH_031, "Access denied", "Access denied, the token is invalid", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_032(MessageKeyEnum.TCH_032, "Token header dont send", "Access denied, the header 'Token' has not been send", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_033(MessageKeyEnum.TCH_033, "Token expired", "Access denied, the token is expired or inactive", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     FUN_001(MessageKeyEnum.FUN_001, "Invalid message code", "The message code is invalid or not within allowed values", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_002(MessageKeyEnum.FUN_002, "Title is empty or null", "The message must have a valid title", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_003(MessageKeyEnum.FUN_003, "Content is empty or null", "The message must include a valid description", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -42,7 +52,6 @@ public enum DetailMessageEnum {
     FUN_013(MessageKeyEnum.FUN_013, "Cache not connected", "Failed to connect to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_014(MessageKeyEnum.FUN_014, "Error during cache connection", "Data access exception while connecting to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_015(MessageKeyEnum.FUN_015, "Unexpected exception", "Unexpected exception while connecting to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_016(MessageKeyEnum.FUN_016, "Error during cache connection", "Data access exception while connecting to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_017(MessageKeyEnum.FUN_017, "Message validators", "The content cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_018(MessageKeyEnum.FUN_018, "Message validators", "The size of the content must not be less than 10", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_019(MessageKeyEnum.FUN_019, "Message validators", "The size of the content cannot be larger than 100", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -50,7 +59,9 @@ public enum DetailMessageEnum {
     FUN_021(MessageKeyEnum.FUN_021, "Message validators", "The size of the title cannot be larger than 50", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_022(MessageKeyEnum.FUN_022, "Message validators", "The title cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_023(MessageKeyEnum.FUN_023, "Unexpected Error", "An unexpected error has occurred", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_024(MessageKeyEnum.FUN_024, "information consulted", "%s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.CONFIRMATION);
+    FUN_024(MessageKeyEnum.FUN_024, "information consulted", "%s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.CONFIRMATION),
+    FUN_025(MessageKeyEnum.FUN_025, "Error create token", "An error occurred while verify the token, please try again later", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_026(MessageKeyEnum.FUN_026, "Token not found", "The token is not found", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
     private MessageKeyEnum code;
     private String title;
     private String content;
