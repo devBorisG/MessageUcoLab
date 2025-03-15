@@ -16,4 +16,6 @@ public interface RedisRepositoryAdapter extends JpaRepository<MessageRedis, UUID
     Page<MessageRedis> findByApplication(String application, Pageable pageable);
 
     List<MessageRedis> findByApplication(String application);
+
+    Page<MessageRedis> findByEnvironmentId(String environmentId, Pageable pageable);
 }

@@ -1,11 +1,14 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.redis;
 
+import co.edu.uco.utils.helper.UtilUUID;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.util.UUID;
+
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
@@ -26,9 +29,24 @@ public final class MessageRedis {
     @Indexed
     private String application;
     private String functionality;
+    @Indexed
+    private String environmentId;
+
+    public MessageRedis() {
+        setId(UtilUUID.getNewUUID());
+        setCode(EMPTY);
+        setTitle(EMPTY);
+        setContent(EMPTY);
+        setType(EMPTY);
+        setCategory(EMPTY);
+        setStatus(EMPTY);
+        setApplication(EMPTY);
+        setFunctionality(EMPTY);
+        setEnvironmentId(EMPTY);
+    }
 
     public MessageRedis(UUID id, String code, String title, String content, String category,
-            String type, String status, String application, String functionality) {
+            String type, String status, String application, String functionality, String environmentId) {
         setId(id);
         setCode(code);
         setTitle(title);
@@ -38,6 +56,7 @@ public final class MessageRedis {
         setStatus(status);
         setApplication(application);
         setFunctionality(functionality);
+        setEnvironmentId(environmentId);
     }
 
     public void setId(UUID id) {
@@ -74,5 +93,9 @@ public final class MessageRedis {
 
     public void setFunctionality(String functionality) {
         this.functionality = trim(functionality);
+    }
+
+    public void setEnvironmentId(String environmentId) {
+        this.environmentId = trim(environmentId);
     }
 }

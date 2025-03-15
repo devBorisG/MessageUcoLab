@@ -6,7 +6,6 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.DataMapper;
 import co.edu.uco.infrastructure.adapter.secondary.repository.redis.MessageRedis;
 import co.edu.uco.infrastructure.adapter.secondary.repository.redis.RedisRepositoryAdapter;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +31,13 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
     }
 
     @Override
+    public void saveWithEnvironment(MessageData data, String environmentId) {
+        MessageRedis messageRedis = mapper.mapperModel(data);
+        messageRedis.setEnvironmentId(environmentId);
+        repository.save(messageRedis);
+    }
+
+    @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
         return repository.findByCodeAndApplication(code, application).stream().map(mapper::mapperData).findFirst();
     }
@@ -53,11 +59,11 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
 
     @Override
     public SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable) {
-        return SimplePage.of(Page.empty());
+        return SimplePage.of(repository.findByEnvironmentId(id.toString(), pageable).map(mapper::mapperData));
     }
 
     @Override
     public SimplePage<MessageData> findMessagesByEnvironment(String environment, Pageable pageable) {
-        return SimplePage.of(Page.empty());
+        return SimplePage.of(repository.findByEnvironmentId(environment, pageable).map(mapper::mapperData));
     }
 }

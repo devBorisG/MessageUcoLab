@@ -40,6 +40,11 @@ public final class CacheMessageCatalog extends CacheCatalog {
     }
 
     @Override
+    public void addMessageWithEnvironment(MessageData messageModel, String environmentId) {
+        repository.saveWithEnvironment(messageModel, environmentId);
+    }
+
+    @Override
     public boolean isExist(String key) {
         return getMessageById(key).isPresent();
     }
