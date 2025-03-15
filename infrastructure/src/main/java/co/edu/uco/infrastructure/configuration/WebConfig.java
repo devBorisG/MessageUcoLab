@@ -25,11 +25,11 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(loggingConfig);
         registry.addInterceptor(acceptHeaderInterceptor)
                 .excludePathPatterns(
-                        "/swagger-ui.html",
-                        "/swagger-ui/**",
-                        "/swagger-resources/**",
-                        "/v3/api-docs/**",
-                        "/webjars/**"
+                        SWAGGER_UI_HTML,
+                        SWAGGER_UI,
+                        SWAGGER_RESOURCES,
+                        SWAGGER_API_DOCS,
+                        SWAGGER_WEBJARS
                 );
         registry.addInterceptor(tokenHeaderInterceptor)
                 .addPathPatterns(
