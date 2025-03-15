@@ -14,17 +14,19 @@ public class TokenDomain {
     private LocalDateTime expirationDate;
     private UUID environmentId;
     private LocalDateTime creationDate;
+    private UUID stateId = UUID.fromString("123e4567-e89b-12d3-a456-426614174023");
 
-    public TokenDomain(String id,LocalDateTime creationDate ,LocalDateTime expirationDate, UUID environmentId, String secretName) {
+    public TokenDomain(String id,LocalDateTime creationDate ,LocalDateTime expirationDate, UUID environmentId, String secretName, UUID stateId) {
         setId(id);
         setSecretName(secretName);
         setExpirationDate(expirationDate);
         setEnvironmentId(environmentId);
         setCreationDate(creationDate);
+        setStateId(stateId);
     }
 
-    public TokenDomain create(String id,LocalDateTime creationDate, LocalDateTime expirationDate, UUID environmentId, String secretName) {
-        return new TokenDomain(id, creationDate,expirationDate, environmentId, secretName);
+    public TokenDomain create(String id,LocalDateTime creationDate, LocalDateTime expirationDate, UUID environmentId, String secretName, UUID tokenStateDataId) {
+        return new TokenDomain(id, creationDate,expirationDate, environmentId, secretName, tokenStateDataId);
     }
 
     public void setExpirationDate(LocalDateTime expirationDate) {
@@ -45,5 +47,9 @@ public class TokenDomain {
 
     public void setSecretName(String secretName) {
         this.secretName = secretName;
+    }
+
+    public void setStateId(UUID stateId) {
+        this.stateId = stateId;
     }
 }

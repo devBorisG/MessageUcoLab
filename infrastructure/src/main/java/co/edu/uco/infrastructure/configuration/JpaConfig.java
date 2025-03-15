@@ -22,9 +22,9 @@ public class JpaConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/ucolab");
-        dataSource.setUsername("crosswords");
-        dataSource.setPassword("crosswords");
+        dataSource.setUrl("jdbc:postgresql://localhost:5435/crs-crossword-db");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("postgres");
         return dataSource;
     }
 
