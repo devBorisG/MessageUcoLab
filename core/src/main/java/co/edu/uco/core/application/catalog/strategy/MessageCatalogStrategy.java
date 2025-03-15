@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum.*;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 @Scope(SINGLETON_SCOPE)
 public final class MessageCatalogStrategy {
@@ -93,6 +96,22 @@ public final class MessageCatalogStrategy {
         throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
     }
 
+    public Optional<MessageData> getMessageByCodeAndEnvironment(String code, String environmentId) {
+        var response = cacheCatalog.getMessageByCodeAndEnvironment(code, environmentId);
+        if (response.isPresent()) {
+            log.info(inMemoryCatalog.getContent(FUN_009.getKey()));
+        }
+
+        if (response.isEmpty()) {
+            log.info(inMemoryCatalog.getContent(FUN_006.getKey()));
+            response = databaseCatalog.getMessageByCodeAndEnvironment(code, environmentId);
+
+            response.ifPresent(message -> cacheCatalog.addMessageWithEnvironment(message, environmentId));
+        }
+
+        return response;
+    }
+
     private void fillCacheWithMissingMessages(SimplePage<MessageData> cachedMessages,
             SimplePage<MessageData> dbMessages) {
         dbMessages.getData().forEach(cacheCatalog::addMessage);
@@ -101,5 +120,14 @@ public final class MessageCatalogStrategy {
     private void fillCacheWithEnvironmentMessages(SimplePage<MessageData> cachedMessages,
             SimplePage<MessageData> dbMessages, String environment) {
         dbMessages.getData().forEach(message -> cacheCatalog.addMessageWithEnvironment(message, environment));
+    }
+
+    public SimplePage<MessageData> findByIdEnvironment(UUID id, SimplePageRequest pageRequest) {
+        var response = cacheCatalog.findByIdEnvironment(id, pageRequest);
+        if (response.getData().isEmpty()) {
+            log.warn(inMemoryCatalog.getContent(FUN_006.getKey()));
+            response = databaseCatalog.findByIdEnvironment(id, pageRequest);
+        }
+        return response;
     }
 }

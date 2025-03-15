@@ -13,14 +13,12 @@ import static co.edu.uco.utils.helper.UtilText.EMPTY;
 @Component
 @Scope(SINGLETON_SCOPE)
 public final class MessageDataCacheMapper implements DataMapper<MessageData, MessageRedis> {
-
     @Override
     public MessageData mapperData(MessageRedis model) {
         return new MessageData(model.getId(), model.getCode(), model.getTitle(), model.getContent(),
-                MessageTypeData.build(),
-                MessageCategoryData.build(), model.getApplication(), model.getFunctionality());
+                MessageTypeData.build(model.getType()),
+                MessageCategoryData.build(model.getCategory()), model.getApplication(), model.getFunctionality());
     }
-
     @Override
     public MessageRedis mapperModel(MessageData data) {
         return new MessageRedis(data.getId(), data.getCode(), data.getTitle(), data.getContent(),

@@ -11,14 +11,17 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 @Component
 @Scope(SINGLETON_SCOPE)
 public final class MessageDataBaseMapper implements DataMapper<MessageData, MessageJsonDocument> {
-    private  final ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
     public MessageDataBaseMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
+
     @Override
     public MessageData mapperData(MessageJsonDocument model) {
         return modelMapper.map(model, MessageData.class);
     }
+
     @Override
     public MessageJsonDocument mapperModel(MessageData data) {
         return modelMapper.map(data, MessageJsonDocument.class);

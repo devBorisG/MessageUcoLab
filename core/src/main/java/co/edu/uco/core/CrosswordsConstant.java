@@ -12,4 +12,5 @@ public final class CrosswordsConstant {
     public static final String REQUEST_PAGE_SORT_DESC = "DESC";
     public static final byte REQUEST_PAGE_DEFAULT = 1;
     public static final byte REQUEST_SIZE_DEFAULT = 50;
+    public static final String SHA_256 = "SHA-256";
 }

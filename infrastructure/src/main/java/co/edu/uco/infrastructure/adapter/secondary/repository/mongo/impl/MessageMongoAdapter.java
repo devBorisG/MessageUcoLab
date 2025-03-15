@@ -27,20 +27,24 @@ public final class MessageMongoAdapter implements DataBaseMessageRepository {
     private final MongoEnvironmentRepositoryAdapter environmentRepository;
     private final DataMapper<MessageData, MessageDocument> mapper;
     private final DataMapper<MessageData, MessageJsonDocument> mapperJson;
-    public MessageMongoAdapter(MongoRepositoryAdapter repository, MongoEnvironmentRepositoryAdapter environmentRepository, DataMapper<MessageData, MessageDocument> mapper,
-                               DataMapper<MessageData, MessageJsonDocument> mapperJson) {
+
+    public MessageMongoAdapter(MongoRepositoryAdapter repository,
+            MongoEnvironmentRepositoryAdapter environmentRepository, DataMapper<MessageData, MessageDocument> mapper,
+            DataMapper<MessageData, MessageJsonDocument> mapperJson) {
         this.repository = repository;
         this.environmentRepository = environmentRepository;
         this.mapper = mapper;
         this.mapperJson = mapperJson;
     }
+
     @Override
     public void save(MessageData data) {
         repository.save(mapper.mapperModel(data));
     }
+
     @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
-        return repository.findByCodeAndApplication(code,application).stream().map(mapper::mapperData).findFirst();
+        return repository.findByCodeAndApplication(code, application).stream().map(mapper::mapperData).findFirst();
     }
 
     @Override
@@ -60,13 +64,21 @@ public final class MessageMongoAdapter implements DataBaseMessageRepository {
 
     @Override
     public SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable) {
-        return null/*SimplePage.of(environmentRepository.findMessageEnvironmentDocumentByEnvironmentId(getStringFromUUID(id), pageable))*/;
+        // Reutilizar el método existente, convirtiendo el UUID a String
+        return findMessagesByEnvironment(getStringFromUUID(id), pageable);
     }
 
     @Override
     public SimplePage<MessageData> findMessagesByEnvironment(String id, Pageable pageable) {
-        Page<MessageEnvironmentDocument> query = environmentRepository.findMessageEnvironmentDocumentByEnvironmentId(id, pageable);
+        Page<MessageEnvironmentDocument> query = environmentRepository.findMessageEnvironmentDocumentByEnvironmentId(id,
+                pageable);
         Page<MessageData> messageDataPage = query.map(doc -> mapperJson.mapperData(doc.getMessage()));
         return SimplePage.of(messageDataPage);
+    }
+
+    @Override
+    public Optional<MessageData> findMessageByCodeAndEnvironment(String code, String environmentId) {
+        return environmentRepository.findByEnvironmentIdAndMessageCode(environmentId, code)
+                .map(doc -> mapperJson.mapperData(doc.getMessage()));
     }
 }

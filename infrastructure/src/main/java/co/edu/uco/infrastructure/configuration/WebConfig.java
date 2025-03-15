@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.WEB_CONFIG_API_MESSAGE;
-import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.WEB_CONFIG_API_APPLICATION;
-import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.WEB_CONFIG_API_ENVIRONMENT;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -37,7 +35,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns(
                         WEB_CONFIG_API_MESSAGE,
                         WEB_CONFIG_API_APPLICATION,
-                        WEB_CONFIG_API_ENVIRONMENT
+                        WEB_CONFIG_API_ENVIRONMENT,
+                        WEB_CONFIG_API_CODE
                 );
     }
 }

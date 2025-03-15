@@ -4,6 +4,7 @@ import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
+import co.edu.uco.core.domain.port.out.repository.token.PageBuilder;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
@@ -20,6 +22,7 @@ import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
 @Scope(SINGLETON_SCOPE)
 public final class DatabaseMessageCatalog extends DatabaseCatalog {
     private final DataBaseMessageRepository repository;
+
     public DatabaseMessageCatalog(DataBaseMessageRepository repository) {
         this.repository = repository;
     }
@@ -46,7 +49,7 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
 
     @Override
     public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
-        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+        var result = PageBuilder.createPageRequest(request);
         return repository.finByApplication(application, result);
     }
 
@@ -57,8 +60,18 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
 
     @Override
     public SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request) {
-        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
-        // var result = PageBuilder.createPageRequest(request);
+        var result = PageBuilder.createPageRequest(request);
         return repository.findMessagesByEnvironment(environment, result);
+    }
+
+    @Override
+    public Optional<MessageData> getMessageByCodeAndEnvironment(String code, String environmentId) {
+        return repository.findMessageByCodeAndEnvironment(code, environmentId);
+    }
+
+    @Override
+    public SimplePage<MessageData> findByIdEnvironment(UUID id, SimplePageRequest pageRequest) {
+        var result = PageBuilder.createPageRequest(pageRequest);
+        return repository.findByIdEnvironment(id, result);
     }
 }

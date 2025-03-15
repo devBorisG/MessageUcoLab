@@ -1,4 +1,5 @@
 package co.edu.uco.core.domain.data;
+import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -29,5 +30,8 @@ public final class MessageCategoryData {
     }
     public static MessageCategoryData build() {
         return new MessageCategoryData();
+    }
+    public static MessageCategoryData build(String name) {
+        return new MessageCategoryData(UtilUUID.getNewUUID(), name);
     }
 }

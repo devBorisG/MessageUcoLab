@@ -1,5 +1,6 @@
 package co.edu.uco.core.domain.data;
 
+import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -31,5 +32,8 @@ public final class MessageTypeData {
     }
     public static MessageTypeData build() {
         return new MessageTypeData();
+    }
+    public static MessageTypeData build(String name) {
+        return new MessageTypeData(UtilUUID.getNewUUID(), name);
     }
 }

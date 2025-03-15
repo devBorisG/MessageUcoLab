@@ -1,5 +1,6 @@
 package co.edu.uco.core.application.encryption;
 
+import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.domain.port.out.secret.EncryptionService;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class SHA256EncryptionService implements EncryptionService {
     @Override
     public String encrypt(String data) {
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            MessageDigest digest = MessageDigest.getInstance(CrosswordsConstant.SHA_256);
             byte[] hash = digest.digest(data.getBytes());
             return HexFormat.of().formatHex(hash).toUpperCase();
         } catch (NoSuchAlgorithmException e) {
