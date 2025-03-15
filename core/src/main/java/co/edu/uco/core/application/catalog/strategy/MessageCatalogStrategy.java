@@ -16,7 +16,6 @@ import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum.*;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @Scope(SINGLETON_SCOPE)
@@ -120,14 +119,5 @@ public final class MessageCatalogStrategy {
     private void fillCacheWithEnvironmentMessages(SimplePage<MessageData> cachedMessages,
             SimplePage<MessageData> dbMessages, String environment) {
         dbMessages.getData().forEach(message -> cacheCatalog.addMessageWithEnvironment(message, environment));
-    }
-
-    public SimplePage<MessageData> findByIdEnvironment(UUID id, SimplePageRequest pageRequest) {
-        var response = cacheCatalog.findByIdEnvironment(id, pageRequest);
-        if (response.getData().isEmpty()) {
-            log.warn(inMemoryCatalog.getContent(FUN_006.getKey()));
-            response = databaseCatalog.findByIdEnvironment(id, pageRequest);
-        }
-        return response;
     }
 }

@@ -2,7 +2,6 @@ package co.edu.uco.infrastructure.adapter.primary.controller;
 
 import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.application.facade.message.FindMessageByCodeAndEnvironmentUseCaseFacade;
-import co.edu.uco.core.application.facade.message.FindMessageByIdEnvironmentUseCaseFacade;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
@@ -19,7 +18,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.ENVIRONMENT_ID_ATTRIBUTE;
 
@@ -29,19 +27,16 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.ENV
 public class FindMessagesControllerImpl implements FindMessagesController {
         private final HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort;
         private final FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade;
-        private final FindMessageByIdEnvironmentUseCaseFacade findMessageByIdEnvironmentUseCaseFacade;
         private final PresenterPort<MessageDTO> restPresenter;
         private final PresenterPort<SimplePage<MessageDTO>> restPresenterPage;
 
         public FindMessagesControllerImpl(
                         HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort,
                         FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade,
-                        FindMessageByIdEnvironmentUseCaseFacade findMessageByIdEnvironmentUseCaseFacade,
                         PresenterPort<MessageDTO> restPresenter,
                         PresenterPort<SimplePage<MessageDTO>> restPresenterPage) {
                 this.handlingFindMessageEnvironmentPort = handlingFindMessageEnvironmentPort;
                 this.findMessageByCodeAndEnvironmentUseCaseFacade = findMessageByCodeAndEnvironmentUseCaseFacade;
-                this.findMessageByIdEnvironmentUseCaseFacade = findMessageByIdEnvironmentUseCaseFacade;
                 this.restPresenter = restPresenter;
                 this.restPresenterPage = restPresenterPage;
         }
@@ -107,39 +102,5 @@ public class FindMessagesControllerImpl implements FindMessagesController {
                 MessageDTO messageDTO = findMessageByCodeAndEnvironmentUseCaseFacade.execute(messageCode,
                                 environmentId);
                 restPresenter.presentRestSuccess(List.of(messageDTO), httpServletRequest, httpServletResponse);
-        }
-
-        @Override
-        @GetMapping("${crosswords.api.path.message.id.environment}")
-        @Operation(summary = "Buscar mensajes por ID y ambiente", description = "Permite obtener los mensajes correspondientes a un ID específico en el ambiente asociado al token. "
-                        +
-                        "El endpoint recibe el parámetro 'id' y opcionalmente acepta parámetros de paginación.", parameters = {
-                                        @Parameter(name = "id", description = "ID del mensaje a buscar", required = true, example = "123e4567-e89b-12d3-a456-426614174000"),
-                                        @Parameter(name = "page", description = "Número de página a consultar (comienza en 0)", required = false, example = "0"),
-                                        @Parameter(name = "size", description = "Cantidad de elementos por página", required = false, example = "10"),
-                                        @Parameter(name = "sort", description = "Dirección de ordenamiento (ASC o DESC)", required = false, example = "ASC"),
-                                        @Parameter(name = "columnSort", description = "Campo por el cual ordenar los resultados", required = false, example = "code")
-                        }, responses = {
-                                        @ApiResponse(responseCode = "200", description = "Mensajes encontrados correctamente", content = {
-                                                        @Content(mediaType = "application/json", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "application/yaml", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "application/xml", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "text/plain", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "text/html", schema = @Schema(implementation = SimplePage.class))
-                                        }),
-                                        @ApiResponse(responseCode = "400", description = "Solicitud incorrecta, parámetros inválidos o faltantes"),
-                                        @ApiResponse(responseCode = "404", description = "Mensajes no encontrados"),
-                                        @ApiResponse(responseCode = "500", description = "Error interno del servidor"),
-                                        @ApiResponse(responseCode = "406", description = "Formato de respuesta no soportado")
-                        })
-        public void findByIdEnvironment(
-                        @PathVariable UUID id,
-                        SimplePageRequest simplePageRequest,
-                        HttpServletRequest httpServletRequest,
-                        HttpServletResponse httpServletResponse) {
-                SimplePage<MessageDTO> messageDTOSimplePage = findMessageByIdEnvironmentUseCaseFacade.execute(id,
-                                simplePageRequest);
-                restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest,
-                                httpServletResponse);
         }
 }

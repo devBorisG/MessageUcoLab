@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
@@ -71,9 +70,4 @@ public final class CacheMessageCatalog extends CacheCatalog {
         return repository.findMessageByCodeAndEnvironment(code, environmentId);
     }
 
-    @Override
-    public SimplePage<MessageData> findByIdEnvironment(UUID id, SimplePageRequest pageRequest) {
-        var result = PageBuilder.createPageRequest(pageRequest);
-        return repository.findByIdEnvironment(id, result);
-    }
 }

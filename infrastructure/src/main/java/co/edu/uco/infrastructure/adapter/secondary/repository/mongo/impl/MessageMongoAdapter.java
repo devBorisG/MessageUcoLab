@@ -1,7 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.impl;
 
 import co.edu.uco.core.domain.data.MessageData;
-import co.edu.uco.core.domain.data.MessageEnvironmentData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.DataMapper;
@@ -60,12 +59,6 @@ public final class MessageMongoAdapter implements DataBaseMessageRepository {
     @Override
     public Optional<MessageData> findById(UUID id) {
         return repository.findById(getStringFromUUID(id)).map(mapper::mapperData);
-    }
-
-    @Override
-    public SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable) {
-        // Reutilizar el método existente, convirtiendo el UUID a String
-        return findMessagesByEnvironment(getStringFromUUID(id), pageable);
     }
 
     @Override

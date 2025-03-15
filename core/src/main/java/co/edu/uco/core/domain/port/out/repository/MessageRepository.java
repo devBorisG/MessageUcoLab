@@ -18,8 +18,6 @@ public interface MessageRepository {
 
     Optional<MessageData> findById(UUID id);
 
-    SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable);
-
     SimplePage<MessageData> findMessagesByEnvironment(String id, Pageable pageable);
 
     Optional<MessageData> findMessageByCodeAndEnvironment(String code, String environmentId);

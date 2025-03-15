@@ -7,7 +7,6 @@ import co.edu.uco.core.application.catalog.strategy.MessageCatalog;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public abstract class DatabaseCatalog extends MessageCatalog<String, Optional<MessageData>> {
     public abstract Optional<MessageData> getMessage(String code, String application);
@@ -20,5 +19,4 @@ public abstract class DatabaseCatalog extends MessageCatalog<String, Optional<Me
 
     public abstract Optional<MessageData> getMessageByCodeAndEnvironment(String code, String environmentId);
 
-    public abstract SimplePage<MessageData> findByIdEnvironment(UUID id, SimplePageRequest pageRequest);
 }

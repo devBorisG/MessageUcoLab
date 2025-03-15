@@ -6,13 +6,10 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.port.out.repository.token.PageBuilder;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
@@ -67,11 +64,5 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
     @Override
     public Optional<MessageData> getMessageByCodeAndEnvironment(String code, String environmentId) {
         return repository.findMessageByCodeAndEnvironment(code, environmentId);
-    }
-
-    @Override
-    public SimplePage<MessageData> findByIdEnvironment(UUID id, SimplePageRequest pageRequest) {
-        var result = PageBuilder.createPageRequest(pageRequest);
-        return repository.findByIdEnvironment(id, result);
     }
 }

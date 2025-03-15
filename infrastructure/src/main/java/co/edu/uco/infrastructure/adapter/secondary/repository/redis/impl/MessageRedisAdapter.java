@@ -39,17 +39,22 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
 
     @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
-        return repository.findByCodeAndApplication(code, application).stream().map(mapper::mapperData).findFirst();
+        return repository.findByCodeAndApplication(code, application).stream()
+                .map(mapper::mapperData)
+                .findFirst();
     }
 
     @Override
     public SimplePage<MessageData> finByApplication(String application, Pageable pageable) {
-        return SimplePage.of(repository.findByApplication(application, pageable).map(mapper::mapperData));
+        return SimplePage.of(repository.findByApplication(application, pageable)
+                .map(mapper::mapperData));
     }
 
     @Override
     public List<MessageData> finByApplication(String application) {
-        return repository.findByApplication(application).stream().map(mapper::mapperData).toList();
+        return repository.findByApplication(application).stream()
+                .map(mapper::mapperData)
+                .toList();
     }
 
     @Override
@@ -59,17 +64,13 @@ public final class MessageRedisAdapter implements CacheMessageRepository {
 
     @Override
     public SimplePage<MessageData> findMessagesByEnvironment(String environment, Pageable pageable) {
-        return SimplePage.of(repository.findByEnvironmentId(environment, pageable).map(mapper::mapperData));
+        return SimplePage.of(repository.findByEnvironmentId(environment, pageable)
+                .map(mapper::mapperData));
     }
 
     @Override
     public Optional<MessageData> findMessageByCodeAndEnvironment(String code, String environmentId) {
-        return repository.findByCodeAndEnvironmentId(code, environmentId).map(mapper::mapperData);
-    }
-
-    @Override
-    public SimplePage<MessageData> findByIdEnvironment(UUID id, Pageable pageable) {
-        // Reutilizar el método existente, convirtiendo el UUID a String
-        return findMessagesByEnvironment(id.toString(), pageable);
+        return repository.findByCodeAndEnvironmentId(code, environmentId)
+                .map(mapper::mapperData);
     }
 }
