@@ -23,7 +23,8 @@ public final class MessageCatalogStrategy {
     private final DatabaseCatalog databaseCatalog;
     private final InMemoryCatalog inMemoryCatalog;
 
-    public MessageCatalogStrategy(CacheCatalog cacheCatalog, DatabaseCatalog databaseCatalog, InMemoryCatalog inMemoryCatalog) {
+    public MessageCatalogStrategy(CacheCatalog cacheCatalog, DatabaseCatalog databaseCatalog,
+            InMemoryCatalog inMemoryCatalog) {
         this.cacheCatalog = cacheCatalog;
         this.databaseCatalog = databaseCatalog;
         this.inMemoryCatalog = inMemoryCatalog;
@@ -36,7 +37,8 @@ public final class MessageCatalogStrategy {
             response = databaseCatalog.getMessage(code, application);
             response.ifPresent(cacheCatalog::addMessage);
         }
-        return response.orElseThrow(() -> BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey())));
+        return response
+                .orElseThrow(() -> BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey())));
     }
 
     public SimplePage<MessageData> getMessages(String application, SimplePageRequest request) {
@@ -91,7 +93,8 @@ public final class MessageCatalogStrategy {
         throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
     }
 
-    private void fillCacheWithMissingMessages(SimplePage<MessageData> cachedMessages, SimplePage<MessageData> dbMessages) {
+    private void fillCacheWithMissingMessages(SimplePage<MessageData> cachedMessages,
+            SimplePage<MessageData> dbMessages) {
         dbMessages.getData().stream()
                 .filter(message -> !cachedMessages.getData().contains(message))
                 .forEach(cacheCatalog::addMessage);

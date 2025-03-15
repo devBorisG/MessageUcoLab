@@ -1,7 +1,9 @@
 package co.edu.uco.infrastructure.configuration;
 
 public final class InfrastructureConstant {
-    private InfrastructureConstant() {}
+    private InfrastructureConstant() {
+    }
+
     public static final String COLLECTION_MONGO_ADAPTER = "airbyte_raw_message";
     public static final String FIELD_MONGO_ADAPTER_ID = "_airbyte_data.id";
     public static final String FIELD_MONGO_ADAPTER_CODE = "_airbyte_data.code";
@@ -23,6 +25,7 @@ public final class InfrastructureConstant {
     public static final String FIELD_ENVIRONMENT_ID = "environment_id";
     public static final String FIELD_SECRET_NAME = "secret_name";
     public static final String FIELD_STATE_ID = "state_id";
+    public static final String ENVIRONMENT_ID_ATTRIBUTE = "environmentId";
 
     public static final String CORRELATION_ID = "X-Correlation-ID";
     public static final String REDIS_HASH = "Message";
@@ -66,4 +69,7 @@ public final class InfrastructureConstant {
     public static final String DOPPLER_DTO_NAME = "name";
     public static final String DOPPLER_DTO_VALUE = "value";
     public static final String DOPPLER_DTO_RAW = "raw";
+    public static final String WEB_CONFIG_API_MESSAGE = "/messageucolab/v1/application/**/message/*";
+    public static final String WEB_CONFIG_API_APPLICATION = "/messageucolab/v1/application/**/message/*";
+    public static final String WEB_CONFIG_API_ENVIRONMENT = "/messageucolab/v1/application/environment";
 }

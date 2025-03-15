@@ -27,8 +27,21 @@ public final class MessageRedis {
     private String application;
     private String functionality;
 
+    public MessageRedis(UUID id, String code, String title, String content, String category,
+            String type, String status, String application, String functionality) {
+        setId(id);
+        setCode(code);
+        setTitle(title);
+        setContent(content);
+        setType(type);
+        setCategory(category);
+        setStatus(status);
+        setApplication(application);
+        setFunctionality(functionality);
+    }
+
     public void setId(UUID id) {
-        this.id =  getDefaultUUID(id);
+        this.id = getDefaultUUID(id);
     }
 
     public void setCode(String code) {

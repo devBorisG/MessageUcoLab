@@ -47,7 +47,7 @@ public enum DetailMessageEnum {
     FUN_008(MessageKeyEnum.FUN_008, "Cache and database messages are not the same amount.", "The number of messages in cache and database does not match, the cache is filled with the missing messages.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.WARNING),
     FUN_009(MessageKeyEnum.FUN_009, "Message found in cache", "Messages were found in cache, proceed to return.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_010(MessageKeyEnum.FUN_010, "Null Validator", "%s is required", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_011(MessageKeyEnum.FUN_011, "Application not found", "Could not get the messages from the %s application, verify that the application exists.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_011(MessageKeyEnum.FUN_011, "Application not found", "Could not get the messages from the application, verify that the application exists.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_012(MessageKeyEnum.FUN_012, "Message not found", "There is no message with the code %s for the application %s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_013(MessageKeyEnum.FUN_013, "Cache not connected", "Failed to connect to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_014(MessageKeyEnum.FUN_014, "Error during cache connection", "Data access exception while connecting to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),

@@ -19,6 +19,7 @@ import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
 @Scope(SINGLETON_SCOPE)
 public final class CacheMessageCatalog extends CacheCatalog {
     private final CacheMessageRepository repository;
+
     public CacheMessageCatalog(CacheMessageRepository repository) {
         this.repository = repository;
     }
@@ -35,7 +36,7 @@ public final class CacheMessageCatalog extends CacheCatalog {
 
     @Override
     public void addMessage(MessageData messageModel) {
-            repository.save(messageModel);
+        repository.save(messageModel);
     }
 
     @Override
@@ -50,13 +51,15 @@ public final class CacheMessageCatalog extends CacheCatalog {
 
     @Override
     public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
-        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+        var result = PageRequest.of(request.getPage(), request.getSize(),
+                Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
         return repository.finByApplication(application, result);
     }
 
     @Override
     public SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request) {
-        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+        var result = PageRequest.of(request.getPage(), request.getSize(),
+                Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
         return repository.findByIdEnvironment(getUUIDFromString(environment), result);
     }
 }

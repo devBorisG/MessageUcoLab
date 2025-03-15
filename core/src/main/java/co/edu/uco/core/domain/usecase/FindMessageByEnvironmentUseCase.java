@@ -31,7 +31,7 @@ public final class FindMessageByEnvironmentUseCase implements HandlingFindMessag
             var messages = page.getData().stream().map(entityMapper::mapperDTO).toList();
             return SimplePage.of(messages, page.getCurrentPage(), page.getPageSize(),page.getTotalItems(), page.getTotalPages());
         }catch (Exception exception){
-            var errorMessage = String.format(DetailMessageEnum.FUN_011.getContent(), environment);
+            var errorMessage = DetailMessageEnum.FUN_011.getContent();
             log.error(errorMessage);
             throw BusinessException.buildUserException(errorMessage);
         }

@@ -10,5 +10,5 @@ public interface FindMessagesController {
 
     void findByApplication(String application, SimplePageRequest simplePageRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
 
-    void findByEnvironmentAndMessage(String environment, SimplePageRequest simplePageRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
+    void findByEnvironmentAndMessage(SimplePageRequest simplePageRequest, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
 }

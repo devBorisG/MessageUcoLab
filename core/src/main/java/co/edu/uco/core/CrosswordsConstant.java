@@ -8,4 +8,8 @@ public final class CrosswordsConstant {
     public static final String SECRET_PORT_SECRET_NAME = "secretName";
     public static final String SECRET_PORT_PRIVATE_KEY = "privateKey";
     public static final String STATE_ACTIVE = "Active";
+    public static final String REQUEST_PAGE_SORT_ASC = "ASC";
+    public static final String REQUEST_PAGE_SORT_DESC = "DESC";
+    public static final byte REQUEST_PAGE_DEFAULT = 1;
+    public static final byte REQUEST_SIZE_DEFAULT = 50;
 }

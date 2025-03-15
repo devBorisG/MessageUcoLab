@@ -20,18 +20,22 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.CAC
 public final class MessageRedisAdapter implements CacheMessageRepository {
     private final RedisRepositoryAdapter repository;
     private final DataMapper<MessageData, MessageRedis> mapper;
+
     public MessageRedisAdapter(RedisRepositoryAdapter repository, DataMapper<MessageData, MessageRedis> mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
+
     @Override
     public void save(MessageData data) {
         repository.save(mapper.mapperModel(data));
     }
+
     @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
         return repository.findByCodeAndApplication(code, application).stream().map(mapper::mapperData).findFirst();
     }
+
     @Override
     public SimplePage<MessageData> finByApplication(String application, Pageable pageable) {
         return SimplePage.of(repository.findByApplication(application, pageable).map(mapper::mapperData));

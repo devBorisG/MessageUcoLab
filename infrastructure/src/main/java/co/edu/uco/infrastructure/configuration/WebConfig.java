@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.WEB_CONFIG_API_MESSAGE;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.WEB_CONFIG_API_APPLICATION;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.WEB_CONFIG_API_ENVIRONMENT;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private final LoggingConfig loggingConfig;
@@ -31,8 +35,9 @@ public class WebConfig implements WebMvcConfigurer {
                 );
         registry.addInterceptor(tokenHeaderInterceptor)
                 .addPathPatterns(
-                        "/messageucolab/v1/application/*/message/*",
-                        "/messageucolab/v1/application/*/messages"
+                        WEB_CONFIG_API_MESSAGE,
+                        WEB_CONFIG_API_APPLICATION,
+                        WEB_CONFIG_API_ENVIRONMENT
                 );
     }
 }

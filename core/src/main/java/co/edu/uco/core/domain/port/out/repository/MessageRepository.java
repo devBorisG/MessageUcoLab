@@ -1,7 +1,6 @@
 package co.edu.uco.core.domain.port.out.repository;
 
 import co.edu.uco.core.domain.data.MessageData;
-import co.edu.uco.core.domain.data.MessageEnvironmentData;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

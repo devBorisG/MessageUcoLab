@@ -189,12 +189,13 @@ public class FindMessagesControllerImpl implements FindMessagesController {
 
     @Override
     @GetMapping("${crosswords.api.path.message.environment}")
-    public void findByEnvironmentAndMessage(@PathVariable String environment,
+    public void findByEnvironmentAndMessage(
                                             SimplePageRequest simplePageRequest,
                                             HttpServletRequest httpServletRequest,
                                             HttpServletResponse httpServletResponse
     ) {
-        SimplePage<MessageDTO> messageDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environment, simplePageRequest);
+        var environmentId = (String) httpServletRequest.getAttribute("environmentId");
+        SimplePage<MessageDTO> messageDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environmentId, simplePageRequest);
         restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest, httpServletResponse);
     }
 }
