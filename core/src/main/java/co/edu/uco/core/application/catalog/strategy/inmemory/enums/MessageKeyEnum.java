@@ -41,6 +41,7 @@ public enum MessageKeyEnum {
     TCH_031("TCH_031", MessageSourceEnum.NETWORK),
     TCH_032("TCH_032", MessageSourceEnum.NETWORK),
     TCH_033("TCH_033", MessageSourceEnum.NETWORK),
+    TCH_034("TCH_034", MessageSourceEnum.NETWORK),
     FUN_001("FUN_001", MessageSourceEnum.CRITICAL),
     FUN_002("FUN_002", MessageSourceEnum.CRITICAL),
     FUN_003("FUN_003", MessageSourceEnum.CRITICAL),
@@ -67,15 +68,12 @@ public enum MessageKeyEnum {
     FUN_024("FUN_024", MessageSourceEnum.NETWORK),
     FUN_025("FUN_025", MessageSourceEnum.NETWORK),
     FUN_026("FUN_026", MessageSourceEnum.NETWORK);
-
     private final String key;
     private final MessageSourceEnum source;
-
     MessageKeyEnum(String key, MessageSourceEnum source) {
         this.key = key;
         this.source = source;
     }
-
     public static MessageKeyEnum of(String key) {
         if (UtilText.isEmptyOrNull(key)) {
             throw CrossWordsException.build(DetailMessageEnum.TCH_008.getContent());

@@ -21,11 +21,9 @@ import static co.edu.uco.utils.helper.UtilText.isEmptyOrNull;
 @Component
 @Slf4j
 public final class TokenHeaderInterceptor implements HandlerInterceptor {
-
     private final SerializerRegistry serializerRegistry;
     private final VerifyAccessUseCaseFacade verifyAccessUseCaseFacade;
     private final FindEnvironmentIdTokenUseCaseFacade findEnvironmentIdTokenUseCaseFacade;
-
     public TokenHeaderInterceptor(SerializerRegistry serializerRegistry,
                                   VerifyAccessUseCaseFacade verifyAccessUseCaseFacade,
                                   FindEnvironmentIdTokenUseCaseFacade findEnvironmentIdTokenUseCaseFacade) {
@@ -33,7 +31,6 @@ public final class TokenHeaderInterceptor implements HandlerInterceptor {
         this.verifyAccessUseCaseFacade = verifyAccessUseCaseFacade;
         this.findEnvironmentIdTokenUseCaseFacade = findEnvironmentIdTokenUseCaseFacade;
     }
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader(REQUEST_GET_HEADER_TOKEN);
@@ -53,7 +50,6 @@ public final class TokenHeaderInterceptor implements HandlerInterceptor {
         request.setAttribute(ENVIRONMENT_ID_ATTRIBUTE, environmentId);
         return true;
     }
-
     private void sendErrorResponse(HttpServletResponse response, String acceptHeader, String errorMessage) throws IOException {
         var serializer = serializerRegistry.getSerializerForMediaType(acceptHeader);
         Response<String> errorResponse = new Response<>(List.of(), List.of(errorMessage));

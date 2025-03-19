@@ -3,7 +3,6 @@ package co.edu.uco.infrastructure.adapter.secondary.external.secrets.impl.dopple
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
 import co.edu.uco.utils.exception.CrossWordsException;
-import co.edu.uco.utils.exception.enumeration.ExceptionLocation;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
@@ -20,7 +19,6 @@ public final class DopplerCreateToken implements CreateTokenSecretPort {
     @Override
     public void execute(String secretName, String privateKey) {
         var client = new OkHttpClient();
-
         var mediaType = MediaType.parse(JSON_SERIALIZER_CONTENT_TYPE);
         var body = RequestBody.create(String.format(BODY_DOPPLER_CREATE_TOKEN_REQUEST, secretName, secretName, privateKey), mediaType);
         var request = new Request.Builder()

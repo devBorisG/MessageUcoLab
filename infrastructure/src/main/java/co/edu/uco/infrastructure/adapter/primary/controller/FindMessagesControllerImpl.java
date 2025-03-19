@@ -24,12 +24,11 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.ENV
 @RestController
 @RequestMapping("${crosswords.api.path.message}")
 @Tag(name = "Consulta de Mensajes", description = "Endpoints para obtener información de mensajes")
-public class FindMessagesControllerImpl implements FindMessagesController {
+final class FindMessagesControllerImpl implements FindMessagesController {
         private final HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort;
         private final FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade;
         private final PresenterPort<MessageDTO> restPresenter;
         private final PresenterPort<SimplePage<MessageDTO>> restPresenterPage;
-
         public FindMessagesControllerImpl(
                         HandlingFindMessageEnvironmentPort handlingFindMessageEnvironmentPort,
                         FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade,
@@ -74,7 +73,6 @@ public class FindMessagesControllerImpl implements FindMessagesController {
                 restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest,
                                 httpServletResponse);
         }
-
         @Override
         @GetMapping("${crosswords.api.path.message.code.environment}")
         @Operation(summary = "Buscar mensaje por código y ambiente", description = "Permite obtener el mensaje correspondiente a un código específico en el ambiente asociado al token. "

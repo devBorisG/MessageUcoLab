@@ -27,12 +27,10 @@ import static co.edu.uco.utils.helper.UtilText.stringToUpperCase;
 @Component
 @Transactional
 public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
-
     private final HandlingCreateTokenPort handlingCreateTokenPort;
     private final TokenDTOMapper tokenDTOMapper;
     private final CreateTokenSecretPort createTokenSecretPort;
     private final EncryptTokenPort encrypt;
-
     public CreateTokenUseCaseFacadeImpl(
             HandlingCreateTokenPort handlingCreateTokenPort,
             TokenDTOMapper tokenDTOMapper,
@@ -44,7 +42,6 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
         this.encrypt = encrypt;
         this.createTokenSecretPort = createTokenSecretPort;
     }
-
     @Override
     public String createToken(
             CreateTokenDTO createTokenDTO,

@@ -1,361 +1,1229 @@
 {
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:07:10.280",
-                "level": "INFO",
-                "thread": "SpringApplicationShutdownHook",
-                "logger": "org.apache.pulsar.client.impl.PulsarClientImpl",
-                "message": "Client closing. URL: pulsar://localhost:6650"
-                }{
-                "correlationId": "",
-                "timestamp": "2025-03-15T00:07:12.303",
-                "level": "INFO",
-                "thread": "SpringApplicationShutdownHook",
-                "logger": "org.apache.pulsar.client.impl.PulsarClientImpl",
-                "message": "Client closing. URL: pulsar://localhost:6650"
-                }{
-                "correlationId": "",
-                "timestamp": "2025-03-15T00:07:12.671",
-                "level": "INFO",
-                "thread": "SpringApplicationShutdownHook",
-                "logger": "org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean",
-                "message": "Closing JPA EntityManagerFactory for persistence unit 'default'"
-                }{
-                "correlationId": "",
-                "timestamp": "2025-03-15T00:14:04.313",
+                "timestamp": "2025-03-18T19:49:23.001",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
-                "message": "Starting CrossWordApplication using Java 17.0.14 with PID 64448 (C:\Users\USUARIO PC\OneDrive\Documentos\GitHub\MessageUcoLab\Infrastructure\target\classes started by USUARIO PC in C:\Users\USUARIO PC\OneDrive\Documentos\GitHub\MessageUcoLab)"
+                "message": "Starting CrossWordApplication using Java 17.0.13 with PID 5328 (C:\Users\faiyo\Documents\Universidad\ucolab\MessageUcoLab\infrastructure\target\classes started by faiyo in C:\Users\faiyo\Documents\Universidad\ucolab\MessageUcoLab)"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:04.316",
+                "timestamp": "2025-03-18T19:49:23.006",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
                 "message": "No active profile set, falling back to 1 default profile: "default""
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:04.987",
+                "timestamp": "2025-03-18T19:49:24.238",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
                 "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:04.988",
+                "timestamp": "2025-03-18T19:49:24.239",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
                 "message": "Bootstrapping Spring Data JPA repositories in DEFAULT mode."
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.090",
+                "timestamp": "2025-03-18T19:49:24.439",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
-                "message": "Finished Spring Data repository scanning in 97 ms. Found 1 JPA repository interface."
+                "message": "Finished Spring Data repository scanning in 189 ms. Found 1 JPA repository interface."
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.091",
+                "timestamp": "2025-03-18T19:49:24.443",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
                 "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.092",
+                "timestamp": "2025-03-18T19:49:24.443",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
                 "message": "Bootstrapping Spring Data MongoDB repositories in DEFAULT mode."
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.100",
+                "timestamp": "2025-03-18T19:49:24.463",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
                 "message": "Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.postgresql.PostgreSQLRepository; If you want this repository to be a MongoDB repository, consider annotating your entities with one of these annotations: org.springframework.data.mongodb.core.mapping.Document (preferred), or consider extending one of the following types with your repository: org.springframework.data.mongodb.repository.MongoRepository"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.101",
+                "timestamp": "2025-03-18T19:49:24.468",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
                 "message": "Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.redis.RedisRepositoryAdapter; If you want this repository to be a MongoDB repository, consider annotating your entities with one of these annotations: org.springframework.data.mongodb.core.mapping.Document (preferred), or consider extending one of the following types with your repository: org.springframework.data.mongodb.repository.MongoRepository"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.106",
+                "timestamp": "2025-03-18T19:49:24.480",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
-                "message": "Finished Spring Data repository scanning in 14 ms. Found 4 MongoDB repository interfaces."
+                "message": "Finished Spring Data repository scanning in 36 ms. Found 4 MongoDB repository interfaces."
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.107",
+                "timestamp": "2025-03-18T19:49:24.483",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
                 "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.108",
+                "timestamp": "2025-03-18T19:49:24.484",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
                 "message": "Bootstrapping Spring Data Redis repositories in DEFAULT mode."
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.117",
+                "timestamp": "2025-03-18T19:49:24.509",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
                 "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoEnvironmentRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.118",
+                "timestamp": "2025-03-18T19:49:24.509",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
                 "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.118",
+                "timestamp": "2025-03-18T19:49:24.510",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
                 "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenMongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.118",
+                "timestamp": "2025-03-18T19:49:24.510",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
                 "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenStateMongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.118",
+                "timestamp": "2025-03-18T19:49:24.510",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
                 "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.postgresql.PostgreSQLRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.122",
+                "timestamp": "2025-03-18T19:49:24.516",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
-                "message": "Finished Spring Data repository scanning in 7 ms. Found 1 Redis repository interface."
+                "message": "Finished Spring Data repository scanning in 12 ms. Found 1 Redis repository interface."
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:05.996",
+                "timestamp": "2025-03-18T19:49:26.173",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
                 "message": "Tomcat initialized with port 8085 (http)"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.004",
+                "timestamp": "2025-03-18T19:49:26.184",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.apache.coyote.http11.Http11NioProtocol",
                 "message": "Initializing ProtocolHandler ["http-nio-8085"]"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.005",
+                "timestamp": "2025-03-18T19:49:26.186",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.apache.catalina.core.StandardService",
                 "message": "Starting service [Tomcat]"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.005",
+                "timestamp": "2025-03-18T19:49:26.187",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.apache.catalina.core.StandardEngine",
                 "message": "Starting Servlet engine: [Apache Tomcat/10.1.20]"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.066",
+                "timestamp": "2025-03-18T19:49:26.272",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
                 "message": "Initializing Spring embedded WebApplicationContext"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.067",
+                "timestamp": "2025-03-18T19:49:26.272",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
-                "message": "Root WebApplicationContext: initialization completed in 1718 ms"
+                "message": "Root WebApplicationContext: initialization completed in 3208 ms"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.276",
+                "timestamp": "2025-03-18T19:49:26.587",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.hibernate.jpa.internal.util.LogHelper",
                 "message": "HHH000204: Processing PersistenceUnitInfo [name: default]"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.333",
+                "timestamp": "2025-03-18T19:49:26.683",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.hibernate.Version",
                 "message": "HHH000412: Hibernate ORM core version 6.4.4.Final"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.363",
+                "timestamp": "2025-03-18T19:49:26.732",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.hibernate.cache.internal.RegionFactoryInitiator",
                 "message": "HHH000026: Second-level cache disabled"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.636",
+                "timestamp": "2025-03-18T19:49:27.222",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo",
                 "message": "No LoadTimeWeaver setup: ignoring JPA class transformer"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:06.771",
+                "timestamp": "2025-03-18T19:49:27.303",
+                "level": "WARN",
+                "thread": "main",
+                "logger": "org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator",
+                "message": "HHH000342: Could not obtain connection to query metadata"
+                }java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at co.edu.uco.infrastructure.init.CrossWordApplication.main(CrossWordApplication.java:14)
+{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:49:27.345",
                 "level": "WARN",
                 "thread": "main",
                 "logger": "org.hibernate.orm.deprecation",
                 "message": "HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:07.433",
+                "timestamp": "2025-03-18T19:49:28.414",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator",
                 "message": "HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:07.436",
+                "timestamp": "2025-03-18T19:49:28.417",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean",
                 "message": "Initialized JPA EntityManagerFactory for persistence unit 'default'"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:08.279",
+                "timestamp": "2025-03-18T19:49:29.984",
                 "level": "WARN",
                 "thread": "main",
                 "logger": "org.springframework.data.mongodb.core.mapping.BasicMongoPersistentProperty",
                 "message": "Customizing field name for id property 'co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument.id' is not allowed; Custom name ('MESSAGE_ID') will not be considered"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:08.808",
+                "timestamp": "2025-03-18T19:49:31.242",
                 "level": "WARN",
                 "thread": "main",
                 "logger": "org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration",
                 "message": "spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.163",
+                "timestamp": "2025-03-18T19:49:31.920",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "com.azure.core.http.netty.implementation.NettyUtility",
                 "message": "{"az.sdk.message":"The following Netty versions were found on the classpath and have a mismatch with the versions used by azure-core-http-netty. If your application runs without issue this message can be ignored, otherwise please align the Netty versions used in your application. For more information, see https://aka.ms/azsdk/java/dependency/troubleshoot.","azure-netty-version":"4.1.115.Final","azure-netty-native-version":"2.0.69.Final","classpath-netty-version-io.netty:netty-common":"4.1.109.Final","classpath-netty-version-io.netty:netty-handler":"4.1.109.Final","classpath-netty-version-io.netty:netty-handler-proxy":"4.1.109.Final","classpath-netty-version-io.netty:netty-buffer":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec-http":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec-http2":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-unix-common":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-epoll":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-kqueue":"4.1.109.Final","classpath-native-netty-version-io.netty:netty-tcnative-boringssl-static":"2.0.65.Final"}"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.611",
+                "timestamp": "2025-03-18T19:49:32.661",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver",
                 "message": "Exposing 3 endpoint(s) beneath base path '/actuator'"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.651",
+                "timestamp": "2025-03-18T19:49:32.746",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.apache.coyote.http11.Http11NioProtocol",
                 "message": "Starting ProtocolHandler ["http-nio-8085"]"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.658",
+                "timestamp": "2025-03-18T19:49:32.760",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
                 "message": "Tomcat started on port 8085 (http) with context path ''"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.668",
+                "timestamp": "2025-03-18T19:49:32.776",
                 "level": "INFO",
                 "thread": "main",
                 "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
-                "message": "Started CrossWordApplication in 5.94 seconds (process running for 6.514)"
+                "message": "Started CrossWordApplication in 10.765 seconds (process running for 13.878)"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.890",
+                "timestamp": "2025-03-18T19:49:35.608",
                 "level": "INFO",
-                "thread": "RMI TCP Connection(2)-192.168.1.8",
+                "thread": "http-nio-8085-exec-1",
                 "logger": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
                 "message": "Initializing Spring DispatcherServlet 'dispatcherServlet'"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.891",
+                "timestamp": "2025-03-18T19:49:35.608",
                 "level": "INFO",
-                "thread": "RMI TCP Connection(2)-192.168.1.8",
+                "thread": "http-nio-8085-exec-1",
                 "logger": "org.springframework.web.servlet.DispatcherServlet",
                 "message": "Initializing Servlet 'dispatcherServlet'"
                 }{
                 "correlationId": "",
-                "timestamp": "2025-03-15T00:14:09.892",
+                "timestamp": "2025-03-18T19:49:35.610",
                 "level": "INFO",
-                "thread": "RMI TCP Connection(2)-192.168.1.8",
+                "thread": "http-nio-8085-exec-1",
                 "logger": "org.springframework.web.servlet.DispatcherServlet",
-                "message": "Completed initialization in 1 ms"
+                "message": "Completed initialization in 2 ms"
                 }{
-                "correlationId": "9e494d9d-f9c8-4b17-9eae-b3bcb8598175",
-                "timestamp": "2025-03-15T00:14:17.260",
-                "level": "INFO",
-                "thread": "http-nio-8085-exec-4",
-                "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
-                "message": "Messages were found in cache, proceed to return."
+                "correlationId": "b19a768f-aeda-46f6-841f-05380141b33f",
+                "timestamp": "2025-03-18T19:49:56.281",
+                "level": "WARN",
+                "thread": "http-nio-8085-exec-9",
+                "logger": "org.hibernate.engine.jdbc.spi.SqlExceptionHelper",
+                "message": "SQL Error: 0, SQLState: 08001"
                 }{
-                "correlationId": "9e494d9d-f9c8-4b17-9eae-b3bcb8598175",
-                "timestamp": "2025-03-15T00:14:17.269",
-                "level": "INFO",
-                "thread": "http-nio-8085-exec-4",
+                "correlationId": "b19a768f-aeda-46f6-841f-05380141b33f",
+                "timestamp": "2025-03-18T19:49:56.282",
+                "level": "ERROR",
+                "thread": "http-nio-8085-exec-9",
+                "logger": "org.hibernate.engine.jdbc.spi.SqlExceptionHelper",
+                "message": "Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections."
+                }{
+                "correlationId": "b19a768f-aeda-46f6-841f-05380141b33f",
+                "timestamp": "2025-03-18T19:49:56.437",
+                "level": "ERROR",
+                "thread": "http-nio-8085-exec-9",
                 "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
-                "message": "The successful response is: {"data":[{"data":[{"code":"008","title":"Prueba 8","content":"Esto es prueba esta es la prueba 8","type":"Prueba2","category":"Information","application":"123e4897-e89b-12d3-a456-426614174241","functionality":"123e4567-e89b-12d3-a496-726614130503"},{"code":"006","title":"Prueba 7","content":"Esto es prueba esta es la prueba 7","type":"Prueba2","category":"Information","application":"123e4897-e89b-12d3-a456-426614174241","functionality":"123e4567-e89b-12d3-a496-726614130503"},{"code":"007","title":"Prueba 7","content":"Esto es prueba esta es la prueba 6","type":"Prueba2","category":"Information","application":"123e4897-e89b-12d3-a456-426614174241","functionality":"123e4567-e89b-12d3-a496-726614130503"}],"currentPage":1,"pageSize":50,"totalItems":3,"totalPages":1}],"errors":[]}"
+                "message": "The error response is: ---
+data: []
+errors:
+- "Could not open JPA EntityManager for transaction"
+"
                 }{
-                "correlationId": "0cc0d392-8eb9-4e18-b58c-725405443575",
-                "timestamp": "2025-03-15T00:14:41.142",
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:51:03.101",
+                "level": "INFO",
+                "thread": "SpringApplicationShutdownHook",
+                "logger": "org.apache.pulsar.client.impl.PulsarClientImpl",
+                "message": "Client closing. URL: pulsar://localhost:6650"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:19.096",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
+                "message": "Starting CrossWordApplication using Java 17.0.13 with PID 27476 (C:\Users\faiyo\Documents\Universidad\ucolab\MessageUcoLab\infrastructure\target\classes started by faiyo in C:\Users\faiyo\Documents\Universidad\ucolab\MessageUcoLab)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:19.101",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
+                "message": "No active profile set, falling back to 1 default profile: "default""
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.404",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.404",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Bootstrapping Spring Data JPA repositories in DEFAULT mode."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.580",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Finished Spring Data repository scanning in 160 ms. Found 1 JPA repository interface."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.583",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.583",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Bootstrapping Spring Data MongoDB repositories in DEFAULT mode."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.596",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.postgresql.PostgreSQLRepository; If you want this repository to be a MongoDB repository, consider annotating your entities with one of these annotations: org.springframework.data.mongodb.core.mapping.Document (preferred), or consider extending one of the following types with your repository: org.springframework.data.mongodb.repository.MongoRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.600",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.redis.RedisRepositoryAdapter; If you want this repository to be a MongoDB repository, consider annotating your entities with one of these annotations: org.springframework.data.mongodb.core.mapping.Document (preferred), or consider extending one of the following types with your repository: org.springframework.data.mongodb.repository.MongoRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.610",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Finished Spring Data repository scanning in 26 ms. Found 4 MongoDB repository interfaces."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.613",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.613",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Bootstrapping Spring Data Redis repositories in DEFAULT mode."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.645",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoEnvironmentRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.646",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.646",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenMongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.646",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenStateMongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.648",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.postgresql.PostgreSQLRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:20.661",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Finished Spring Data repository scanning in 24 ms. Found 1 Redis repository interface."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.318",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+                "message": "Tomcat initialized with port 8085 (http)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.328",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.coyote.http11.Http11NioProtocol",
+                "message": "Initializing ProtocolHandler ["http-nio-8085"]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.330",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.catalina.core.StandardService",
+                "message": "Starting service [Tomcat]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.330",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.catalina.core.StandardEngine",
+                "message": "Starting Servlet engine: [Apache Tomcat/10.1.20]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.425",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
+                "message": "Initializing Spring embedded WebApplicationContext"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.425",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+                "message": "Root WebApplicationContext: initialization completed in 3261 ms"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.739",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.jpa.internal.util.LogHelper",
+                "message": "HHH000204: Processing PersistenceUnitInfo [name: default]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:22.870",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.Version",
+                "message": "HHH000412: Hibernate ORM core version 6.4.4.Final"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:23.042",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.cache.internal.RegionFactoryInitiator",
+                "message": "HHH000026: Second-level cache disabled"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:23.758",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo",
+                "message": "No LoadTimeWeaver setup: ignoring JPA class transformer"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:24.101",
+                "level": "WARN",
+                "thread": "main",
+                "logger": "org.hibernate.orm.deprecation",
+                "message": "HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:27.581",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator",
+                "message": "HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:27.586",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean",
+                "message": "Initialized JPA EntityManagerFactory for persistence unit 'default'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:29.506",
+                "level": "WARN",
+                "thread": "main",
+                "logger": "org.springframework.data.mongodb.core.mapping.BasicMongoPersistentProperty",
+                "message": "Customizing field name for id property 'co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument.id' is not allowed; Custom name ('MESSAGE_ID') will not be considered"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:30.703",
+                "level": "WARN",
+                "thread": "main",
+                "logger": "org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration",
+                "message": "spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:31.913",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "com.azure.core.http.netty.implementation.NettyUtility",
+                "message": "{"az.sdk.message":"The following Netty versions were found on the classpath and have a mismatch with the versions used by azure-core-http-netty. If your application runs without issue this message can be ignored, otherwise please align the Netty versions used in your application. For more information, see https://aka.ms/azsdk/java/dependency/troubleshoot.","azure-netty-version":"4.1.115.Final","azure-netty-native-version":"2.0.69.Final","classpath-netty-version-io.netty:netty-common":"4.1.109.Final","classpath-netty-version-io.netty:netty-handler":"4.1.109.Final","classpath-netty-version-io.netty:netty-handler-proxy":"4.1.109.Final","classpath-netty-version-io.netty:netty-buffer":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec-http":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec-http2":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-unix-common":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-epoll":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-kqueue":"4.1.109.Final","classpath-native-netty-version-io.netty:netty-tcnative-boringssl-static":"2.0.65.Final"}"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:33.441",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver",
+                "message": "Exposing 3 endpoint(s) beneath base path '/actuator'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:33.552",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.coyote.http11.Http11NioProtocol",
+                "message": "Starting ProtocolHandler ["http-nio-8085"]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:33.570",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+                "message": "Tomcat started on port 8085 (http) with context path ''"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:33.596",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
+                "message": "Started CrossWordApplication in 15.532 seconds (process running for 16.426)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:34.058",
+                "level": "INFO",
+                "thread": "RMI TCP Connection(2)-172.30.144.1",
+                "logger": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
+                "message": "Initializing Spring DispatcherServlet 'dispatcherServlet'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:34.058",
+                "level": "INFO",
+                "thread": "RMI TCP Connection(2)-172.30.144.1",
+                "logger": "org.springframework.web.servlet.DispatcherServlet",
+                "message": "Initializing Servlet 'dispatcherServlet'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T19:54:34.060",
+                "level": "INFO",
+                "thread": "RMI TCP Connection(2)-172.30.144.1",
+                "logger": "org.springframework.web.servlet.DispatcherServlet",
+                "message": "Completed initialization in 2 ms"
+                }{
+                "correlationId": "5646ef06-e3fe-4c5d-ac21-93d0f6e570c0",
+                "timestamp": "2025-03-18T19:54:51.074",
                 "level": "INFO",
                 "thread": "http-nio-8085-exec-3",
                 "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
-                "message": "Messages were found in cache, proceed to return."
+                "message": "The message was not found in cache, we proceed to search in database"
                 }{
-                "correlationId": "0cc0d392-8eb9-4e18-b58c-725405443575",
-                "timestamp": "2025-03-15T00:14:41.161",
+                "correlationId": "5646ef06-e3fe-4c5d-ac21-93d0f6e570c0",
+                "timestamp": "2025-03-18T19:54:51.230",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-3",
+                "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
+                "message": "Messages were found in the database, proceed to return and cache."
+                }{
+                "correlationId": "5646ef06-e3fe-4c5d-ac21-93d0f6e570c0",
+                "timestamp": "2025-03-18T19:54:51.431",
                 "level": "INFO",
                 "thread": "http-nio-8085-exec-3",
                 "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
                 "message": "The successful response is: ---
 data:
-- code: "008"
-  title: "Prueba 8"
-  content: "Esto es prueba esta es la prueba 8"
-  type: "Prueba2"
-  category: "Information"
-  application: "123e4897-e89b-12d3-a456-426614174241"
-  functionality: "123e4567-e89b-12d3-a496-726614130503"
+- data:
+  - code: "007"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 6"
+    type: "Information"
+    category: "Prueba2"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "006"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 7"
+    type: "Information"
+    category: "Prueba2"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "008"
+    title: "Prueba 8"
+    content: "Esto es prueba esta es la prueba 8"
+    type: "Information"
+    category: "Prueba2"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  currentPage: 1
+  pageSize: 50
+  totalItems: 3
+  totalPages: 1
 errors: []
 "
                 }{
-                "correlationId": "316a3451-1612-4dc1-8368-94166317690b",
-                "timestamp": "2025-03-15T00:15:10.876",
+                "correlationId": "c35d2551-da63-4593-91eb-32de39ef4efd",
+                "timestamp": "2025-03-18T19:56:41.465",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-8",
+                "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
+                "message": "The message was not found in cache, we proceed to search in database"
+                }{
+                "correlationId": "c35d2551-da63-4593-91eb-32de39ef4efd",
+                "timestamp": "2025-03-18T19:56:41.829",
+                "level": "ERROR",
+                "thread": "http-nio-8085-exec-8",
+                "logger": "co.edu.uco.core.domain.usecase.FindMessageByEnvironmentUseCase",
+                "message": "Could not get the messages from the application, verify that the application exists."
+                }{
+                "correlationId": "c35d2551-da63-4593-91eb-32de39ef4efd",
+                "timestamp": "2025-03-18T19:56:41.835",
+                "level": "ERROR",
+                "thread": "http-nio-8085-exec-8",
+                "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
+                "message": "The error response is: ---
+data: []
+errors:
+- "Could not get the messages from the application, verify that the application exists."
+"
+                }{
+                "correlationId": "8a3c5156-07f0-4178-88dd-7883d946c433",
+                "timestamp": "2025-03-18T19:56:49.920",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-1",
+                "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
+                "message": "Messages were found in cache, proceed to return."
+                }{
+                "correlationId": "8a3c5156-07f0-4178-88dd-7883d946c433",
+                "timestamp": "2025-03-18T19:56:49.925",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-1",
+                "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
+                "message": "The successful response is: ---
+data:
+- data:
+  - code: "008"
+    title: "Prueba 8"
+    content: "Esto es prueba esta es la prueba 8"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "006"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 7"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "007"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 6"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  currentPage: 1
+  pageSize: 50
+  totalItems: 3
+  totalPages: 1
+errors: []
+"
+                }{
+                "correlationId": "25ced732-2136-4174-8f04-7764a2f7bae5",
+                "timestamp": "2025-03-18T19:59:29.169",
                 "level": "INFO",
                 "thread": "http-nio-8085-exec-3",
                 "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
                 "message": "Messages were found in cache, proceed to return."
                 }{
-                "correlationId": "316a3451-1612-4dc1-8368-94166317690b",
-                "timestamp": "2025-03-15T00:15:10.878",
+                "correlationId": "25ced732-2136-4174-8f04-7764a2f7bae5",
+                "timestamp": "2025-03-18T19:59:29.174",
                 "level": "INFO",
                 "thread": "http-nio-8085-exec-3",
                 "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
-                "message": "The successful response is: {"data":[{"data":[{"code":"008","title":"Prueba 8","content":"Esto es prueba esta es la prueba 8","type":"Prueba2","category":"Information","application":"123e4897-e89b-12d3-a456-426614174241","functionality":"123e4567-e89b-12d3-a496-726614130503"},{"code":"006","title":"Prueba 7","content":"Esto es prueba esta es la prueba 7","type":"Prueba2","category":"Information","application":"123e4897-e89b-12d3-a456-426614174241","functionality":"123e4567-e89b-12d3-a496-726614130503"},{"code":"007","title":"Prueba 7","content":"Esto es prueba esta es la prueba 6","type":"Prueba2","category":"Information","application":"123e4897-e89b-12d3-a456-426614174241","functionality":"123e4567-e89b-12d3-a496-726614130503"}],"currentPage":1,"pageSize":50,"totalItems":3,"totalPages":1}],"errors":[]}"
+                "message": "The successful response is: ---
+data:
+- data:
+  - code: "008"
+    title: "Prueba 8"
+    content: "Esto es prueba esta es la prueba 8"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "006"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 7"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "007"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 6"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  currentPage: 1
+  pageSize: 50
+  totalItems: 3
+  totalPages: 1
+errors: []
+"
+                }{
+                "correlationId": "94c7a1df-495f-48b2-bf32-37eb97ea51fe",
+                "timestamp": "2025-03-18T19:59:35.820",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-10",
+                "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
+                "message": "Messages were found in cache, proceed to return."
+                }{
+                "correlationId": "94c7a1df-495f-48b2-bf32-37eb97ea51fe",
+                "timestamp": "2025-03-18T19:59:35.823",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-10",
+                "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
+                "message": "The successful response is: ---
+data:
+- data:
+  - code: "008"
+    title: "Prueba 8"
+    content: "Esto es prueba esta es la prueba 8"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "006"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 7"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "007"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 6"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  currentPage: 1
+  pageSize: 50
+  totalItems: 3
+  totalPages: 1
+errors: []
+"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:16.869",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
+                "message": "Starting CrossWordApplication using Java 17.0.13 with PID 13468 (C:\Users\faiyo\Documents\Universidad\ucolab\MessageUcoLab\infrastructure\target\classes started by faiyo in C:\Users\faiyo\Documents\Universidad\ucolab\MessageUcoLab)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:16.875",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
+                "message": "No active profile set, falling back to 1 default profile: "default""
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:17.869",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:17.870",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Bootstrapping Spring Data JPA repositories in DEFAULT mode."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.025",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Finished Spring Data repository scanning in 147 ms. Found 1 JPA repository interface."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.026",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.026",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Bootstrapping Spring Data MongoDB repositories in DEFAULT mode."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.040",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.postgresql.PostgreSQLRepository; If you want this repository to be a MongoDB repository, consider annotating your entities with one of these annotations: org.springframework.data.mongodb.core.mapping.Document (preferred), or consider extending one of the following types with your repository: org.springframework.data.mongodb.repository.MongoRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.042",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.redis.RedisRepositoryAdapter; If you want this repository to be a MongoDB repository, consider annotating your entities with one of these annotations: org.springframework.data.mongodb.core.mapping.Document (preferred), or consider extending one of the following types with your repository: org.springframework.data.mongodb.repository.MongoRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.048",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Finished Spring Data repository scanning in 22 ms. Found 4 MongoDB repository interfaces."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.052",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Multiple Spring Data modules found, entering strict repository configuration mode"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.052",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Bootstrapping Spring Data Redis repositories in DEFAULT mode."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.069",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoEnvironmentRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.070",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.071",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenMongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.072",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenStateMongoRepositoryAdapter; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.072",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport",
+                "message": "Spring Data Redis - Could not safely identify store assignment for repository candidate interface co.edu.uco.infrastructure.adapter.secondary.repository.postgresql.PostgreSQLRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:18.081",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.data.repository.config.RepositoryConfigurationDelegate",
+                "message": "Finished Spring Data repository scanning in 18 ms. Found 1 Redis repository interface."
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:19.609",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+                "message": "Tomcat initialized with port 8085 (http)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:19.623",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.coyote.http11.Http11NioProtocol",
+                "message": "Initializing ProtocolHandler ["http-nio-8085"]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:19.625",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.catalina.core.StandardService",
+                "message": "Starting service [Tomcat]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:19.625",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.catalina.core.StandardEngine",
+                "message": "Starting Servlet engine: [Apache Tomcat/10.1.20]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:19.719",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
+                "message": "Initializing Spring embedded WebApplicationContext"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:19.720",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+                "message": "Root WebApplicationContext: initialization completed in 2785 ms"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:20.042",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.jpa.internal.util.LogHelper",
+                "message": "HHH000204: Processing PersistenceUnitInfo [name: default]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:20.121",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.Version",
+                "message": "HHH000412: Hibernate ORM core version 6.4.4.Final"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:20.167",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.cache.internal.RegionFactoryInitiator",
+                "message": "HHH000026: Second-level cache disabled"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:20.574",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo",
+                "message": "No LoadTimeWeaver setup: ignoring JPA class transformer"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:20.743",
+                "level": "WARN",
+                "thread": "main",
+                "logger": "org.hibernate.orm.deprecation",
+                "message": "HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:22.153",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator",
+                "message": "HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:22.157",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean",
+                "message": "Initialized JPA EntityManagerFactory for persistence unit 'default'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:23.665",
+                "level": "WARN",
+                "thread": "main",
+                "logger": "org.springframework.data.mongodb.core.mapping.BasicMongoPersistentProperty",
+                "message": "Customizing field name for id property 'co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument.id' is not allowed; Custom name ('MESSAGE_ID') will not be considered"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:24.566",
+                "level": "WARN",
+                "thread": "main",
+                "logger": "org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration",
+                "message": "spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:25.205",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "com.azure.core.http.netty.implementation.NettyUtility",
+                "message": "{"az.sdk.message":"The following Netty versions were found on the classpath and have a mismatch with the versions used by azure-core-http-netty. If your application runs without issue this message can be ignored, otherwise please align the Netty versions used in your application. For more information, see https://aka.ms/azsdk/java/dependency/troubleshoot.","azure-netty-version":"4.1.115.Final","azure-netty-native-version":"2.0.69.Final","classpath-netty-version-io.netty:netty-common":"4.1.109.Final","classpath-netty-version-io.netty:netty-handler":"4.1.109.Final","classpath-netty-version-io.netty:netty-handler-proxy":"4.1.109.Final","classpath-netty-version-io.netty:netty-buffer":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec-http":"4.1.109.Final","classpath-netty-version-io.netty:netty-codec-http2":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-unix-common":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-epoll":"4.1.109.Final","classpath-netty-version-io.netty:netty-transport-native-kqueue":"4.1.109.Final","classpath-native-netty-version-io.netty:netty-tcnative-boringssl-static":"2.0.65.Final"}"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:25.993",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver",
+                "message": "Exposing 3 endpoint(s) beneath base path '/actuator'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:26.057",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.apache.coyote.http11.Http11NioProtocol",
+                "message": "Starting ProtocolHandler ["http-nio-8085"]"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:26.069",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "org.springframework.boot.web.embedded.tomcat.TomcatWebServer",
+                "message": "Tomcat started on port 8085 (http) with context path ''"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:26.088",
+                "level": "INFO",
+                "thread": "main",
+                "logger": "co.edu.uco.infrastructure.init.CrossWordApplication",
+                "message": "Started CrossWordApplication in 10.234 seconds (process running for 11.24)"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:26.353",
+                "level": "INFO",
+                "thread": "RMI TCP Connection(1)-172.30.144.1",
+                "logger": "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
+                "message": "Initializing Spring DispatcherServlet 'dispatcherServlet'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:26.353",
+                "level": "INFO",
+                "thread": "RMI TCP Connection(1)-172.30.144.1",
+                "logger": "org.springframework.web.servlet.DispatcherServlet",
+                "message": "Initializing Servlet 'dispatcherServlet'"
+                }{
+                "correlationId": "",
+                "timestamp": "2025-03-18T20:08:26.356",
+                "level": "INFO",
+                "thread": "RMI TCP Connection(1)-172.30.144.1",
+                "logger": "org.springframework.web.servlet.DispatcherServlet",
+                "message": "Completed initialization in 3 ms"
+                }{
+                "correlationId": "b6a7a921-9a44-4f6a-9020-7197c85d4550",
+                "timestamp": "2025-03-18T20:08:40.630",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-2",
+                "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
+                "message": "Messages were found in cache, proceed to return."
+                }{
+                "correlationId": "b6a7a921-9a44-4f6a-9020-7197c85d4550",
+                "timestamp": "2025-03-18T20:08:40.676",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-2",
+                "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
+                "message": "The successful response is: ---
+data:
+- data:
+  - code: "008"
+    title: "Prueba 8"
+    content: "Esto es prueba esta es la prueba 8"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "006"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 7"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "007"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 6"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  currentPage: 1
+  pageSize: 50
+  totalItems: 3
+  totalPages: 1
+errors: []
+"
+                }{
+                "correlationId": "ceed4175-b368-4ca5-bb92-c99bb36063aa",
+                "timestamp": "2025-03-18T20:08:44.612",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-8",
+                "logger": "co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy",
+                "message": "Messages were found in cache, proceed to return."
+                }{
+                "correlationId": "ceed4175-b368-4ca5-bb92-c99bb36063aa",
+                "timestamp": "2025-03-18T20:08:44.617",
+                "level": "INFO",
+                "thread": "http-nio-8085-exec-8",
+                "logger": "co.edu.uco.infrastructure.adapter.secondary.presenter.rest.HttpPresenterAdapter",
+                "message": "The successful response is: ---
+data:
+- data:
+  - code: "008"
+    title: "Prueba 8"
+    content: "Esto es prueba esta es la prueba 8"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "006"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 7"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  - code: "007"
+    title: "Prueba 7"
+    content: "Esto es prueba esta es la prueba 6"
+    type: "Prueba2"
+    category: "Information"
+    application: "123e4897-e89b-12d3-a456-426614174241"
+    functionality: "123e4567-e89b-12d3-a496-726614130503"
+  currentPage: 1
+  pageSize: 50
+  totalItems: 3
+  totalPages: 1
+errors: []
+"
                 }

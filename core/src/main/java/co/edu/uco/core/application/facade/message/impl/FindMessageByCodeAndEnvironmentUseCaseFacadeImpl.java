@@ -10,12 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class FindMessageByCodeAndEnvironmentUseCaseFacadeImpl implements FindMessageByCodeAndEnvironmentUseCaseFacade {
     private final HandlingFindMessageByCodeAndEnvironmentPort handlingFindMessageByCodeAndEnvironmentPort;
-
     public FindMessageByCodeAndEnvironmentUseCaseFacadeImpl(
             HandlingFindMessageByCodeAndEnvironmentPort handlingFindMessageByCodeAndEnvironmentPort) {
         this.handlingFindMessageByCodeAndEnvironmentPort = handlingFindMessageByCodeAndEnvironmentPort;
     }
-
     @Override
     public MessageDTO execute(String messageCode, String environmentId) {
         return handlingFindMessageByCodeAndEnvironmentPort.execute(messageCode, environmentId);

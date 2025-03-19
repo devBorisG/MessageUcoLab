@@ -1,9 +1,10 @@
 package co.edu.uco.core.application.catalog.strategy.inmemory.enums;
 
 import co.edu.uco.core.application.catalog.MessageModel;
+import lombok.Getter;
 
+@Getter
 public enum DetailMessageEnum {
-
     TCH_001(MessageKeyEnum.TCH_001, "Database not connected", "Unable to establish connection to %s database", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_002(MessageKeyEnum.TCH_002, "Message Broker not connected", "Unable to establish connection to Message Broker", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_003(MessageKeyEnum.TCH_003, "API Translate not connected", "Unable to establish connection to translate API", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
@@ -37,6 +38,7 @@ public enum DetailMessageEnum {
     TCH_031(MessageKeyEnum.TCH_031, "Access denied", "Access denied, the token is invalid", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_032(MessageKeyEnum.TCH_032, "Token header dont send", "Access denied, the header 'Token' has not been send", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     TCH_033(MessageKeyEnum.TCH_033, "Token expired", "Access denied, the token is expired or inactive", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
+    TCH_034(MessageKeyEnum.TCH_034, "SHA-256 not available", "SHA-256 algorithm not available", MessageTypeEnum.TECHNICAL, MessageCategoryEnum.ERROR),
     FUN_001(MessageKeyEnum.FUN_001, "Invalid message code", "The message code is invalid or not within allowed values", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_002(MessageKeyEnum.FUN_002, "Title is empty or null", "The message must have a valid title", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_003(MessageKeyEnum.FUN_003, "Content is empty or null", "The message must include a valid description", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -52,12 +54,12 @@ public enum DetailMessageEnum {
     FUN_013(MessageKeyEnum.FUN_013, "Cache not connected", "Failed to connect to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_014(MessageKeyEnum.FUN_014, "Error during cache connection", "Data access exception while connecting to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_015(MessageKeyEnum.FUN_015, "Unexpected exception", "Unexpected exception while connecting to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_017(MessageKeyEnum.FUN_017, "Message validators", "The content cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_018(MessageKeyEnum.FUN_018, "Message validators", "The size of the content must not be less than 10", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_019(MessageKeyEnum.FUN_019, "Message validators", "The size of the content cannot be larger than 100", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_020(MessageKeyEnum.FUN_020, "Message validators", "The size of the title cannot be smaller than 10", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_021(MessageKeyEnum.FUN_021, "Message validators", "The size of the title cannot be larger than 50", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_022(MessageKeyEnum.FUN_022, "Message validators", "The title cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_017(MessageKeyEnum.FUN_017, "Content be empty", "The content cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_018(MessageKeyEnum.FUN_018, "Title size exceeds limit", "The size of the content must not be less than 10", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_019(MessageKeyEnum.FUN_019, "Title size insufficient", "The size of the content cannot be larger than 100", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_020(MessageKeyEnum.FUN_020, "Content size insufficient", "The size of the title cannot be smaller than 10", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_021(MessageKeyEnum.FUN_021, "Content size exceeds limit", "The size of the title cannot be larger than 50", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_022(MessageKeyEnum.FUN_022, "Title be empty", "The title cannot be empty", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_023(MessageKeyEnum.FUN_023, "Unexpected Error", "An unexpected error has occurred", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_024(MessageKeyEnum.FUN_024, "information consulted", "%s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.CONFIRMATION),
     FUN_025(MessageKeyEnum.FUN_025, "Error create token", "An error occurred while verify the token, please try again later", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -74,30 +76,15 @@ public enum DetailMessageEnum {
         this.type = type;
         this.category = category;
     }
-    public MessageKeyEnum getCode() {
-        return code;
-    }
     public void setCode(final MessageKeyEnum code) { this.code = code;}
-    public String getTitle() {
-        return title;
-    }
     private void setTitle(final String title) {
         this.title = title;
-    }
-    public MessageTypeEnum getType() {
-        return type;
     }
     private void setType(final MessageTypeEnum type) {
         this.type = type;
     }
-    public String getContent() {
-        return content;
-    }
     private void setContent(final String content) {
         this.content = content;
-    }
-    public MessageCategoryEnum getCategory() {
-        return category;
     }
     private void setCategory(final MessageCategoryEnum category) {
         this.category = category;

@@ -3,7 +3,6 @@ package co.edu.uco.infrastructure.adapter.primary.interceptors;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerRegistry;
-import co.edu.uco.utils.helper.UtilObject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
