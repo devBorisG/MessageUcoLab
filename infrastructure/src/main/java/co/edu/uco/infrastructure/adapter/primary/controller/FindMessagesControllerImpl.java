@@ -68,7 +68,7 @@ final class FindMessagesControllerImpl implements FindMessagesController {
                         HttpServletRequest httpServletRequest,
                         HttpServletResponse httpServletResponse) {
                 var environmentId = (String) httpServletRequest.getAttribute(ENVIRONMENT_ID_ATTRIBUTE);
-                SimplePage<MessageDTO> messageDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environmentId,
+                var messageDTOSimplePage = handlingFindMessageEnvironmentPort.execute(environmentId,
                                 simplePageRequest);
                 restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest,
                                 httpServletResponse);
@@ -97,7 +97,7 @@ final class FindMessagesControllerImpl implements FindMessagesController {
                         HttpServletRequest httpServletRequest,
                         HttpServletResponse httpServletResponse) {
                 var environmentId = (String) httpServletRequest.getAttribute(ENVIRONMENT_ID_ATTRIBUTE);
-                MessageDTO messageDTO = findMessageByCodeAndEnvironmentUseCaseFacade.execute(messageCode,
+                var messageDTO = findMessageByCodeAndEnvironmentUseCaseFacade.execute(messageCode,
                                 environmentId);
                 restPresenter.presentRestSuccess(List.of(messageDTO), httpServletRequest, httpServletResponse);
         }

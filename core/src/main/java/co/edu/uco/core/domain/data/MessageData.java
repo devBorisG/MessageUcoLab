@@ -4,7 +4,6 @@ import co.edu.uco.utils.helper.UtilObject;
 import co.edu.uco.utils.helper.UtilText;
 import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.util.UUID;
 
@@ -14,7 +13,6 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 
 @Getter
-@ToString
 public final class MessageData {
     private UUID id;
     private String code;
@@ -25,7 +23,6 @@ public final class MessageData {
     private StatusMessageData status;
     private String application;
     private String functionality;
-
     public MessageData() {
         setId(UtilUUID.getNewUUID());
         setCode(UtilText.EMPTY);
