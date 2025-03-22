@@ -11,6 +11,7 @@ import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageEnvironmentPort;
 import co.edu.uco.core.domain.validator.message.ListMessageValidator;
 import co.edu.uco.utils.exception.BusinessException;
+import co.edu.uco.utils.exception.CrossWordsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,11 @@ public final class FindMessageByEnvironmentUseCase implements HandlingFindMessag
             var page = messageCatalogStrategy.getMessagesWithEnvironment(environment, pageRequest);
             var messages = page.getData().stream().map(entityMapper::mapperDTO).toList();
             return SimplePage.of(messages, page.getPage(), page.getSize(),page.getTotalItems(), page.getTotalPages());
-        }catch (Exception exception){
+        } catch (CrossWordsException e) {
+            log.error(e.getUserMessage(), e.getTechnicalMessage());
+            throw e;
+        }
+        catch (Exception exception){
             var errorMessage = DetailMessageEnum.FUN_011.getContent();
             log.error(errorMessage);
             throw BusinessException.buildUserException(errorMessage);

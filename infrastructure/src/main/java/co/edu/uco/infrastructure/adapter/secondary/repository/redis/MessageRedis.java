@@ -26,12 +26,10 @@ public final class MessageRedis {
     private String type;
     private String category;
     private String status;
-    @Indexed
     private String application;
     private String functionality;
     @Indexed
     private String environmentId;
-
     public MessageRedis() {
         setId(UtilUUID.getNewUUID());
         setCode(EMPTY);
@@ -44,7 +42,6 @@ public final class MessageRedis {
         setFunctionality(EMPTY);
         setEnvironmentId(EMPTY);
     }
-
     public MessageRedis(UUID id, String code, String title, String content, String category,
             String type, String status, String application, String functionality, String environmentId) {
         setId(id);
@@ -58,43 +55,33 @@ public final class MessageRedis {
         setFunctionality(functionality);
         setEnvironmentId(environmentId);
     }
-
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
     }
-
     public void setCode(String code) {
         this.code = trim(code);
     }
-
     public void setTitle(String title) {
         this.title = trim(title);
     }
-
     public void setContent(String content) {
         this.content = trim(content);
     }
-
     public void setType(String type) {
         this.type = trim(type);
     }
-
     public void setCategory(String category) {
         this.category = trim(category);
     }
-
     public void setStatus(String status) {
         this.status = trim(status);
     }
-
     public void setApplication(String application) {
         this.application = trim(application);
     }
-
     public void setFunctionality(String functionality) {
         this.functionality = trim(functionality);
     }
-
     public void setEnvironmentId(String environmentId) {
         this.environmentId = trim(environmentId);
     }

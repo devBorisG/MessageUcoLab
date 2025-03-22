@@ -12,12 +12,8 @@ import java.util.UUID;
 @Repository
 public interface RedisRepositoryAdapter extends JpaRepository<MessageRedis, UUID> {
     Optional<MessageRedis> findByCodeAndApplication(String code, String application);
-
     Page<MessageRedis> findByApplication(String application, Pageable pageable);
-
     List<MessageRedis> findByApplication(String application);
-
     Page<MessageRedis> findByEnvironmentId(String environmentId, Pageable pageable);
-
     Optional<MessageRedis> findByCodeAndEnvironmentId(String code, String environmentId);
 }

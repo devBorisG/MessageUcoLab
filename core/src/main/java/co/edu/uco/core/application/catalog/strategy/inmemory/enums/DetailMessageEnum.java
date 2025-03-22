@@ -49,7 +49,7 @@ public enum DetailMessageEnum {
     FUN_007(MessageKeyEnum.FUN_007, "Message found in cache", "Messages were found in the database, proceed to return and cache.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.INFORMATION),
     FUN_008(MessageKeyEnum.FUN_008, "Cache and database messages are not the same amount.", "The number of messages in cache and database does not match, the cache is filled with the missing messages.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.WARNING),
     FUN_009(MessageKeyEnum.FUN_009, "Message found in cache", "Messages were found in cache, proceed to return.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_010(MessageKeyEnum.FUN_010, "Null Validator", "%s is required", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_010(MessageKeyEnum.FUN_010, "Null Validator", "%s is required", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.INFORMATION),
     FUN_011(MessageKeyEnum.FUN_011, "Application not found", "Could not get the messages from the application, verify that the application exists.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_012(MessageKeyEnum.FUN_012, "Message not found", "There is no message with the code %s for the application %s", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_013(MessageKeyEnum.FUN_013, "Cache not connected", "Failed to connect to Redis", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -70,7 +70,10 @@ public enum DetailMessageEnum {
     FUN_029(MessageKeyEnum.FUN_029, "Invalid page size", "The page size must be between 1 and %d.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_030(MessageKeyEnum.FUN_030, "Invalid sort column", "The sort column '%s' is not valid.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_031(MessageKeyEnum.FUN_031, "Invalid sort direction", "The sort direction must be 'ASC' or 'DESC'.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_032(MessageKeyEnum.FUN_032, "Page not found", "The requested page is empty or does not exist.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
+    FUN_032(MessageKeyEnum.FUN_032, "Page not found", "The requested page is empty or does not exist.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_033(MessageKeyEnum.FUN_033, "Invalid page type", "The value of page must be a valid integer.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_034(MessageKeyEnum.FUN_034, "Invalid size type", "The value of size must be a valid integer.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
+    
     private MessageKeyEnum code;
     private String title;
     private String content;

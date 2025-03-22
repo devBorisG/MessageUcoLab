@@ -1,6 +1,5 @@
 package co.edu.uco.core.domain.validator.message;
 
-import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.validator.page.SimplePageRequestValidator;

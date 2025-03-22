@@ -4,9 +4,8 @@ import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.validator.CompositeValidator;
 import org.springframework.stereotype.Component;
 
-
 @Component
-    public final class SimplePageRequestValidator {
+public final class SimplePageRequestValidator{
     private final CompositeValidator<SimplePageRequest> compositeValidator;
     public SimplePageRequestValidator(CompositeValidator<SimplePageRequest> compositeValidator) {
         this.compositeValidator = compositeValidator;
