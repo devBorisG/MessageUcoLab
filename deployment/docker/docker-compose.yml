@@ -125,12 +125,9 @@ services:
       CONNECT_PLUGIN_PATH: "/kafka/connect,/mongo-connector/lib"
     volumes:
       - ./mongo-connector:/mongo-connector
-      - ./configs/connector-postgres.json:/connector-postgres.json
-      - ./scripts/setup-connector.sh:/setup-connector.sh
     depends_on:
       - kafka
       - debezium-postgres
-    command: [ "bash", "-c", "/kafka/bin/connect-distributed.sh /kafka/config/connect-distributed.properties & sleep 30 && /setup-connector.sh && wait" ]
 
   mongodb:
     image: mongo:5.0
