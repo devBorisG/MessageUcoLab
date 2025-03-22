@@ -77,6 +77,18 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - ./scripts/create-topics.sh:/create-topics.sh
+    entrypoint: >
+      bash -c "
+        echo 'Starting Kafka broker...' &&
+        /etc/confluent/docker/run &
+        echo 'Waiting for Kafka to be ready...' &&
+        sleep 30 &&
+        /create-topics.sh &&
+        wait
+      "
     depends_on:
       - zookeeper
 
@@ -113,9 +125,12 @@ services:
       CONNECT_PLUGIN_PATH: "/kafka/connect,/mongo-connector/lib"
     volumes:
       - ./mongo-connector:/mongo-connector
+      - ./configs/connector-postgres.json:/connector-postgres.json
+      - ./scripts/setup-connector.sh:/setup-connector.sh
     depends_on:
       - kafka
       - debezium-postgres
+    command: [ "bash", "-c", "/kafka/bin/connect-distributed.sh /kafka/config/connect-distributed.properties & sleep 30 && /setup-connector.sh && wait" ]
 
   mongodb:
     image: mongo:5.0
