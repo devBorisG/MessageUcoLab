@@ -1,6 +1,5 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Field;
 

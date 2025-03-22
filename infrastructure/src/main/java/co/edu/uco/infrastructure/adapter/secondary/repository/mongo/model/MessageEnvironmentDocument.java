@@ -20,26 +20,26 @@ public final class MessageEnvironmentDocument {
     @Field("MESSAGE_ENVIRONMENT_ID")
     private String id;
     @Field("MESSAGE")
-    private MessageJsonDocument message;
+    private MessageDocument message;
     @Field("ENVIRONMENT_ID")
     private String environmentId;
     @Field("STATUS")
     private MessageEnvironmentStateDocument state;
-    public MessageEnvironmentDocument(String id, MessageJsonDocument message, String environmentId) {
+    public MessageEnvironmentDocument(String id, MessageDocument message, String environmentId) {
         setId(id);
         setMessage(message);
         setEnvironmentId(environmentId);
     }
     public MessageEnvironmentDocument() {
         setId(EMPTY);
-        setMessage(MessageJsonDocument.build());
+        setMessage(MessageDocument.build());
         setEnvironmentId(EMPTY);
     }
     public void setId(String id) {
         this.id =UtilText.trim(id);
     }
-    public void setMessage(MessageJsonDocument message) {
-        this.message = UtilObject.getDefaultIsNullObject(message, MessageJsonDocument.build());
+    public void setMessage(MessageDocument message) {
+        this.message = UtilObject.getDefaultIsNullObject(message, MessageDocument.build());
     }
     public void setEnvironmentId(String environmentId) {
         this.environmentId = trim(environmentId);

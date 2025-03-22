@@ -7,7 +7,6 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
@@ -22,7 +21,7 @@ public final class MessageData {
     private MessageCategoryData category;
     private StatusMessageData status;
     private String application;
-    private String functionality;
+    private FunctionalityData functionality;
     public MessageData() {
         setId(UtilUUID.getNewUUID());
         setCode(UtilText.EMPTY);
@@ -32,10 +31,10 @@ public final class MessageData {
         setType(MessageTypeData.build());
         setCategory(MessageCategoryData.build());
         setStatus(StatusMessageData.build());
-        setFunctionality(EMPTY);
+        setFunctionality(FunctionalityData.build());
     }
     public MessageData(UUID id, String code, String title, String content, MessageTypeData type,
-                       MessageCategoryData category,  String application, String functionality) {
+                       MessageCategoryData category,  String application, FunctionalityData functionality) {
         setId(id);
         setCode(code);
         setTitle(title);
@@ -59,18 +58,12 @@ public final class MessageData {
         this.content = trim(content);
     }
     public void setType(MessageTypeData type) {this.type = UtilObject.getDefaultIsNullObject(type,MessageTypeData.build());}
-    public void setCategory(MessageCategoryData category) {
-        this.category = getDefaultIsNullObject(category, MessageCategoryData.build());
-    }
-    public void setStatus(StatusMessageData status) {
-        this.status = getDefaultIsNullObject(status, StatusMessageData.build());
-    }
+    public void setCategory(MessageCategoryData category) {this.category = getDefaultIsNullObject(category, MessageCategoryData.build());}
+    public void setStatus(StatusMessageData status) {this.status = getDefaultIsNullObject(status, StatusMessageData.build());}
     public void setApplication(String application) {
         this.application = trim(application);
     }
-    public void setFunctionality(String functionality) {
-        this.functionality = trim(functionality);
-    }
+    public void setFunctionality(FunctionalityData functionality) {this.functionality = getDefaultIsNullObject(functionality, FunctionalityData.build());}
     public static MessageData build() {
         return new MessageData();
     }

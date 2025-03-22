@@ -5,10 +5,9 @@ import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.secondary.repository.data.DataMapper;
 import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoEnvironmentRepositoryAdapter;
-import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument;
 import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.MongoRepositoryAdapter;
 import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageEnvironmentDocument;
-import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageJsonDocument;
+import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.MessageDocument;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -24,41 +23,39 @@ import static co.edu.uco.utils.helper.UtilUUID.getStringFromUUID;
 public final class MessageMongoAdapter implements DataBaseMessageRepository {
     private final MongoRepositoryAdapter repository;
     private final MongoEnvironmentRepositoryAdapter environmentRepository;
-    private final DataMapper<MessageData, MessageDocument> mapper;
-    private final DataMapper<MessageData, MessageJsonDocument> mapperJson;
+    private final DataMapper<MessageData, MessageDocument> mapperJson;
 
     public MessageMongoAdapter(MongoRepositoryAdapter repository,
-            MongoEnvironmentRepositoryAdapter environmentRepository, DataMapper<MessageData, MessageDocument> mapper,
-            DataMapper<MessageData, MessageJsonDocument> mapperJson) {
+            MongoEnvironmentRepositoryAdapter environmentRepository,
+            DataMapper<MessageData, MessageDocument> mapperJson) {
         this.repository = repository;
         this.environmentRepository = environmentRepository;
-        this.mapper = mapper;
         this.mapperJson = mapperJson;
     }
 
     @Override
     public void save(MessageData data) {
-        repository.save(mapper.mapperModel(data));
+
     }
 
     @Override
     public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
-        return repository.findByCodeAndApplication(code, application).stream().map(mapper::mapperData).findFirst();
+        return Optional.empty();
     }
 
     @Override
     public SimplePage<MessageData> finByApplication(String application, Pageable pageable) {
-        return SimplePage.of(repository.findByApplication(application, pageable).map(mapper::mapperData));
+        return null;
     }
 
     @Override
     public List<MessageData> finByApplication(String application) {
-        return repository.findByApplication(application).stream().map(mapper::mapperData).toList();
+        return List.of();
     }
 
     @Override
     public Optional<MessageData> findById(UUID id) {
-        return repository.findById(getStringFromUUID(id)).map(mapper::mapperData);
+        return null; //repository.findById(getStringFromUUID(id)).map(mapperJson::mapperData);
     }
 
     @Override

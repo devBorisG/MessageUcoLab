@@ -1,5 +1,6 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.data;
 
+import co.edu.uco.core.domain.data.FunctionalityData;
 import co.edu.uco.core.domain.data.MessageCategoryData;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.data.MessageTypeData;
@@ -17,13 +18,13 @@ public final class MessageDataCacheMapper implements DataMapper<MessageData, Mes
     public MessageData mapperData(MessageRedis model) {
         return new MessageData(model.getId(), model.getCode(), model.getTitle(), model.getContent(),
                 MessageTypeData.build(model.getType()),
-                MessageCategoryData.build(model.getCategory()), model.getApplication(), model.getFunctionality());
+                MessageCategoryData.build(model.getCategory()), model.getApplication(), FunctionalityData.build());
     }
     @Override
     public MessageRedis mapperModel(MessageData data) {
         return new MessageRedis(data.getId(), data.getCode(), data.getTitle(), data.getContent(),
                 data.getType().getName(),
                 data.getCategory().getName(), data.getStatus().getName(), data.getApplication(),
-                data.getFunctionality(), EMPTY);
+                data.getFunctionality().getName(), EMPTY);
     }
 }
