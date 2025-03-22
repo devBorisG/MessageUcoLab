@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface PostgreSQLRepository extends JpaRepository<TokenEntity, UUID> {
+public interface TokenPostgresSQLRepositoryAdapter extends JpaRepository<TokenEntity, UUID> {
 }

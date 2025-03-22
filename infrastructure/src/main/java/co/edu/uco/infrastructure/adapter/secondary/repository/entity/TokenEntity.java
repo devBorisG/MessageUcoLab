@@ -18,22 +18,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TokenEntity {
+public final class TokenEntity {
     @Id
     private String id;
-
     @Column(nullable = false, name = "creation_date")
     private LocalDateTime creationDate;
-
     @Column(nullable = false, name = "secret_name")
     private String secretName;
-
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
-
-    @Column(nullable = false, name = "environment_id")
+    @Column(nullable = false,name = "environment_id")
     private UUID environmentId;
-
     @Column(name = "state_id")
     private UUID tokenStateDataId = UUID.fromString("123e4567-e89b-12d3-a456-426614175000");
 }
