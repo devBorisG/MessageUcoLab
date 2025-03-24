@@ -4,7 +4,6 @@ import co.edu.uco.core.application.dto.MessageDTO;
 import co.edu.uco.core.application.dto.PageRequestDTO;
 import co.edu.uco.core.application.facade.page.impl.SimplePageFacadeImpl;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
-import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageEnvironmentPort;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +18,7 @@ public final class FindMessagesByEnvironmentFacade {
         this.simplePageFacadeImpl = simplePageFacadeImpl;
     }
     public SimplePage<MessageDTO> execute(String environmentId, PageRequestDTO pageDTO) {
-        // Procesar la solicitud de paginación para convertir de PageRequestDTO a SimplePageRequest
-        SimplePageRequest pageRequest = simplePageFacadeImpl.execute(pageDTO);
-        // Ejecutar la búsqueda con los parámetros validados y convertidos
-        return handlingFindMessageEnvironmentPort.execute(environmentId, pageRequest);
+        var simplePageRequest = simplePageFacadeImpl.execute(pageDTO);
+        return handlingFindMessageEnvironmentPort.execute(environmentId, simplePageRequest);
     }
 }

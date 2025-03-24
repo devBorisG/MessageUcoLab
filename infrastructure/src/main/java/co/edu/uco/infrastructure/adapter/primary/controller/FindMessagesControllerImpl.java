@@ -29,7 +29,6 @@ final class FindMessagesControllerImpl implements FindMessagesController {
         private final FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade;
         private final PresenterPort<MessageDTO> restPresenter;
         private final PresenterPort<SimplePage<MessageDTO>> restPresenterPage;
-
         public FindMessagesControllerImpl(
                         FindMessagesByEnvironmentFacade findMessagesByEnvironmentFacade,
                         FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade,
@@ -40,7 +39,6 @@ final class FindMessagesControllerImpl implements FindMessagesController {
                 this.restPresenter = restPresenter;
                 this.restPresenterPage = restPresenterPage;
         }
-
         @Override
         @GetMapping("${crosswords.api.path.message.environment}")
         @Operation(summary = "Listar mensajes por ambiente", description = "Retorna una lista paginada de mensajes asociados al ambiente del token actual. "
@@ -68,15 +66,11 @@ final class FindMessagesControllerImpl implements FindMessagesController {
                         @ModelAttribute PageRequestDTO pageRequestDTO,
                         HttpServletRequest httpServletRequest,
                         HttpServletResponse httpServletResponse) {
-                // Obtener el ID del ambiente del token
                 var environmentId = (String) httpServletRequest.getAttribute(ENVIRONMENT_ID_ATTRIBUTE);
-                // Usar la fachada para validar, convertir y ejecutar la consulta
                 var messageDTOSimplePage = findMessagesByEnvironmentFacade.execute(environmentId, pageRequestDTO);
-                // Presentar la respuesta
                 restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest,
                                 httpServletResponse);
         }
-        
         @Override
         @GetMapping("${crosswords.api.path.message.code.environment}")
         @Operation(summary = "Buscar mensaje por código y ambiente", description = "Permite obtener el mensaje correspondiente a un código específico en el ambiente asociado al token. "

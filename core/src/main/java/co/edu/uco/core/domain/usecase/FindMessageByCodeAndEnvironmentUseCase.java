@@ -11,28 +11,24 @@ import co.edu.uco.utils.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 @Slf4j
 public final class FindMessageByCodeAndEnvironmentUseCase implements HandlingFindMessageByCodeAndEnvironmentPort {
     private final MessageCatalogStrategy messageCatalogStrategy;
     private final DataMapper<MessageData, MessageDomain, MessageDTO> entityMapper;
-
     public FindMessageByCodeAndEnvironmentUseCase(MessageCatalogStrategy messageCatalogStrategy,
             DataMapper<MessageData, MessageDomain, MessageDTO> entityMapper) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
     }
-
     @Override
     public MessageDTO execute(String messageCode, String environmentId) {
         try {
-            Optional<MessageData> messageDataOptional = messageCatalogStrategy
+            var messageDataOptional = messageCatalogStrategy
                     .getMessageByCodeAndEnvironment(messageCode, environmentId);
 
-            MessageData messageData = messageDataOptional.orElseThrow(() -> {
-                String errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), messageCode, environmentId);
+            var messageData = messageDataOptional.orElseThrow(() -> {
+                var errorMessage = String.format(DetailMessageEnum.FUN_012.getContent(), messageCode, environmentId);
                 return BusinessException.buildUserException(errorMessage);
             });
 
