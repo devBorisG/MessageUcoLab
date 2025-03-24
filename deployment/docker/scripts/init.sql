@@ -1,3 +1,6 @@
+-- Conectar a la base de datos
+\c "crs-crossword-db";
+
 -- Table: language_base_data
 CREATE TABLE language_base_data (
     id UUID PRIMARY KEY,

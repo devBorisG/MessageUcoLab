@@ -7,6 +7,7 @@ echo "Creating Kafka topics..."
 
 # Lista de tópicos a crear
 topics=(
+  "postgres.public.language_base_data"
   "postgres.public.application_data"
   "postgres.public.application_state_data"
   "postgres.public.environment_data"
@@ -14,7 +15,6 @@ topics=(
   "postgres.public.environment_type_data"
   "postgres.public.functionality_data"
   "postgres.public.functionality_state_data"
-  "postgres.public.language_base_data"
   "postgres.public.message_category_data"
   "postgres.public.message_data"
   "postgres.public.message_environment_data"
