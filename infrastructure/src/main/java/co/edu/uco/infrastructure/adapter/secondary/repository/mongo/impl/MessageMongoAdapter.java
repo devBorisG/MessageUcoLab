@@ -17,7 +17,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.DATABASE_MONGO_ADAPTER;
-import static co.edu.uco.utils.helper.UtilUUID.getStringFromUUID;
 
 @Component(DATABASE_MONGO_ADAPTER)
 public final class MessageMongoAdapter implements DataBaseMessageRepository {

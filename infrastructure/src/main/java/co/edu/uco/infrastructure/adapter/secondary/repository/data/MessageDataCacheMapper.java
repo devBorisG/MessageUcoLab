@@ -16,9 +16,9 @@ import static co.edu.uco.utils.helper.UtilText.EMPTY;
 public final class MessageDataCacheMapper implements DataMapper<MessageData, MessageRedis> {
     @Override
     public MessageData mapperData(MessageRedis model) {
-        return new MessageData(model.getId(), model.getCode(), model.getTitle(), model.getContent(),
-                MessageTypeData.build(model.getType()),
-                MessageCategoryData.build(model.getCategory()), model.getApplication(), FunctionalityData.build());
+        return new MessageData(model.getId(), model.getCode(), model.getTitle(),
+                model.getContent(), MessageTypeData.build(model.getType()),
+                MessageCategoryData.build(model.getCategory()), model.getApplication(), FunctionalityData.build(model.getFunctionality()));
     }
     @Override
     public MessageRedis mapperModel(MessageData data) {
