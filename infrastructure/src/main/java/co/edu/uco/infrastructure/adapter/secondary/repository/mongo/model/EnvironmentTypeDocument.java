@@ -6,11 +6,12 @@ import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.COLLECTION_ENVIRONMENT_TYPE;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "environment_type")
+@Document(collection = COLLECTION_ENVIRONMENT_TYPE)
 public final class EnvironmentTypeDocument {
     @Id
     private String id;

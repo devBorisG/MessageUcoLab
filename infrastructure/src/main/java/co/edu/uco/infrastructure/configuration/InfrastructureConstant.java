@@ -5,12 +5,22 @@ public final class InfrastructureConstant {
     }
     public static final String COLLECTION_TOKEN = "token";
     public static final String COLLECTION_TOKEN_STATE = "token_state";
+    public static final String COLLECTION_MESSAGE_ENVIRONMENT = "message_environment";
+    public static final String COLLECTION_ENVIRONMENT = "environment";
+    public static final String COLLECTION_APPLICATION = "application";
+    public static final String COLLECTION_STATUS_MESSAGE_ENVIRONMENT = "status_message_environment";
+    public static final String COLLECTION_ENVIRONMENT_TYPE = "environment_type";
+    public static final String COLLECTION_REPRESENT_PARAMETER = "represent_parameter";
+    public static final String COLLECTION_PARAMETER = "parameter";
+
 
     public static final String FIELD_ID = "id";
     public static final String FIELD_NAME = "name";
     public static final String FIELD_CREATION_DATE = "creation_date";
     public static final String FIELD_EXPIRATION_DATE = "expiration_date";
     public static final String FIELD_ENVIRONMENT_ID = "environment_id";
+    public static final String FIELD_MESSAGE_ENVIRONMENT_ID = "message_environment_id";
+    public static final String FIELD_MESSAGE = "message";
     public static final String FIELD_SECRET_NAME = "secret_name";
     public static final String FIELD_STATE_ID = "state_id";
     public static final String ENVIRONMENT_ID_ATTRIBUTE = "environmentId";
@@ -21,7 +31,7 @@ public final class InfrastructureConstant {
     public static final String REDIS_HASH = "Message";
     public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";
     public static final String CACHE_REDIS_ADAPTER = "MessageRedisAdapter";
-    public static final String POSTGRESQL_ADAPTER = "MessagePostgreSQLAdapter";
+    public static final String POSTGRESQL_ADAPTER = "TokenPostgresSQLAdapter";
     public static final String LOGGING_REQUEST_URI = "REQUEST_URI";
     public static final String LOGGING_HTTP_METHOD = "HTTP_METHOD";
     public static final String LOGGING_SESSION_ID = "JSESSIONID";

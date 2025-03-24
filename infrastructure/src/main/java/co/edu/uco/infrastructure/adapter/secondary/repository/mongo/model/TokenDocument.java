@@ -17,7 +17,6 @@ import static co.edu.uco.utils.helper.UtilText.trim;
 @Getter
 @Document(collection = COLLECTION_TOKEN)
 public final class TokenDocument {
-    private String _id;
     @Id
     @Field(FIELD_ID)
     private String id;

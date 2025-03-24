@@ -1,14 +1,16 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
-import co.edu.uco.utils.helper.UtilObject;
 import co.edu.uco.utils.helper.UtilText;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.COLLECTION_ENVIRONMENT;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+
 @Getter
-@Document("environment")
+@Document(COLLECTION_ENVIRONMENT)
 public final class EnvironmentDocument {
     @Id
     String id;
@@ -31,9 +33,7 @@ public final class EnvironmentDocument {
     public void setName(String name) {
         this.name = UtilText.trim(name);
     }
-    public void setApplication(ApplicationDocument application) {
-        this.application = UtilObject.getDefaultIsNullObject(application, ApplicationDocument.build());
-    }
+    public void setApplication(ApplicationDocument application) {this.application = getDefaultIsNullObject(application, ApplicationDocument.build());}
     public static EnvironmentDocument build() {
         return new EnvironmentDocument();
     }
