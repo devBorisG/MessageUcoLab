@@ -30,5 +30,5 @@ public final class TokenEntity {
     @Column(nullable = false,name = "environment_id")
     private UUID environmentId;
     @Column(name = "state_id")
-    private UUID tokenStateDataId = UUID.fromString("123e4567-e89b-12d3-a456-426614175000");
+    private UUID tokenStateDataId = UUID.fromString("123e4567-e89b-12d3-a456-426614174023");
 }
