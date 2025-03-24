@@ -157,3 +157,58 @@ CREATE TABLE token_data (
     FOREIGN KEY (environment_id) REFERENCES environment_data(id),
     FOREIGN KEY (state_id) REFERENCES token_state_data(id)
 );
+
+-- Insertar datos en language_base_data
+INSERT INTO language_base_data (id, language, code) VALUES
+                                                        (gen_random_uuid(), 'English', 'EN'),
+                                                        (gen_random_uuid(), 'Spanish', 'ES'),
+                                                        (gen_random_uuid(), 'French', 'FR');
+
+-- Insertar datos en application_state_data
+INSERT INTO application_state_data (id, name) VALUES
+                                                  (gen_random_uuid(), 'Active'),
+                                                  (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en environment_type_data
+INSERT INTO environment_type_data (id, name) VALUES
+                                                 (gen_random_uuid(), 'Develop'),
+                                                 (gen_random_uuid(), 'Production'),
+                                                 (gen_random_uuid(), 'Testing');
+
+-- Insertar datos en environment_state_data
+INSERT INTO environment_state_data (id, name) VALUES
+                                                  (gen_random_uuid(), 'Active'),
+                                                  (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en functionality_state_data
+INSERT INTO functionality_state_data (id, name) VALUES
+                                                    (gen_random_uuid(), 'Active'),
+                                                    (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en message_category_data
+INSERT INTO message_category_data (id, name) VALUES
+                                                 (gen_random_uuid(), 'Error'),
+                                                 (gen_random_uuid(), 'Information'),
+                                                 (gen_random_uuid(), 'Confirmation'),
+                                                 (gen_random_uuid(), 'Warning'),
+                                                 (gen_random_uuid(), 'Debug');
+
+-- Insertar datos en message_type_data
+INSERT INTO message_type_data (id, name) VALUES
+                                             (gen_random_uuid(), 'Functional'),
+                                             (gen_random_uuid(), 'Technical');
+
+-- Insertar datos en message_state_data
+INSERT INTO message_state_data (id, name) VALUES
+                                              (gen_random_uuid(), 'Active'),
+                                              (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en message_environment_state_data
+INSERT INTO message_environment_state_data (id, name) VALUES
+                                                          (gen_random_uuid(), 'Active'),
+                                                          (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en token_state_data
+INSERT INTO token_state_data (id, name) VALUES
+                                            ('123e4567-e89b-12d3-a456-426614175000', 'Active'),
+                                            (gen_random_uuid(), 'Inactive');
