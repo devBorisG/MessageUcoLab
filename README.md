@@ -80,6 +80,39 @@ The project is organized into multiple modules:
 3. Prometheus listens on port 9090
 4. The application exposes metrics at the `/actuator/prometheus` endpoint
 
+### Kafka Infrastructure
+
+1. Install Apache Kafka (version 7.0.0 or higher)
+2. Install Zookeeper (version 7.0.0 or higher)
+3. Configure the following topics:
+   - `connect-configs`
+   - `connect-offsets`
+   - `connect-status`
+
+### KSQLDB
+
+1. Install KSQLDB Server (version 0.20.0 or higher)
+2. Configure to connect to Kafka cluster
+3. KSQLDB Server listens on port 8088
+
+### Debezium Connect
+
+1. Install Debezium Connect (version 1.9 or higher)
+2. Configure to connect to:
+   - Kafka cluster
+   - PostgreSQL database
+   - MongoDB database
+3. Debezium Connect listens on port 8083
+
+### Kong API Gateway
+
+1. Install Kong Gateway (version 3.5 or higher)
+2. Configure in DB-less mode
+3. Use the configuration in `deployment/docker/kong.yaml`
+4. Kong Gateway exposes:
+   - API Gateway on port 8000
+   - Admin API on port 8001
+
 ## Environment Variables
 
 Configure the following environment variables before running the application:
@@ -147,20 +180,36 @@ API documentation is available at:
 1. Health check:
 
 ```bash
+# Direct access
 curl http://localhost:8085/actuator/health
+
+# Through API Gateway
+curl http://localhost:8000/actuator/health
 ```
 
 2. Message endpoints:
 
 ```bash
 # Get messages for an application
+# Direct access
 curl http://localhost:8085/messageucolab/v1/application/{id}/messages
 
+# Through API Gateway
+curl http://localhost:8000/messageucolab/v1/application/{id}/messages
+
 # Get a specific message by code
+# Direct access
 curl http://localhost:8085/messageucolab/v1/application/{id}/message/{messageCode}
 
+# Through API Gateway
+curl http://localhost:8000/messageucolab/v1/application/{id}/message/{messageCode}
+
 # Get token for an application
+# Direct access
 curl http://localhost:8085/messageucolab/v1/application/{id}/token
+
+# Through API Gateway
+curl http://localhost:8000/messageucolab/v1/application/{id}/token
 ```
 
 ## Monitoring and Logging
@@ -200,10 +249,14 @@ docker-compose up -d
 
 This will start:
 
-- MongoDB
-- Redis
-- PostgreSQL (with tables automatically created using the init.sql script)
-- Apache Pulsar
+- MongoDB (port 27017)
+- Redis (port 6379)
+- PostgreSQL (port 5435)
+- Apache Kafka (port 9094)
+- Zookeeper (port 2181)
+- KSQLDB Server (port 8088)
+- Debezium Connect (port 8083)
+- Kong API Gateway (ports 8000, 8001)
 - Observability services:
   - Grafana (port 3000)
   - Loki (port 3100)
@@ -212,14 +265,26 @@ This will start:
 
 Then you can run the application connecting to these services.
 
-### Grafana Configuration
+### Kong Gateway Configuration
 
-After starting the services with Docker Compose, you can access Grafana at `http://localhost:3000` with the following credentials:
+After starting the services with Docker Compose, you can access Kong Gateway at:
+- API Gateway: `http://localhost:8000`
+- Admin API: `http://localhost:8001`
 
-- Username: admin
-- Password: admin
+The gateway is configured in DB-less mode using the configuration file at `deployment/docker/kong.yaml`.
 
-It is recommended to configure the following data sources:
+### Kafka Configuration
 
-1. Prometheus: `http://prometheus:9090`
-2. Loki: `http://loki:3100`
+The Kafka cluster is configured with:
+- External access on port 9094
+- Internal communication on port 9092
+- Automatic topic creation enabled
+- Single broker setup for development
+
+### Debezium Connect Configuration
+
+Debezium Connect is configured to:
+- Connect to Kafka cluster
+- Monitor PostgreSQL database changes
+- Monitor MongoDB database changes
+- Store configurations in Kafka topics
