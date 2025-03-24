@@ -13,7 +13,6 @@ public final class InfrastructureConstant {
     public static final String COLLECTION_REPRESENT_PARAMETER = "represent_parameter";
     public static final String COLLECTION_PARAMETER = "parameter";
 
-
     public static final String FIELD_ID = "id";
     public static final String FIELD_NAME = "name";
     public static final String FIELD_CREATION_DATE = "creation_date";
@@ -27,6 +26,14 @@ public final class InfrastructureConstant {
     public static final String TOKEN_ENTITY = "token_data";
     public static final String TOKEN_STATE_ACTIVE_ID = "123e4567-e89b-12d3-a456-426614175000";
 
+    public static final String PACKAGE_REPOSITORY_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository";
+    public static final String PACKAGE_REPOSITORY_ADAPTER_ENTITY = "co.edu.uco.infrastructure.adapter.secondary.repository.entity";
+    public static final String PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository.postgresql";
+    public static final String JPA_CONFIG_PREFIX = "datasource";
+    public static final String JPA_DRIVER_CLASS_NAME = "org.postgresql.Driver";
+    public static final String JPA_HIBERNATE_DIALECT = "hibernate.dialect";
+    public static final String JPA_HIBERNATE_SHOW_SQL= "hibernate.show_sql";
+
     public static final String CORRELATION_ID = "X-Correlation-ID";
     public static final String REDIS_HASH = "Message";
     public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";
@@ -39,8 +46,6 @@ public final class InfrastructureConstant {
     public static final String LOGGING_PARAMETER_APPLICATION_NAME = "MessageUcoLab";
     public static final String LOGGING_PARAMETER_CODE_MESSAGE = "codeMessage";
     public static final String LOGGING_PARAMETER_APPLICATION = "application";
-    public static final String PACKAGE_REPOSITORY_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository";
-    public static final String PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository.postgresql";
     public static final String PACKAGE_BASE = "co.edu.uco";
     public static final String LOGGING_TIMESTAMP = "TS";
     public static final String LOGGING_THREAD = "THREAD";
