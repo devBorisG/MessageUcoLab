@@ -1,7 +1,6 @@
 package co.edu.uco.core.domain.data;
 
 import co.edu.uco.utils.helper.UtilDate;
-import co.edu.uco.utils.helper.UtilObject;
 import co.edu.uco.utils.helper.UtilText;
 import lombok.Getter;
 
@@ -45,12 +44,10 @@ public final class TokenData {
     public void setEnvironmentId(String environmentId) {
         this.environmentId = trim(environmentId);
     }
-
     public void setStateId(String stateId) {
         this.stateId = UtilText.trim(stateId);
     }
     public void setSecretName(String secretName) {
         this.secretName = trim(secretName);
     }
-
 }
