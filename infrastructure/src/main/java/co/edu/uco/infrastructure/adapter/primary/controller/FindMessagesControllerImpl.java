@@ -9,6 +9,7 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.primary.FindMessagesController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -44,10 +45,12 @@ final class FindMessagesControllerImpl implements FindMessagesController {
         @Operation(summary = "Listar mensajes por ambiente", description = "Retorna una lista paginada de mensajes asociados al ambiente del token actual. "
                         +
                         "El endpoint obtiene el ID del ambiente del token y opcionalmente acepta parámetros de paginación.", parameters = {
-                                        @Parameter(name = "page", description = "Número de página a consultar (comienza en 0)", required = false, example = "0"),
+                                        @Parameter(name = "page", description = "Número de página a consultar (comienza en 1)", required = false, example = "1"),
                                         @Parameter(name = "size", description = "Cantidad de elementos por página", required = false, example = "10"),
                                         @Parameter(name = "sort", description = "Dirección de ordenamiento (ASC o DESC)", required = false, example = "ASC"),
-                                        @Parameter(name = "columnSort", description = "Campo por el cual ordenar los resultados", required = false, example = "code")
+                                        @Parameter(name = "columnSort", description = "Campo por el cual ordenar los resultados", required = false, example = "code"),
+                                        @Parameter(name = "Token", description = "Token de autorización", required = true, in = ParameterIn.HEADER, schema = @Schema(type = "string", example = "your_token_here")
+                )
                         }, responses = {
                                         @ApiResponse(responseCode = "200", description = "Lista de mensajes obtenida correctamente", content = {
                                                         @Content(mediaType = "application/json", schema = @Schema(implementation = SimplePage.class)),
@@ -76,7 +79,9 @@ final class FindMessagesControllerImpl implements FindMessagesController {
         @Operation(summary = "Buscar mensaje por código y ambiente", description = "Permite obtener el mensaje correspondiente a un código específico en el ambiente asociado al token. "
                         +
                         "El endpoint recibe el parámetro 'messageCode' y utiliza el ID del ambiente obtenido del token.", parameters = {
-                                        @Parameter(name = "messageCode", description = "Código del mensaje a buscar", required = true, example = "MSG001")
+                                        @Parameter(name = "messageCode", description = "Código del mensaje a buscar", required = true, example = "MSG_001"),
+                                        @Parameter(name = "Token", description = "Token de autorización", required = true, in = ParameterIn.HEADER, schema = @Schema(type = "string", example = "your_token_here")
+                        )
                         }, responses = {
                                         @ApiResponse(responseCode = "200", description = "Mensaje encontrado correctamente", content = {
                                                         @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDTO.class)),

@@ -4,13 +4,11 @@ import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessage
 import co.edu.uco.core.domain.port.out.Response;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerRegistry;
-import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.SerializerType;
 import co.edu.uco.utils.exception.CrossWordsException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
