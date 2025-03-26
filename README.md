@@ -303,13 +303,13 @@ Debezium Connect is configured to:
 
 # Change Data Capture (CDC) Configuration
 
-## Configuración de Debezium para PostgreSQL
+## Debezium PostgreSQL Configuration
 
-Para configurar el CDC con Debezium, sigue estos pasos:
+To configure CDC with Debezium, follow these steps:
 
-1. **Configurar el Conector de PostgreSQL**
+1. **Configure PostgreSQL Connector**
    
-   Realiza una petición POST al endpoint de Kafka Connect:
+   Make a POST request to the Kafka Connect endpoint:
    ```bash
    curl -X POST http://localhost:8083/connectors \
    -H "Content-Type: application/json" \
@@ -345,23 +345,23 @@ Para configurar el CDC con Debezium, sigue estos pasos:
    }'
    ```
 
-2. **Configurar KSQLDB**
+2. **Configure KSQLDB**
 
-   a. Accede al servidor KSQLDB:
+   a. Access the KSQLDB server:
    ```bash
    ksql http://localhost:8088
    ```
 
-   b. Ejecuta los comandos SQL contenidos en el archivo `deployment/docker/scripts/ksql.sql`:
-   - Creación de tablas para datos de referencia
-   - Creación de streams para datos transaccionales
-   - Creación de streams con joins para datos enriquecidos
+   b. Execute the SQL commands contained in the `deployment/docker/scripts/ksql.sql` file:
+   - Creation of reference data tables
+   - Creation of transactional data streams
+   - Creation of enriched data streams with joins
 
-3. **Configurar Conectores MongoDB**
+3. **Configure MongoDB Connectors**
 
-   Realiza peticiones POST para cada conector MongoDB:
+   Make POST requests for each MongoDB connector:
    ```bash
-   # Conector para Token State
+   # Token State Connector
    curl -X POST http://localhost:8083/connectors \
    -H "Content-Type: application/json" \
    -d '{
@@ -382,7 +382,7 @@ Para configurar el CDC con Debezium, sigue estos pasos:
      }
    }'
 
-   # Conector para Token
+   # Token Connector
    curl -X POST http://localhost:8083/connectors \
    -H "Content-Type: application/json" \
    -d '{
@@ -403,7 +403,7 @@ Para configurar el CDC con Debezium, sigue estos pasos:
      }
    }'
 
-   # Conector para Message Environment
+   # Message Environment Connector
    curl -X POST http://localhost:8083/connectors \
    -H "Content-Type: application/json" \
    -d '{
@@ -424,7 +424,7 @@ Para configurar el CDC con Debezium, sigue estos pasos:
      }
    }'
 
-   # Conector para Messages
+   # Messages Connector
    curl -X POST http://localhost:8083/connectors \
    -H "Content-Type: application/json" \
    -d '{
@@ -446,31 +446,31 @@ Para configurar el CDC con Debezium, sigue estos pasos:
    }'
    ```
 
-## Estructura de Datos en MongoDB
+## MongoDB Data Structure
 
-Después de la configuración, los datos se sincronizarán en las siguientes colecciones de MongoDB:
+After configuration, data will be synchronized in the following MongoDB collections:
 
-- `token_state`: Estado de los tokens
-- `token`: Información de tokens
-- `message_environment`: Relación mensaje-entorno
-- `messages`: Mensajes con información enriquecida
+- `token_state`: Token states
+- `token`: Token information
+- `message_environment`: Message-environment relationship
+- `messages`: Messages with enriched information
 
-## Verificación
+## Verification
 
-Para verificar que todo está funcionando correctamente:
+To verify that everything is working correctly:
 
-1. Revisa el estado de los conectores:
+1. Check connector status:
    ```bash
    curl http://localhost:8083/connectors
    ```
 
-2. Verifica los logs de los contenedores:
+2. Check container logs:
    ```bash
    docker-compose logs -f connect
    docker-compose logs -f kafka
    ```
 
-3. Consulta los datos en MongoDB:
+3. Query data in MongoDB:
    ```bash
    mongosh "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco"
    ```
