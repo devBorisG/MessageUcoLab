@@ -423,6 +423,28 @@ To configure CDC with Debezium, follow these steps:
        "key.converter": "org.apache.kafka.connect.storage.StringConverter"
      }
    }'
+   
+   # Environment Connector
+   curl -X POST http://localhost:8083/connectors \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "mongodb-environment-sink",
+     "config": {
+        "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+        "topics": "postgres.public.environment_data",
+        "collection": "environment",
+        "database": "Cluster0",
+        "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+        "document.id.strategy.partial.value.projection.list": "id",
+        "connection.uri": "mongodb+srv://crossword:crossword.@cluster0.jfxemcn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        "value.converter.schemas.enable": "false",
+        "name": "mongodb-environment-sink",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "document.id.strategy.partial.value.projection.type": "allowlist",
+        "errors.log.enable": "true",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+     }
+   }'
 
    # Messages Connector
    curl -X POST http://localhost:8083/connectors \
@@ -453,6 +475,7 @@ After configuration, data will be synchronized in the following MongoDB collecti
 - `token_state`: Token states
 - `token`: Token information
 - `message_environment`: Message-environment relationship
+- `environment`: Environment information
 - `messages`: Messages with enriched information
 
 ## Verification
