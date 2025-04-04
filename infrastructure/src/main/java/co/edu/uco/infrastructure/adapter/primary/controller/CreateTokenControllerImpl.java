@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("${crosswords.api.path.message}")
@@ -48,7 +47,7 @@ final class CreateTokenControllerImpl implements CreateTokenController {
     @Override
     public void createToken(
             @RequestBody CreateTokenDTO tokenDTO,
-            @PathVariable UUID id,
+            @PathVariable String id,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
     ) {

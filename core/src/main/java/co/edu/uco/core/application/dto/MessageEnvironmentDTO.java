@@ -12,41 +12,41 @@ import static co.edu.uco.utils.helper.UtilUUID.getNewUUID;
 @Getter
 public final class MessageEnvironmentDTO {
     private UUID id;
-    private UUID message_id;
+    private UUID messageId;
     private MessageDTO message;
-    private UUID environment_type_id;
-    private UUID state_data_id;
-    public MessageEnvironmentDTO(UUID id, UUID message_id, MessageDTO message, UUID environment_type_id, UUID state_data_id) {
+    private UUID environmentTypeId;
+    private UUID stateId;
+    public MessageEnvironmentDTO(UUID id, UUID messageId, MessageDTO message, UUID environmentTypeId, UUID stateId) {
         setId(id);
-        setMessage_id(message_id);
+        setMessageId(messageId);
         setMessage(message);
-        setEnvironment_type_id(environment_type_id);
-        setState_data_id(state_data_id);
+        setEnvironmentTypeId(environmentTypeId);
+        setStateId(stateId);
     }
     public MessageEnvironmentDTO() {
         setId(getNewUUID());
-        setMessage_id(getNewUUID());
+        setMessageId(getNewUUID());
         setMessage(MessageDTO.create(EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY));
-        setEnvironment_type_id(getNewUUID());
-        setState_data_id(getNewUUID());
+        setEnvironmentTypeId(getNewUUID());
+        setStateId(getNewUUID());
     }
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
     }
-    public void setMessage_id(UUID message_id) {
-        this.message_id = getDefaultUUID(message_id);
+    public void setMessageId(UUID messageId) {
+        this.messageId = getDefaultUUID(messageId);
     }
-    public void setEnvironment_type_id(UUID environment_type_id) {
-        this.environment_type_id = getDefaultUUID(environment_type_id);
+    public void setEnvironmentTypeId(UUID environmentTypeId) {
+        this.environmentTypeId = getDefaultUUID(environmentTypeId);
     }
-    public void setState_data_id(UUID state_data_id) {
-        this.state_data_id = getDefaultUUID(state_data_id);
+    public void setStateId(UUID stateId) {
+        this.stateId = getDefaultUUID(stateId);
     }
     public void setMessage(MessageDTO message) {
         this.message = UtilObject.getDefaultIsNullObject(message,MessageDTO.create(message.code(), message.title(), message.content(), message.type(),
                 message.category(), message.application(), message.functionality()));
     }
-    public static MessageEnvironmentDTO create(UUID id, UUID message_id, MessageDTO message, UUID environment_type_id, UUID state_data_id) {
-        return new MessageEnvironmentDTO(id, message_id, message, environment_type_id, state_data_id);
+    public static MessageEnvironmentDTO create(UUID id, UUID messageId, MessageDTO message, UUID environmentTypeId, UUID stateId) {
+        return new MessageEnvironmentDTO(id, messageId, message, environmentTypeId, stateId);
     }
 }

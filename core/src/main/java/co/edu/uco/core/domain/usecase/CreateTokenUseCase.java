@@ -4,10 +4,10 @@ import co.edu.uco.core.application.mapper.entity.impl.TokenEntityMapper;
 import co.edu.uco.core.domain.domains.TokenDomain;
 import co.edu.uco.core.domain.port.out.repository.token.TokenRepository;
 import co.edu.uco.core.domain.usecase.handling.HandlingCreateTokenPort;
-import co.edu.uco.utils.helper.UtilUUID;
 import org.springframework.stereotype.Component;
 
 import static co.edu.uco.core.CrosswordsConstant.TOKEN_STATE_ACTIVE_ID;
+import static co.edu.uco.utils.helper.UtilUUID.getStringToUUID;
 
 @Component
 public final class CreateTokenUseCase implements HandlingCreateTokenPort {
@@ -19,7 +19,7 @@ public final class CreateTokenUseCase implements HandlingCreateTokenPort {
     }
     @Override
     public void createToken(TokenDomain tokenDomain) {
-        tokenDomain.setStateId(UtilUUID.getStringToUUID(TOKEN_STATE_ACTIVE_ID));
+        tokenDomain.setStateId(getStringToUUID(TOKEN_STATE_ACTIVE_ID));
         tokenEntityMapper.mapperDomain(tokenRepository.save(tokenEntityMapper.mapperData(tokenDomain)));
     }
 }

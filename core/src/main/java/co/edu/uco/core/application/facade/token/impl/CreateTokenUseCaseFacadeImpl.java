@@ -8,20 +8,23 @@ import co.edu.uco.core.application.mapper.dto.impl.TokenDTOMapper;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
 import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingCreateTokenPort;
+import co.edu.uco.core.domain.validator.token.CreateTokenCompositeValidator;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilPairKey;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import co.edu.uco.utils.helper.UtilUUID;
+
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static co.edu.uco.core.CrosswordsConstant.TOKEN_SECRET_IDENTIFIER;
 
+import static co.edu.uco.utils.helper.UtilDate.parseDate;
 import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 import static co.edu.uco.utils.helper.UtilText.concatenateWithoutSeparator;
 import static co.edu.uco.utils.helper.UtilText.stringToUpperCase;
+import static co.edu.uco.utils.helper.UtilUUID.formatUUID;
+import static co.edu.uco.utils.helper.UtilUUID.getStringToUUID;
 
 @Slf4j
 @Component
@@ -30,27 +33,30 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
     private final HandlingCreateTokenPort handlingCreateTokenPort;
     private final TokenDTOMapper tokenDTOMapper;
     private final CreateTokenSecretPort createTokenSecretPort;
+    private final CreateTokenCompositeValidator validator;
     private final EncryptTokenPort encrypt;
     public CreateTokenUseCaseFacadeImpl(
             HandlingCreateTokenPort handlingCreateTokenPort,
             TokenDTOMapper tokenDTOMapper,
             EncryptTokenPort encrypt,
-            CreateTokenSecretPort createTokenSecretPort
+            CreateTokenSecretPort createTokenSecretPort, CreateTokenCompositeValidator validator
     ) {
         this.handlingCreateTokenPort = handlingCreateTokenPort;
         this.tokenDTOMapper = tokenDTOMapper;
         this.encrypt = encrypt;
         this.createTokenSecretPort = createTokenSecretPort;
+        this.validator = validator;
     }
     @Override
     public String createToken(
             CreateTokenDTO createTokenDTO,
-            UUID application
+            String application
     ) {
+        validator.validate(createTokenDTO, application);
         var secretName = concatenateWithoutSeparator(
                 TOKEN_SECRET_IDENTIFIER,
-                stringToUpperCase(UtilUUID.formatUUID(application)),
-                stringToUpperCase(UtilUUID.formatUUID(createTokenDTO.getEnvironmentId()))
+                stringToUpperCase(formatUUID(getStringToUUID(application))),
+                stringToUpperCase(formatUUID(getStringToUUID(createTokenDTO.getEnvironmentId())))
         );
 
         var keyPairResponseDTO = encrypt.generateKeys();
@@ -68,12 +74,10 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
                     .id(generateSignature)
                     .secretName(secretName)
                     .creationDate(LocalDateTime.now())
-                    .expirationDate(createTokenDTO.getExpirationDate())
-                    .environmentId(createTokenDTO.getEnvironmentId())
+                    .expirationDate(parseDate(createTokenDTO.getExpirationDate()))
+                    .environmentId(getStringToUUID(createTokenDTO.getEnvironmentId()))
                     .build();
-
             createTokenSecretPort.execute(secretName, UtilPairKey.encodePrivateKey(keyPairResponseDTO.getPrivateKey()));
-
             handlingCreateTokenPort.createToken(tokenDTOMapper.mapperDomain(tokenDTO));
             return generateSignature;
         }catch (Exception e){
