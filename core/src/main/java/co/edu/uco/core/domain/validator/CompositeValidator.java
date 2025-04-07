@@ -1,5 +1,6 @@
 package co.edu.uco.core.domain.validator;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.utils.exception.CrossWordsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,10 +19,10 @@ public class CompositeValidator<T> implements Validator<T> {
     @Override
     public void validate(T data) {
         if (validators.isEmpty()) {
-            throw CrossWordsException.build("No validators have been added.");
+            throw CrossWordsException.build(DetailMessageEnum.FUN_034.getContent());
         }
         if (isNullObject(data)) {
-            throw CrossWordsException.build("Data is null.");
+            throw CrossWordsException.build(DetailMessageEnum.FUN_010.getContent());
         }
         validators.forEach(validator -> validator.validate(data));
     }

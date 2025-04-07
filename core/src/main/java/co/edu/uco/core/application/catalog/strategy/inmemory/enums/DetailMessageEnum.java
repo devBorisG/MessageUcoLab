@@ -71,13 +71,14 @@ public enum DetailMessageEnum {
     FUN_030(MessageKeyEnum.FUN_030, "Invalid sort column", "The sort column '%s' is not valid.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_031(MessageKeyEnum.FUN_031, "Invalid sort direction", "The sort direction must be 'ASC' or 'DESC'.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_032(MessageKeyEnum.FUN_032, "Page not found", "The requested page is empty or does not exist.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_033(MessageKeyEnum.FUN_033, "Invalid page type", "The value of page must be a valid integer.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_034(MessageKeyEnum.FUN_034, "Invalid size type", "The value of size must be a valid integer.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_033(MessageKeyEnum.FUN_033, "Invalid %s type", "The value of %s must be a valid integer.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_034(MessageKeyEnum.FUN_034, "Validator empty", "No validators have been added.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_035(MessageKeyEnum.FUN_035, "Environment does not exist", "The environment does not exist.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_036(MessageKeyEnum.FUN_036, "Application does not exist", "The application to which the environment is intended to be associated does not exist for the environment.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_037(MessageKeyEnum.FUN_037, "Expiration date is earlier than today", "The expiration date must be a date greater than today.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_038(MessageKeyEnum.FUN_038, "Invalid Id", "The id must not be the default UUID.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_039(MessageKeyEnum.FUN_039, "Invalid date character", "Date contains characters not allowed", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
+    FUN_039(MessageKeyEnum.FUN_039, "Invalid date character", "Date contains characters not allowed", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_040(MessageKeyEnum.FUN_040, "Invalid Message code", "The message code cannot be empty or null.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
     private MessageKeyEnum code;
     private String title;
     private String content;

@@ -6,6 +6,9 @@ import co.edu.uco.core.domain.validator.Validator;
 import co.edu.uco.utils.exception.BusinessRuleException;
 import org.springframework.stereotype.Component;
 
+import static co.edu.uco.core.CrosswordsConstant.PAGE_ATTRIBUTE;
+import static co.edu.uco.core.CrosswordsConstant.SIZE_ATTRIBUTE;
+import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 import static co.edu.uco.utils.helper.UtilText.ONLY_NUMBERS;
 import static co.edu.uco.utils.helper.UtilText.validMatch;
 
@@ -13,23 +16,20 @@ import static co.edu.uco.utils.helper.UtilText.validMatch;
 public final class PageRequestTypeValidator implements Validator<PageRequestDTO> {
     @Override
     public void validate(PageRequestDTO data) throws BusinessRuleException {
-        if (data == null) {
-            return; // Si es nulo, se usarán valores por defecto en el mapper
+        if (isNullObject(data)) {
+            return;
         }
         validatePage(data.getPage());
         validateSize(data.getSize());
     }
-    /**
-     * Valida que page sea un número entero válido
-     */
     private void validatePage(String page) {
         if (page != null && !page.isEmpty() && !validMatch(page, ONLY_NUMBERS)) {
-            throw BusinessRuleException.buildUserException(DetailMessageEnum.FUN_033.getContent());
+            throw BusinessRuleException.buildUserException(String.format(DetailMessageEnum.FUN_033.getContent(), PAGE_ATTRIBUTE));
         }
     }
     private void validateSize(String size) {
         if (size != null && !size.isEmpty() && !validMatch(size, ONLY_NUMBERS)) {
-            throw BusinessRuleException.buildUserException(DetailMessageEnum.FUN_034.getContent());
+            throw BusinessRuleException.buildUserException(String.format(DetailMessageEnum.FUN_033.getContent(),SIZE_ATTRIBUTE));
         }
     }
 } 
