@@ -303,6 +303,52 @@ Debezium Connect is configured to:
 
 # Change Data Capture (CDC) Configuration
 
+## Create Required Kafka Topics
+
+Before configuring Debezium and KSQLDB, you must create the necessary Kafka themes. You can do this by running the provided script inside the kafka container:
+
+1. **Create each topic:**
+   
+   a. First, connect to the Kafka container:
+   ```bash
+   docker exec -it kafka-crosswords bash
+   ```
+
+   b. Once inside the container, create each topic using the following commands:
+   ```bash
+   # Create topics for reference data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.language_base_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.application_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.application_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.environment_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.environment_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.environment_type_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.functionality_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.functionality_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_category_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_environment_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_environment_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_type_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.parameter_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.represent_parameter_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.token_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.token_state_data
+   ```
+
+   c. Verify that all topics were created successfully:
+   ```bash
+   kafka-topics --list --bootstrap-server localhost:9092
+   ```
+
+   d. Exit the Kafka container:
+   ```bash
+   exit
+   ```
+
+This step is crucial as it prepares the Kafka infrastructure for the CDC pipeline. The topics will store the change events from PostgreSQL that will later be processed by KSQLDB and synchronized to MongoDB.
+
 ## Debezium PostgreSQL Configuration
 
 To configure CDC with Debezium, follow these steps:

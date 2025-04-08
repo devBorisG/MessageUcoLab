@@ -64,6 +64,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:7.0.0
+    container_name: kafka-crosswords
     ports:
       - "9094:9094"
     environment:
@@ -81,16 +82,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     volumes:
-      - ./scripts/create-topics.sh:/create-topics.sh
-    entrypoint: >
-      bash -c "
-        echo 'Starting Kafka broker...' &&
-        /etc/confluent/docker/run &
-        echo 'Waiting for Kafka to be ready...' &&
-        sleep 30 &&
-        /create-topics.sh &&
-        wait
-      "
+      - kafka-data:/var/lib/kafka/data
     depends_on:
       - zookeeper
 
@@ -100,6 +92,9 @@ services:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-logs:/var/lib/zookeeper/log
   
   ksqldb-server:
     image: confluentinc/ksqldb-server:0.20.0
@@ -111,6 +106,8 @@ services:
       KSQL_BOOTSTRAP_SERVERS: "kafka:9092"
       KSQL_HOST_NAME: "ksqldb-server"
       KSQL_LISTENERS: "http://0.0.0.0:8088"
+    volumes:
+      - ksqldb-data:/var/lib/ksql/data
     depends_on:
       - kafka
 
@@ -127,6 +124,7 @@ services:
       CONNECT_PLUGIN_PATH: "/kafka/connect,/mongo-connector/lib"
     volumes:
       - ./mongo-connector:/mongo-connector
+      - connect-data:/kafka/connect
     depends_on:
       - kafka
       - debezium-postgres
@@ -144,7 +142,7 @@ services:
     container_name: api-gateway-kong
     restart: always
     environment:
-      KONG_DATABASE: "off"  # Modo DB-less
+      KONG_DATABASE: "off"
       KONG_DECLARATIVE_CONFIG: /kong/kong.yaml
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
@@ -166,6 +164,16 @@ volumes:
   postgres-data:
     driver: local
   mongo-data:
+  kafka-data:
+    driver: local
+  ksqldb-data:
+    driver: local
+  connect-data:
+    driver: local
+  zookeeper-data:
+    driver: local
+  zookeeper-logs:
+    driver: local
 
 networks:
   observability-network:
