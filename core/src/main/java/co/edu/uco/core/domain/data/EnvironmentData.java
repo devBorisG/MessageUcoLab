@@ -1,11 +1,14 @@
 package co.edu.uco.core.domain.data;
 
-import co.edu.uco.utils.helper.UtilObject;
-import co.edu.uco.utils.helper.UtilText;
-import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 
 import java.util.UUID;
+
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
+import static co.edu.uco.utils.helper.UtilText.trim;
+import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
+import static co.edu.uco.utils.helper.UtilUUID.getNewUUID;
 
 @Getter
 public final class EnvironmentData {
@@ -18,20 +21,15 @@ public final class EnvironmentData {
         setApplication(application);
     }
     public EnvironmentData() {
-        setId(UtilUUID.getNewUUID());
-        setName(UtilText.EMPTY);
+        setId(getNewUUID());
+        setName(EMPTY);
         setApplication(ApplicationData.build());
     }
-    public void setId(UUID id) {
-        this.id = UtilUUID.getDefaultUUID(id);
-    }
+    public void setId(UUID id) { this.id = getDefaultUUID(id);}
     public void setName(String name) {
-        this.name = UtilText.trim(name);
+        this.name = trim(name);
     }
-    public void setApplication(ApplicationData application) {
-        this.application = UtilObject.getDefaultIsNullObject(application, ApplicationData.build());
-    }
-    
+    public void setApplication(ApplicationData application) { this.application = getDefaultIsNullObject(application, ApplicationData.build());}
     public static EnvironmentData build() {
         return new EnvironmentData();
     }

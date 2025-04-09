@@ -12,36 +12,35 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
-import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
 @Configuration
 @EnableJpaRepositories(basePackages=PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER)
 public class JpaConfig {
-
+    private final DatabaseProperties databaseProperties;
+    public JpaConfig(DatabaseProperties databaseProperties) {
+        this.databaseProperties = databaseProperties;
+    }
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/ucolab");
-        dataSource.setUsername("crosswords");
-        dataSource.setPassword("crosswords");
+        dataSource.setDriverClassName(JPA_DRIVER_CLASS_NAME);
+        dataSource.setUrl(databaseProperties.getUrl());
+        dataSource.setUsername(databaseProperties.getUsername());
+        dataSource.setPassword(databaseProperties.getPassword());
         return dataSource;
     }
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("co.edu.uco.infrastructure.adapter.secondary.repository.entity");
+        emf.setPackagesToScan(PACKAGE_REPOSITORY_ADAPTER_ENTITY);
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-
-        // Configuraciones adicionales de JPA
-        emf.getJpaPropertyMap().put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        emf.getJpaPropertyMap().put("hibernate.show_sql", true);
-
+        
+        emf.getJpaPropertyMap().put(JPA_HIBERNATE_DIALECT, databaseProperties.getDialect());
+        emf.getJpaPropertyMap().put(JPA_HIBERNATE_SHOW_SQL, databaseProperties.isShowSql());
         return emf;
     }
-
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);

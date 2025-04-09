@@ -13,7 +13,6 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 public final class ApplicationData {
     private UUID id;
     private String name;
-
     public ApplicationData() {
         setId(getNewUUID());
         setName(EMPTY);
@@ -30,5 +29,8 @@ public final class ApplicationData {
     }
     public static ApplicationData build() {
         return new ApplicationData();
+    }
+    public static ApplicationData build(UUID id, String name) {
+        return new ApplicationData(id, name);
     }
 }

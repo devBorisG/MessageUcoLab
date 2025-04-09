@@ -1,3 +1,6 @@
+-- Conectar a la base de datos
+\c "crs-crossword-db";
+
 -- Table: language_base_data
 CREATE TABLE language_base_data (
     id UUID PRIMARY KEY,
@@ -16,6 +19,8 @@ CREATE TABLE application_data (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     language_id UUID NOT NULL,
+    start_date TIMESTAMP NOT NULL,
+    end_date TIMESTAMP NOT NULL,
     state_id UUID NOT NULL,
     FOREIGN KEY (language_id) REFERENCES language_base_data(id),
     FOREIGN KEY (state_id) REFERENCES application_state_data(id)
@@ -108,10 +113,10 @@ CREATE TABLE message_environment_state_data (
 CREATE TABLE message_environment_data (
     id UUID PRIMARY KEY,
     message_id UUID NOT NULL,
-    environment_type_id UUID NOT NULL,
+    environment_id UUID NOT NULL,
     state_data_id UUID NOT NULL,
     FOREIGN KEY (message_id) REFERENCES message_data(id),
-    FOREIGN KEY (environment_type_id) REFERENCES environment_type_data(id),
+    FOREIGN KEY (environment_id) REFERENCES environment_data(id),
     FOREIGN KEY (state_data_id) REFERENCES message_environment_state_data(id)
 );
 
@@ -143,7 +148,8 @@ CREATE TABLE token_state_data (
 
 -- Table: token_data
 CREATE TABLE token_data (
-    id UUID PRIMARY KEY,
+    id VARCHAR PRIMARY KEY,
+    secret_name VARCHAR(255) NOT NULL,
     creation_date TIMESTAMP NOT NULL,
     expiration_date TIMESTAMP NOT NULL,
     environment_id UUID NOT NULL,
@@ -152,37 +158,57 @@ CREATE TABLE token_data (
     FOREIGN KEY (state_id) REFERENCES token_state_data(id)
 );
 
--- Asignar al usuario de la db el permiso replicación
-ALTER ROLE crosswords WITH REPLICATION;
--- Agregar permisos a los schemas
-GRANT USAGE ON SCHEMA public TO crosswords;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO crosswords;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO crosswords;
--- Otorgar permisos de replicación
-GRANT SELECT ON application_data TO crosswords;
-GRANT SELECT ON language_base_data TO crosswords;
-GRANT SELECT ON application_state_data TO crosswords;
-GRANT SELECT ON environment_data TO crosswords;
-GRANT SELECT ON environment_type_data TO crosswords;
-GRANT SELECT ON environment_state_data TO crosswords;
-GRANT SELECT ON functionality_data TO crosswords;
-GRANT SELECT ON functionality_state_data TO crosswords;
-GRANT SELECT ON message_category_data TO crosswords;
-GRANT SELECT ON message_type_data TO crosswords;
-GRANT SELECT ON message_state_data TO crosswords;
-GRANT SELECT ON message_data TO crosswords;
-GRANT SELECT ON message_environment_state_data TO crosswords;
-GRANT SELECT ON message_environment_data TO crosswords;
-GRANT SELECT ON parameter_data TO crosswords;
-GRANT SELECT ON represent_parameter_data TO crosswords;
-GRANT SELECT ON token_state_data TO crosswords;
-GRANT SELECT ON token_data TO crosswords;
+-- Insertar datos en language_base_data
+INSERT INTO language_base_data (id, language, code) VALUES
+                                                        (gen_random_uuid(), 'English', 'EN'),
+                                                        (gen_random_uuid(), 'Spanish', 'ES'),
+                                                        (gen_random_uuid(), 'French', 'FR');
 
--- Crear una ranura de replicación
-SELECT * FROM pg_create_logical_replication_slot('replication_slot', 'pgoutput');
+-- Insertar datos en application_state_data
+INSERT INTO application_state_data (id, name) VALUES
+                                                  (gen_random_uuid(), 'Active'),
+                                                  (gen_random_uuid(), 'Inactive');
 
-ALTER TABLE message_data REPLICA IDENTITY DEFAULT;
-CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
+-- Insertar datos en environment_type_data
+INSERT INTO environment_type_data (id, name) VALUES
+                                                 (gen_random_uuid(), 'Develop'),
+                                                 (gen_random_uuid(), 'Production'),
+                                                 (gen_random_uuid(), 'Testing');
 
--- Reiniciar el servidor para aplicar los cambios
-SELECT pg_reload_conf();
+-- Insertar datos en environment_state_data
+INSERT INTO environment_state_data (id, name) VALUES
+                                                  (gen_random_uuid(), 'Active'),
+                                                  (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en functionality_state_data
+INSERT INTO functionality_state_data (id, name) VALUES
+                                                    (gen_random_uuid(), 'Active'),
+                                                    (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en message_category_data
+INSERT INTO message_category_data (id, name) VALUES
+                                                 (gen_random_uuid(), 'Error'),
+                                                 (gen_random_uuid(), 'Information'),
+                                                 (gen_random_uuid(), 'Confirmation'),
+                                                 (gen_random_uuid(), 'Warning'),
+                                                 (gen_random_uuid(), 'Debug');
+
+-- Insertar datos en message_type_data
+INSERT INTO message_type_data (id, name) VALUES
+                                             (gen_random_uuid(), 'Functional'),
+                                             (gen_random_uuid(), 'Technical');
+
+-- Insertar datos en message_state_data
+INSERT INTO message_state_data (id, name) VALUES
+                                              (gen_random_uuid(), 'Active'),
+                                              (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en message_environment_state_data
+INSERT INTO message_environment_state_data (id, name) VALUES
+                                                          (gen_random_uuid(), 'Active'),
+                                                          (gen_random_uuid(), 'Inactive');
+
+-- Insertar datos en token_state_data
+INSERT INTO token_state_data (id, name) VALUES
+                                            ('123e4567-e89b-12d3-a456-426614175000', 'Active'),
+                                            (gen_random_uuid(), 'Inactive');

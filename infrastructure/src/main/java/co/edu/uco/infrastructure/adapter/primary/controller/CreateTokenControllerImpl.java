@@ -4,27 +4,50 @@ import co.edu.uco.core.application.dto.CreateTokenDTO;
 import co.edu.uco.core.application.facade.token.CreateTokenUseCaseFacade;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.infrastructure.adapter.primary.CreateTokenController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("${crosswords.api.path.message}")
-public final class CreateTokenControllerImpl implements CreateTokenController {
+@Tag(name = "Gestión de Tokens", description = "Endpoints para la creación y gestión de tokens")
+final class CreateTokenControllerImpl implements CreateTokenController {
     private final CreateTokenUseCaseFacade createTokenUseCaseFacade;
     private final PresenterPort<String> restPresenter;
+    
     public CreateTokenControllerImpl(CreateTokenUseCaseFacade createTokenUseCaseFacade, PresenterPort<String> restPresenter) {
         this.createTokenUseCaseFacade = createTokenUseCaseFacade;
         this.restPresenter = restPresenter;
     }
+
     @PostMapping("${crosswords.api.path.token.application}")
+    @Operation(summary = "Crear token de aplicación", 
+              description = "Crea un nuevo token para una aplicación específica. El token generado puede ser utilizado para autenticar las solicitudes subsiguientes.")
+    @Parameter(name = "id", description = "Identificador único de la aplicación", required = true, example = "123e4567-e89b-12d3-a456-426614174000")
+    @ApiResponse(responseCode = "200", description = "Token creado exitosamente", 
+                content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)),
+                    @Content(mediaType = "application/yaml", schema = @Schema(implementation = String.class)),
+                    @Content(mediaType = "application/xml", schema = @Schema(implementation = String.class)),
+                    @Content(mediaType = "text/plain", schema = @Schema(implementation = String.class)),
+                    @Content(mediaType = "text/html", schema = @Schema(implementation = String.class))
+                })
+    @ApiResponse(responseCode = "400", description = "Solicitud incorrecta, datos inválidos")
+    @ApiResponse(responseCode = "404", description = "Aplicación no encontrada")
+    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    @ApiResponse(responseCode = "406", description = "Formato de respuesta no soportado")
     @Override
     public void createToken(
             @RequestBody CreateTokenDTO tokenDTO,
-            @PathVariable UUID id,
+            @PathVariable String id,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
     ) {

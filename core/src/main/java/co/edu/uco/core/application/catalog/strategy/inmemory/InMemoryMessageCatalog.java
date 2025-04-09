@@ -1,13 +1,11 @@
 package co.edu.uco.core.application.catalog.strategy.inmemory;
 
-import co.edu.uco.core.CrosswordsConstant;
 import co.edu.uco.core.application.catalog.MessageModel;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilObject;
 import jakarta.annotation.PostConstruct;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -16,10 +14,8 @@ import java.util.Map;
 import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 
 @Component
-@Scope(CrosswordsConstant.SINGLETON_SCOPE)
 public final class InMemoryMessageCatalog extends InMemoryCatalog {
     private Map<MessageKeyEnum, MessageModel> messages;
-
     @Override
     public MessageModel getMessageById(MessageKeyEnum code) {
         if (isNullObject(code)) {

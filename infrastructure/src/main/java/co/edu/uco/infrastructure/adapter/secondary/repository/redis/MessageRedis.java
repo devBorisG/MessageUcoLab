@@ -1,11 +1,14 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.redis;
 
+import co.edu.uco.utils.helper.UtilUUID;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.util.UUID;
+
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 
@@ -23,43 +26,63 @@ public final class MessageRedis {
     private String type;
     private String category;
     private String status;
-    @Indexed
     private String application;
     private String functionality;
-
-    public void setId(UUID id) {
-        this.id =  getDefaultUUID(id);
+    @Indexed
+    private String environmentId;
+    public MessageRedis() {
+        setId(UtilUUID.getNewUUID());
+        setCode(EMPTY);
+        setTitle(EMPTY);
+        setContent(EMPTY);
+        setType(EMPTY);
+        setCategory(EMPTY);
+        setStatus(EMPTY);
+        setApplication(EMPTY);
+        setFunctionality(EMPTY);
+        setEnvironmentId(EMPTY);
     }
-
+    public MessageRedis(UUID id, String code, String title, String content, String category,
+            String type, String status, String application, String functionality, String environmentId) {
+        setId(id);
+        setCode(code);
+        setTitle(title);
+        setContent(content);
+        setType(type);
+        setCategory(category);
+        setStatus(status);
+        setApplication(application);
+        setFunctionality(functionality);
+        setEnvironmentId(environmentId);
+    }
+    public void setId(UUID id) {
+        this.id = getDefaultUUID(id);
+    }
     public void setCode(String code) {
         this.code = trim(code);
     }
-
     public void setTitle(String title) {
         this.title = trim(title);
     }
-
     public void setContent(String content) {
         this.content = trim(content);
     }
-
     public void setType(String type) {
         this.type = trim(type);
     }
-
     public void setCategory(String category) {
         this.category = trim(category);
     }
-
     public void setStatus(String status) {
         this.status = trim(status);
     }
-
     public void setApplication(String application) {
         this.application = trim(application);
     }
-
     public void setFunctionality(String functionality) {
         this.functionality = trim(functionality);
+    }
+    public void setEnvironmentId(String environmentId) {
+        this.environmentId = trim(environmentId);
     }
 }

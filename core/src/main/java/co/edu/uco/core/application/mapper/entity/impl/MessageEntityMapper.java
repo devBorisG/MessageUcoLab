@@ -20,5 +20,7 @@ public final class MessageEntityMapper implements DataMapper<MessageData, Messag
     @Override
     public MessageData mapperData(MessageDomain domain) { return mapper.map(domain, MessageData.class); }
     @Override
-    public MessageDTO mapperDTO(MessageData entity) { return MessageDTO.create(entity.getCode(), entity.getTitle(), entity.getContent(), entity.getType().getName(), entity.getCategory().getName(), entity.getApplication(), entity.getFunctionality().getName()); }
+    public MessageDTO mapperDTO(MessageData entity) { return MessageDTO.create(entity.getCode(), entity.getTitle(),
+            entity.getContent(), entity.getType().getName(),
+            entity.getCategory().getName(), entity.getApplication(), entity.getFunctionality().getName()); }
 }

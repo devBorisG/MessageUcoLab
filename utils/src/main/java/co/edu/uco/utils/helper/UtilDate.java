@@ -1,20 +1,24 @@
 package co.edu.uco.utils.helper;
 
+import co.edu.uco.utils.exception.CrossWordsException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.util.Date;
 
+import static co.edu.uco.utils.helper.EnumConstants.DATE_FORMAT;
+import static co.edu.uco.utils.helper.EnumConstants.ERROR_DATE_FORMAT_INVALID;
 import static co.edu.uco.utils.helper.UtilNumeric.ZERO;
 import static co.edu.uco.utils.helper.UtilObject.*;
 
 public final class UtilDate {
     private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .appendPattern(EnumConstants.DATE_FORMAT.getValue())
+            .appendPattern(DATE_FORMAT.getValue())
             .optionalStart()
             .appendFraction(ChronoField.MICRO_OF_SECOND, ZERO, 9, true)
             .optionalEnd()
@@ -66,11 +70,15 @@ public final class UtilDate {
     public static LocalDateTime getDateALocalDateTime(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
-    public static boolean isOfLegalAge(Date birthDate) {
-        Period period = Period.between(getDateALocalDate(birthDate), currentDate());
-        return !UtilNumeric.isLessThan(period.getYears(), 18);
-    }
     public static LocalDateTime parseDate(String date) {
-        return LocalDateTime.parse(date, formatter);
+        try {
+            return LocalDateTime.parse(date, formatter);
+        } catch (DateTimeParseException exception) {
+            throw CrossWordsException.build(ERROR_DATE_FORMAT_INVALID.getValue(), exception);
+        }
+    }
+    public static LocalDateTime parseDate(String date, String pattern) {
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(pattern);
+        return LocalDateTime.parse(date, customFormatter);
     }
 }

@@ -46,17 +46,15 @@ public final class UtilUUID {
         return uuidString;
     }
     public static UUID getStringToUUID(final String uuid){
-        return UUID.fromString(uuid);
+        return getUUIDFromString(uuid);
     }
     public static boolean isNull(UUID value) {
         return isNullObject(value);
     }
-
     public static String formatUUID(UUID uuid) {
-        return uuid.toString().replace("-", "_");
+        return uuid.toString().replace(STANDARD_HYPHEN.getValue(), STANDARD_UNDERSCORE.getValue());
     }
-
     public static UUID unformatUUID(String uuid) {
-        return UUID.fromString(uuid.replace("_", "-"));
+        return UUID.fromString(uuid.replace(STANDARD_UNDERSCORE.getValue(), STANDARD_HYPHEN.getValue()));
     }
 }

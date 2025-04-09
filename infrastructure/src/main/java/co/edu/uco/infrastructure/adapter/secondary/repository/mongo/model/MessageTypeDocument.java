@@ -1,16 +1,15 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
 import lombok.Getter;
-import jakarta.persistence.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.FIELD_ID;
 import static co.edu.uco.utils.helper.UtilText.trim;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 
 @Getter
-@Document(collection = "message_type")
 public final class MessageTypeDocument {
-    @Id
+    @Field(FIELD_ID)
     private String id;
     private String name;
     public MessageTypeDocument(String id, String name) {

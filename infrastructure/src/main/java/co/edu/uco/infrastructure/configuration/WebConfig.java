@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private final LoggingConfig loggingConfig;
@@ -23,16 +25,18 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(loggingConfig);
         registry.addInterceptor(acceptHeaderInterceptor)
                 .excludePathPatterns(
-                        "/swagger-ui.html",
-                        "/swagger-ui/**",
-                        "/swagger-resources/**",
-                        "/v3/api-docs/**",
-                        "/webjars/**"
+                        SWAGGER_UI_HTML,
+                        SWAGGER_UI,
+                        SWAGGER_RESOURCES,
+                        SWAGGER_API_DOCS,
+                        SWAGGER_WEBJARS
                 );
         registry.addInterceptor(tokenHeaderInterceptor)
                 .addPathPatterns(
-                        "/messageucolab/v1/application/*/message/*",
-                        "/messageucolab/v1/application/*/messages"
+                        WEB_CONFIG_API_MESSAGE,
+                        WEB_CONFIG_API_APPLICATION,
+                        WEB_CONFIG_API_ENVIRONMENT,
+                        WEB_CONFIG_API_CODE
                 );
     }
 }

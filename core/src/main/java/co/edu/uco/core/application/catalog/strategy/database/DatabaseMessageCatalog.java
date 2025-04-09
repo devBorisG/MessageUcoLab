@@ -4,54 +4,53 @@ import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.port.out.repository.DataBaseMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
-import co.edu.uco.utils.helper.UtilUUID;
-import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import co.edu.uco.core.domain.port.out.repository.token.PageBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
+import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
 
 @Component
-@Scope(SINGLETON_SCOPE)
 public final class DatabaseMessageCatalog extends DatabaseCatalog {
     private final DataBaseMessageRepository repository;
     public DatabaseMessageCatalog(DataBaseMessageRepository repository) {
         this.repository = repository;
     }
-
     @Override
     public Optional<MessageData> getMessageById(String code) {
-        return repository.findById(UtilUUID.getUUIDFromString(code));
+        return repository.findById(getUUIDFromString(code));
     }
-
     @Override
     public String getContent(String code) {
-        return repository.findById(UtilUUID.getUUIDFromString(code)).map(MessageData::getContent).orElse(EMPTY);
+        return repository.findById(getUUIDFromString(code)).map(MessageData::getContent).orElse(EMPTY);
     }
-
     @Override
     public boolean isExist(String key) {
         return getMessageById(key).isPresent();
     }
-
     @Override
     public Optional<MessageData> getMessage(String code, String application) {
         return repository.findApplicationMessageByCode(code, application);
     }
-
     @Override
     public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
-        var  result = PageRequest.of(request.getPage(), request.getSize(), Sort.by(Sort.Direction.fromString(request.getSort()), request.getColumnSort()));
+        var result = PageBuilder.createPageRequest(request);
         return repository.finByApplication(application, result);
     }
-
     @Override
     public List<MessageData> getMessages(String application) {
         return repository.finByApplication(application);
+    }
+    @Override
+    public SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request) {
+        var result = PageBuilder.createPageRequest(request);
+        return repository.findMessagesByEnvironment(environment, result);
+    }
+    @Override
+    public Optional<MessageData> getMessageByCodeAndEnvironment(String code, String environmentId) {
+        return repository.findMessageByCodeAndEnvironment(code, environmentId);
     }
 }

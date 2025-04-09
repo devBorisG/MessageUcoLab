@@ -41,6 +41,8 @@ public enum MessageKeyEnum {
     TCH_031("TCH_031", MessageSourceEnum.NETWORK),
     TCH_032("TCH_032", MessageSourceEnum.NETWORK),
     TCH_033("TCH_033", MessageSourceEnum.NETWORK),
+    TCH_034("TCH_034", MessageSourceEnum.NETWORK),
+    TCH_035("TCH_035", MessageSourceEnum.CRITICAL),
     FUN_001("FUN_001", MessageSourceEnum.CRITICAL),
     FUN_002("FUN_002", MessageSourceEnum.CRITICAL),
     FUN_003("FUN_003", MessageSourceEnum.CRITICAL),
@@ -66,16 +68,28 @@ public enum MessageKeyEnum {
     FUN_023("FUN_023", MessageSourceEnum.CRITICAL),
     FUN_024("FUN_024", MessageSourceEnum.NETWORK),
     FUN_025("FUN_025", MessageSourceEnum.NETWORK),
-    FUN_026("FUN_026", MessageSourceEnum.NETWORK);
+    FUN_026("FUN_026", MessageSourceEnum.NETWORK),
+    FUN_027("FUN_027", MessageSourceEnum.NETWORK),
+    FUN_028("FUN_028", MessageSourceEnum.CRITICAL),
+    FUN_029("FUN_029", MessageSourceEnum.CRITICAL),
+    FUN_030("FUN_030", MessageSourceEnum.CRITICAL),
+    FUN_031("FUN_031", MessageSourceEnum.CRITICAL),
+    FUN_032("FUN_032", MessageSourceEnum.CRITICAL),
+    FUN_033("FUN_033", MessageSourceEnum.CRITICAL),
+    FUN_034("FUN_034", MessageSourceEnum.CRITICAL),
+    FUN_035("FUN_035", MessageSourceEnum.CRITICAL),
+    FUN_036("FUN_036", MessageSourceEnum.CRITICAL),
+    FUN_037("FUN_037", MessageSourceEnum.CRITICAL),
+    FUN_038("FUN_038", MessageSourceEnum.CRITICAL),
+    FUN_039("FUN_039", MessageSourceEnum.CRITICAL),
+    FUN_040("FUN_040", MessageSourceEnum.CRITICAL);
 
     private final String key;
     private final MessageSourceEnum source;
-
     MessageKeyEnum(String key, MessageSourceEnum source) {
         this.key = key;
         this.source = source;
     }
-
     public static MessageKeyEnum of(String key) {
         if (UtilText.isEmptyOrNull(key)) {
             throw CrossWordsException.build(DetailMessageEnum.TCH_008.getContent());

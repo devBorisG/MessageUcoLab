@@ -1,17 +1,15 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
-import co.edu.uco.utils.helper.UtilObject;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.FIELD_ID;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "message")
 public final class MessageDocument {
-    @Id
+    @Field(FIELD_ID)
     private String id;
     private String code;
     private String title;
@@ -20,7 +18,6 @@ public final class MessageDocument {
     private MessageCategoryDocument category;
     private StatusMessageDocument status;
     private String application;
-    @DBRef
     private FunctionalityDocument functionality;
     public void setId(String id) {
         this.id = trim(id);
@@ -34,19 +31,10 @@ public final class MessageDocument {
     public void setContent(String content) {
         this.content = trim(content);
     }
-    public void setType(MessageTypeDocument type) {
-        this.type = UtilObject.getDefaultIsNullObject(MessageTypeDocument.build(), type);
-    }
-    public void setCategory(MessageCategoryDocument category) {
-        this.category = UtilObject.getDefaultIsNullObject(MessageCategoryDocument.build(), category);
-    }
-    public void setStatus(StatusMessageDocument status) {
-        this.status = UtilObject.getDefaultIsNullObject(status, StatusMessageDocument.build());
-    }
-    public void setApplication(String application) {
-        this.application = trim(application);
-    }
-    public void setFunctionality(FunctionalityDocument functionality) {
-        this.functionality = UtilObject.getDefaultIsNullObject(functionality, FunctionalityDocument.build());
-    }
+    public void setType(MessageTypeDocument type) { this.type = getDefaultIsNullObject(MessageTypeDocument.build(), type);}
+    public void setCategory(MessageCategoryDocument category) { this.category = getDefaultIsNullObject(MessageCategoryDocument.build(), category);}
+    public void setStatus(StatusMessageDocument status) {  this.status = getDefaultIsNullObject(status, StatusMessageDocument.build());}
+    public void setApplication(String application) {this.application = trim(application);}
+    public void setFunctionality(FunctionalityDocument functionality) { this.functionality = getDefaultIsNullObject(FunctionalityDocument.build(), functionality);}
+    public static MessageDocument build() {return new MessageDocument();}
 }

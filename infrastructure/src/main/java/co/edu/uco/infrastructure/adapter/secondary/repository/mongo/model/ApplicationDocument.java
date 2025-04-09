@@ -4,11 +4,12 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.COLLECTION_APPLICATION;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "application")
+@Document(collection = COLLECTION_APPLICATION)
 public final class ApplicationDocument {
     @Id
     private String id;

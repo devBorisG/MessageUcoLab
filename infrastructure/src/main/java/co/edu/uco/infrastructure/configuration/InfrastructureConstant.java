@@ -1,34 +1,46 @@
 package co.edu.uco.infrastructure.configuration;
 
 public final class InfrastructureConstant {
-    private InfrastructureConstant() {}
-    public static final String COLLECTION_MONGO_ADAPTER = "airbyte_raw_message";
-    public static final String FIELD_MONGO_ADAPTER_ID = "_airbyte_data.id";
-    public static final String FIELD_MONGO_ADAPTER_CODE = "_airbyte_data.code";
-    public static final String FIELD_MONGO_ADAPTER_TITLE = "_airbyte_data.title";
-    public static final String FIELD_MONGO_ADAPTER_CONTENT = "_airbyte_data.content";
-    public static final String FIELD_MONGO_ADAPTER_TYPE = "_airbyte_data.type";
-    public static final String FIELD_MONGO_ADAPTER_CATEGORY = "_airbyte_data.category";
-    public static final String FIELD_MONGO_ADAPTER_STATUS = "_airbyte_data.status";
-    public static final String FIELD_MONGO_ADAPTER_APPLICATION = "_airbyte_data.application";
-    public static final String FIELD_MONGO_ADAPTER_FUNCTIONALITY = "_airbyte_data.functionality";
-
+    private InfrastructureConstant() {
+    }
     public static final String COLLECTION_TOKEN = "token";
     public static final String COLLECTION_TOKEN_STATE = "token_state";
+    public static final String COLLECTION_MESSAGE_ENVIRONMENT = "message_environment";
+    public static final String COLLECTION_ENVIRONMENT = "environment";
+    public static final String COLLECTION_APPLICATION = "application";
+    public static final String COLLECTION_STATUS_MESSAGE_ENVIRONMENT = "status_message_environment";
+    public static final String COLLECTION_ENVIRONMENT_TYPE = "environment_type";
+    public static final String COLLECTION_REPRESENT_PARAMETER = "represent_parameter";
+    public static final String COLLECTION_PARAMETER = "parameter";
 
     public static final String FIELD_ID = "id";
     public static final String FIELD_NAME = "name";
     public static final String FIELD_CREATION_DATE = "creation_date";
     public static final String FIELD_EXPIRATION_DATE = "expiration_date";
     public static final String FIELD_ENVIRONMENT_ID = "environment_id";
+    public static final String FIELD_MESSAGE_ENVIRONMENT_ID = "message_environment_id";
+    public static final String FIELD_MESSAGE = "message";
     public static final String FIELD_SECRET_NAME = "secret_name";
     public static final String FIELD_STATE_ID = "state_id";
+    public static final String FIELD_TYPE_ID = "type_id";
+    public static final String FIELD_APPLICATION_ID = "application_id";
+    public static final String ENVIRONMENT_ID_ATTRIBUTE = "environmentId";
+    public static final String TOKEN_ENTITY = "token_data";
+    public static final String TOKEN_STATE_ACTIVE_ID = "123e4567-e89b-12d3-a456-426614175000";
+
+    public static final String PACKAGE_REPOSITORY_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository";
+    public static final String PACKAGE_REPOSITORY_ADAPTER_ENTITY = "co.edu.uco.infrastructure.adapter.secondary.repository.entity";
+    public static final String PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository.postgresql";
+    public static final String JPA_CONFIG_PREFIX = "datasource";
+    public static final String JPA_DRIVER_CLASS_NAME = "org.postgresql.Driver";
+    public static final String JPA_HIBERNATE_DIALECT = "hibernate.dialect";
+    public static final String JPA_HIBERNATE_SHOW_SQL= "hibernate.show_sql";
 
     public static final String CORRELATION_ID = "X-Correlation-ID";
     public static final String REDIS_HASH = "Message";
     public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";
     public static final String CACHE_REDIS_ADAPTER = "MessageRedisAdapter";
-    public static final String POSTGRESQL_ADAPTER = "MessagePostgreSQLAdapter";
+    public static final String POSTGRESQL_ADAPTER = "TokenPostgresSQLAdapter";
     public static final String LOGGING_REQUEST_URI = "REQUEST_URI";
     public static final String LOGGING_HTTP_METHOD = "HTTP_METHOD";
     public static final String LOGGING_SESSION_ID = "JSESSIONID";
@@ -36,8 +48,6 @@ public final class InfrastructureConstant {
     public static final String LOGGING_PARAMETER_APPLICATION_NAME = "MessageUcoLab";
     public static final String LOGGING_PARAMETER_CODE_MESSAGE = "codeMessage";
     public static final String LOGGING_PARAMETER_APPLICATION = "application";
-    public static final String PACKAGE_REPOSITORY_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository";
-    public static final String PACKAGE_REPOSITORY_POSTGRESQL_ADAPTER = "co.edu.uco.infrastructure.adapter.secondary.repository.postgresql";
     public static final String PACKAGE_BASE = "co.edu.uco";
     public static final String LOGGING_TIMESTAMP = "TS";
     public static final String LOGGING_THREAD = "THREAD";
@@ -66,4 +76,14 @@ public final class InfrastructureConstant {
     public static final String DOPPLER_DTO_NAME = "name";
     public static final String DOPPLER_DTO_VALUE = "value";
     public static final String DOPPLER_DTO_RAW = "raw";
+    public static final String WEB_CONFIG_API_MESSAGE = "/messageucolab/v1/application/**/message/*";
+    public static final String WEB_CONFIG_API_APPLICATION = "/messageucolab/v1/application/**/message/*";
+    public static final String WEB_CONFIG_API_ENVIRONMENT = "/messageucolab/v1/application/environment";
+    public static final String WEB_CONFIG_API_CODE = "/messageucolab/v1/application/code/*";
+
+    public static final String SWAGGER_UI_HTML = "/swagger-ui.html";
+    public static final String SWAGGER_UI = "/swagger-ui/**";
+    public static final String SWAGGER_RESOURCES = "/swagger-resources/**";
+    public static final String SWAGGER_API_DOCS = "/v3/api-docs/**";
+    public static final String SWAGGER_WEBJARS = "/webjars/**";
 }

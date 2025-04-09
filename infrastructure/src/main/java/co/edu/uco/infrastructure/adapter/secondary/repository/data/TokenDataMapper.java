@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import static co.edu.uco.core.CrosswordsConstant.SINGLETON_SCOPE;
+import static co.edu.uco.utils.helper.UtilUUID.getStringToUUID;
 
 @Component
 @Scope(SINGLETON_SCOPE)
@@ -24,6 +25,8 @@ public final class TokenDataMapper implements DataMapper<TokenData, TokenEntity>
 
     @Override
     public TokenEntity mapperModel(TokenData data) {
-        return mapper.map(data, TokenEntity.class);
+        return new TokenEntity(data.getId(), data.getCreationDate(), data.getSecretName(),
+                data.getExpirationDate(), getStringToUUID(data.getEnvironmentId()),
+                getStringToUUID(data.getStateId()));
     }
 }

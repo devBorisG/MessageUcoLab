@@ -1,45 +1,46 @@
 package co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model;
 
-import co.edu.uco.core.domain.data.MessageData;
-import co.edu.uco.utils.helper.UtilObject;
-import co.edu.uco.utils.helper.UtilText;
 import jakarta.persistence.Id;
 import lombok.Getter;
+
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
+import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import static co.edu.uco.utils.helper.UtilText.trim;
+
+import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@Document(collection = "message_environment")
+@Document(collection = COLLECTION_MESSAGE_ENVIRONMENT)
+@ToString
 public final class MessageEnvironmentDocument {
     @Id
+    @Field(FIELD_MESSAGE_ENVIRONMENT_ID)
     private String id;
-    @DBRef
-    private MessageData message;
-    private EnvironmentTypeDocument environmentTypeDocument;
-    private MessageEnvironmentStateDocument stateData;
-    public MessageEnvironmentDocument(String id, MessageData message, EnvironmentTypeDocument environmentTypeDocument) {
+    @Field(FIELD_MESSAGE)
+    private MessageDocument message;
+    @Field(FIELD_ENVIRONMENT_ID)
+    private String environmentId;
+    private MessageEnvironmentStateDocument status;
+    public MessageEnvironmentDocument(String id, MessageDocument message, String environmentId) {
         setId(id);
         setMessage(message);
-        setEnvironmentTypeDocument(environmentTypeDocument);
+        setEnvironmentId(environmentId);
     }
     public MessageEnvironmentDocument() {
         setId(EMPTY);
-        setMessage(MessageData.build());
-        setEnvironmentTypeDocument(EnvironmentTypeDocument.build());
+        setMessage(MessageDocument.build());
+        setEnvironmentId(EMPTY);
     }
     public void setId(String id) {
-        this.id =UtilText.trim(id);
+        this.id = trim(id);
     }
-    public void setMessage(MessageData message) {
-        this.message = UtilObject.getDefaultIsNullObject(message, MessageData.build());
+    public void setMessage(MessageDocument message) {this.message = getDefaultIsNullObject(message, MessageDocument.build());}
+    public void setEnvironmentId(String environmentId) {
+        this.environmentId = trim(environmentId);
     }
-    public void setEnvironmentTypeDocument(EnvironmentTypeDocument environmentTypeDocument) {
-        this.environmentTypeDocument = UtilObject.getDefaultIsNullObject(environmentTypeDocument, EnvironmentTypeDocument.build());
-    }
-    public void setStateData(MessageEnvironmentStateDocument stateData) {
-        this.stateData = UtilObject.getDefaultIsNullObject(stateData, MessageEnvironmentStateDocument.build());
-    }
-
+    public void setStatus(MessageEnvironmentStateDocument status) { this.status = getDefaultIsNullObject(status, MessageEnvironmentStateDocument.build());}
     public static MessageEnvironmentDocument build(){return new MessageEnvironmentDocument();}
 }

@@ -4,11 +4,12 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.COLLECTION_STATUS_MESSAGE_ENVIRONMENT;
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilText.trim;
 
 @Getter
-@Document(collection = "status_message_environment")
+@Document(collection = COLLECTION_STATUS_MESSAGE_ENVIRONMENT)
 public final class StatusMessageEnvironmentDocument {
     @Id
     private String id;
@@ -27,6 +28,5 @@ public final class StatusMessageEnvironmentDocument {
     public void setName(String name) {
         this.name = trim(name);
     }
-
     public static StatusMessageEnvironmentDocument build(){return new StatusMessageEnvironmentDocument();}
 }

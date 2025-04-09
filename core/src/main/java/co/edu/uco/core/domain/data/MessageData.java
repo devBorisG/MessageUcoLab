@@ -4,7 +4,6 @@ import co.edu.uco.utils.helper.UtilObject;
 import co.edu.uco.utils.helper.UtilText;
 import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.util.UUID;
 
@@ -13,7 +12,6 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 import static co.edu.uco.utils.helper.UtilObject.getDefaultIsNullObject;
 
 @Getter
-@ToString
 public final class MessageData {
     private UUID id;
     private String code;
@@ -24,7 +22,6 @@ public final class MessageData {
     private StatusMessageData status;
     private String application;
     private FunctionalityData functionality;
-
     public MessageData() {
         setId(UtilUUID.getNewUUID());
         setCode(UtilText.EMPTY);
@@ -61,18 +58,12 @@ public final class MessageData {
         this.content = trim(content);
     }
     public void setType(MessageTypeData type) {this.type = UtilObject.getDefaultIsNullObject(type,MessageTypeData.build());}
-    public void setCategory(MessageCategoryData category) {
-        this.category = getDefaultIsNullObject(category, MessageCategoryData.build());
-    }
-    public void setStatus(StatusMessageData status) {
-        this.status = getDefaultIsNullObject(status, StatusMessageData.build());
-    }
+    public void setCategory(MessageCategoryData category) {this.category = getDefaultIsNullObject(category, MessageCategoryData.build());}
+    public void setStatus(StatusMessageData status) {this.status = getDefaultIsNullObject(status, StatusMessageData.build());}
     public void setApplication(String application) {
         this.application = trim(application);
     }
-    public void setFunctionality(FunctionalityData functionality) {
-        this.functionality = UtilObject.getDefaultIsNullObject(functionality, FunctionalityData.build());
-    }
+    public void setFunctionality(FunctionalityData functionality) {this.functionality = getDefaultIsNullObject(functionality, FunctionalityData.build());}
     public static MessageData build() {
         return new MessageData();
     }

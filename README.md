@@ -11,6 +11,11 @@ A Spring Boot application for message handling and processing.
   - Redis (version 6.0 or higher)
   - PostgreSQL (version 12 or higher)
   - Apache Pulsar (version 3.2.2)
+  - Apache Kafka (version 7.0.0 or higher)
+  - Zookeeper (version 7.0.0 or higher)
+  - KSQLDB (version 0.20.0 or higher)
+  - Debezium Connect (version 1.9 or higher)
+  - Kong API Gateway (version 3.5 or higher)
   - Observability (optional but recommended):
     - Grafana (for metrics and logs visualization)
     - Loki (for log storage and querying)
@@ -44,8 +49,41 @@ The project is organized into multiple modules:
 2. Create a database named `ucolab`
 3. Create a user `crosswords` with password `crosswords` (or configure according to your needs)
 4. Assign permissions to the user for the database
-5. If you're configuring PostgreSQL manually (without Docker), run the SQL script located at `deployment/docker/init.sql` to create the necessary tables
+5. If you're configuring PostgreSQL manually (without Docker), run the SQL script located at `deployment/docker/scripts/init.sql` to create the necessary tables
    > Note: If you use the provided docker-compose, this script will be executed automatically when the PostgreSQL container starts
+
+### Apache Kafka
+
+1. Install Apache Kafka (version 7.0.0 or higher)
+2. Install Zookeeper (version 7.0.0 or higher)
+3. Configure the following topics:
+   - `connect-configs`
+   - `connect-offsets`
+   - `connect-status`
+
+### KSQLDB
+
+1. Install KSQLDB Server (version 0.20.0 or higher)
+2. Configure to connect to Kafka cluster
+3. KSQLDB Server listens on port 8088
+
+### Debezium Connect
+
+1. Install Debezium Connect (version 1.9 or higher)
+2. Configure to connect to:
+   - Kafka cluster
+   - PostgreSQL database
+   - MongoDB database
+3. Debezium Connect listens on port 8083
+
+### Kong API Gateway
+
+1. Install Kong Gateway (version 3.5 or higher)
+2. Configure in DB-less mode
+3. Use the configuration in `deployment/docker/kong.yaml`
+4. Kong Gateway exposes:
+   - API Gateway on port 8000
+   - Admin API on port 8001
 
 ### Apache Pulsar
 
@@ -99,6 +137,13 @@ REDISPORT=6379
 REDISPASSWORD=your_redis_password
 REDISDATABASE=0
 
+# PostgreSQL
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5435
+POSTGRES_DATABASE=crs-crossword-db
+POSTGRES_USERNAME=your_postgres_user
+POSTGRES_PASSWORD=your_postgres_password
+
 # Azure Key Vault (for production only)
 AZURE_KEYVAULT_UCOLAB_ENDPOINT=your_azure_keyvault_endpoint
 
@@ -125,7 +170,7 @@ mvn clean install
 
 ## Running the Application
 
-To run the application, make sure all infrastructure dependencies are running (MongoDB, Redis, PostgreSQL, Pulsar), then use Maven:
+To run the application, make sure all infrastructure dependencies are running (MongoDB, Redis, PostgreSQL, Kafka), then use Maven:
 
 ```bash
 mvn spring-boot:run -pl Infrastructure
@@ -147,20 +192,36 @@ API documentation is available at:
 1. Health check:
 
 ```bash
+# Direct access
 curl http://localhost:8085/actuator/health
+
+# Through API Gateway
+curl http://localhost:8000/actuator/health
 ```
 
 2. Message endpoints:
 
 ```bash
 # Get messages for an application
+# Direct access
 curl http://localhost:8085/messageucolab/v1/application/{id}/messages
 
+# Through API Gateway
+curl http://localhost:8000/messageucolab/v1/application/{id}/messages
+
 # Get a specific message by code
+# Direct access
 curl http://localhost:8085/messageucolab/v1/application/{id}/message/{messageCode}
 
+# Through API Gateway
+curl http://localhost:8000/messageucolab/v1/application/{id}/message/{messageCode}
+
 # Get token for an application
+# Direct access
 curl http://localhost:8085/messageucolab/v1/application/{id}/token
+
+# Through API Gateway
+curl http://localhost:8000/messageucolab/v1/application/{id}/token
 ```
 
 ## Monitoring and Logging
@@ -200,10 +261,14 @@ docker-compose up -d
 
 This will start:
 
-- MongoDB
-- Redis
-- PostgreSQL (with tables automatically created using the init.sql script)
-- Apache Pulsar
+- MongoDB (port 27017)
+- Redis (port 6379)
+- PostgreSQL (port 5435)
+- Apache Kafka (port 9094)
+- Zookeeper (port 2181)
+- KSQLDB Server (port 8088)
+- Debezium Connect (port 8083)
+- Kong API Gateway (ports 8000, 8001)
 - Observability services:
   - Grafana (port 3000)
   - Loki (port 3100)
@@ -212,14 +277,269 @@ This will start:
 
 Then you can run the application connecting to these services.
 
-### Grafana Configuration
+### Kong Gateway Configuration
 
-After starting the services with Docker Compose, you can access Grafana at `http://localhost:3000` with the following credentials:
+After starting the services with Docker Compose, you can access Kong Gateway at:
+- API Gateway: `http://localhost:8000`
+- Admin API: `http://localhost:8001`
 
-- Username: admin
-- Password: admin
+The gateway is configured in DB-less mode using the configuration file at `deployment/docker/kong.yaml`.
 
-It is recommended to configure the following data sources:
+### Kafka Configuration
 
-1. Prometheus: `http://prometheus:9090`
-2. Loki: `http://loki:3100`
+The Kafka cluster is configured with:
+- External access on port 9094
+- Internal communication on port 9092
+- Automatic topic creation enabled
+- Single broker setup for development
+
+### Debezium Connect Configuration
+
+Debezium Connect is configured to:
+- Connect to Kafka cluster
+- Monitor PostgreSQL database changes
+- Monitor MongoDB database changes
+- Store configurations in Kafka topics
+
+# Change Data Capture (CDC) Configuration
+
+## Create Required Kafka Topics
+
+Before configuring Debezium and KSQLDB, you must create the necessary Kafka themes. You can do this by running the provided script inside the kafka container:
+
+1. **Create each topic:**
+   
+   a. First, connect to the Kafka container:
+   ```bash
+   docker exec -it kafka-crosswords bash
+   ```
+
+   b. Once inside the container, create each topic using the following commands:
+   ```bash
+   # Create topics for reference data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.language_base_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.application_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.application_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.environment_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.environment_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.environment_type_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.functionality_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.functionality_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_category_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_environment_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_environment_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_state_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.message_type_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.parameter_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.represent_parameter_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.token_data
+   kafka-topics --create --if-not-exists --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic postgres.public.token_state_data
+   ```
+
+   c. Verify that all topics were created successfully:
+   ```bash
+   kafka-topics --list --bootstrap-server localhost:9092
+   ```
+
+   d. Exit the Kafka container:
+   ```bash
+   exit
+   ```
+
+This step is crucial as it prepares the Kafka infrastructure for the CDC pipeline. The topics will store the change events from PostgreSQL that will later be processed by KSQLDB and synchronized to MongoDB.
+
+## Debezium PostgreSQL Configuration
+
+To configure CDC with Debezium, follow these steps:
+
+1. **Configure PostgreSQL Connector**
+   
+   Make a POST request to the Kafka Connect endpoint:
+   ```bash
+   curl -X POST http://localhost:8083/connectors \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "postgres-source-connector",    
+     "config": {
+       "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+       "transforms.unwrap.delete.handling.mode": "drop",
+       "slot.name": "debezium_slot",
+       "publication.name": "debezium_publication",
+       "transforms": "unwrap,extractId",
+       "topic.prefix": "postgres",
+       "transforms.unwrap.drop.tombstones": "false",
+       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+       "database.user": "your_postgres_user",
+       "database.dbname": "crs-crossword-db",
+       "database.server.name": "postgres",
+       "database.port": "5432",
+       "plugin.name": "pgoutput",
+       "key.converter.schemas.enable": "false",
+       "transforms.unwrap.unwrap.keys": "true",
+       "database.hostname": "debezium-postgres",
+       "transforms.extractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+       "database.password": "your_postgres_password",
+       "name": "postgres-source-connector",
+       "value.converter.schemas.enable": "false",
+       "transforms.unwrap.add.fields": "op,source.ts_ms",
+       "transforms.extractId.field": "id",
+       "table.include.list": "public.language_base_data,public.application_state_data,public.application_data,public.environment_type_data,public.environment_state_data,public.environment_data,public.functionality_state_data,public.functionality_data,public.message_category_data,public.message_type_data,public.message_state_data,public.message_data,public.message_environment_state_data,public.message_environment_data,public.parameter_data,public.represent_parameter_data,public.token_state_data,public.token_data,public.message_data_table"
+     }
+   }'
+   ```
+
+2. **Configure KSQLDB**
+
+   a. Access the KSQLDB server:
+   ```bash
+   ksql http://localhost:8088
+   ```
+
+   b. Execute the SQL commands contained in the `deployment/docker/scripts/ksql.sql` file:
+   - Creation of reference data tables
+   - Creation of transactional data streams
+   - Creation of enriched data streams with joins
+
+3. **Configure MongoDB Connectors**
+
+   Make POST requests for each MongoDB connector:
+   ```bash
+   # Token State Connector
+   curl -X POST http://localhost:8083/connectors \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "mongodb-token-state-sink",
+     "config": {
+       "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+       "topics": "postgres.public.token_state_data",
+       "collection": "token_state",
+       "database": "messageuco",
+       "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+       "document.id.strategy.partial.value.projection.list": "id",
+       "connection.uri": "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco",
+       "value.converter.schemas.enable": "false",
+       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+       "document.id.strategy.partial.value.projection.type": "allowlist",
+       "errors.log.enable": "true",
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+     }
+   }'
+
+   # Token Connector
+   curl -X POST http://localhost:8083/connectors \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "mongodb-token-sink",
+     "config": {
+       "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+       "topics": "postgres.public.token_data",
+       "collection": "token",
+       "database": "messageuco",
+       "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+       "document.id.strategy.partial.value.projection.list": "id",
+       "connection.uri": "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco",
+       "value.converter.schemas.enable": "false",
+       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+       "document.id.strategy.partial.value.projection.type": "allowlist",
+       "errors.log.enable": "true",
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+     }
+   }'
+
+   # Message Environment Connector
+   curl -X POST http://localhost:8083/connectors \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "mongodb-message-environment-sink",
+     "config": {
+       "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+       "topics": "message_environment_data_stream",
+       "collection": "message_environment",
+       "database": "messageuco",
+       "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+       "document.id.strategy.partial.value.projection.list": "message_environment_id",
+       "connection.uri": "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco",
+       "value.converter.schemas.enable": "false",
+       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+       "document.id.strategy.partial.value.projection.type": "allowlist",
+       "errors.log.enable": "true",
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+     }
+   }'
+   
+   # Environment Connector
+   curl -X POST http://localhost:8083/connectors \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "mongodb-environment-sink",
+     "config": {
+        "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+        "topics": "postgres.public.environment_data",
+        "collection": "environment",
+        "database": "messageuco",
+        "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+        "document.id.strategy.partial.value.projection.list": "id",
+        "connection.uri": "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco",
+        "value.converter.schemas.enable": "false",
+        "name": "mongodb-environment-sink",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "document.id.strategy.partial.value.projection.type": "allowlist",
+        "errors.log.enable": "true",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+     }
+   }'
+
+   # Messages Connector
+   curl -X POST http://localhost:8083/connectors \
+   -H "Content-Type: application/json" \
+   -d '{
+     "name": "mongodb-message-sink",
+     "config": {
+       "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+       "topics": "MESSAGE_DATA_COLLECTION",
+       "collection": "messages",
+       "database": "messageuco",
+       "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+       "document.id.strategy.partial.value.projection.list": "message_id",
+       "connection.uri": "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco",
+       "value.converter.schemas.enable": "false",
+       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+       "document.id.strategy.partial.value.projection.type": "allowlist",
+       "errors.log.enable": "true",
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+     }
+   }'
+   ```
+
+## MongoDB Data Structure
+
+After configuration, data will be synchronized in the following MongoDB collections:
+
+- `token_state`: Token states
+- `token`: Token information
+- `message_environment`: Message-environment relationship
+- `environment`: Environment information
+- `messages`: Messages with enriched information
+
+## Verification
+
+To verify that everything is working correctly:
+
+1. Check connector status:
+   ```bash
+   curl http://localhost:8083/connectors
+   ```
+
+2. Check container logs:
+   ```bash
+   docker-compose logs -f connect
+   docker-compose logs -f kafka
+   ```
+
+3. Query data in MongoDB:
+   ```bash
+   mongosh "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco"
+   ```
