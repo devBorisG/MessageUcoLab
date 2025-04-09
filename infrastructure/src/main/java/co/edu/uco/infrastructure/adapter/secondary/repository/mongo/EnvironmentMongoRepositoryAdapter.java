@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MongoEnvironmentRepositoryAdapter extends MongoRepository<MessageEnvironmentDocument, String> {
+public interface EnvironmentMongoRepositoryAdapter extends MongoRepository<MessageEnvironmentDocument, String> {
     Page<MessageEnvironmentDocument> findMessageEnvironmentDocumentByEnvironmentId(String environmentId,
             Pageable pageable);
     Optional<MessageEnvironmentDocument> findByEnvironmentIdAndMessageCode(String environmentId, String code);
+    Optional<MessageEnvironmentDocument> findByMessageId(String messageId);
 }

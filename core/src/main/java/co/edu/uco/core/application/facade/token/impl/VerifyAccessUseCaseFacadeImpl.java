@@ -3,7 +3,6 @@ package co.edu.uco.core.application.facade.token.impl;
 import co.edu.uco.core.application.facade.token.VerifyAccessUseCaseFacade;
 import co.edu.uco.core.domain.usecase.handling.HandlingVerifyAccessPort;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public final class VerifyAccessUseCaseFacadeImpl implements VerifyAccessUseCaseFacade {

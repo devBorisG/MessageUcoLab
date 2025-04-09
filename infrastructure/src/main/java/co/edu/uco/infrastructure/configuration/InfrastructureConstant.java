@@ -52,9 +52,9 @@ public final class InfrastructureConstant {
 
     public static final String CORRELATION_ID = "X-Correlation-ID";
     public static final String REDIS_HASH = "Message";
-    public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";
-    public static final String CACHE_REDIS_ADAPTER = "MessageRedisAdapter";
-    public static final String POSTGRESQL_ADAPTER = "TokenPostgresSQLAdapter";
+    public static final String DATABASE_MONGO_ADAPTER = "messageMongoAdapter";
+    public static final String CACHE_REDIS_ADAPTER = "messageRedisAdapter";
+    public static final String POSTGRESQL_ADAPTER = "tokenPostgresSQLAdapter";
     public static final String LOGGING_REQUEST_URI = "REQUEST_URI";
     public static final String LOGGING_HTTP_METHOD = "HTTP_METHOD";
     public static final String LOGGING_SESSION_ID = "JSESSIONID";
@@ -66,7 +66,6 @@ public final class InfrastructureConstant {
     public static final String LOGGING_TIMESTAMP = "TS";
     public static final String LOGGING_THREAD = "THREAD";
     public static final String LOGGING_APP_NAME = "APP";
-    public static final String LOGGING_TRACE_ID = "TRACEID";
     public static final String REQUEST_GET_HEADER_ACCEPT = "Accept";
     public static final String REQUEST_GET_HEADER_TOKEN = "Token";
     public static final String REQUEST_GET_HEADER_CONTENT_TYPE = "Content-Type";

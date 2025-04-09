@@ -5,11 +5,11 @@ import co.edu.uco.core.domain.port.out.repository.CacheMessageRepository;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.port.out.repository.token.PageBuilder;
-import co.edu.uco.utils.helper.UtilText;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+import static co.edu.uco.utils.helper.UtilText.EMPTY;
 import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
 
 @Component
@@ -24,7 +24,7 @@ public final class CacheMessageCatalog extends CacheCatalog {
     }
     @Override
     public String getContent(String code) {
-        return repository.findById(getUUIDFromString(code)).map(MessageData::getContent).orElse(UtilText.EMPTY);
+        return repository.findById(getUUIDFromString(code)).map(MessageData::getContent).orElse(EMPTY);
     }
     @Override
     public void addMessage(MessageData messageModel) {
@@ -37,15 +37,6 @@ public final class CacheMessageCatalog extends CacheCatalog {
     @Override
     public boolean isExist(String key) {
         return getMessageById(key).isPresent();
-    }
-    @Override
-    public Optional<MessageData> getMessage(String code, String application) {
-        return repository.findApplicationMessageByCode(code, application);
-    }
-    @Override
-    public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
-        var result = PageBuilder.createPageRequest(request);
-        return repository.finByApplication(application, result);
     }
     @Override
     public SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request) {

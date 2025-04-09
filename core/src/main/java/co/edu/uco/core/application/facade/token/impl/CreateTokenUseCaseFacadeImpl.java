@@ -11,7 +11,6 @@ import co.edu.uco.core.domain.usecase.handling.HandlingCreateTokenPort;
 import co.edu.uco.core.domain.validator.token.CreateTokenCompositeValidator;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilPairKey;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

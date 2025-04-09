@@ -8,8 +8,6 @@ import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import java.util.Optional;
 
 public abstract class CacheCatalog extends MessageCatalog<String, Optional<MessageData>> {
-    public abstract Optional<MessageData> getMessage(String code, String application);
-    public abstract SimplePage<MessageData> getMessage(String application, SimplePageRequest request);
     public abstract void addMessage(MessageData messageModel);
     public abstract void addMessageWithEnvironment(MessageData messageModel, String environmentId);
     public abstract SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request);
