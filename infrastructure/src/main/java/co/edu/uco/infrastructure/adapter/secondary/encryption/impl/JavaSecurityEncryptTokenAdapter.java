@@ -1,7 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.encryption.impl;
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
-import co.edu.uco.core.application.dto.encrypt.KeyPairDTO;
+import co.edu.uco.core.application.dto.keypair.KeyPairDTO;
 import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;

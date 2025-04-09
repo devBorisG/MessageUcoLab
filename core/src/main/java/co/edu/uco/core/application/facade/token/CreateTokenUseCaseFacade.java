@@ -1,7 +1,7 @@
 package co.edu.uco.core.application.facade.token;
 
-import co.edu.uco.core.application.dto.CreateTokenDTO;
+import co.edu.uco.core.application.dto.token.CreateTokenDTO;
 
 public interface CreateTokenUseCaseFacade {
-    String createToken(CreateTokenDTO tokenDTO, String application);
+    String execute(CreateTokenDTO tokenDTO, String application);
 }

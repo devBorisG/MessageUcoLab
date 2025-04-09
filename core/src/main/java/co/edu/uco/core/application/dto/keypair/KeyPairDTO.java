@@ -1,4 +1,4 @@
-package co.edu.uco.core.application.dto.encrypt;
+package co.edu.uco.core.application.dto.keypair;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

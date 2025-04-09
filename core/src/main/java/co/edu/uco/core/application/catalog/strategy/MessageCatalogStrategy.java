@@ -30,7 +30,7 @@ public final class MessageCatalogStrategy {
     public MessageData getMessage(String code, String application) {
         var response = cacheCatalog.getMessage(code, application);
         if (response.isEmpty()) {
-            log.warn(inMemoryCatalog.getContent(FUN_006.getKey()));
+            log.info(inMemoryCatalog.getContent(FUN_006.getKey()));
             response = databaseCatalog.getMessage(code, application);
             response.ifPresent(cacheCatalog::addMessage);
         }

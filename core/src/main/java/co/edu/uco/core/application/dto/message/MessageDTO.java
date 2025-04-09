@@ -1,4 +1,4 @@
-package co.edu.uco.core.application.dto;
+package co.edu.uco.core.application.dto.message;
 
 import static co.edu.uco.utils.helper.UtilText.trim;
 

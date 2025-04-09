@@ -1,6 +1,6 @@
 package co.edu.uco.core.domain.validator.page;
 
-import co.edu.uco.core.application.dto.PageRequestDTO;
+import co.edu.uco.core.application.dto.page.PageRequestDTO;
 import co.edu.uco.core.domain.validator.CompositeValidator;
 import co.edu.uco.core.domain.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;

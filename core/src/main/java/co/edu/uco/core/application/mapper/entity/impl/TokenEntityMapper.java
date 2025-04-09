@@ -1,6 +1,6 @@
 package co.edu.uco.core.application.mapper.entity.impl;
 
-import co.edu.uco.core.application.dto.TokenDTO;
+import co.edu.uco.core.application.dto.token.TokenDTO;
 import co.edu.uco.core.application.mapper.entity.DataMapper;
 import co.edu.uco.core.domain.data.TokenData;
 import co.edu.uco.core.domain.domains.TokenDomain;

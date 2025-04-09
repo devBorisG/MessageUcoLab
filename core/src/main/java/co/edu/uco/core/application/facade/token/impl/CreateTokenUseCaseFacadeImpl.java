@@ -1,8 +1,8 @@
 package co.edu.uco.core.application.facade.token.impl;
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
-import co.edu.uco.core.application.dto.CreateTokenDTO;
-import co.edu.uco.core.application.dto.TokenDTO;
+import co.edu.uco.core.application.dto.token.CreateTokenDTO;
+import co.edu.uco.core.application.dto.token.TokenDTO;
 import co.edu.uco.core.application.facade.token.CreateTokenUseCaseFacade;
 import co.edu.uco.core.application.mapper.dto.impl.TokenDTOMapper;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
@@ -28,13 +28,13 @@ import static co.edu.uco.utils.helper.UtilUUID.getStringToUUID;
 
 @Slf4j
 @Component
-@Transactional
-public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
+public final class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
     private final HandlingCreateTokenPort handlingCreateTokenPort;
     private final TokenDTOMapper tokenDTOMapper;
     private final CreateTokenSecretPort createTokenSecretPort;
     private final CreateTokenCompositeValidator validator;
     private final EncryptTokenPort encrypt;
+
     public CreateTokenUseCaseFacadeImpl(
             HandlingCreateTokenPort handlingCreateTokenPort,
             TokenDTOMapper tokenDTOMapper,
@@ -47,8 +47,9 @@ public class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFacade {
         this.createTokenSecretPort = createTokenSecretPort;
         this.validator = validator;
     }
+
     @Override
-    public String createToken(
+    public String execute(
             CreateTokenDTO createTokenDTO,
             String application
     ) {

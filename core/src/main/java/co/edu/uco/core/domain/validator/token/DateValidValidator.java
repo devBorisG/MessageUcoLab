@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import static co.edu.uco.utils.helper.UtilDate.parseDate;
 
 @Component
-public final class DateisValidValidator implements Validator<String> {
+public final class DateValidValidator implements Validator<String> {
     @Override
     public void validate(String data) throws BusinessRuleException {
         if (containsInvalidCharacters(data)) {

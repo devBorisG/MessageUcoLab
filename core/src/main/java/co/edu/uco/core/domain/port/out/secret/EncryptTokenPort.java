@@ -1,6 +1,6 @@
 package co.edu.uco.core.domain.port.out.secret;
 
-import co.edu.uco.core.application.dto.encrypt.KeyPairDTO;
+import co.edu.uco.core.application.dto.keypair.KeyPairDTO;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;

@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.application.dto.CreateTokenDTO;
+import co.edu.uco.core.application.dto.token.CreateTokenDTO;
 import co.edu.uco.core.application.facade.token.CreateTokenUseCaseFacade;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.infrastructure.adapter.primary.CreateTokenController;

@@ -2,7 +2,7 @@ package co.edu.uco.core.domain.usecase;
 
 import co.edu.uco.core.application.catalog.strategy.MessageCatalogStrategy;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
-import co.edu.uco.core.application.dto.MessageDTO;
+import co.edu.uco.core.application.dto.message.MessageDTO;
 import co.edu.uco.core.application.mapper.entity.DataMapper;
 import co.edu.uco.core.domain.data.MessageData;
 import co.edu.uco.core.domain.domains.MessageDomain;
