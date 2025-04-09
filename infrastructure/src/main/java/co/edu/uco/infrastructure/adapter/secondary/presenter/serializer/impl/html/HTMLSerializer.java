@@ -6,23 +6,22 @@ import co.edu.uco.utils.exception.CrossWordsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.HTML_SERIALIZER_CONTENT_TYPE;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 
-public class HTMLSerializer extends AbstractSerializer {
+public final class HTMLSerializer extends AbstractSerializer {
     public HTMLSerializer() {
         super(HTML_SERIALIZER_CONTENT_TYPE);
     }
-
     @Override
     public <T> String serialize(T data) {
         try {
-            StringBuilder html = new StringBuilder();
-            ObjectMapper objectMapper = new ObjectMapper();
+            var html = new StringBuilder();
+            var objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
-            String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
-            html.append("<html><body>");
-            html.append("<pre>").append(result).append("</pre>");
-            html.append("</body></html>");
+            var result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
+            html.append(HTML_OPEN_TAG).append(BODY_OPEN_TAG);
+            html.append(PRE_OPEN_TAG).append(result).append(PRE_CLOSE_TAG);
+            html.append(BODY_CLOSE_TAG).append(HTML_CLOSE_TAG);
             return html.toString();
         } catch (Exception e) {
             throw CrossWordsException.build(DetailMessageEnum.TCH_018.getContent(), e);

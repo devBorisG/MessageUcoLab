@@ -36,7 +36,6 @@ public final class DopplerCreateToken implements CreateTokenSecretPort {
                 throw CrossWordsException.buildInfrastructure(
                         message,
                         DetailMessageEnum.FUN_025.getContent(),
-                        null,
                         ExceptionType.TECHNICAL
                 );
             }

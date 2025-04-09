@@ -31,7 +31,7 @@ public class RedisConfig {
         RedisTemplate<String, MessageRedis> template = new RedisTemplate<>();
         try {
             template.setConnectionFactory(connectionFactory);
-            ObjectMapper objectMapper = new ObjectMapper();
+            var objectMapper = new ObjectMapper();
             objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
             PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
                     .allowIfSubType(MessageRedis.class)

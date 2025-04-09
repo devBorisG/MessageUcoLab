@@ -57,7 +57,7 @@ public final class JavaSecurityEncryptTokenAdapter implements EncryptTokenPort {
         byte[] signatureBytes = Base64.getDecoder().decode(signature);
         byte[] privateKeyBytes = Base64.getDecoder().decode(privateKey);
 
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+        var keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
         try{
             var decryptCipher = Cipher.getInstance(ALGORITHM_PAIR_KEY);
             var keyFactory = KeyFactory.getInstance(ALGORITHM_GENERATE_PAIR_KEY);

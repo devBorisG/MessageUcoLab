@@ -4,16 +4,13 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.MED
 
 public abstract class AbstractSerializer implements SerializerType {
     private final String contentType;
-
     protected AbstractSerializer(String contentType) {
         this.contentType = contentType;
     }
-
     @Override
     public String getSupportedContentType() {
         return contentType;
     }
-
     @Override
     public boolean supports(String mediaType) {
         return getSupportedContentType().equalsIgnoreCase(mediaType) ||
@@ -23,5 +20,4 @@ public abstract class AbstractSerializer implements SerializerType {
     public boolean isDefault() {
         return false;
     }
-
 }

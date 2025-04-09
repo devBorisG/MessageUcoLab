@@ -5,8 +5,6 @@ import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.model.Messag
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-
-
 @Component
 public final class MessageDataBaseMapper implements DataMapper<MessageData, MessageDocument> {
     private final ModelMapper modelMapper;

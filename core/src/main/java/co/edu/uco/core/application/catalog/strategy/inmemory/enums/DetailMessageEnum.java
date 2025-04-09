@@ -78,7 +78,8 @@ public enum DetailMessageEnum {
     FUN_037(MessageKeyEnum.FUN_037, "Expiration date is earlier than today", "The expiration date must be a date greater than today.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_038(MessageKeyEnum.FUN_038, "Invalid Id", "The id must not be the default UUID.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_039(MessageKeyEnum.FUN_039, "Invalid date character", "Date contains characters not allowed", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_040(MessageKeyEnum.FUN_040, "Invalid Message code", "The message code cannot be empty or null.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
+    FUN_040(MessageKeyEnum.FUN_040, "Invalid Message code", "The message code cannot be empty or null.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_041(MessageKeyEnum.FUN_041, "Error searching for token", "An error occurred while searching for the token.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
     private MessageKeyEnum code;
     private String title;
     private String content;

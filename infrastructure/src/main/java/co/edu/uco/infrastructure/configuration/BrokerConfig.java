@@ -7,29 +7,26 @@ import org.apache.pulsar.client.api.PulsarClientException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static co.edu.uco.utils.helper.EnumConstants.PULSAR_URL;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.PULSAR_CLIENT_HOST;
+import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 
 @Configuration
 public class BrokerConfig {
     private PulsarClient client;
-
     @PostConstruct
     public void init() throws PulsarClientException {
         this.client = PulsarClient.builder()
-                .serviceUrl(PULSAR_URL.getValue())
+                .serviceUrl(PULSAR_CLIENT_HOST)
                 .build();
     }
-
     @Bean
     public PulsarClient pulsarClient() {
         return this.client;
     }
-
     @PreDestroy
     public void cleanup() throws PulsarClientException {
-        if (this.client != null) {
+        if (!isNullObject(this.client)) {
             this.client.close();
         }
     }
-
 }

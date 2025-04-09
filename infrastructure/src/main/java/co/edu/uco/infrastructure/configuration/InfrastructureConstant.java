@@ -36,6 +36,20 @@ public final class InfrastructureConstant {
     public static final String JPA_HIBERNATE_DIALECT = "hibernate.dialect";
     public static final String JPA_HIBERNATE_SHOW_SQL= "hibernate.show_sql";
 
+    public static final int CACHE_EXPIRATION_TIME = 15;
+    public static final int CACHE_MAXIMUM_SIZE = 500;
+
+    public static final long MICROSECONDS_PER_MILLISECOND = 1_000;
+
+    public static final String PULSAR_CLIENT_HOST = "pulsar://localhost:6650";
+
+    public static final String HTML_OPEN_TAG = "<html>";
+    public static final String HTML_CLOSE_TAG = "</html>";
+    public static final String BODY_OPEN_TAG = "<body>";
+    public static final String BODY_CLOSE_TAG = "</body>";
+    public static final String PRE_OPEN_TAG = "<pre>";
+    public static final String PRE_CLOSE_TAG = "</pre>";
+
     public static final String CORRELATION_ID = "X-Correlation-ID";
     public static final String REDIS_HASH = "Message";
     public static final String DATABASE_MONGO_ADAPTER = "MessageMongoAdapter";

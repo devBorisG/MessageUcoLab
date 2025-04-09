@@ -1,8 +1,9 @@
 package co.edu.uco.infrastructure.adapter.secondary.broker;
 
+import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.out.broker.SendMessage;
-import co.edu.uco.utils.exception.enumeration.infrastructure.SendBrokerMessageCustomException;
+import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.mapper.json.UtilMapperJson;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.pulsar.client.api.Producer;
@@ -31,9 +32,7 @@ public final class SendBrokerMessage implements SendMessage {
                         stringProducer.send(message.get());
                     }
         } catch (PulsarClientException ex) {
-            throw SendBrokerMessageCustomException.buildTechnicalException(ex.getMessage(), ex);
-        } catch (Exception ex){
-            throw SendBrokerMessageCustomException.buildTechnicalException(ex.getMessage());
+            throw CrossWordsException.buildInfrastructure(DetailMessageEnum.TCH_002.getContent(), ex);
         }
     }
 }

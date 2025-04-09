@@ -11,22 +11,17 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SerializerConfig {
-
     @Bean
     public SerializerType jsonSerializer() {
         return new JsonSerializer();
     }
-
     @Bean
     public SerializerType yamlSerializer() {
         return new YamlSerializer();
     }
-
     @Bean
     public SerializerType textSerializer() { return new PlainTextSerializer(); }
-
     @Bean
     public SerializerType htmlSerializer() { return new HTMLSerializer(); }
-
     @Bean SerializerType xmlSerializer() { return new XMLSerializer(); }
 }

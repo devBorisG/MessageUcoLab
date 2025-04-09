@@ -46,7 +46,6 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             log.error(DetailMessageEnum.TCH_016.getContent(), ex);
         }
     }
-
     @ExceptionHandler(CrossWordsException.class)
     public void presentCrossWordsException(
             CrossWordsException ex,
@@ -74,7 +73,6 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             throw exception;
         }
     }
-
     @ExceptionHandler(Exception.class)
     public void handleGeneralException(
             Exception ex,
@@ -95,5 +93,4 @@ public final class HttpPresenterAdapter<T> implements PresenterPort<T> {
             log.error(DetailMessageEnum.TCH_019.getContent(), ioEx);
         }
     }
-
 }

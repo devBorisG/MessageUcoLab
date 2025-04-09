@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.CACHE_EXPIRATION_TIME;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.CACHE_MAXIMUM_SIZE;
+
 @Component
 public final class DopplerSecretCacheService  implements FindTokenCachePort {
     private final Cache<String, Map<String, String>> dopplerSecretCache;
@@ -16,8 +19,8 @@ public final class DopplerSecretCacheService  implements FindTokenCachePort {
     public DopplerSecretCacheService(FindSecretTokenPort findSecretTokenPort) {
         this.findSecretTokenPort = findSecretTokenPort;
         this.dopplerSecretCache = Caffeine.newBuilder()
-                .expireAfterWrite(15, TimeUnit.MINUTES)
-                .maximumSize(500)
+                .expireAfterWrite(CACHE_EXPIRATION_TIME, TimeUnit.MINUTES)
+                .maximumSize(CACHE_MAXIMUM_SIZE)
                 .build();
     }
     @Override
