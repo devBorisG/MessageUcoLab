@@ -3,7 +3,6 @@ package co.edu.uco.infrastructure.adapter.secondary.external.secrets.impl.dopple
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.secret.FindSecretTokenPort;
 import co.edu.uco.utils.exception.CrossWordsException;
-import co.edu.uco.utils.exception.enumeration.ExceptionType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
+import static co.edu.uco.utils.exception.enumeration.ExceptionType.TECHNICAL;
 
 @Slf4j
 @Component
@@ -41,8 +41,7 @@ public final class DopplerFindToken implements FindSecretTokenPort {
                 throw CrossWordsException.buildInfrastructure(
                         message,
                         DetailMessageEnum.FUN_025.getContent(),
-                        null,
-                        ExceptionType.TECHNICAL
+                        TECHNICAL
                 );
             }else {
                 var dopplerFindTokenDTO = mapper.readValue(response.body().byteStream(), DopplerFindTokenDTO.class);
@@ -58,7 +57,7 @@ public final class DopplerFindToken implements FindSecretTokenPort {
                     message,
                     DetailMessageEnum.FUN_025.getContent(),
                     e,
-                    ExceptionType.TECHNICAL
+                    TECHNICAL
             );
         }
     }
