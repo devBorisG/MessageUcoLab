@@ -1,4 +1,3 @@
-
 services:
   grafana:
     image: grafana/grafana:latest
@@ -47,6 +46,10 @@ services:
     volumes:
       - redis_data:/data
     command: ["redis-server", "--requirepass", "cr0ssw0rds.", "--appendonly", "yes"]
+    networks:
+      - observability-network
+      - kong-network
+      - app-network
 
   debezium-postgres:
     image: debezium/postgres:13
@@ -60,6 +63,10 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - observability-network
+      - kong-network
+      - app-network
 
   kafka:
     image: confluentinc/cp-kafka:7.0.0
@@ -84,6 +91,10 @@ services:
       - kafka-data:/var/lib/kafka/data
     depends_on:
       - zookeeper
+    networks:
+      - observability-network
+      - kong-network
+      - app-network
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.0
@@ -94,7 +105,9 @@ services:
     volumes:
       - zookeeper-data:/var/lib/zookeeper/data
       - zookeeper-logs:/var/lib/zookeeper/log
-  
+    networks:
+      - app-network
+
   ksqldb-server:
     image: confluentinc/ksqldb-server:0.20.0
     hostname: ksqldb-server
@@ -109,6 +122,8 @@ services:
       - ksqldb-data:/var/lib/ksql/data
     depends_on:
       - kafka
+    networks:
+      - app-network
 
   connect:
     image: debezium/connect:1.9
@@ -127,6 +142,8 @@ services:
     depends_on:
       - kafka
       - debezium-postgres
+    networks:
+      - app-network
 
   mongodb:
     image: mongo:5.0
@@ -135,6 +152,10 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - observability-network
+      - kong-network
+      - app-network
 
   kong:
     image: kong/kong-gateway:3.5
@@ -155,6 +176,53 @@ services:
       - "8001:8001"  # Kong Admin API (HTTP)
     networks:
       - kong-network
+
+  messageucolab:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: messageucolab-app
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      # MongoDB
+      - MONGOURI=example.mongodb.net
+      - MONGODBHOST=example.mongodb.net
+      - MONGODBPORT=27017
+      - MONGODBUSER=example
+      - MONGOPASSWORD=example
+      - MONGODBDATABASE=example
+      # Redis
+      - REDISHOST=redis
+      - REDISPORT=6379
+      - REDISPASSWORD=example
+      - REDISDATABASE=0
+      # PostgreSQL
+      - POSTGRESHOST=crs-crossword-db
+      - POSTGRESPORT=5432
+      - POSTGRESDATABASE=crs-crossword-db
+      - POSTGRESUSERNAME=postgres
+      - POSTGRESPASSWORD=postgres
+      # Kafka
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      - debezium-postgres
+      - mongodb
+      - redis
+      - kafka
+    networks:
+      - observability-network
+      - kong-network
+      - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8085/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
 volumes:
   grafana-data:
@@ -178,4 +246,6 @@ networks:
   observability-network:
     driver: bridge
   kong-network:
+    driver: bridge
+  app-network:
     driver: bridge
