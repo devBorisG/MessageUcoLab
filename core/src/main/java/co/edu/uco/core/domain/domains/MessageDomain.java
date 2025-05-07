@@ -1,7 +1,5 @@
 package co.edu.uco.core.domain.domains;
 
-import co.edu.uco.utils.helper.UtilObject;
-import co.edu.uco.utils.helper.UtilText;
 import co.edu.uco.utils.helper.UtilUUID;
 import lombok.Getter;
 
