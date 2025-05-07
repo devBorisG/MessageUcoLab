@@ -138,16 +138,16 @@ REDISPASSWORD=your_redis_password
 REDISDATABASE=0
 
 # PostgreSQL
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5435
-POSTGRES_DATABASE=crs-crossword-db
-POSTGRES_USERNAME=your_postgres_user
-POSTGRES_PASSWORD=your_postgres_password
+POSTGRESHOST=localhost
+POSTGRESPORT=5435
+POSTGRESDATABASE=crs-crossword-db
+POSTGRESUSERNAME=your_postgres_user
+POSTGRESPASSWORD=your_postgres_password
 
-# Azure Key Vault (for production only)
+# Azure Key Vault
 AZURE_KEYVAULT_UCOLAB_ENDPOINT=your_azure_keyvault_endpoint
 
-# Doppler (optional)
+# Doppler
 DOPPLERTOKEN=your_doppler_token
 ```
 
@@ -511,32 +511,6 @@ To configure CDC with Debezium, follow these steps:
         "errors.log.enable": "true"
      }
    }'
-
-   # Messages Connector
-   curl -X POST http://localhost:8083/connectors \
-   -H "Content-Type: application/json" \
-   -d '{
-     "name": "mongodb-message-sink",
-     "config": {
-       "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-       "topics": "MESSAGE_DATA_COLLECTION",
-       "collection": "messages",
-       "database": "messageuco",
-       "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
-       "document.id.strategy.partial.value.projection.list": "message_id",
-       "connection.uri": "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco",
-       "value.converter.schemas.enable": "false",
-       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-       "document.id.strategy.partial.value.projection.type": "allowlist",
-       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-       "deletes.enabled": "true",
-       "transforms": "unwrap",
-       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
-       "transforms.unwrap.delete.handling.mode": "rewrite",
-       "transforms.unwrap.drop.tombstones": "true",
-       "errors.log.enable": "true"
-     }
-   }'
    ```
 
 ## MongoDB Data Structure
@@ -547,7 +521,6 @@ After configuration, data will be synchronized in the following MongoDB collecti
 - `token`: Token information
 - `message_environment`: Message-environment relationship
 - `environment`: Environment information
-- `messages`: Messages with enriched information
 
 ## Verification
 
