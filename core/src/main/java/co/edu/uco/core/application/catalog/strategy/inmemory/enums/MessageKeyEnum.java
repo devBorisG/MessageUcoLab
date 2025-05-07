@@ -82,7 +82,8 @@ public enum MessageKeyEnum {
     FUN_037("FUN_037", MessageSourceEnum.CRITICAL),
     FUN_038("FUN_038", MessageSourceEnum.CRITICAL),
     FUN_039("FUN_039", MessageSourceEnum.CRITICAL),
-    FUN_040("FUN_040", MessageSourceEnum.CRITICAL);
+    FUN_040("FUN_040", MessageSourceEnum.CRITICAL),
+    FUN_041("FUN_041", MessageSourceEnum.CRITICAL);
 
     private final String key;
     private final MessageSourceEnum source;

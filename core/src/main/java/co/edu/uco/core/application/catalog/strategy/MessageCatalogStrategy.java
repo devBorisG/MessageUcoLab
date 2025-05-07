@@ -27,40 +27,6 @@ public final class MessageCatalogStrategy {
         this.databaseCatalog = databaseCatalog;
         this.inMemoryCatalog = inMemoryCatalog;
     }
-    public MessageData getMessage(String code, String application) {
-        var response = cacheCatalog.getMessage(code, application);
-        if (response.isEmpty()) {
-            log.warn(inMemoryCatalog.getContent(FUN_006.getKey()));
-            response = databaseCatalog.getMessage(code, application);
-            response.ifPresent(cacheCatalog::addMessage);
-        }
-        return response
-                .orElseThrow(() -> BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey())));
-    }
-    public SimplePage<MessageData> getMessages(String application, SimplePageRequest request) {
-        var cachedMessages = cacheCatalog.getMessage(application, request);
-        if (cachedMessages.getData().isEmpty()) {
-            log.info(inMemoryCatalog.getContent(FUN_006.getKey()));
-            var dbMessages = databaseCatalog.getMessage(application, request);
-            if (!dbMessages.getData().isEmpty()) {
-                log.info(inMemoryCatalog.getContent(FUN_007.getKey()));
-                fillCacheWithMissingMessages(cachedMessages, dbMessages);
-                return dbMessages;
-            }
-            throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
-        }
-        var dbMessages = databaseCatalog.getMessage(application, request);
-        if (!dbMessages.getData().isEmpty()) {
-            if (cachedMessages.getData().size() != dbMessages.getData().size()) {
-                log.info(inMemoryCatalog.getContent(FUN_008.getKey()));
-                fillCacheWithMissingMessages(cachedMessages, dbMessages);
-                return dbMessages;
-            }
-            log.info(inMemoryCatalog.getContent(FUN_009.getKey()));
-            return cachedMessages;
-        }
-        throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
-    }
     public SimplePage<MessageData> getMessagesWithEnvironment(String environment, SimplePageRequest request) {
         var cachedMessages = cacheCatalog.getMessageWithEnvironment(environment, request);
         if (cachedMessages.getData().isEmpty()) {
@@ -68,7 +34,7 @@ public final class MessageCatalogStrategy {
             var dbMessages = databaseCatalog.getMessageWithEnvironment(environment, request);
             if (!dbMessages.getData().isEmpty()) {
                 log.info(inMemoryCatalog.getContent(FUN_007.getKey()));
-                fillCacheWithEnvironmentMessages(cachedMessages, dbMessages, environment);
+                fillCacheWithEnvironmentMessages(dbMessages, environment);
                 return dbMessages;
             }
             throw BusinessException.buildUserException(inMemoryCatalog.getContent(TCH_009.getKey()));
@@ -78,7 +44,7 @@ public final class MessageCatalogStrategy {
         if (!dbMessages.getData().isEmpty()) {
             if (cachedMessages.getData().size() != dbMessages.getData().size()) {
                 log.info(inMemoryCatalog.getContent(FUN_008.getKey()));
-                fillCacheWithEnvironmentMessages(cachedMessages, dbMessages, environment);
+                fillCacheWithEnvironmentMessages(dbMessages, environment);
                 return dbMessages;
             }
             log.info(inMemoryCatalog.getContent(FUN_009.getKey()));
@@ -91,22 +57,14 @@ public final class MessageCatalogStrategy {
         if (response.isPresent()) {
             log.info(inMemoryCatalog.getContent(FUN_009.getKey()));
         }
-
         if (response.isEmpty()) {
             log.info(inMemoryCatalog.getContent(FUN_006.getKey()));
             response = databaseCatalog.getMessageByCodeAndEnvironment(code, environmentId);
-
             response.ifPresent(message -> cacheCatalog.addMessageWithEnvironment(message, environmentId));
         }
-
         return response;
     }
-    private void fillCacheWithMissingMessages(SimplePage<MessageData> cachedMessages,
-            SimplePage<MessageData> dbMessages) {
-        dbMessages.getData().forEach(cacheCatalog::addMessage);
-    }
-    private void fillCacheWithEnvironmentMessages(SimplePage<MessageData> cachedMessages,
-            SimplePage<MessageData> dbMessages, String environment) {
+    private void fillCacheWithEnvironmentMessages(SimplePage<MessageData> dbMessages, String environment) {
         dbMessages.getData().forEach(message -> cacheCatalog.addMessageWithEnvironment(message, environment));
     }
 }

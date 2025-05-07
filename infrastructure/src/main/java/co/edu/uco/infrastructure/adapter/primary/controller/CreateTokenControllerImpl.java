@@ -1,6 +1,6 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.application.dto.CreateTokenDTO;
+import co.edu.uco.core.application.dto.token.CreateTokenDTO;
 import co.edu.uco.core.application.facade.token.CreateTokenUseCaseFacade;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.infrastructure.adapter.primary.CreateTokenController;
@@ -22,12 +22,10 @@ import java.util.List;
 final class CreateTokenControllerImpl implements CreateTokenController {
     private final CreateTokenUseCaseFacade createTokenUseCaseFacade;
     private final PresenterPort<String> restPresenter;
-    
     public CreateTokenControllerImpl(CreateTokenUseCaseFacade createTokenUseCaseFacade, PresenterPort<String> restPresenter) {
         this.createTokenUseCaseFacade = createTokenUseCaseFacade;
         this.restPresenter = restPresenter;
     }
-
     @PostMapping("${crosswords.api.path.token.application}")
     @Operation(summary = "Crear token de aplicación", 
               description = "Crea un nuevo token para una aplicación específica. El token generado puede ser utilizado para autenticar las solicitudes subsiguientes.")
@@ -51,7 +49,7 @@ final class CreateTokenControllerImpl implements CreateTokenController {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
     ) {
-        String result = createTokenUseCaseFacade.createToken(tokenDTO, id);
+        var result = createTokenUseCaseFacade.execute(tokenDTO, id);
         restPresenter.presentRestSuccess(List.of(result), httpServletRequest, httpServletResponse);
     }
 }

@@ -2,25 +2,25 @@ package co.edu.uco.infrastructure.adapter.secondary.external.secrets.impl.dopple
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.secret.FindSecretTokenPort;
+import co.edu.uco.infrastructure.configuration.DopplerProperties;
 import co.edu.uco.utils.exception.CrossWordsException;
-import co.edu.uco.utils.exception.enumeration.ExceptionType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
+import static co.edu.uco.utils.exception.enumeration.ExceptionType.TECHNICAL;
 
 @Slf4j
 @Component
 public final class DopplerFindToken implements FindSecretTokenPort {
-    @Value("${doppler.token}")
-    private String token;
+    private final DopplerProperties properties;
     private final ObjectMapper mapper;
-    public DopplerFindToken(ObjectMapper mapper) {
+    public DopplerFindToken(DopplerProperties properties, ObjectMapper mapper) {
+        this.properties = properties;
         this.mapper = mapper;
     }
     @Override
@@ -28,10 +28,10 @@ public final class DopplerFindToken implements FindSecretTokenPort {
         var client = new OkHttpClient();
 
         var request = new Request.Builder()
-                .url(URL_DOPPLER_CONFIG_SECRETS_GET.formatted(secretName))
+                .url(properties.getUrlConfigSecretsGet().formatted(secretName))
                 .get()
                 .addHeader(REQUEST_GET_HEADER_ACCEPT.toLowerCase(), JSON_SERIALIZER_CONTENT_TYPE)
-                .addHeader(REQUEST_GET_HEADER_AUTHORIZATION.toLowerCase(), BEARER_TOKEN.formatted(token))
+                .addHeader(REQUEST_GET_HEADER_AUTHORIZATION.toLowerCase(), BEARER_TOKEN.formatted(properties.getToken()))
                 .build();
 
         try(Response response = client.newCall(request).execute()){
@@ -41,10 +41,10 @@ public final class DopplerFindToken implements FindSecretTokenPort {
                 throw CrossWordsException.buildInfrastructure(
                         message,
                         DetailMessageEnum.FUN_025.getContent(),
-                        null,
-                        ExceptionType.TECHNICAL
+                        TECHNICAL
                 );
             }else {
+                assert response.body() != null;
                 var dopplerFindTokenDTO = mapper.readValue(response.body().byteStream(), DopplerFindTokenDTO.class);
                 return Map.of(
                         DOPPLER_DTO_SECRET_NAME, dopplerFindTokenDTO.getName(),
@@ -58,7 +58,7 @@ public final class DopplerFindToken implements FindSecretTokenPort {
                     message,
                     DetailMessageEnum.FUN_025.getContent(),
                     e,
-                    ExceptionType.TECHNICAL
+                    TECHNICAL
             );
         }
     }

@@ -7,11 +7,9 @@ import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.port.out.repository.token.PageBuilder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 import static co.edu.uco.utils.helper.UtilText.EMPTY;
-import static co.edu.uco.utils.helper.UtilUUID.getUUIDFromString;
 
 @Component
 public final class DatabaseMessageCatalog extends DatabaseCatalog {
@@ -21,28 +19,15 @@ public final class DatabaseMessageCatalog extends DatabaseCatalog {
     }
     @Override
     public Optional<MessageData> getMessageById(String code) {
-        return repository.findById(getUUIDFromString(code));
+        return repository.findById(code);
     }
     @Override
     public String getContent(String code) {
-        return repository.findById(getUUIDFromString(code)).map(MessageData::getContent).orElse(EMPTY);
+        return repository.findById(code).map(MessageData::getContent).orElse(EMPTY);
     }
     @Override
     public boolean isExist(String key) {
         return getMessageById(key).isPresent();
-    }
-    @Override
-    public Optional<MessageData> getMessage(String code, String application) {
-        return repository.findApplicationMessageByCode(code, application);
-    }
-    @Override
-    public SimplePage<MessageData> getMessage(String application, SimplePageRequest request) {
-        var result = PageBuilder.createPageRequest(request);
-        return repository.finByApplication(application, result);
-    }
-    @Override
-    public List<MessageData> getMessages(String application) {
-        return repository.finByApplication(application);
     }
     @Override
     public SimplePage<MessageData> getMessageWithEnvironment(String environment, SimplePageRequest request) {

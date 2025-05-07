@@ -9,15 +9,14 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.XML_SERIALIZER_CONTENT_TYPE;
 
-public class XMLSerializer extends AbstractSerializer {
+public final class XMLSerializer extends AbstractSerializer {
     public XMLSerializer() {
         super(XML_SERIALIZER_CONTENT_TYPE);
     }
-
     @Override
     public <T> String serialize(T data) {
         try {
-            XmlMapper xmlMapper = new XmlMapper();
+            var xmlMapper = new XmlMapper();
             xmlMapper.registerModule(new JavaTimeModule());
             return xmlMapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {

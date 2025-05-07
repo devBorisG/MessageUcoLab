@@ -1,4 +1,4 @@
-package co.edu.uco.core.application.dto;
+package co.edu.uco.core.application.dto.message;
 
 import co.edu.uco.utils.helper.UtilObject;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package co.edu.uco.infrastructure.adapter.secondary.encryption.impl;
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
-import co.edu.uco.core.application.dto.encrypt.KeyPairDTO;
+import co.edu.uco.core.application.dto.keypair.KeyPairDTO;
 import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
@@ -57,7 +57,7 @@ public final class JavaSecurityEncryptTokenAdapter implements EncryptTokenPort {
         byte[] signatureBytes = Base64.getDecoder().decode(signature);
         byte[] privateKeyBytes = Base64.getDecoder().decode(privateKey);
 
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+        var keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
         try{
             var decryptCipher = Cipher.getInstance(ALGORITHM_PAIR_KEY);
             var keyFactory = KeyFactory.getInstance(ALGORITHM_GENERATE_PAIR_KEY);

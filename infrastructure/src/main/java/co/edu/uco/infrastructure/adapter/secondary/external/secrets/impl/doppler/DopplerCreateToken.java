@@ -2,11 +2,11 @@ package co.edu.uco.infrastructure.adapter.secondary.external.secrets.impl.dopple
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
+import co.edu.uco.infrastructure.configuration.DopplerProperties;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.exception.enumeration.ExceptionType;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
@@ -14,19 +14,21 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 @Slf4j
 @Component
 public final class DopplerCreateToken implements CreateTokenSecretPort {
-    @Value("${doppler.token}")
-    private String token;
+    private final DopplerProperties properties;
+    public DopplerCreateToken(DopplerProperties properties) {
+        this.properties = properties;
+    }
     @Override
     public void execute(String secretName, String privateKey) {
         var client = new OkHttpClient();
         var mediaType = MediaType.parse(JSON_SERIALIZER_CONTENT_TYPE);
-        var body = RequestBody.create(String.format(BODY_DOPPLER_CREATE_TOKEN_REQUEST, secretName, secretName, privateKey), mediaType);
+        var body = RequestBody.create(String.format(properties.getRequest(), secretName, secretName, privateKey), mediaType);
         var request = new Request.Builder()
-                .url(URL_DOPPLER_CONFIG_SECRETS_POST)
+                .url(properties.getUrlConfigSecretsPost())
                 .post(body)
                 .addHeader(REQUEST_GET_HEADER_ACCEPT.toLowerCase(), JSON_SERIALIZER_CONTENT_TYPE)
                 .addHeader(REQUEST_GET_HEADER_CONTENT_TYPE.toLowerCase(), JSON_SERIALIZER_CONTENT_TYPE)
-                .addHeader(REQUEST_GET_HEADER_AUTHORIZATION.toLowerCase(), BEARER_TOKEN.formatted(token))
+                .addHeader(REQUEST_GET_HEADER_AUTHORIZATION.toLowerCase(), BEARER_TOKEN.formatted(properties.getToken()))
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
@@ -36,7 +38,6 @@ public final class DopplerCreateToken implements CreateTokenSecretPort {
                 throw CrossWordsException.buildInfrastructure(
                         message,
                         DetailMessageEnum.FUN_025.getContent(),
-                        null,
                         ExceptionType.TECHNICAL
                 );
             }

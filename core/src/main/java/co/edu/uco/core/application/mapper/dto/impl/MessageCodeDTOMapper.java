@@ -1,6 +1,6 @@
 package co.edu.uco.core.application.mapper.dto.impl;
 
-import co.edu.uco.core.application.dto.MessageCodeDTO;
+import co.edu.uco.core.application.dto.message.MessageCodeDTO;
 import co.edu.uco.core.application.mapper.dto.DTOMapper;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import org.modelmapper.ModelMapper;

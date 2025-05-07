@@ -1,7 +1,7 @@
 package co.edu.uco.core.domain.validator.page;
 
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
-import co.edu.uco.core.application.dto.PageRequestDTO;
+import co.edu.uco.core.application.dto.page.PageRequestDTO;
 import co.edu.uco.core.domain.validator.Validator;
 import co.edu.uco.utils.exception.BusinessRuleException;
 import org.springframework.stereotype.Component;

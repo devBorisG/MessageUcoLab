@@ -6,6 +6,5 @@ import java.util.Optional;
 
 public interface CacheMessageRepository extends MessageRepository {
     void saveWithEnvironment(MessageData data, String environmentId);
-
     Optional<MessageData> findMessageByCodeAndEnvironment(String code, String environmentId);
 }

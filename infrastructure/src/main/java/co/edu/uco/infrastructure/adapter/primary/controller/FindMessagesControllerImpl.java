@@ -1,9 +1,9 @@
 package co.edu.uco.infrastructure.adapter.primary.controller;
 
-import co.edu.uco.core.application.dto.MessageDTO;
-import co.edu.uco.core.application.dto.PageRequestDTO;
+import co.edu.uco.core.application.dto.message.MessageDTO;
+import co.edu.uco.core.application.dto.page.PageRequestDTO;
 import co.edu.uco.core.application.facade.message.FindMessageByCodeAndEnvironmentUseCaseFacade;
-import co.edu.uco.core.application.facade.message.FindMessagesByEnvironmentFacade;
+import co.edu.uco.core.application.facade.message.impl.FindMessagesByEnvironmentFacadeImpl;
 import co.edu.uco.core.domain.port.out.presenter.PresenterPort;
 import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.infrastructure.adapter.primary.FindMessagesController;
@@ -26,16 +26,16 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.ENV
 @RequestMapping("${crosswords.api.path.message}")
 @Tag(name = "Consulta de Mensajes", description = "Endpoints para obtener información de mensajes")
 final class FindMessagesControllerImpl implements FindMessagesController {
-        private final FindMessagesByEnvironmentFacade findMessagesByEnvironmentFacade;
+        private final FindMessagesByEnvironmentFacadeImpl findMessagesByEnvironmentFacadeImpl;
         private final FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade;
         private final PresenterPort<MessageDTO> restPresenter;
         private final PresenterPort<SimplePage<MessageDTO>> restPresenterPage;
         public FindMessagesControllerImpl(
-                        FindMessagesByEnvironmentFacade findMessagesByEnvironmentFacade,
-                        FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade,
-                        PresenterPort<MessageDTO> restPresenter,
-                        PresenterPort<SimplePage<MessageDTO>> restPresenterPage) {
-                this.findMessagesByEnvironmentFacade = findMessagesByEnvironmentFacade;
+                FindMessagesByEnvironmentFacadeImpl findMessagesByEnvironmentFacadeImpl,
+                FindMessageByCodeAndEnvironmentUseCaseFacade findMessageByCodeAndEnvironmentUseCaseFacade,
+                PresenterPort<MessageDTO> restPresenter,
+                PresenterPort<SimplePage<MessageDTO>> restPresenterPage) {
+                this.findMessagesByEnvironmentFacadeImpl = findMessagesByEnvironmentFacadeImpl;
                 this.findMessageByCodeAndEnvironmentUseCaseFacade = findMessageByCodeAndEnvironmentUseCaseFacade;
                 this.restPresenter = restPresenter;
                 this.restPresenterPage = restPresenterPage;
@@ -70,7 +70,7 @@ final class FindMessagesControllerImpl implements FindMessagesController {
                         HttpServletRequest httpServletRequest,
                         HttpServletResponse httpServletResponse) {
                 var environmentId = (String) httpServletRequest.getAttribute(ENVIRONMENT_ID_ATTRIBUTE);
-                var messageDTOSimplePage = findMessagesByEnvironmentFacade.execute(environmentId, pageRequestDTO);
+                var messageDTOSimplePage = findMessagesByEnvironmentFacadeImpl.execute(environmentId, pageRequestDTO);
                 restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest,
                                 httpServletResponse);
         }

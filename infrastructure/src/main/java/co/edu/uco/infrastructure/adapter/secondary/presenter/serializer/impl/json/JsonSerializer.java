@@ -16,7 +16,7 @@ public final class JsonSerializer extends AbstractSerializer {
     @Override
     public <T> String serialize(T data) throws CrossWordsException {
         try{
-            ObjectMapper mapper = new ObjectMapper();
+            var mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
             return mapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {

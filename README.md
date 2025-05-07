@@ -138,16 +138,16 @@ REDISPASSWORD=your_redis_password
 REDISDATABASE=0
 
 # PostgreSQL
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5435
-POSTGRES_DATABASE=crs-crossword-db
-POSTGRES_USERNAME=your_postgres_user
-POSTGRES_PASSWORD=your_postgres_password
+POSTGRESHOST=localhost
+POSTGRESPORT=5435
+POSTGRESDATABASE=crs-crossword-db
+POSTGRESUSERNAME=your_postgres_user
+POSTGRESPASSWORD=your_postgres_password
 
-# Azure Key Vault (for production only)
+# Azure Key Vault
 AZURE_KEYVAULT_UCOLAB_ENDPOINT=your_azure_keyvault_endpoint
 
-# Doppler (optional)
+# Doppler
 DOPPLERTOKEN=your_doppler_token
 ```
 
@@ -362,32 +362,32 @@ To configure CDC with Debezium, follow these steps:
    -d '{
      "name": "postgres-source-connector",    
      "config": {
-       "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
-       "transforms.unwrap.delete.handling.mode": "drop",
-       "slot.name": "debezium_slot",
-       "publication.name": "debezium_publication",
-       "transforms": "unwrap,extractId",
-       "topic.prefix": "postgres",
-       "transforms.unwrap.drop.tombstones": "false",
-       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
-       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-       "database.user": "your_postgres_user",
-       "database.dbname": "crs-crossword-db",
-       "database.server.name": "postgres",
-       "database.port": "5432",
-       "plugin.name": "pgoutput",
-       "key.converter.schemas.enable": "false",
-       "transforms.unwrap.unwrap.keys": "true",
-       "database.hostname": "debezium-postgres",
-       "transforms.extractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
-       "database.password": "your_postgres_password",
-       "name": "postgres-source-connector",
-       "value.converter.schemas.enable": "false",
-       "transforms.unwrap.add.fields": "op,source.ts_ms",
-       "transforms.extractId.field": "id",
-       "table.include.list": "public.language_base_data,public.application_state_data,public.application_data,public.environment_type_data,public.environment_state_data,public.environment_data,public.functionality_state_data,public.functionality_data,public.message_category_data,public.message_type_data,public.message_state_data,public.message_data,public.message_environment_state_data,public.message_environment_data,public.parameter_data,public.represent_parameter_data,public.token_state_data,public.token_data,public.message_data_table"
-     }
+        "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+        "transforms.unwrap.delete.handling.mode": "rewrite",
+        "slot.name": "debezium_slot",
+        "publication.name": "debezium_publication",
+        "transforms": "unwrap,extractId",
+        "transforms.unwrap.rewrite.drop.tombstones": "true",
+        "topic.prefix": "postgres",
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "database.user": "your_postgres_user",
+        "database.dbname": "crs-crossword-db",
+        "database.server.name": "postgres",
+        "database.port": "5432",
+        "plugin.name": "pgoutput",
+        "key.converter.schemas.enable": "false",
+        "transforms.unwrap.unwrap.keys": "true",
+        "database.hostname": "debezium-postgres",
+        "transforms.extractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+        "database.password": "your_postgres_password",
+        "name": "postgres-source-connector",
+        "value.converter.schemas.enable": "false",
+        "transforms.unwrap.add.fields": "op,source.ts_ms",
+        "transforms.extractId.field": "id",
+        "table.include.list": "public.language_base_data,public.application_state_data,public.application_data,public.environment_type_data,public.environment_state_data,public.environment_data,public.functionality_state_data,public.functionality_data,public.message_category_data,public.message_type_data,public.message_state_data,public.message_data,public.message_environment_state_data,public.message_environment_data,public.parameter_data,public.represent_parameter_data,public.token_state_data,public.token_data,public.message_data_table"
+      }
    }'
    ```
 
@@ -423,8 +423,13 @@ To configure CDC with Debezium, follow these steps:
        "value.converter.schemas.enable": "false",
        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
        "document.id.strategy.partial.value.projection.type": "allowlist",
-       "errors.log.enable": "true",
-       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+       "deletes.enabled": "true",
+       "transforms": "unwrap",
+       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+       "transforms.unwrap.delete.handling.mode": "rewrite",
+       "transforms.unwrap.drop.tombstones": "true",
+       "errors.log.enable": "true"
      }
    }'
 
@@ -444,8 +449,13 @@ To configure CDC with Debezium, follow these steps:
        "value.converter.schemas.enable": "false",
        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
        "document.id.strategy.partial.value.projection.type": "allowlist",
-       "errors.log.enable": "true",
-       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+       "deletes.enabled": "true",
+       "transforms": "unwrap",
+       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+       "transforms.unwrap.delete.handling.mode": "rewrite",
+       "transforms.unwrap.drop.tombstones": "true",
+       "errors.log.enable": "true"
      }
    }'
 
@@ -465,8 +475,13 @@ To configure CDC with Debezium, follow these steps:
        "value.converter.schemas.enable": "false",
        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
        "document.id.strategy.partial.value.projection.type": "allowlist",
-       "errors.log.enable": "true",
-       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+       "deletes.enabled": "true",
+       "transforms": "unwrap",
+       "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+       "transforms.unwrap.delete.handling.mode": "rewrite",
+       "transforms.unwrap.drop.tombstones": "true",
+       "errors.log.enable": "true"
      }
    }'
    
@@ -487,29 +502,13 @@ To configure CDC with Debezium, follow these steps:
         "name": "mongodb-environment-sink",
         "value.converter": "org.apache.kafka.connect.json.JsonConverter",
         "document.id.strategy.partial.value.projection.type": "allowlist",
-        "errors.log.enable": "true",
-        "key.converter": "org.apache.kafka.connect.storage.StringConverter"
-     }
-   }'
-
-   # Messages Connector
-   curl -X POST http://localhost:8083/connectors \
-   -H "Content-Type: application/json" \
-   -d '{
-     "name": "mongodb-message-sink",
-     "config": {
-       "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-       "topics": "MESSAGE_DATA_COLLECTION",
-       "collection": "messages",
-       "database": "messageuco",
-       "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
-       "document.id.strategy.partial.value.projection.list": "message_id",
-       "connection.uri": "mongodb://your_mongodb_user:your_mongodb_password@localhost:27017/messageuco",
-       "value.converter.schemas.enable": "false",
-       "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-       "document.id.strategy.partial.value.projection.type": "allowlist",
-       "errors.log.enable": "true",
-       "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "deletes.enabled": "true",
+        "transforms": "unwrap",
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "transforms.unwrap.delete.handling.mode": "rewrite",
+        "transforms.unwrap.drop.tombstones": "true",
+        "errors.log.enable": "true"
      }
    }'
    ```
@@ -522,7 +521,6 @@ After configuration, data will be synchronized in the following MongoDB collecti
 - `token`: Token information
 - `message_environment`: Message-environment relationship
 - `environment`: Environment information
-- `messages`: Messages with enriched information
 
 ## Verification
 

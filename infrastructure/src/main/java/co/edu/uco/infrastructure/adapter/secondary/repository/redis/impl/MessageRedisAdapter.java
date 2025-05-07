@@ -9,7 +9,6 @@ import co.edu.uco.infrastructure.adapter.secondary.repository.redis.RedisReposit
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,55 +18,29 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.CAC
 public final class MessageRedisAdapter implements CacheMessageRepository {
     private final RedisRepositoryAdapter repository;
     private final DataMapper<MessageData, MessageRedis> mapper;
-
     public MessageRedisAdapter(RedisRepositoryAdapter repository, DataMapper<MessageData, MessageRedis> mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
-
     @Override
     public void save(MessageData data) {
         repository.save(mapper.mapperModel(data));
     }
-
     @Override
     public void saveWithEnvironment(MessageData data, String environmentId) {
-        MessageRedis messageRedis = mapper.mapperModel(data);
+        var messageRedis = mapper.mapperModel(data);
         messageRedis.setEnvironmentId(environmentId);
         repository.save(messageRedis);
     }
-
-    @Override
-    public Optional<MessageData> findApplicationMessageByCode(String code, String application) {
-        return repository.findByCodeAndApplication(code, application).stream()
-                .map(mapper::mapperData)
-                .findFirst();
-    }
-
-    @Override
-    public SimplePage<MessageData> finByApplication(String application, Pageable pageable) {
-        return SimplePage.of(repository.findByApplication(application, pageable)
-                .map(mapper::mapperData));
-    }
-
-    @Override
-    public List<MessageData> finByApplication(String application) {
-        return repository.findByApplication(application).stream()
-                .map(mapper::mapperData)
-                .toList();
-    }
-
     @Override
     public Optional<MessageData> findById(UUID id) {
         return repository.findById(id).map(mapper::mapperData);
     }
-
     @Override
     public SimplePage<MessageData> findMessagesByEnvironment(String environment, Pageable pageable) {
         return SimplePage.of(repository.findByEnvironmentId(environment, pageable)
                 .map(mapper::mapperData));
     }
-
     @Override
     public Optional<MessageData> findMessageByCodeAndEnvironment(String code, String environmentId) {
         return repository.findByCodeAndEnvironmentId(code, environmentId)

@@ -8,6 +8,7 @@ import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.Serializ
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -32,21 +33,21 @@ public final class TokenHeaderInterceptor implements HandlerInterceptor {
         this.findEnvironmentIdTokenUseCaseFacade = findEnvironmentIdTokenUseCaseFacade;
     }
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String token = request.getHeader(REQUEST_GET_HEADER_TOKEN);
-        String acceptHeader = request.getHeader(REQUEST_GET_HEADER_ACCEPT);
+    public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
+        var token = request.getHeader(REQUEST_GET_HEADER_TOKEN);
+        var acceptHeader = request.getHeader(REQUEST_GET_HEADER_ACCEPT);
 
         if (isEmptyOrNull(token)) {
             sendErrorResponse(response, acceptHeader, DetailMessageEnum.TCH_032.getContent());
             return false;
         }
 
-        if (!verifyAccessUseCaseFacade.verifyAccess(token)) {
+        if (!verifyAccessUseCaseFacade.execute(token)) {
             sendErrorResponse(response, acceptHeader, DetailMessageEnum.TCH_031.getContent());
             return false;
         }
 
-        var environmentId = findEnvironmentIdTokenUseCaseFacade.findEnvironmentIdToken(token);
+        var environmentId = findEnvironmentIdTokenUseCaseFacade.execute(token);
         request.setAttribute(ENVIRONMENT_ID_ATTRIBUTE, environmentId);
         return true;
     }

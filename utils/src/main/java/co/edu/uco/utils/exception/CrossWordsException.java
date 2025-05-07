@@ -27,11 +27,11 @@ public class CrossWordsException extends RuntimeException {
     }
 
     public static CrossWordsException build(String technicalMessage) {
-        return new CrossWordsException(null, technicalMessage, null, ExceptionType.TECHNICAL, null);
+        return new CrossWordsException(null, technicalMessage, null, ExceptionType.TECHNICAL, ExceptionLocation.GENERAL);
     }
 
     public static CrossWordsException build(String technicalMessage, Exception rootException) {
-        return new CrossWordsException(null, technicalMessage, rootException, ExceptionType.TECHNICAL,null);
+        return new CrossWordsException(null, technicalMessage, rootException, ExceptionType.TECHNICAL, ExceptionLocation.GENERAL);
     }
 
     public static CrossWordsException build(String technicalMessage, String userMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {
@@ -40,6 +40,12 @@ public class CrossWordsException extends RuntimeException {
 
     public static CrossWordsException buildInfrastructure(String technicalMessage, String userMessage, Exception rootException, ExceptionType type) {
         return new CrossWordsException(userMessage, technicalMessage, rootException, type, ExceptionLocation.INFRASTRUCTURE);
+    }
+    public static CrossWordsException buildInfrastructure(String technicalMessage, Exception rootException) {
+        return new CrossWordsException(null, technicalMessage, rootException, ExceptionType.TECHNICAL, ExceptionLocation.INFRASTRUCTURE);
+    }
+    public static CrossWordsException buildInfrastructure(String technicalMessage, String userMessage, ExceptionType type) {
+        return new CrossWordsException(userMessage, technicalMessage, null, type, ExceptionLocation.INFRASTRUCTURE);
     }
 
     protected CrossWordsException(String userMessage, String technicalMessage, Exception rootException, ExceptionType type, ExceptionLocation location) {

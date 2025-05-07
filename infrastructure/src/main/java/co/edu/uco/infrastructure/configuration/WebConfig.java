@@ -13,13 +13,11 @@ public class WebConfig implements WebMvcConfigurer {
     private final LoggingConfig loggingConfig;
     private final AcceptHeaderInterceptor acceptHeaderInterceptor;
     private final TokenHeaderInterceptor tokenHeaderInterceptor;
-
     public WebConfig(LoggingConfig loggingConfig, AcceptHeaderInterceptor acceptHeaderInterceptor, TokenHeaderInterceptor tokenHeaderInterceptor){
         this.loggingConfig=loggingConfig;
         this.acceptHeaderInterceptor = acceptHeaderInterceptor;
         this.tokenHeaderInterceptor = tokenHeaderInterceptor;
     }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loggingConfig);

@@ -6,6 +6,7 @@ import co.edu.uco.infrastructure.adapter.secondary.presenter.serializer.Serializ
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public final class AcceptHeaderInterceptor implements HandlerInterceptor {
         this.serializerRegistry = serializerRegistry;
     }
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
         var acceptHeader = Optional.ofNullable(request.getHeader(REQUEST_GET_HEADER_ACCEPT))
                 .orElse(MediaType.APPLICATION_JSON_VALUE);
 
