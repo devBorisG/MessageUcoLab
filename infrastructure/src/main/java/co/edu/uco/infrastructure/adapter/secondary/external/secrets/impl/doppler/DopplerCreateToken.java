@@ -15,8 +15,10 @@ import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.*;
 @Component
 public final class DopplerCreateToken implements CreateTokenSecretPort {
     private final DopplerProperties properties;
-    public DopplerCreateToken(DopplerProperties properties) {
+    private final DopplerSecretCacheService cacheService;
+    public DopplerCreateToken(DopplerProperties properties, DopplerSecretCacheService cacheService) {
         this.properties = properties;
+        this.cacheService = cacheService;
     }
     @Override
     public void execute(String secretName, String privateKey) {
@@ -41,6 +43,7 @@ public final class DopplerCreateToken implements CreateTokenSecretPort {
                         ExceptionType.TECHNICAL
                 );
             }
+            cacheService.invalidateCache(secretName);
         } catch (Exception e) {
             var message = DetailMessageEnum.TCH_029.getContent();
             log.error(message, e);
