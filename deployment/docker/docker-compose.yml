@@ -4,7 +4,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
     volumes:
       - grafana-data:/var/lib/grafana
     networks:
@@ -42,10 +42,10 @@ services:
     image: redis:latest
     container_name: redis
     ports:
-      - "6379:6379"
+      - "${REDISPORT}:${REDISPORT}"
     volumes:
       - redis_data:/data
-    command: ["redis-server", "--requirepass", "cr0ssw0rds.", "--appendonly", "yes"]
+    command: [ "redis-server", "--requirepass", "${REDISPASSWORD}", "--appendonly", "yes" ]
     networks:
       - observability-network
       - kong-network
@@ -55,11 +55,11 @@ services:
     image: debezium/postgres:13
     container_name: crs-crossword-db
     ports:
-      - "5435:5432"
+      - "5435:${POSTGRESPORT}"
     environment:
-      POSTGRES_DB: crs-crossword-db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${POSTGRESDATABASE}
+      POSTGRES_USER: ${POSTGRESUSERNAME}
+      POSTGRES_PASSWORD: ${POSTGRESPASSWORD}
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -185,27 +185,22 @@ services:
     ports:
       - "8085:8085"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      # MongoDB
-      - MONGOURI=example.mongodb.net
-      - MONGODBHOST=example.mongodb.net
-      - MONGODBPORT=27017
-      - MONGODBUSER=example
-      - MONGOPASSWORD=example
-      - MONGODBDATABASE=example
-      # Redis
-      - REDISHOST=redis
-      - REDISPORT=6379
-      - REDISPASSWORD=example
-      - REDISDATABASE=0
-      # PostgreSQL
-      - POSTGRESHOST=crs-crossword-db
-      - POSTGRESPORT=5432
-      - POSTGRESDATABASE=crs-crossword-db
-      - POSTGRESUSERNAME=postgres
-      - POSTGRESPASSWORD=postgres
-      # Kafka
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - MONGOURI=${MONGOURI}
+      - MONGODBHOST=${MONGODBHOST}
+      - MONGODBPORT=${MONGODBPORT}
+      - MONGODBUSER=${MONGODBUSER}
+      - MONGOPASSWORD=${MONGOPASSWORD}
+      - MONGODBDATABASE=${MONGODBDATABASE}
+      - REDISHOST=${REDISHOST}
+      - REDISPORT=${REDISPORT}
+      - REDISPASSWORD=${REDISPASSWORD}
+      - REDISDATABASE=${REDISDATABASE}
+      - POSTGRESHOST=${POSTGRESHOST}
+      - POSTGRESPORT=${POSTGRESPORT}
+      - POSTGRESDATABASE=${POSTGRESDATABASE}
+      - POSTGRESUSERNAME=${POSTGRESUSERNAME}
+      - POSTGRESPASSWORD=${POSTGRESPASSWORD}
     volumes:
       - ./logs:/app/logs
     depends_on:
