@@ -17,17 +17,20 @@ COPY utils/src utils/src
 RUN mvn clean package -DskipTests -B
 
 # Etapa de ejecución
-FROM eclipse-temurin:17-jre-alpine
+FROM openjdk:17-jdk-slim
+
+# Instalar herramientas de diagnóstico
+RUN apt-get update && apt-get install -y \
+    curl \
+    iputils-ping \
+    net-tools \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Crear directorio de logs y dar permisos
 RUN mkdir -p /app/logs && \
     chmod 777 /app/logs
-
-# Crear usuario no root para mayor seguridad
-RUN addgroup -S spring && adduser -S spring -G spring && \
-    chown -R spring:spring /app/logs
-USER spring:spring
 
 # Copiar el JAR desde la etapa de construcción
 COPY --from=build /app/infrastructure/target/infrastructure-0.0.1-SNAPSHOT.jar app.jar
@@ -35,12 +38,6 @@ COPY --from=build /app/infrastructure/target/infrastructure-0.0.1-SNAPSHOT.jar a
 # Configuración de variables de entorno
 ENV JAVA_OPTS="-Xms512m -Xmx1024m -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
 
-# Exponer el puerto en el que se ejecutará la aplicación
 EXPOSE 8085
 
-# Comando para ejecutar la aplicación con healthcheck
-HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:8085/actuator/health || exit 1
-
-# Comando para ejecutar la aplicación
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

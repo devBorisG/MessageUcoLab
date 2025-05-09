@@ -14,7 +14,10 @@ services:
     image: grafana/loki:latest
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/config.yaml
+    volumes:
+      - ./loki-config.yaml:/etc/loki/config.yaml
+      - loki-data:/loki
     networks:
       - observability-network
 
@@ -150,6 +153,10 @@ services:
     container_name: mongodb-crosswords-db
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODBUSER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGOPASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODBDATABASE}
     volumes:
       - mongo-data:/data/db
     networks:
@@ -185,7 +192,6 @@ services:
     ports:
       - "8085:8085"
     environment:
-      - MONGOURI=${MONGOURI}
       - MONGODBHOST=${MONGODBHOST}
       - MONGODBPORT=${MONGODBPORT}
       - MONGODBUSER=${MONGODBUSER}
@@ -200,8 +206,9 @@ services:
       - POSTGRESDATABASE=${POSTGRESDATABASE}
       - POSTGRESUSERNAME=${POSTGRESUSERNAME}
       - POSTGRESPASSWORD=${POSTGRESPASSWORD}
+      - LOG_PATH=/app/logs
     volumes:
-      - ./logs:/app/logs
+      - ../../logs:/app/logs
     depends_on:
       - debezium-postgres
       - mongodb
@@ -235,6 +242,7 @@ volumes:
     driver: local
   zookeeper-logs:
     driver: local
+  loki-data:
 
 networks:
   observability-network:
