@@ -214,16 +214,41 @@ services:
       - mongodb
       - redis
       - kafka
+      - pulsar
     networks:
       - observability-network
       - kong-network
       - app-network
+      - pulsar-network
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8085/actuator/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 60s
+
+  pulsar:
+    image: apachepulsar/pulsar:3.2.2
+    container_name: pulsar-standalone
+    command: >
+      /bin/bash -c "
+      bin/apply-config-from-env.py conf/standalone.conf &&
+      bin/apply-config-from-env.py conf/client.conf &&
+      bin/pulsar standalone -nss -nfw"
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    volumes:
+      - pulsar-data:/pulsar/data
+      - pulsar-conf:/pulsar/conf
+      - ./pulsar-scripts:/pulsar/scripts
+    environment:
+      PULSAR_MEM: "-Xms1g -Xmx1g -XX:MaxDirectMemorySize=2g"
+      PULSAR_PREFIX_allowAutoTopicCreationType: "partitioned"
+    networks:
+      - pulsar-network
+      - app-network
+
 
 volumes:
   grafana-data:
@@ -243,6 +268,10 @@ volumes:
   zookeeper-logs:
     driver: local
   loki-data:
+  pulsar-data:
+    driver: local
+  pulsar-conf:
+    driver: local
 
 networks:
   observability-network:
@@ -250,4 +279,6 @@ networks:
   kong-network:
     driver: bridge
   app-network:
+    driver: bridge
+  pulsar-network:
     driver: bridge

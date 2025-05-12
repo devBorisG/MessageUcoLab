@@ -3,6 +3,7 @@ package co.edu.uco.infrastructure.adapter.secondary.broker;
 import co.edu.uco.core.application.catalog.strategy.inmemory.enums.DetailMessageEnum;
 import co.edu.uco.core.domain.domains.MessageCodeDomain;
 import co.edu.uco.core.domain.port.out.broker.SendMessage;
+import co.edu.uco.infrastructure.configuration.PulsarProperties;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.mapper.json.UtilMapperJson;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,19 +19,22 @@ import java.util.Optional;
 public final class SendBrokerMessage implements SendMessage {
     private final PulsarClient client;
     private final UtilMapperJson utilMapperJson;
-    public SendBrokerMessage(PulsarClient client, UtilMapperJson utilMapperJson) {
+    private final PulsarProperties pulsarProperties;
+    public SendBrokerMessage(PulsarClient client, UtilMapperJson utilMapperJson, PulsarProperties pulsarProperties) {
         this.client = client;
         this.utilMapperJson = utilMapperJson;
+        this.pulsarProperties = pulsarProperties;
     }
     @Override
     public void execute(MessageCodeDomain messageDomain, HttpServletResponse response) {
         try (Producer<String> stringProducer = this.client
                 .newProducer(Schema.STRING)
+                .topic(pulsarProperties.getTopicName())
                 .create()) {
-                    Optional<String> message = utilMapperJson.execute(messageDomain);
-                    if(message.isPresent()){
-                        stringProducer.send(message.get());
-                    }
+            Optional<String> message = utilMapperJson.execute(messageDomain);
+            if(message.isPresent()){
+                stringProducer.send(message.get());
+            }
         } catch (PulsarClientException ex) {
             throw CrossWordsException.buildInfrastructure(DetailMessageEnum.TCH_002.getContent(), ex);
         }

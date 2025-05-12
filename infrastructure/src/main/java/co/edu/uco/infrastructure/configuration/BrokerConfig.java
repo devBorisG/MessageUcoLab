@@ -7,16 +7,19 @@ import org.apache.pulsar.client.api.PulsarClientException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.PULSAR_CLIENT_HOST;
 import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 
 @Configuration
 public class BrokerConfig {
     private PulsarClient client;
+    private final PulsarProperties pulsarProperties;
+    public BrokerConfig(PulsarProperties pulsarProperties) {
+        this.pulsarProperties = pulsarProperties;
+    }
     @PostConstruct
     public void init() throws PulsarClientException {
         this.client = PulsarClient.builder()
-                .serviceUrl(PULSAR_CLIENT_HOST)
+                .serviceUrl(pulsarProperties.getServiceUrl())
                 .build();
     }
     @Bean
