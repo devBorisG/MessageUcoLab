@@ -148,6 +148,10 @@ AZURE_KEYVAULT_UCOLAB_ENDPOINT=your_azure_keyvault_endpoint
 
 # Doppler
 DOPPLERTOKEN=your_doppler_token
+
+# Pulsar
+PULSARURL=pulsar://pulsar-standalone:6650
+PULSARTOPICNAME=crossword-topic
 ```
 
 ## Building the Project
@@ -263,6 +267,7 @@ This will start:
 - MongoDB (port 27017)
 - Redis (port 6379)
 - PostgreSQL (port 5435)
+- Apache Pulsar (port 6650, 8080)
 - Apache Kafka (port 9094)
 - Zookeeper (port 2181)
 - KSQLDB Server (port 8088)
