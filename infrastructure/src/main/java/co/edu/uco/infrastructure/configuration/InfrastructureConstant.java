@@ -41,7 +41,7 @@ public final class InfrastructureConstant {
 
     public static final long MICROSECONDS_PER_MILLISECOND = 1_000;
 
-    public static final String PULSAR_CLIENT_HOST = "pulsar://localhost:6650";
+    public static final String PULSAR_CONFIG_PREFIX = "pulsar";
 
     public static final String HTML_OPEN_TAG = "<html>";
     public static final String HTML_CLOSE_TAG = "</html>";

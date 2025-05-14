@@ -27,4 +27,7 @@ public final class DopplerSecretCacheService  implements FindTokenCachePort {
     public Map<String, String> getSecret(String secretName) {
         return dopplerSecretCache.get(secretName, findSecretTokenPort::findSecretToken);
     }
+    public void invalidateCache(String secretName) {
+        dopplerSecretCache.invalidate(secretName);
+    }
 }

@@ -124,7 +124,6 @@ Configure the following environment variables before running the application:
 
 ```text
 # MongoDB
-MONGOURI=mongodb://localhost:27017/messageuco
 MONGODBHOST=localhost
 MONGODBPORT=27017
 MONGODBUSER=your_mongodb_user
@@ -149,6 +148,10 @@ AZURE_KEYVAULT_UCOLAB_ENDPOINT=your_azure_keyvault_endpoint
 
 # Doppler
 DOPPLERTOKEN=your_doppler_token
+
+# Pulsar
+PULSARURL=pulsar://pulsar-standalone:6650
+PULSARTOPICNAME=crossword-topic
 ```
 
 ## Building the Project
@@ -204,17 +207,17 @@ curl http://localhost:8000/actuator/health
 ```bash
 # Get messages for an application
 # Direct access
-curl http://localhost:8085/messageucolab/v1/application/{id}/messages
+curl http://localhost:8085/messageucolab/v1/application/environment
 
 # Through API Gateway
-curl http://localhost:8000/messageucolab/v1/application/{id}/messages
+curl http://localhost:8000/messageucolab/v1/application/environment
 
 # Get a specific message by code
 # Direct access
-curl http://localhost:8085/messageucolab/v1/application/{id}/message/{messageCode}
+curl http://localhost:8085/messageucolab/v1/application/code/{messageCode}
 
 # Through API Gateway
-curl http://localhost:8000/messageucolab/v1/application/{id}/message/{messageCode}
+curl http://localhost:8000/messageucolab/v1/application/code/{messageCode}
 
 # Get token for an application
 # Direct access
@@ -264,6 +267,7 @@ This will start:
 - MongoDB (port 27017)
 - Redis (port 6379)
 - PostgreSQL (port 5435)
+- Apache Pulsar (port 6650, 8080)
 - Apache Kafka (port 9094)
 - Zookeeper (port 2181)
 - KSQLDB Server (port 8088)
