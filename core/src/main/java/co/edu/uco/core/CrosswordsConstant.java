@@ -7,8 +7,11 @@ public final class CrosswordsConstant {
     public static final String TOKEN_SECRET_IDENTIFIER = "UCOLAB_TOKEN_PRIVATE_KEY_";
     public static final String SECRET_PORT_SECRET_NAME = "secretName";
     public static final String SECRET_PORT_PRIVATE_KEY = "privateKey";
+    public static final String DATE_PATTERN = "[\\d\\-:/.TZ+ ]+";
     public static final String PAGE_ATTRIBUTE = "page";
     public static final String SIZE_ATTRIBUTE = "size";
+    public static final String COLUMN_SORT_ATTRIBUTE = "columnSort";
+    public static final String SORT_ATTRIBUTE = "sort";
     public static final String STATE_ACTIVE = "Active";
     public static final String STATE_INACTIVE = "Inactive";
     public static final String REQUEST_PAGE_SORT_ASC = "ASC";

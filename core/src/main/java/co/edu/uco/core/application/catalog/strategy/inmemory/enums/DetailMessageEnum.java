@@ -70,8 +70,8 @@ public enum DetailMessageEnum {
     FUN_029(MessageKeyEnum.FUN_029, "Invalid page size", "The page size must be between 1 and %d.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_030(MessageKeyEnum.FUN_030, "Invalid sort column", "The sort column '%s' is not valid.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_031(MessageKeyEnum.FUN_031, "Invalid sort direction", "The sort direction must be 'ASC' or 'DESC'.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_032(MessageKeyEnum.FUN_032, "Page not found", "The requested page is empty or does not exist.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_033(MessageKeyEnum.FUN_033, "Invalid %s type", "The value of %s must be a valid integer.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_032(MessageKeyEnum.FUN_032, "Page not found", "The page cannot be less than 1.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_033(MessageKeyEnum.FUN_033, "Invalid %s type", "The value of %s must be a valid integer greater than 1.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_034(MessageKeyEnum.FUN_034, "Validator empty", "No validators have been added.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_035(MessageKeyEnum.FUN_035, "Environment does not exist", "The environment does not exist.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_036(MessageKeyEnum.FUN_036, "Application does not exist", "The application to which the environment is intended to be associated does not exist for the environment.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
@@ -80,7 +80,8 @@ public enum DetailMessageEnum {
     FUN_039(MessageKeyEnum.FUN_039, "Invalid date character", "Date contains characters not allowed", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_040(MessageKeyEnum.FUN_040, "Invalid Message code", "The message code cannot be empty or null.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_041(MessageKeyEnum.FUN_041, "Error searching for token", "An error occurred while searching for the token.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_042(MessageKeyEnum.FUN_042, "Page out of range", "Page number exceeds total pages %s.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
+    FUN_042(MessageKeyEnum.FUN_042, "Page out of range", "Page number exceeds total pages %s.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_043(MessageKeyEnum.FUN_043, "Invalid %s type", "The value of %s cannot contain special characters.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
     private MessageKeyEnum code;
     private String title;
     private String content;

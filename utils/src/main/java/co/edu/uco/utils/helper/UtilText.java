@@ -7,6 +7,7 @@ public final class UtilText {
     public static final String LETTERS_AND_SPACES_ONLY = "^[a-zA-ZñÑ\\s]+$";
     public static final String ANY_CHARACTER_EXCEPT_NUMBER = "[^\\d]";
     public static final String ONLY_NUMBERS = "\\d+";
+    public static final String ONLY_LETTERS = "^[a-zA-Z]+$";
     public static final String ONLY_ANY_NUMBER = "[-+]?\\d*\\.?\\d+";
     public static final String ONLY_CHARACTERS_AND_NUMBERS = "^[a-zA-Z0-9]*$";
     public static final String SPACE = " ";
