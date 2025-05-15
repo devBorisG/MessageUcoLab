@@ -79,7 +79,8 @@ public enum DetailMessageEnum {
     FUN_038(MessageKeyEnum.FUN_038, "Invalid Id", "The id must not be the default UUID.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_039(MessageKeyEnum.FUN_039, "Invalid date character", "Date contains characters not allowed", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
     FUN_040(MessageKeyEnum.FUN_040, "Invalid Message code", "The message code cannot be empty or null.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
-    FUN_041(MessageKeyEnum.FUN_041, "Error searching for token", "An error occurred while searching for the token.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
+    FUN_041(MessageKeyEnum.FUN_041, "Error searching for token", "An error occurred while searching for the token.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR),
+    FUN_042(MessageKeyEnum.FUN_042, "Page out of range", "Page number exceeds total pages %s.", MessageTypeEnum.FUNCTIONAL, MessageCategoryEnum.ERROR);
     private MessageKeyEnum code;
     private String title;
     private String content;
@@ -90,19 +91,6 @@ public enum DetailMessageEnum {
         this.title = title;
         this.content = content;
         this.type = type;
-        this.category = category;
-    }
-    public void setCode(final MessageKeyEnum code) { this.code = code;}
-    private void setTitle(final String title) {
-        this.title = title;
-    }
-    private void setType(final MessageTypeEnum type) {
-        this.type = type;
-    }
-    private void setContent(final String content) {
-        this.content = content;
-    }
-    private void setCategory(final MessageCategoryEnum category) {
         this.category = category;
     }
     public MessageModel getMessage() {

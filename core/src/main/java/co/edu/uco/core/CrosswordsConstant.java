@@ -10,6 +10,7 @@ public final class CrosswordsConstant {
     public static final String PAGE_ATTRIBUTE = "page";
     public static final String SIZE_ATTRIBUTE = "size";
     public static final String STATE_ACTIVE = "Active";
+    public static final String STATE_INACTIVE = "Inactive";
     public static final String REQUEST_PAGE_SORT_ASC = "ASC";
     public static final String REQUEST_PAGE_SORT_DESC = "DESC";
     public static final byte REQUEST_PAGE_DEFAULT = 1;

@@ -8,6 +8,8 @@ import co.edu.uco.infrastructure.adapter.secondary.repository.mongo.TokenMongoRe
 import co.edu.uco.utils.exception.BusinessException;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public final class TokenMongoAdapter implements FindTokenRepository {
     private final TokenMongoRepositoryAdapter tokenMongoRepositoryAdapter;
@@ -20,5 +22,10 @@ public final class TokenMongoAdapter implements FindTokenRepository {
     public TokenData findById(String id) {
         return tokenMongoRepositoryAdapter.findTokenDocumentById(id).map(mapper::mapperData)
                 .orElseThrow(() -> BusinessException.buildUserException(DetailMessageEnum.FUN_026.getContent()));
+    }
+    @Override
+    public Optional<TokenData> findByEnvironmentAndState(String environment, String state) {
+        return tokenMongoRepositoryAdapter.findTokenDocumentByEnvironmentIdAndStateId(environment,state)
+                .map(mapper::mapperData);
     }
 }

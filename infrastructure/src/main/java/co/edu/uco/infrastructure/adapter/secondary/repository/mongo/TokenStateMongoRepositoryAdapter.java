@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TokenStateMongoRepositoryAdapter extends MongoRepository<StatusTokenDocument, String> {
     StatusTokenDocument findStatusTokenDocumentById(String id);
+    StatusTokenDocument findStatusTokenDocumentByName(String name);
 }

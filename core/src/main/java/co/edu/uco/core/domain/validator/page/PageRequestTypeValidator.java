@@ -23,12 +23,12 @@ public final class PageRequestTypeValidator implements Validator<PageRequestDTO>
         validateSize(data.getSize());
     }
     private void validatePage(String page) {
-        if (page != null && !page.isEmpty() && !validMatch(page, ONLY_NUMBERS)) {
+        if (!isNullObject(page) && !page.isEmpty() && !validMatch(page, ONLY_NUMBERS)) {
             throw BusinessRuleException.buildUserException(String.format(DetailMessageEnum.FUN_033.getContent(), PAGE_ATTRIBUTE));
         }
     }
     private void validateSize(String size) {
-        if (size != null && !size.isEmpty() && !validMatch(size, ONLY_NUMBERS)) {
+        if (!isNullObject(size) && !size.isEmpty() && !validMatch(size, ONLY_NUMBERS)) {
             throw BusinessRuleException.buildUserException(String.format(DetailMessageEnum.FUN_033.getContent(),SIZE_ATTRIBUTE));
         }
     }
