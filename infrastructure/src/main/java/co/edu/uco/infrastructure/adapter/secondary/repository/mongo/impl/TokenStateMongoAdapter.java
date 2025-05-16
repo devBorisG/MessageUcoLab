@@ -18,4 +18,8 @@ public final class TokenStateMongoAdapter implements TokenStateRepository {
     public StatusTokenData findByStatus(String id) {
         return mapper.mapperData(tokenStateMongoRepositoryAdapter.findStatusTokenDocumentById(id));
     }
+    @Override
+    public StatusTokenData findByStatusName(String name) {
+        return mapper.mapperData(tokenStateMongoRepositoryAdapter.findStatusTokenDocumentByName(name));
+    }
 }

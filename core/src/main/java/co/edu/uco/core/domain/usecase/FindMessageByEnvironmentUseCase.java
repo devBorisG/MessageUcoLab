@@ -10,6 +10,7 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.domain.usecase.handling.HandlingFindMessageEnvironmentPort;
 import co.edu.uco.core.domain.validator.message.ListMessageValidator;
+import co.edu.uco.core.domain.validator.page.PageRequestRangeValidator;
 import co.edu.uco.utils.exception.BusinessException;
 import co.edu.uco.utils.exception.CrossWordsException;
 import lombok.extern.slf4j.Slf4j;
@@ -21,16 +22,19 @@ public final class FindMessageByEnvironmentUseCase implements HandlingFindMessag
     private final MessageCatalogStrategy messageCatalogStrategy;
     private final DataMapper<MessageData, MessageDomain,MessageDTO> entityMapper;
     private final ListMessageValidator listMessageValidator;
-    public FindMessageByEnvironmentUseCase(MessageCatalogStrategy messageCatalogStrategy, DataMapper<MessageData, MessageDomain, MessageDTO> entityMapper, ListMessageValidator listMessageValidator) {
+    private final PageRequestRangeValidator rangeValidator;
+    public FindMessageByEnvironmentUseCase(MessageCatalogStrategy messageCatalogStrategy, DataMapper<MessageData, MessageDomain, MessageDTO> entityMapper, ListMessageValidator listMessageValidator, PageRequestRangeValidator rangeValidator) {
         this.messageCatalogStrategy = messageCatalogStrategy;
         this.entityMapper = entityMapper;
         this.listMessageValidator = listMessageValidator;
+        this.rangeValidator = rangeValidator;
     }
     @Override
     public SimplePage<MessageDTO> execute(String environment, SimplePageRequest pageRequest) {
         try {
             listMessageValidator.validate(pageRequest);
             var page = messageCatalogStrategy.getMessagesWithEnvironment(environment, pageRequest);
+            rangeValidator.validate(pageRequest.getPage(), page.getTotalPages());
             var messages = page.getData().stream().map(entityMapper::mapperDTO).toList();
             return SimplePage.of(messages, page.getPage(), page.getSize(),page.getTotalItems(), page.getTotalPages());
         } catch (CrossWordsException exception) {

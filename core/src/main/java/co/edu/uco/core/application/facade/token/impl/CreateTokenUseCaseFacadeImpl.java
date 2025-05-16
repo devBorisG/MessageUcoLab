@@ -8,6 +8,7 @@ import co.edu.uco.core.application.mapper.dto.impl.TokenDTOMapper;
 import co.edu.uco.core.domain.port.out.secret.CreateTokenSecretPort;
 import co.edu.uco.core.domain.port.out.secret.EncryptTokenPort;
 import co.edu.uco.core.domain.usecase.handling.HandlingCreateTokenPort;
+import co.edu.uco.core.domain.usecase.handling.HandlingRevokeTokenPort;
 import co.edu.uco.core.domain.validator.token.CreateTokenCompositeValidator;
 import co.edu.uco.utils.exception.CrossWordsException;
 import co.edu.uco.utils.helper.UtilPairKey;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 
 import static co.edu.uco.core.CrosswordsConstant.TOKEN_SECRET_IDENTIFIER;
 
+import static co.edu.uco.core.CrosswordsConstant.TOKEN_STATE_ACTIVE_ID;
 import static co.edu.uco.utils.helper.UtilDate.parseDate;
 import static co.edu.uco.utils.helper.UtilObject.isNullObject;
 import static co.edu.uco.utils.helper.UtilText.concatenateWithoutSeparator;
@@ -33,18 +35,20 @@ public final class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFac
     private final CreateTokenSecretPort createTokenSecretPort;
     private final CreateTokenCompositeValidator validator;
     private final EncryptTokenPort encrypt;
+    private final HandlingRevokeTokenPort handlingRevokeTokenPort;
 
     public CreateTokenUseCaseFacadeImpl(
             HandlingCreateTokenPort handlingCreateTokenPort,
             TokenDTOMapper tokenDTOMapper,
             EncryptTokenPort encrypt,
-            CreateTokenSecretPort createTokenSecretPort, CreateTokenCompositeValidator validator
+            CreateTokenSecretPort createTokenSecretPort, CreateTokenCompositeValidator validator, HandlingRevokeTokenPort handlingRevokeTokenPort
     ) {
         this.handlingCreateTokenPort = handlingCreateTokenPort;
         this.tokenDTOMapper = tokenDTOMapper;
         this.encrypt = encrypt;
         this.createTokenSecretPort = createTokenSecretPort;
         this.validator = validator;
+        this.handlingRevokeTokenPort = handlingRevokeTokenPort;
     }
 
     @Override
@@ -53,6 +57,7 @@ public final class CreateTokenUseCaseFacadeImpl implements CreateTokenUseCaseFac
             String application
     ) {
         validator.validate(createTokenDTO, application);
+        handlingRevokeTokenPort.execute(createTokenDTO.getEnvironmentId(), TOKEN_STATE_ACTIVE_ID);
         var secretName = concatenateWithoutSeparator(
                 TOKEN_SECRET_IDENTIFIER,
                 stringToUpperCase(formatUUID(getStringToUUID(application))),

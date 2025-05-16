@@ -6,6 +6,7 @@ import co.edu.uco.utils.exception.BusinessRuleException;
 import co.edu.uco.utils.exception.CrossWordsException;
 import org.springframework.stereotype.Component;
 
+import static co.edu.uco.core.CrosswordsConstant.DATE_PATTERN;
 import static co.edu.uco.utils.helper.UtilDate.parseDate;
 
 @Component
@@ -22,6 +23,6 @@ public final class DateValidValidator implements Validator<String> {
         }
     }
     private static boolean containsInvalidCharacters(String date) {
-        return !date.matches("[\\d\\-:/.TZ+ ]+");
+        return !date.matches(DATE_PATTERN);
     }
 }
