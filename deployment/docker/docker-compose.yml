@@ -159,6 +159,8 @@ services:
       MONGO_INITDB_DATABASE: ${MONGODBDATABASE}
     volumes:
       - mongo-data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    command: ["--auth"]
     networks:
       - observability-network
       - kong-network
@@ -245,7 +247,6 @@ services:
     volumes:
       - pulsar-data:/pulsar/data
       - pulsar-conf:/pulsar/conf
-      - ./pulsar-scripts:/pulsar/scripts
     environment:
       PULSAR_MEM: "-Xms1g -Xmx1g -XX:MaxDirectMemorySize=2g"
       PULSAR_PREFIX_allowAutoTopicCreationType: "partitioned"
