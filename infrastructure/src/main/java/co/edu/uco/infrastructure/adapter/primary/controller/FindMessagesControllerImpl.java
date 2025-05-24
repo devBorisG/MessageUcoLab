@@ -42,33 +42,43 @@ final class FindMessagesControllerImpl implements FindMessagesController {
         }
         @Override
         @GetMapping("${crosswords.api.path.message.environment}")
-        @Operation(summary = "Listar mensajes por ambiente", description = "Retorna una lista paginada de mensajes asociados al ambiente del token actual. "
-                        +
-                        "El endpoint obtiene el ID del ambiente del token y opcionalmente acepta parámetros de paginación.", parameters = {
-                                        @Parameter(name = "page", description = "Número de página a consultar (comienza en 1)", required = false, example = "1"),
-                                        @Parameter(name = "size", description = "Cantidad de elementos por página", required = false, example = "10"),
-                                        @Parameter(name = "sort", description = "Dirección de ordenamiento (ASC o DESC)", required = false, example = "ASC"),
-                                        @Parameter(name = "columnSort", description = "Campo por el cual ordenar los resultados", required = false, example = "code"),
-                                        @Parameter(name = "Token", description = "Token de autorización", required = true, in = ParameterIn.HEADER, schema = @Schema(type = "string", example = "your_token_here")
-                )
-                        }, responses = {
-                                        @ApiResponse(responseCode = "200", description = "Lista de mensajes obtenida correctamente", content = {
-                                                        @Content(mediaType = "application/json", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "application/yaml", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "application/xml", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "text/plain", schema = @Schema(implementation = SimplePage.class)),
-                                                        @Content(mediaType = "text/html", schema = @Schema(implementation = SimplePage.class))
-                                        }),
-                                        @ApiResponse(responseCode = "400", description = "Solicitud incorrecta, parámetros inválidos o faltantes"),
-                                        @ApiResponse(responseCode = "401", description = "No autorizado, token inválido o expirado"),
-                                        @ApiResponse(responseCode = "404", description = "No se encontraron mensajes para el ambiente especificado"),
-                                        @ApiResponse(responseCode = "500", description = "Error interno del servidor"),
-                                        @ApiResponse(responseCode = "406", description = "Formato de respuesta no soportado")
-                        })
+        @Operation(summary = "Listar mensajes por ambiente", 
+                   description = "Retorna una lista paginada de mensajes asociados al ambiente del token actual. " +
+                   "El endpoint obtiene el ID del ambiente del token y opcionalmente acepta parámetros de paginación.")
+        @ApiResponse(responseCode = "200", description = "Lista de mensajes obtenida correctamente", 
+                    content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = SimplePage.class)),
+                            @Content(mediaType = "application/yaml", schema = @Schema(implementation = SimplePage.class)),
+                            @Content(mediaType = "application/xml", schema = @Schema(implementation = SimplePage.class)),
+                            @Content(mediaType = "text/plain", schema = @Schema(implementation = SimplePage.class)),
+                            @Content(mediaType = "text/html", schema = @Schema(implementation = SimplePage.class))
+                    })
+        @ApiResponse(responseCode = "400", description = "Solicitud incorrecta, parámetros inválidos o faltantes")
+        @ApiResponse(responseCode = "401", description = "No autorizado, token inválido o expirado")
+        @ApiResponse(responseCode = "404", description = "No se encontraron mensajes para el ambiente especificado")
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        @ApiResponse(responseCode = "406", description = "Formato de respuesta no soportado")
         public void findByEnvironmentAndMessage(
-                        @ModelAttribute PageRequestDTO pageRequestDTO,
+                        @Parameter(name = "page", description = "Número de página a consultar (comienza en 1)", required = false, example = "1")
+                        @RequestParam(value = "page", required = false) String page,
+                        @Parameter(name = "size", description = "Cantidad de elementos por página", required = false, example = "10")
+                        @RequestParam(value = "size", required = false) String size,
+                        @Parameter(name = "sort", description = "Dirección de ordenamiento (ASC o DESC)", required = false, example = "ASC")
+                        @RequestParam(value = "sort", required = false) String sort,
+                        @Parameter(name = "columnSort", description = "Campo por el cual ordenar los resultados", required = false, example = "code")
+                        @RequestParam(value = "columnSort", required = false) String columnSort,
+                        @Parameter(name = "Token", description = "Token de autorización", required = true, in = ParameterIn.HEADER, schema = @Schema(type = "string", example = "your_token_here"))
+                        @RequestHeader("Token") String token,
                         HttpServletRequest httpServletRequest,
                         HttpServletResponse httpServletResponse) {
+
+                var pageRequestDTO = PageRequestDTO.builder()
+                        .page(page)
+                        .size(size)
+                        .sort(sort)
+                        .columnSort(columnSort)
+                        .build();
+                
                 var environmentId = (String) httpServletRequest.getAttribute(ENVIRONMENT_ID_ATTRIBUTE);
                 var messageDTOSimplePage = findMessagesByEnvironmentFacadeImpl.execute(environmentId, pageRequestDTO);
                 restPresenterPage.presentRestSuccess(List.of(messageDTOSimplePage), httpServletRequest,
