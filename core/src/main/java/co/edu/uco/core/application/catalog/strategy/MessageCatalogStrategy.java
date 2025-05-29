@@ -7,17 +7,15 @@ import co.edu.uco.core.domain.port.out.repository.SimplePage;
 import co.edu.uco.core.domain.port.out.repository.SimplePageRequest;
 import co.edu.uco.core.application.catalog.strategy.inmemory.InMemoryCatalog;
 import co.edu.uco.utils.exception.BusinessException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import static co.edu.uco.core.application.catalog.strategy.inmemory.enums.MessageKeyEnum.*;
 
 import java.util.Optional;
-
+@Slf4j
 @Component
 public final class MessageCatalogStrategy {
-    private static final Logger log = LoggerFactory.getLogger(MessageCatalogStrategy.class);
     private final CacheCatalog cacheCatalog;
     private final DatabaseCatalog databaseCatalog;
     private final InMemoryCatalog inMemoryCatalog;

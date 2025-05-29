@@ -16,19 +16,14 @@ public final class FunctionalityEntity extends Entity<UUID> {
     private String name;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-
-    public void setId(UUID id) {
-        this.id = getDefaultUUID(id);
-    }
-
+    @Override
+    public void setId(UUID id) {this.id = getDefaultUUID(id);}
     public void setName(String name) {
         this.name = trim(name);
     }
-
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = getDefaultTimeIfNull(startDate);
     }
-
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = getDefaultTimeIfNull(endDate);
     }

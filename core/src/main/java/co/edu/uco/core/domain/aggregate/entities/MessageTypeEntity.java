@@ -12,11 +12,10 @@ import static co.edu.uco.utils.helper.UtilUUID.getDefaultUUID;
 public final class MessageTypeEntity extends Entity<UUID> {
     private UUID id;
     private String name;
-
+    @Override
     public void setId(UUID id) {
         this.id = getDefaultUUID(id);
     }
-
     public void setName(String name) {
         this.name = trim(name);
     }

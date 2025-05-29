@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.ENVIRONMENT_ID_ATTRIBUTE;
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.MESSAGE_CODE_PARAMETER;
 
 @RestController
 @RequestMapping("${crosswords.api.path.message}")
@@ -59,13 +60,13 @@ final class FindMessagesControllerImpl implements FindMessagesController {
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
         @ApiResponse(responseCode = "406", description = "Formato de respuesta no soportado")
         public void findByEnvironmentAndMessage(
-                        @Parameter(name = "page", description = "Número de página a consultar (comienza en 1)", required = false, example = "1")
+                        @Parameter(name = "page", description = "Número de página a consultar (comienza en 1)", example = "1")
                         @RequestParam(value = "page", required = false) String page,
-                        @Parameter(name = "size", description = "Cantidad de elementos por página", required = false, example = "10")
+                        @Parameter(name = "size", description = "Cantidad de elementos por página", example = "10")
                         @RequestParam(value = "size", required = false) String size,
-                        @Parameter(name = "sort", description = "Dirección de ordenamiento (ASC o DESC)", required = false, example = "ASC")
+                        @Parameter(name = "sort", description = "Dirección de ordenamiento (ASC o DESC)", example = "ASC")
                         @RequestParam(value = "sort", required = false) String sort,
-                        @Parameter(name = "columnSort", description = "Campo por el cual ordenar los resultados", required = false, example = "code")
+                        @Parameter(name = "columnSort", description = "Campo por el cual ordenar los resultados", example = "code")
                         @RequestParam(value = "columnSort", required = false) String columnSort,
                         @Parameter(name = "Token", description = "Token de autorización", required = true, in = ParameterIn.HEADER, schema = @Schema(type = "string", example = "your_token_here"))
                         @RequestHeader("Token") String token,
@@ -106,7 +107,7 @@ final class FindMessagesControllerImpl implements FindMessagesController {
                                         @ApiResponse(responseCode = "406", description = "Formato de respuesta no soportado")
                         })
         public void findByCodeMessageAndEnvironment(
-                        @PathVariable String messageCode,
+                        @PathVariable(MESSAGE_CODE_PARAMETER) String messageCode,
                         HttpServletRequest httpServletRequest,
                         HttpServletResponse httpServletResponse) {
                 var environmentId = (String) httpServletRequest.getAttribute(ENVIRONMENT_ID_ATTRIBUTE);

@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static co.edu.uco.infrastructure.configuration.InfrastructureConstant.FIELD_ID;
+
 @RestController
 @RequestMapping("${crosswords.api.path.message}")
-@Tag(name = "Gestión de Tokens", description = "Endpoints para la creación y gestión de tokens")
+@Tag(name = "Gestión de Tokens", description = "Endpoints para la gestión de tokens")
 final class CreateTokenControllerImpl implements CreateTokenController {
     private final CreateTokenUseCaseFacade createTokenUseCaseFacade;
     private final PresenterPort<String> restPresenter;
@@ -28,7 +30,7 @@ final class CreateTokenControllerImpl implements CreateTokenController {
     }
     @PostMapping("${crosswords.api.path.token.application}")
     @Operation(summary = "Crear token de aplicación", 
-              description = "Crea un nuevo token para una aplicación específica. El token generado puede ser utilizado para autenticar las solicitudes subsiguientes.")
+              description = "Crea un nuevo token para una aplicación específica. El token generado puede ser utilizado para autenticar las solicitudes.")
     @Parameter(name = "id", description = "Identificador único de la aplicación", required = true, example = "123e4567-e89b-12d3-a456-426614174000")
     @ApiResponse(responseCode = "200", description = "Token creado exitosamente", 
                 content = {
@@ -45,7 +47,7 @@ final class CreateTokenControllerImpl implements CreateTokenController {
     @Override
     public void createToken(
             @RequestBody CreateTokenDTO tokenDTO,
-            @PathVariable String id,
+            @PathVariable(FIELD_ID) String id,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse
     ) {
